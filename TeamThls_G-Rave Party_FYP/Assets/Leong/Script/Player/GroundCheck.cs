@@ -13,16 +13,16 @@ public class GroundCheck : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		player.grounded = true;
+		player.player_grounded = true;
 	}
 
 	void OnTriggerStay2D(Collider2D col)
 	{
-		player.grounded = true;
+		player.player_grounded = true;
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		player.grounded = false;
+		player.player_grounded = false;
 	}
 }

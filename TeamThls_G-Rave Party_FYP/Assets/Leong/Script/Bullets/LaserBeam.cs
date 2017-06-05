@@ -7,7 +7,7 @@ public class LaserBeam : MonoBehaviour {
 	public LineRenderer line_Ren;
 	bool line_Ren_Decrease;
 
-	float speed = 75.0f;
+	float speed = 100.0f;
 	float time;
 	// Use this for initialization
 	void Start () 
@@ -23,8 +23,8 @@ public class LaserBeam : MonoBehaviour {
 
 		if(line_Ren_Decrease == false)
 		{
-			line_Ren.widthMultiplier += 70.0f;
-			if(line_Ren.widthMultiplier > 50.0)
+			line_Ren.widthMultiplier += 50.0f;
+			if(line_Ren.widthMultiplier >= 50.0)
 			{
 				line_Ren_Decrease = true;
 			}

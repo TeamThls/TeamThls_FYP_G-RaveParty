@@ -10,7 +10,9 @@ public class Bullet : MonoBehaviour {
 	public Movement movementScript;
 	public Transform gun;
 
-	[SerializeField] MeshRenderer mesh_Ren;
+	//[SerializeField] MeshRenderer mesh_Ren;
+	[SerializeField] LineRenderer line_Ren;
+
 
 	// Use this for initialization
 	void Start () 
@@ -20,13 +22,24 @@ public class Bullet : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{
 		transform.Translate(Vector2.right * speed * Time.deltaTime, Space.World);
+		line_Ren.widthMultiplier = Mathf.Clamp(time * 10, 1, 15);
 
 		time += Time.deltaTime;
-		if(time > 3.0f)
-			this.gameObject.SetActive(false);
+		if(time > 5.0f)
+			Destroy(this.gameObject);
 
+	}
+
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if(col.CompareTag("Enemy"))
+		{
+			col.GetComponent<EnemyCollider>().enemy_Health -= 10.0f;
+			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
+			Destroy(this.gameObject);
+		}
 	}
 }

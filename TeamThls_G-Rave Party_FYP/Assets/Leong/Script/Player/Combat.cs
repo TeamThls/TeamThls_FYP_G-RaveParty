@@ -8,7 +8,8 @@ public class Combat : MonoBehaviour {
 	public Bullet bullet_Script;
 	public GameObject bullet_Obj;
 	public GameObject laserBeam_Obj;
-	public ParticleSystem flame_Obj;
+	public ParticleSystem flame_Particles;
+	public ParticleSystem iceCasting_Particles;
 	public Transform gun;
 	public Transform gunCenter;
 
@@ -18,6 +19,7 @@ public class Combat : MonoBehaviour {
 	public bool isSlowMo = false;
 
 	//float updateTime = 1.0f;
+
 
 	Vector3 offset;
 	Vector3 objPos;
@@ -40,13 +42,10 @@ public class Combat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		/*objPos = Camera.main.WorldToScreenPoint(gunCenter.position);
-		pos = Input.mousePosition - objPos;
-		angle = Mathf.Atan2(pos.y, pos.x) * Mathf.Rad2Deg;
-		gunCenter.rotation = Quaternion.AngleAxis(angle, Vector3.forward);*/
 		if(Input.GetKey(KeyCode.Mouse0) && Time.time > nextFire)
 		{
 			nextFire = Time.time + fireRate;
+			Instantiate(iceCasting_Particles, new Vector2(gun.position.x + 0.5f, gun.position.y), Quaternion.identity);
 			Shoot();
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha1))
@@ -65,7 +64,7 @@ public class Combat : MonoBehaviour {
 
 	void Shoot ()
 	{	
-		if(movementScript.isRight == true)
+		if(movementScript.player_isRight == true)
 		{
 			Instantiate(bullet_Obj, new Vector2(gun.position.x + 1.0f, gun.position.y), Quaternion.identity);
 		}
@@ -85,12 +84,12 @@ public class Combat : MonoBehaviour {
 	{
 		if(Input.GetKey(KeyCode.J))
 		{
-			flame_Obj.Play();
+			flame_Particles.Play();
 			Debug.Log("Flame");
 		}
 		else if(Input.GetKeyUp(KeyCode.J))
 		{
-			flame_Obj.Stop();
+			flame_Particles.Stop();
 			Debug.Log("FlameNo");
 		}
 	}

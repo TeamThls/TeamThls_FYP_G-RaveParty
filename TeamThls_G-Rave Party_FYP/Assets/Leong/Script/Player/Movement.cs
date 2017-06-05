@@ -4,48 +4,53 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
-	public float speed = 1.0f;
-	public bool isWalking = false;
-	public bool isLeft;
-	public bool isRight;
-	public bool grounded;
+	public float player_WalkSpeed = 10.0f;
+	public float player_JumpStrength = 20.0f;
+	public bool player_isWalking = false;
+	public bool player_isLeft;
+	public bool player_isRight;
+	public bool player_grounded;
 	Animator anim;
-	SpriteRenderer spriteRen;
-
+	SpriteRenderer player_spriteRen;
 	Rigidbody2D rgBody;
 	// Use this for initialization
 	void Start () 
 	{
 		rgBody = GetComponent<Rigidbody2D>();
 		anim = transform.Find("Sprite").GetComponent<Animator>();
-		spriteRen = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+		player_spriteRen = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		anim.SetBool("IsWalking", isWalking);
+		anim.SetBool("IsWalking", player_isWalking);
+
 		if(Input.GetKey(KeyCode.D))
 		{
-			isWalking = true;
-			spriteRen.flipX = false;
-			isRight = true;
-			isLeft = false;
-			transform.Translate(speed * Time.deltaTime, 0.0f, 0.0f, Space.World);
+			player_isWalking = true;
+			player_spriteRen.flipX = false;
+			player_isRight = true;
+			player_isLeft = false;
+			rgBody.velocity = new Vector2(Mathf.Lerp(0, player_WalkSpeed, 7.0f), rgBody.velocity.y);
+
 		}
 		if(Input.GetKey(KeyCode.A))
 		{
-			spriteRen.flipX = true;
-			isWalking = true;
-			isRight = false;
-			isLeft = true;
-			transform.Translate(-speed * Time.deltaTime, 0.0f, 0.0f, Space.World);
+			player_spriteRen.flipX = true;
+			player_isWalking = true;
+			player_isRight = false;
+			player_isLeft = true;
+			rgBody.velocity = new Vector2(Mathf.Lerp(0, -player_WalkSpeed, 7.0f), rgBody.velocity.y);
+
 		}
-		if(Input.GetKeyDown(KeyCode.Space) && grounded == true)
+		if(Input.GetKeyDown(KeyCode.Space) && player_grounded == true)
 		{
-			rgBody.AddForce(new Vector2(0.0f, 10.0f), ForceMode2D.Impulse);
-			grounded = false;
+			rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
+			player_grounded = false;
 		}
+
 
 	}
 }
