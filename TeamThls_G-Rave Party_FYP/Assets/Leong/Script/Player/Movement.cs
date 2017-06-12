@@ -74,5 +74,14 @@ public class Movement : MonoBehaviour {
 			player_grounded = false;
 		}
 
+		// Min Screen Limit Vector3, everything is zero (Left Side)
+		Vector3 camera_MinScreenLimit = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+
+		// Max Screen Limit Vector3, take from camera screen width and height (Right Side)
+    	Vector3 camera_MaxScreenLimit = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+ 
+		transform.position = new Vector3(Mathf.Clamp(transform.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
+										,Mathf.Clamp(transform.position.y, camera_MinScreenLimit.y + 1, camera_MaxScreenLimit.y - 1), transform.position.z);
+
 	}
 }

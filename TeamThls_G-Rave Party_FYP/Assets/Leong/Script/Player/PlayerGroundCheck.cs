@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundCheck : MonoBehaviour {
+public class PlayerGroundCheck : MonoBehaviour {
 
-	Movement player;
+	PlayerMovement player;
 	// Use this for initialization
 	void Start () 
 	{
-		player = GetComponentInParent<Movement>();
+		player = GetComponentInParent<PlayerMovement>();
 	}
 
 	void OnTriggerEnter2D(Collider2D col)

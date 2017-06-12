@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour {
 	[SerializeField] float speed = 13.0f;
 	[SerializeField] float time = 0.0f;
 	public GameObject player;
-	public Movement movementScript;
+	public PlayerMovement movementScript;
 	public Transform gun;
 
 	//[SerializeField] MeshRenderer mesh_Ren;

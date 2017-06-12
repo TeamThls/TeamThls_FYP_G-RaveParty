@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Combat : MonoBehaviour {
+public class PlayerCombat : MonoBehaviour {
 
 	public Bullet bullet_Script;
 	public GameObject bullet_Obj;
@@ -29,14 +29,14 @@ public class Combat : MonoBehaviour {
 
 	private IEnumerator coroutine;
 
-	Movement movementScript;
+	PlayerMovement movementScript;
 
 	// Use this for initialization
 	void Start () 
 	{
 		//StartCoroutine(Shoot());
 
-		movementScript = GetComponent<Movement>();
+		movementScript = GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame
@@ -45,7 +45,7 @@ public class Combat : MonoBehaviour {
 		if(Input.GetKey(KeyCode.Mouse0) && Time.time > nextFire)
 		{
 			nextFire = Time.time + fireRate;
-			Instantiate(iceCasting_Particles, new Vector2(gun.position.x + 0.5f, gun.position.y), Quaternion.identity);
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 0.5f, gun.position.y, gun.position.z - 0.1f), Quaternion.identity);
 			Shoot();
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha1))
@@ -59,25 +59,25 @@ public class Combat : MonoBehaviour {
 		}
 
 		ShootFlame();
-		
+
 	}
 
 	void Shoot ()
 	{	
 		if(movementScript.player_isRight == true)
 		{
-			Instantiate(bullet_Obj, new Vector2(gun.position.x + 1.0f, gun.position.y), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
 		else
 		{
-			Instantiate(bullet_Obj, new Vector2(gun.position.x - 1.0f, gun.position.y), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
 
 	}
 
 	void ShootLaser()
 	{
-		Instantiate(laserBeam_Obj, new Vector2(gun.position.x - 1.0f, gun.position.y), Quaternion.identity);
+		Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 	}
 
 	void ShootFlame()
