@@ -5,10 +5,11 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
 
 	public float player_WalkSpeed = 10.0f;
+	public float player_horizontalSpeed;
 	public float player_JumpStrength = 20.0f;
 	public bool player_isWalking = false;
-	public bool player_isLeft;
-	public bool player_isRight;
+	public bool player_isLeft = false;
+	public bool player_isRight = true;
 	public bool player_grounded;
 	Animator anim;
 	SpriteRenderer player_spriteRen;
@@ -21,13 +22,35 @@ public class Movement : MonoBehaviour {
 		player_spriteRen = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
 	}
-	
+
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
 		anim.SetBool("IsWalking", player_isWalking);
+		Vector2 move = Vector2.zero;
+		move.x = Input.GetAxis ("Horizontal");
 
-		if(Input.GetKey(KeyCode.D))
+		bool flipSprite = (player_spriteRen.flipX ? (move.x > 0.01f) : (move.x < 0.01f));
+		if (flipSprite) 
+		{
+			player_spriteRen.flipX = !player_spriteRen.flipX;
+			player_isRight = !player_isRight ;
+			player_isLeft = !player_isLeft;
+		}
+
+		if (player_horizontalSpeed == 0.0f) 
+		{
+			player_isWalking = false;
+		} 
+		else 
+		{
+			player_isWalking = true;
+		}
+
+		player_horizontalSpeed = move.x * player_WalkSpeed;
+		rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), rgBody.velocity.y);
+		//rgBody.AddForce (new Vector2 (player_horizontalSpeed, 0.0f), ForceMode2D.Impulse);
+		/*if(Input.GetKey(KeyCode.D))
 		{
 			player_isWalking = true;
 			player_spriteRen.flipX = false;
@@ -44,13 +67,12 @@ public class Movement : MonoBehaviour {
 			player_isLeft = true;
 			rgBody.velocity = new Vector2(Mathf.Lerp(0, -player_WalkSpeed, 7.0f), rgBody.velocity.y);
 
-		}
-		if(Input.GetKeyDown(KeyCode.Space) && player_grounded == true)
+		}*/
+		if(Input.GetButtonDown("Jump") && player_grounded)
 		{
 			rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
 			player_grounded = false;
 		}
-
 
 	}
 }
