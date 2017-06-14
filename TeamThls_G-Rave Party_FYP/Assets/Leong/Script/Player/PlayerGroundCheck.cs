@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerGroundCheck : MonoBehaviour {
 
-	PlayerMovement player;
+	Movement player;
 	// Use this for initialization
 	void Start () 
 	{
-		player = GetComponentInParent<PlayerMovement>();
+		player = GetComponentInParent<Movement>();
 	}
 
 	void OnTriggerEnter2D(Collider2D col)

@@ -9,6 +9,13 @@ public class LaserBeam : MonoBehaviour {
 
 	float speed = 100.0f;
 	float time;
+
+	public enum Laser_SpawnDirection
+	{
+		Up, Down, Left, Right
+	}
+
+	public Laser_SpawnDirection laser_Direction;
 	// Use this for initialization
 	void Start () 
 	{
@@ -18,7 +25,8 @@ public class LaserBeam : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		line_Ren.SetPosition(0, new Vector3(1, 0, 0 ));
+		LaserDirection();
+		line_Ren.SetPosition(0, new Vector3(1, 0, 0));
 		line_Ren.SetPosition(1, new Vector3(30, 0, 0));
 
 		if(line_Ren_Decrease == false)
@@ -36,6 +44,27 @@ public class LaserBeam : MonoBehaviour {
 			{
 				this.gameObject.SetActive(false);
 			}
+		}
+	}
+
+	void LaserDirection ()
+	{
+		if(laser_Direction == Laser_SpawnDirection.Right)
+		{
+			
+		}
+		else if(laser_Direction == Laser_SpawnDirection.Left)
+		{
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
+		}
+		else if(laser_Direction == Laser_SpawnDirection.Up)
+		{
+			
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
+		}
+		else
+		{
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
 		}
 	}
 }

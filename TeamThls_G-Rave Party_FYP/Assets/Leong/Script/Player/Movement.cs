@@ -10,14 +10,16 @@ public class Movement : MonoBehaviour {
 	public bool player_isWalking = false;
 	public bool player_isLeft = false;
 	public bool player_isRight = true;
+	public bool player_isUp = false;
+	public bool player_isDown = false;
 	public bool player_grounded;
 	Animator anim;
 	SpriteRenderer player_spriteRen;
-	Rigidbody2D rgBody;
+	Rigidbody2D player_rgBody;
 	// Use this for initialization
 	void Start () 
 	{
-		rgBody = GetComponent<Rigidbody2D>();
+		player_rgBody = GetComponent<Rigidbody2D>();
 		anim = transform.Find("Sprite").GetComponent<Animator>();
 		player_spriteRen = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
@@ -29,14 +31,35 @@ public class Movement : MonoBehaviour {
 		anim.SetBool("IsWalking", player_isWalking);
 		Vector2 move = Vector2.zero;
 		move.x = Input.GetAxis ("Horizontal");
+		move.y = Input.GetAxis ("Vertical");
 
-		bool flipSprite = (player_spriteRen.flipX ? (move.x > 0.01f) : (move.x < 0.01f));
-		if (flipSprite) 
+		// I change the value here, sprite flipping no longer a problem - Leong
+		bool flipSpriteX = (player_spriteRen.flipX ? (move.x > 0.0f) : (move.x < -0.01f));
+
+		if (flipSpriteX) 
 		{
 			player_spriteRen.flipX = !player_spriteRen.flipX;
-			player_isRight = !player_isRight ;
+			player_isRight = !player_isRight;
 			player_isLeft = !player_isLeft;
 		}
+		if(move.y > 0.0f)
+		{
+			player_isUp = true;
+
+			player_isDown = false;
+		}
+		else if(move.y < 0.0f)
+		{
+			player_isUp = false;
+
+			player_isDown = true;
+		}
+		else if(move.y == 0.0f)
+		{
+			player_isUp =  false;
+			player_isDown = false;
+		}
+
 
 		if (player_horizontalSpeed == 0.0f) 
 		{
@@ -48,7 +71,7 @@ public class Movement : MonoBehaviour {
 		}
 
 		player_horizontalSpeed = move.x * player_WalkSpeed;
-		rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), rgBody.velocity.y);
+		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
 		//rgBody.AddForce (new Vector2 (player_horizontalSpeed, 0.0f), ForceMode2D.Impulse);
 		/*if(Input.GetKey(KeyCode.D))
 		{
@@ -70,7 +93,7 @@ public class Movement : MonoBehaviour {
 		}*/
 		if(Input.GetButtonDown("Jump") && player_grounded)
 		{
-			rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
+			player_rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
 			player_grounded = false;
 		}
 
