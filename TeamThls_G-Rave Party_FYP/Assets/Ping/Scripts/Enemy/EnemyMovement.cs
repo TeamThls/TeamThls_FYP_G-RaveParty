@@ -6,6 +6,7 @@ public class EnemyMovement : MonoBehaviour {
 
 	public float setTime = 0.0f;
 	public float setTime2 = 0.0f;
+	public float maxDuration = 1.0f;
 	public bool detection = false;
 	public Transform player;
 	Vector3 newPos = new Vector3();
@@ -55,7 +56,7 @@ public class EnemyMovement : MonoBehaviour {
 				//setTime2 = 0.0f;
 			}
 
-			if (setTime >= 3.0f) {
+			if (setTime >= maxDuration) {
 				detection = false;
 				setTime = 0.0f;
 			}
