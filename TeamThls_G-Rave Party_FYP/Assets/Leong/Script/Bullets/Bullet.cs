@@ -16,20 +16,19 @@ public class Bullet : MonoBehaviour {
 	public Bullet_SpawnDirection bullet_Direction;
 
 	//[SerializeField] MeshRenderer mesh_Ren;
-	[SerializeField] LineRenderer line_Ren;
-
+	//[SerializeField] LineRenderer line_Ren;
+	CameraShake cameraShake;
 
 	// Use this for initialization
 	void Start () 
 	{
-
+		cameraShake = Camera.main.GetComponent<CameraShake>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		BulletDirection();
-		line_Ren.widthMultiplier = Mathf.Clamp(bullet_Time * 10, 1, 15);
 
 		bullet_Time += Time.deltaTime;
 		if(bullet_Time > 5.0f)
@@ -66,6 +65,7 @@ public class Bullet : MonoBehaviour {
 	{
 		if(col.CompareTag("Enemy"))
 		{
+			cameraShake.Shake(0.3f, 0.1f);
 			col.GetComponent<EnemyCollider>().enemy_Health -= 10.0f;
 			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
 			Destroy(this.gameObject);

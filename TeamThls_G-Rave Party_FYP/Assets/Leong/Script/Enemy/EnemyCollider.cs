@@ -9,9 +9,12 @@ public class EnemyCollider : MonoBehaviour {
 	[SerializeField] Animator anim;
 	[SerializeField] ParticleSystem p_BloodOnDeath;
 	Rigidbody2D rgBody;
+	float death_PauseTimer = 0.0f;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		rgBody = GetComponent<Rigidbody2D>();
+
 	}
 	
 	// Update is called once per frame
@@ -19,8 +22,18 @@ public class EnemyCollider : MonoBehaviour {
 	{
 		if(enemy_Health <= 0.0f)
 		{
-			Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
-			this.gameObject.SetActive(false);
+			// WIP, a tiny pause when killed an enemy 
+			death_PauseTimer += Time.deltaTime;
+			if(death_PauseTimer < 0.01f)
+			{
+				Time.timeScale = 0.01f;
+			}
+			else
+			{
+				Time.timeScale = 1.0f;
+				Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
+				this.gameObject.SetActive(false);
+			}
 		}
 
 	}

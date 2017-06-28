@@ -16,10 +16,13 @@ public class LaserBeam : MonoBehaviour {
 	}
 
 	public Laser_SpawnDirection laser_Direction;
+
+	CameraShake cameraShake;
 	// Use this for initialization
 	void Start () 
 	{
-		
+		cameraShake = Camera.main.GetComponent<CameraShake>();
+
 	}
 	
 	// Update is called once per frame
@@ -58,13 +61,23 @@ public class LaserBeam : MonoBehaviour {
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
 		}
 		else if(laser_Direction == Laser_SpawnDirection.Up)
-		{
-			
+		{			
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
 		}
 		else
 		{
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if(col.CompareTag("Enemy"))
+		{
+			cameraShake.Shake(0.7f, 0.2f);
+			col.GetComponent<EnemyCollider>().enemy_Health -= 100.0f;
+			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
+			Destroy(this.gameObject);
 		}
 	}
 }
