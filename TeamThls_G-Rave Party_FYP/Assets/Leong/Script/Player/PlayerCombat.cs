@@ -11,9 +11,11 @@ public class PlayerCombat : MonoBehaviour {
 	public ParticleSystem iceCasting_Particles;
 	public Transform gun;
 	public Transform gunCenter;
+	SharedStats shareStat;
 
 	public float fireRate = 0.25f;
 	public float nextFire = 0.0f;
+	public float fireDuration = 0.0f;
 
 	public bool isSlowMo = false;
 
@@ -38,24 +40,27 @@ public class PlayerCombat : MonoBehaviour {
 		bullet = bullet_Obj.GetComponent<Bullet>();
 		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
 		movementScript = GetComponent<Movement>();
+		shareStat = GetComponent<SharedStats> ();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetKey(KeyCode.K) && Time.time > nextFire)
+		if(Input.GetKey(KeyCode.K) && Time.time > nextFire && shareStat.player_Mana >= 2)
 		{
 			nextFire = Time.time + fireRate;
 			Shoot();
+			shareStat.player_Mana -= 2;
 		}
 		if(Input.GetKeyDown(KeyCode.Alpha1))
 		{
 			SlowMo();
 		}
-		if(Input.GetKey(KeyCode.L) && Time.time > nextFire)
+		if(Input.GetKey(KeyCode.L) && Time.time > nextFire && shareStat.player_Mana >= 20)
 		{
 			nextFire = Time.time + fireRate;
 			ShootLaser();
+			shareStat.player_Mana -= 20;
 		}
 
 		ShootFlame();
@@ -118,9 +123,17 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootFlame()
 	{
-		if(Input.GetKey(KeyCode.J))
+		if(shareStat.player_Mana >= 5 && Input.GetKey(KeyCode.J))
 		{
+			fireDuration += Time.deltaTime;
 			flame_Particles.Play();
+			if (fireDuration >= 0.5f) {
+				shareStat.player_Mana -= 5;
+				fireDuration = 0;
+			}
+			if (shareStat.player_Mana < 5) {
+				flame_Particles.Stop ();
+			}
 		}
 		else if(Input.GetKeyUp(KeyCode.J))
 		{
