@@ -73,8 +73,12 @@ public class GameManagerScript : MonoBehaviour
 				}*/
 			}
 		spawner [0].transform.position = new Vector3 (-20 ,0, 0);
+		spawner [0].SetActive (false);
 		spawner [1].transform.position = new Vector3 (-20 ,5, 0);
+		spawner [1].SetActive (false);
 		spawner [2].transform.position = new Vector3 (-20 ,10, 0);
+		spawner [2].SetActive (false);
+
 		/*
 		spawner [3].transform.position = new Vector3 (-10 ,-5, 0);
 		spawner [4].transform.position = new Vector3 (0 ,-5, 0);
@@ -105,7 +109,7 @@ public class GameManagerScript : MonoBehaviour
 		spawner [11].transform.parent = spawn9.transform;
 		spawner [11].transform.localPosition = new Vector3 (0 ,0, 0);
 
-		InvokeRepeating("check", 0.0f, 1.0f/15f); // update at 15 fps
+		InvokeRepeating("check", 0.0f, 2.0f); // update at 15 fps
 
 
 	}
@@ -130,6 +134,10 @@ public class GameManagerScript : MonoBehaviour
 				crossover *= 2;   // frequency crossover point for each band.
 				Vector3 tmp = new Vector3 (band[k]*2,band[k]*2,band[k]*2 /*spawner[k].transform.position.z*/);
 				spawner[k].transform.localScale = tmp;
+				if (band [k]*2 >= 1.7f) 
+				{
+					spawner[k].GetComponent<SpawnBehaviour>().Spawn();
+				}
 				band[k] = 0;
 				k++;
 

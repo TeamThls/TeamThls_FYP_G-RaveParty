@@ -27,8 +27,5 @@ public class SpawnBehaviour : MonoBehaviour {
 		Instantiate(spawnbullet_obj, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
 	}
 
-	public void actualspawn()
-	{
-		
-	}
+
 }

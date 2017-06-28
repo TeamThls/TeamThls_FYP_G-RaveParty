@@ -8,19 +8,19 @@ public class EnemyMovement : MonoBehaviour {
 	public float setTime2 = 0.0f;
 	public float maxDuration = 1.0f;
 	public bool detection = false;
-	public Transform player;
+	public GameObject player;
 	Vector3 newPos = new Vector3();
 
 	// Use this for initialization
 	void Start () {
-		//player = GameObject.transform.Find ("Player");
+		player = GameObject.Find ("Player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// detect the player position and store it to a temp;
 		if(detection == false){
-			newPos = player.position;
+			newPos = player.transform.position;
 			detection = true;
 		}
 
