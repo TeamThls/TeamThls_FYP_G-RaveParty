@@ -5,6 +5,14 @@ using System;
 
 public class PlayerCombat : MonoBehaviour {
 
+	public enum Player_Controller
+	{
+		Keyboard_1, 
+		Keyboard_2,
+		Controller_1,
+		Controller_2
+	}
+
 	public GameObject bullet_Obj;
 	public GameObject laserBeam_Obj;
 	public GameObject iceBullet_Obj;
@@ -12,6 +20,7 @@ public class PlayerCombat : MonoBehaviour {
 	public ParticleSystem iceCasting_Particles;
 	public Transform gun;
 	public Transform gunCenter;
+	public Player_Controller player_Control;
 
 	[SerializeField] float normalBullet_FireRate = 0.1f;
 	[SerializeField] float laserBullet_FireRate = 1.0f;
@@ -38,7 +47,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	ParticleSystem tempPar;
 
-	Movement movementScript;
+	PlayerMovement movementScript;
 
 	// Use this for initialization
 	void Start () 
@@ -47,34 +56,131 @@ public class PlayerCombat : MonoBehaviour {
 		bullet = bullet_Obj.GetComponent<Bullet>();
 		iceBullet = iceBullet_Obj.GetComponent<IceBullet>();
 		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
-		movementScript = GetComponent<Movement>();
+		movementScript = GetComponent<PlayerMovement>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetKey(KeyCode.J) && Time.time > normalBullet_NextFire)
+		if (player_Control == Player_Controller.Keyboard_1) 
+		{
+			Keyboard1 ();
+		} 
+		else if (player_Control == Player_Controller.Keyboard_2) 
+		{
+			Keyboard2 ();
+		} 
+		else if (player_Control == Player_Controller.Controller_1) 
+		{
+			Controller1 ();
+		} 
+		else if (player_Control == Player_Controller.Controller_2) 
+		{
+			Controller2 ();
+		}
+
+
+
+	}
+
+	void Keyboard1()
+	{
+		if(Input.GetAxis ("SquareK1")>0 && Time.time > normalBullet_NextFire)
 		{
 			normalBullet_NextFire = Time.time + normalBullet_FireRate;
 			ShootBullet();
 		}
-		if(Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			SlowMo();
-		}
-		if(Input.GetKey(KeyCode.L) && Time.time > laserBullet_NextFire)
+		//if(Input.GetAxis (KeyCode.Alpha1))
+		//{
+		//	SlowMo();
+		//}
+		if(Input.GetAxis ("CircleK1")>0 && Time.time > laserBullet_NextFire)
 		{
 			laserBullet_NextFire = Time.time + laserBullet_FireRate;
 			ShootLaser();
 		}
-		if(Input.GetKey(KeyCode.I) && Time.time > iceBullet_NextFire)
+		if(Input.GetAxis ("TriangleK1")>0 && Time.time > iceBullet_NextFire)
 		{
 			iceBullet_NextFire = Time.time + iceBullet_FireRate;
 			ShootIceBullet();
 		}
 
-		ShootFlame();
+		//ShootFlame();
+	}
 
+	void Keyboard2()
+	{
+		if(Input.GetAxis ("SquareK2")>0 && Time.time > normalBullet_NextFire)
+		{
+			normalBullet_NextFire = Time.time + normalBullet_FireRate;
+			ShootBullet();
+		}
+		//if(Input.GetAxis (KeyCode.Alpha1))
+		//{
+		//	SlowMo();
+		//}
+		if(Input.GetAxis ("CircleK2")>0 && Time.time > laserBullet_NextFire)
+		{
+			laserBullet_NextFire = Time.time + laserBullet_FireRate;
+			ShootLaser();
+		}
+		if(Input.GetAxis ("TriangleK2")>0 && Time.time > iceBullet_NextFire)
+		{
+			iceBullet_NextFire = Time.time + iceBullet_FireRate;
+			ShootIceBullet();
+		}
+
+		//ShootFlame();
+	}
+
+	void Controller1()
+	{
+		if(Input.GetAxis ("SquareP1")>0 && Time.time > normalBullet_NextFire)
+		{
+			normalBullet_NextFire = Time.time + normalBullet_FireRate;
+			ShootBullet();
+		}
+		//if(Input.GetAxis (KeyCode.Alpha1))
+		//{
+		//	SlowMo();
+		//}
+		if(Input.GetAxis ("CircleP1")>0 && Time.time > laserBullet_NextFire)
+		{
+			laserBullet_NextFire = Time.time + laserBullet_FireRate;
+			ShootLaser();
+		}
+		if(Input.GetAxis ("TriangleP1")>0 && Time.time > iceBullet_NextFire)
+		{
+			iceBullet_NextFire = Time.time + iceBullet_FireRate;
+			ShootIceBullet();
+		}
+
+		//ShootFlame();
+	}
+
+	void Controller2()
+	{
+		if(Input.GetAxis ("SquareP2")>0 && Time.time > normalBullet_NextFire)
+		{
+			normalBullet_NextFire = Time.time + normalBullet_FireRate;
+			ShootBullet();
+		}
+		//if(Input.GetAxis (KeyCode.Alpha1))
+		//{
+		//	SlowMo();
+		//}
+		if(Input.GetAxis ("CircleP2")>0 && Time.time > laserBullet_NextFire)
+		{
+			laserBullet_NextFire = Time.time + laserBullet_FireRate;
+			ShootLaser();
+		}
+		if(Input.GetAxis ("TriangleP2")>0 && Time.time > iceBullet_NextFire)
+		{
+			iceBullet_NextFire = Time.time + iceBullet_FireRate;
+			ShootIceBullet();
+		}
+
+		//ShootFlame();
 	}
 
 	void ShootBullet()
@@ -109,7 +215,7 @@ public class PlayerCombat : MonoBehaviour {
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Right;
 			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 0.1f), Quaternion.identity);
 			Instantiate(iceBullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, -0.1f), Quaternion.identity);
-			
+
 		}
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{

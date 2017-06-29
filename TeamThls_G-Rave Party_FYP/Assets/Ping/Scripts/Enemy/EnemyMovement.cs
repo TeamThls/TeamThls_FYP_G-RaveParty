@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour {
 	public GameObject player;
 	Vector3 newPos = new Vector3();
 
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find ("Player");
