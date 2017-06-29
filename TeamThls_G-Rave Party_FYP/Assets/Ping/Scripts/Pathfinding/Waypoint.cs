@@ -12,6 +12,7 @@ public class Waypoint : MonoBehaviour {
 	public float totalDist = 0.0f;			// total distance from enemy -> this waypoint -> player
 	public float P_Dist = 0.0f;				// distance from this waypoint to player
 	public float W_Dist = 0.0f;				// distance from enemy to this waypoint
+	public float S_Dist = 0.0f;				// distance from the Spawner
 	//public float f_cost = 0.0f;				// forget
 	//public float h_cost = 0.0f;				// forget
 

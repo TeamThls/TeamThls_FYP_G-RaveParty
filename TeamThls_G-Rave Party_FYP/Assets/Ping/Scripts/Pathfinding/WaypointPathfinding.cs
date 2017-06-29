@@ -9,6 +9,7 @@ public class WaypointPathfinding : MonoBehaviour {
 	public List<GameObject> TargetList;		// used to calculate the distance
 	public GameObject t_Waypoint;			// target waypoint to move;
 	public GameObject target;				// player;
+	public GameObject Manager;
 
 	public int num;							// waypoint temp count;
 	public int counter;						// for double checking;
@@ -33,7 +34,18 @@ public class WaypointPathfinding : MonoBehaviour {
 	void Start () {
 		rgd = GetComponent<Rigidbody2D> ();
 		target = GameObject.Find ("Player");
-		t_Waypoint = TargetList [0];
+		Manager = GameObject.Find ("WaypointMap");
+		WaypointManager WayManager = Manager.GetComponent<WaypointManager> ();
+		//t_Waypoint = TargetList [0];
+
+		// get the nearest waypoint to move when spawned
+		for(int i = 0 ; i < WayManager.childList.Count(); i++){
+			t_Waypoint = WayManager.childList [i];
+			if (WayManager.childList [i].GetComponent<Waypoint> ().W_Dist < t_Waypoint.GetComponent<Waypoint> ().W_Dist) {
+				t_Waypoint = WayManager.childList [i];
+			}
+		}
+
 		flipx = this.gameObject.GetComponent<SpriteRenderer> ().flipX;
 	}
 	
@@ -48,10 +60,9 @@ public class WaypointPathfinding : MonoBehaviour {
 			xPos = this.transform.position.x;
 		}
 
-		LayerMask layerMask = LayerMask.NameToLayer("Enemy");
-		RaycastHit2D hitInfo;
-
 		if (flipx == true) {
+			LayerMask layerMask = LayerMask.NameToLayer("Enemy");
+			RaycastHit2D hitInfo;
 			hitInfo = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y) + Vector2.right * 1.0f, Vector2.right, 1.0f, ~(0 << layerMask.value));
 			Debug.DrawRay (new Vector2 (transform.position.x, transform.position.y) + Vector2.right, Vector2.right * 1.0f, Color.yellow);
 
@@ -72,6 +83,8 @@ public class WaypointPathfinding : MonoBehaviour {
 			}
 		} 
 		else if (flipx == false) {
+			LayerMask layerMask = LayerMask.NameToLayer("Enemy");
+			RaycastHit2D hitInfo;
 			hitInfo = Physics2D.Raycast (new Vector2 (transform.position.x, transform.position.y) + Vector2.left * 1.0f, Vector2.left, 1.0f, ~(0 << layerMask.value));
 			Debug.DrawRay (new Vector2 (transform.position.x, transform.position.y) + Vector2.left, Vector2.left * 1.0f, Color.yellow);
 
