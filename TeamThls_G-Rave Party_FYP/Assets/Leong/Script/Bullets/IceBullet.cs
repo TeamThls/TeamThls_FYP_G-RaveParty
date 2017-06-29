@@ -67,9 +67,9 @@ public class IceBullet : MonoBehaviour {
 		if(col.CompareTag("Enemy"))
 		{
 			cameraShake.Shake(0.5f, 0.1f);
-			col.GetComponent<EnemyCollider>().enemy_Health -= 50.0f;
+			col.GetComponent<EnemyCollider>().enemy_Health -= 30.0f;
 			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
-			Destroy(this.gameObject);
+			//Destroy(this.gameObject);
 		}
 	}
 }

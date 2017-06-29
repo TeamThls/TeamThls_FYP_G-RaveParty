@@ -23,7 +23,7 @@ public class PlayerCombat : MonoBehaviour {
 	public Player_Controller player_Control;
 
 	[SerializeField] float normalBullet_FireRate = 0.1f;
-	[SerializeField] float laserBullet_FireRate = 1.0f;
+	[SerializeField] float laserBullet_FireRate = 4.0f;
 	[SerializeField] float iceBullet_FireRate = 2.0f;
 
 	[SerializeField] float normalBullet_NextFire = 0.0f;

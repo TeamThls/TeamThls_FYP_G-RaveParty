@@ -31,6 +31,9 @@ public class LaserBeam : MonoBehaviour {
 		LaserDirection();
 		line_Ren.SetPosition(0, new Vector3(1, 0, 0));
 		line_Ren.SetPosition(1, new Vector3(30, 0, 0));
+		time += Time.deltaTime;
+
+
 
 		if(line_Ren_Decrease == false)
 		{
@@ -48,6 +51,12 @@ public class LaserBeam : MonoBehaviour {
 				this.gameObject.SetActive(false);
 			}
 		}
+
+		if(time > 1.2f)
+		{
+			Destroy(this.gameObject);
+		}
+
 	}
 
 	void LaserDirection ()
@@ -77,7 +86,7 @@ public class LaserBeam : MonoBehaviour {
 			cameraShake.Shake(0.7f, 0.2f);
 			col.GetComponent<EnemyCollider>().enemy_Health -= 100.0f;
 			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
-			Destroy(this.gameObject);
+			//Destroy(this.gameObject);
 		}
 	}
 }
