@@ -22,6 +22,8 @@ public class PlayerCombat : MonoBehaviour {
 	public Transform gunCenter;
 	public Player_Controller player_Control;
 
+	SharedStats shareStat;
+
 	[SerializeField] float normalBullet_FireRate = 0.1f;
 	[SerializeField] float laserBullet_FireRate = 4.0f;
 	[SerializeField] float iceBullet_FireRate = 2.0f;
@@ -29,6 +31,8 @@ public class PlayerCombat : MonoBehaviour {
 	[SerializeField] float normalBullet_NextFire = 0.0f;
 	[SerializeField] float laserBullet_NextFire = 0.0f;
 	[SerializeField] float iceBullet_NextFire = 0.0f;
+
+	public float fireDuration = 0.0f;
 
 	public bool isSlowMo = false;
 
@@ -57,6 +61,7 @@ public class PlayerCombat : MonoBehaviour {
 		iceBullet = iceBullet_Obj.GetComponent<IceBullet>();
 		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
 		movementScript = GetComponent<PlayerMovement>();
+		shareStat = GetComponent<SharedStats> ();
 	}
 
 	// Update is called once per frame
@@ -89,6 +94,7 @@ public class PlayerCombat : MonoBehaviour {
 		{
 			normalBullet_NextFire = Time.time + normalBullet_FireRate;
 			ShootBullet();
+			shareStat.player_Mana -= 2;	
 		}
 		//if(Input.GetAxis (KeyCode.Alpha1))
 		//{
@@ -98,6 +104,7 @@ public class PlayerCombat : MonoBehaviour {
 		{
 			laserBullet_NextFire = Time.time + laserBullet_FireRate;
 			ShootLaser();
+			shareStat.player_Mana -= 20;
 		}
 		if(Input.GetAxis ("TriangleK1")>0 && Time.time > iceBullet_NextFire)
 		{
@@ -266,16 +273,23 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootFlame()
 	{
-		if(Input.GetKey(KeyCode.K))
-		{
+		if (shareStat.player_Mana >= 5 && Input.GetKey (KeyCode.K)) {
+			fireDuration += Time.deltaTime;
 			flame_Particles.Play();
+			if (fireDuration >= 0.5f) {
+				shareStat.player_Mana -= 5;
+				fireDuration = 0;
+			}
+			if (shareStat.player_Mana < 5) {
+				flame_Particles.Stop ();
+			}
 		}
-		else if(Input.GetKeyUp(KeyCode.K))
-		{
-			flame_Particles.Stop();
-		}
-	}
 
+		else if (Input.GetKeyUp (KeyCode.K)) {
+			flame_Particles.Stop ();
+		}
+
+	}
 	void SlowMo()
 	{
 		if(isSlowMo == false)
