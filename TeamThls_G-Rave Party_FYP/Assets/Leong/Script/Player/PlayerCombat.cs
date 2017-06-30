@@ -90,7 +90,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Keyboard1()
 	{
-		if(Input.GetAxis ("SquareK1")>0 && Time.time > normalBullet_NextFire)
+		if(Input.GetAxis ("SquareK1")>0 && Time.time > normalBullet_NextFire  && shareStat.player_Mana >= 2)
 		{
 			normalBullet_NextFire = Time.time + normalBullet_FireRate;
 			ShootBullet();
@@ -100,16 +100,17 @@ public class PlayerCombat : MonoBehaviour {
 		//{
 		//	SlowMo();
 		//}
-		if(Input.GetAxis ("CircleK1")>0 && Time.time > laserBullet_NextFire)
+		if(Input.GetAxis ("CircleK1")>0 && Time.time > laserBullet_NextFire  && shareStat.player_Mana >= 20)
 		{
 			laserBullet_NextFire = Time.time + laserBullet_FireRate;
 			ShootLaser();
 			shareStat.player_Mana -= 20;
 		}
-		if(Input.GetAxis ("TriangleK1")>0 && Time.time > iceBullet_NextFire)
+		if(Input.GetAxis ("TriangleK1")>0 && Time.time > iceBullet_NextFire  && shareStat.player_Mana >= 5)
 		{
 			iceBullet_NextFire = Time.time + iceBullet_FireRate;
 			ShootIceBullet();
+			shareStat.player_Mana -= 5;
 		}
 
 		//ShootFlame();
