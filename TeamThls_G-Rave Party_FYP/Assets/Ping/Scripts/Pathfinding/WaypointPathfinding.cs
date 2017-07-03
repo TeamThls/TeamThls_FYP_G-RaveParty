@@ -68,8 +68,10 @@ public class WaypointPathfinding : MonoBehaviour {
 
 			if(hitInfo.collider != null)
 			{
-				if(hitInfo.collider.gameObject.name == "Player")
+				Debug.Log("Collided");
+				if(hitInfo.collider.gameObject == target)
 				{
+					Debug.Log("PlayerCollided");
 					detect = true;
 				}
 				else

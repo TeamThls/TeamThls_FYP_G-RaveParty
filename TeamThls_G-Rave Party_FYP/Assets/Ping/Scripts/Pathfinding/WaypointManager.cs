@@ -10,12 +10,21 @@ public class WaypointManager : MonoBehaviour {
 	public GameObject MinChild;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+		GetChild();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void GetChild ()
+	{
+		for(int i = 0; i < transform.childCount; i++)
+		{
+			GameObject wp = transform.GetChild(i).gameObject;
+			childList.Add(wp);
+		}
 	}
 }

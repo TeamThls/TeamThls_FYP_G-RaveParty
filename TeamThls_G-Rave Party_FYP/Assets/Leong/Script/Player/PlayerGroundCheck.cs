@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerGroundCheck : MonoBehaviour {
 
 	PlayerMovement player;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -13,16 +14,28 @@ public class PlayerGroundCheck : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		player.player_grounded = true;
+		if(col.tag == "Ground")
+		{
+			player.player_grounded = true;
+
+		}
 	}
 
 	void OnTriggerStay2D(Collider2D col)
 	{
-		player.player_grounded = true;
+		if(col.tag == "Ground")
+		{
+			player.player_grounded = true;
+
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		player.player_grounded = false;
+		if(col.tag == "Ground")
+		{
+			player.player_grounded = false;
+
+		}
 	}
 }

@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PlayerMovement : MonoBehaviour {
 
 	public enum Player_Controller
@@ -29,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
 	SpriteRenderer player_spriteRen;
 	Rigidbody2D player_rgBody;
 	public Player_Controller player_Control;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -66,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 		move.x = Input.GetAxis ("HorizontalK1");
 		move.y = Input.GetAxis ("VerticalK1");
 
-		// I change the value here, sprite flipping no longer a problem - Leong
+
 		bool flipSpriteX = (player_spriteRen.flipX ? (move.x > 0.0f) : (move.x < -0.01f));
 
 		if (flipSpriteX) 
@@ -131,7 +128,7 @@ public class PlayerMovement : MonoBehaviour {
 		move.x = Input.GetAxis ("HorizontalK2");
 		move.y = Input.GetAxis ("VerticalK2");
 
-		// I change the value here, sprite flipping no longer a problem - Leong
+
 		bool flipSpriteX = (player_spriteRen.flipX ? (move.x > 0.0f) : (move.x < -0.01f));
 
 		if (flipSpriteX) 
@@ -170,6 +167,8 @@ public class PlayerMovement : MonoBehaviour {
 
 		player_horizontalSpeed = move.x * player_WalkSpeed;
 		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
+
+
 		if(Input.GetButtonDown("JumpK2") && player_grounded)
 		{
 			player_rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
