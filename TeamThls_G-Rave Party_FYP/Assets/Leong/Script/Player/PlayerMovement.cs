@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 	Animator anim;
 	SpriteRenderer player_spriteRen;
 	Rigidbody2D player_rgBody;
+	GameObject player1, player2;
 	public Player_Controller player_Control;
 
 	// Use this for initialization
@@ -32,7 +33,8 @@ public class PlayerMovement : MonoBehaviour {
 		player_rgBody = GetComponent<Rigidbody2D>();
 		anim = transform.Find("Sprite").GetComponent<Animator>();
 		player_spriteRen = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-
+		player1 = GameObject.Find("Player");
+		player2 = GameObject.Find("Player2");
 	}
 
 	// Update is called once per frame
@@ -55,6 +57,8 @@ public class PlayerMovement : MonoBehaviour {
 			Controller2 ();
 		}
 	}
+
+
 
 	void Keyboard1()
 	{
@@ -119,6 +123,24 @@ public class PlayerMovement : MonoBehaviour {
 
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
 			,Mathf.Clamp(transform.position.y, camera_MinScreenLimit.y + 1, camera_MaxScreenLimit.y - 1), transform.position.z);
+
+		Debug.Log(transform.position.y + " , " + camera_MinScreenLimit.y);
+
+
+		if(transform.position.y <= camera_MinScreenLimit.y + 1 ||
+		   transform.position.y >= camera_MaxScreenLimit.y - 1)
+		   {
+		   Debug.Log("Teleport");
+		   		if(this.gameObject.name == "Player")
+		   		{
+		   			player1.transform.position = player2.transform.position;
+		   		}
+		   		else
+		   		{
+		   			player2.transform.position = player1.transform.position;
+		   		}
+		   }
+
 	}
 
 	void Keyboard2()
@@ -183,6 +205,22 @@ public class PlayerMovement : MonoBehaviour {
 
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
 			,Mathf.Clamp(transform.position.y, camera_MinScreenLimit.y + 1, camera_MaxScreenLimit.y - 1), transform.position.z);
+
+		Debug.Log(transform.position.y + " , " + camera_MinScreenLimit.y);
+		if(transform.position.y <= camera_MinScreenLimit.y + 1||
+		   transform.position.y >= camera_MaxScreenLimit.y - 1)
+		   {
+			Debug.Log("Teleport");
+		   		if(this.gameObject.name == "Player")
+		   		{
+		   			player1.transform.position = player2.transform.position;
+		   		}
+		   		else
+		   		{
+		   			player2.transform.position = player1.transform.position;
+		   		}
+		   }
+
 	}
 
 	void Controller1()
@@ -310,5 +348,17 @@ public class PlayerMovement : MonoBehaviour {
 
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
 			,Mathf.Clamp(transform.position.y, camera_MinScreenLimit.y + 1, camera_MaxScreenLimit.y - 1), transform.position.z);
+	}
+
+	void TeleportBackToOtherPlayer(GameObject teleportingPlayer1, GameObject teleportingPlayer2)
+	{
+		if(player1)
+		{
+			teleportingPlayer1.transform.position = teleportingPlayer2.transform.position;
+		}
+		else if(player2)
+		{
+			teleportingPlayer2.transform.position = teleportingPlayer1.transform.position;
+		}
 	}
 }

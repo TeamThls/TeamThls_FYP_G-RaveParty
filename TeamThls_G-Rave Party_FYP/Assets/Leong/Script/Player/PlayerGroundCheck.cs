@@ -17,8 +17,8 @@ public class PlayerGroundCheck : MonoBehaviour {
 		if(col.tag == "Ground")
 		{
 			player.player_grounded = true;
-
 		}
+
 	}
 
 	void OnTriggerStay2D(Collider2D col)
@@ -26,8 +26,8 @@ public class PlayerGroundCheck : MonoBehaviour {
 		if(col.tag == "Ground")
 		{
 			player.player_grounded = true;
-
 		}
+
 	}
 
 	void OnTriggerExit2D(Collider2D col)
@@ -35,7 +35,6 @@ public class PlayerGroundCheck : MonoBehaviour {
 		if(col.tag == "Ground")
 		{
 			player.player_grounded = false;
-
 		}
 	}
 }
