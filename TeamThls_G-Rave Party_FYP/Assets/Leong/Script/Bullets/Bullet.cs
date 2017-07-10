@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour {
 	public GameObject player;
 	public Movement movementScript;
 	public Transform gun;
+	public int bullet_Damage = 10;
 	public enum Bullet_SpawnDirection
 	{
 		Up, Down, Left, Right
@@ -66,7 +67,7 @@ public class Bullet : MonoBehaviour {
 		if(col.CompareTag("Enemy"))
 		{
 			cameraShake.Shake(0.3f, 0.1f);
-			col.GetComponent<EnemyCollider>().enemy_Health -= 10.0f;
+			col.GetComponent<EnemyCollider>().enemy_Health -= bullet_Damage;
 			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
 			Destroy(this.gameObject);
 		}

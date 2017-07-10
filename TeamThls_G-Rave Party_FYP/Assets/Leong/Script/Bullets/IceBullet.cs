@@ -6,6 +6,7 @@ public class IceBullet : MonoBehaviour {
 
 	[SerializeField] float iceBullet_Speed = 13.0f;
 	[SerializeField] float iceBullet_Time = 0.0f;
+	public int iceBullet_Damage = 30;
 	//public GameObject player;
 	public Movement movementScript;
 	public Transform gun;
@@ -67,7 +68,7 @@ public class IceBullet : MonoBehaviour {
 		if(col.CompareTag("Enemy"))
 		{
 			cameraShake.Shake(0.5f, 0.1f);
-			col.GetComponent<EnemyCollider>().enemy_Health -= 30.0f;
+			col.GetComponent<EnemyCollider>().enemy_Health -= iceBullet_Damage;
 			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
 			//Destroy(this.gameObject);
 		}

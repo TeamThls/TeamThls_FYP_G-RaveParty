@@ -7,8 +7,11 @@ public class LaserBeam : MonoBehaviour {
 	public LineRenderer line_Ren;
 	bool line_Ren_Decrease;
 
-	float speed = 100.0f;
-	float time;
+	float laser_Speed = 100.0f;
+	float laser_Time;
+
+	public int laser_Damage = 100;
+
 
 	public enum Laser_SpawnDirection
 	{
@@ -31,7 +34,7 @@ public class LaserBeam : MonoBehaviour {
 		LaserDirection();
 		line_Ren.SetPosition(0, new Vector3(1, 0, 0));
 		line_Ren.SetPosition(1, new Vector3(30, 0, 0));
-		time += Time.deltaTime;
+		laser_Time += Time.deltaTime;
 
 
 
@@ -45,14 +48,14 @@ public class LaserBeam : MonoBehaviour {
 		}
 		else
 		{
-			line_Ren.widthMultiplier -= speed * Time.deltaTime;
+			line_Ren.widthMultiplier -= laser_Speed * Time.deltaTime;
 			if(line_Ren.widthMultiplier < 0.0)
 			{
 				this.gameObject.SetActive(false);
 			}
 		}
 
-		if(time > 1.2f)
+		if(laser_Time > 1.2f)
 		{
 			Destroy(this.gameObject);
 		}
@@ -84,7 +87,7 @@ public class LaserBeam : MonoBehaviour {
 		if(col.CompareTag("Enemy"))
 		{
 			cameraShake.Shake(0.7f, 0.2f);
-			col.GetComponent<EnemyCollider>().enemy_Health -= 100.0f;
+			col.GetComponent<EnemyCollider>().enemy_Health -= laser_Damage;
 			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
 			//Destroy(this.gameObject);
 		}

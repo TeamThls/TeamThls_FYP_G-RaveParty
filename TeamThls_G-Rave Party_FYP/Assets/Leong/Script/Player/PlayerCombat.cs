@@ -251,27 +251,27 @@ public class PlayerCombat : MonoBehaviour {
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Right;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 0.1f), Quaternion.identity);
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
 			Instantiate(iceBullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 
 		}
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Left;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 3.0f, gun.position.y, gun.position.z - 0.1f), Quaternion.identity);
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 3.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
 			Instantiate(iceBullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
 		else if(movementScript.player_isUp == true)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Up;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, gun.position.z - 0.1f), Quaternion.identity);
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, gun.position.z - 1), Quaternion.identity);
 			Instantiate(iceBullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, -0.1f), Quaternion.identity);
 
 		}
 		else if(movementScript.player_isDown == true)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Down;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, gun.position.z - 0.1f), Quaternion.identity);
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, gun.position.z - 1), Quaternion.identity);
 			Instantiate(iceBullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, -0.1f), Quaternion.identity);
 		}
 
