@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
 
-	public float setTime = 0.0f;
-	public float setTime2 = 0.0f;
-	public float maxDuration = 1.0f;
+	public float maxDuration;
+	public float setTime;
 	public bool detection = false;
+	public bool inCd = false;
 	public GameObject player;
-	Vector3 newPos = new Vector3();
 
+	Vector3 newPos = new Vector3();
+	Vector3 newPos2 = new Vector3();
+	Vector3 newPos3 = new Vector3();
+
+	public bool isAttack = false;
+
+	public float step;
+	public float speed;
+	public float dist;
+
+	public float totalDist;
+	public int counter;
+	public int xPos;
+	public int yPos;
 
 	// Use this for initialization
 	void Start () {
@@ -19,47 +32,74 @@ public class EnemyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// detect the player position and store it to a temp;
-		if(detection == false){
-			newPos = player.transform.position;
-			detection = true;
+		dist = Vector3.Distance (this.gameObject.transform.position, player.transform.position);
+		step = speed * Time.deltaTime;
+
+		newPos = new Vector3(player.transform.position.x, player.transform.position.y + 2, player.transform.position.z);
+		newPos2 = new Vector3(player.transform.position.x + xPos, player.transform.position.y + yPos, player.transform.position.z);
+		newPos3 = new Vector3(player.transform.position.x - xPos, player.transform.position.y + yPos, player.transform.position.z);
+
+
+		if (dist > totalDist) {
+			isAttack = false;
+		} 
+		else if (dist < totalDist) {
+			isAttack = true;
 		}
-
-		// move enemy to the temp position
-		if (detection == true) {
-			transform.position = Vector3.MoveTowards (this.transform.position, newPos, 0.1f);
-		}
-
-		// when enemy reach the temp position, use the timer to reset the bool, bool reseted will redetect the player position
-		if (this.transform.position == newPos) {
-			// set timer to reset the detection on player
-			setTime += Time.deltaTime;
-			setTime2 += Time.deltaTime;
-			int Rand = 0;
-			if (setTime2 >= 0.5f && detection == true) {
-				Rand = Random.Range (1,4);
+		
+		if(isAttack == false){
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+			/*
+			// detect the player position and store it to a temp;
+			if(detection == false){
+				newPos = player.transform.position;
+				detection = true;
 			}
 
-			if (Rand == 1) {
-				this.transform.Translate (Vector3.left * 3.0f * Time.deltaTime);
-				//setTime2 = 0.0f;
-			}
-			else if (Rand == 2) {
-				this.transform.Translate (Vector3.right * 3.0f * Time.deltaTime);
-				//setTime2 = 0.0f;
-			}
-			else if (Rand == 3) {
-				this.transform.Translate (Vector3.up * 3.0f * Time.deltaTime);
-				//setTime2 = 0.0f;
-			}
-			else if (Rand == 4) {
-				this.transform.Translate (Vector3.down * 3.0f * Time.deltaTime);
-				//setTime2 = 0.0f;
+			// move enemy to the temp position
+			if (detection == true) {
+				transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
 			}
 
-			if (setTime >= maxDuration) {
+			if (this.transform.position == player.transform.position) {
 				detection = false;
+			}
+			*/
+		}
+		if (isAttack == true && inCd == false && counter == 0) {
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+			if (this.transform.position == newPos) {
+				counter = 1;
+			}
+		}
+		if (isAttack == true && inCd == false && counter == 1) {
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos2, step);
+			if (this.transform.position == newPos2) {
+				GetComponentInChildren<SpriteRenderer> ().flipX = true;
+				inCd = true;
+				counter = 3;
+			}
+		}
+		if (isAttack == true && inCd == false && counter == 3) {
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+			if (this.transform.position == newPos) {
+				counter = 4;
+			}
+		}
+		if (isAttack == true && inCd == false && counter == 4) {
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos3, step);
+			if (this.transform.position == newPos3) {
+				GetComponentInChildren<SpriteRenderer> ().flipX = false;
+				inCd = true;
+				counter = 0;
+			}
+		}
+
+		if (inCd == true) {
+			setTime += Time.deltaTime;
+			if (setTime >= maxDuration) {
 				setTime = 0.0f;
+				inCd = false;
 			}
 		}
 	}

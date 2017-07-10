@@ -22,6 +22,13 @@ public class PlayerCombat : MonoBehaviour {
 	public Transform gunCenter;
 	public Player_Controller player_Control;
 
+	public int BulletMana;
+	public int FireMana;
+	public int BaseFireMana;
+	public int LaserMana;
+	public int IceMana;
+
+	public GameObject GameManager;
 	SharedStats shareStat;
 
 	[SerializeField] float normalBullet_FireRate = 0.1f;
@@ -61,7 +68,8 @@ public class PlayerCombat : MonoBehaviour {
 		iceBullet = iceBullet_Obj.GetComponent<IceBullet>();
 		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
 		movementScript = GetComponent<PlayerMovement>();
-		shareStat = GetComponent<SharedStats> ();
+		GameManager = GameObject.Find ("GameManager");
+		shareStat = GameManager.GetComponent<SharedStats> ();
 	}
 
 	// Update is called once per frame
@@ -90,24 +98,90 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Keyboard1()
 	{
-		if(Input.GetAxis ("SquareK1")>0 && Time.time > normalBullet_NextFire  && shareStat.player_Mana >= 2)
+		if(Input.GetAxis ("SquareK1")>0 && Time.time > normalBullet_NextFire  && shareStat.player_Mana >= BulletMana)
 		{
+			shareStat.setTime = 0.0f;
 			normalBullet_NextFire = Time.time + normalBullet_FireRate;
 			ShootBullet();
-			shareStat.player_Mana -= 2;	
+			shareStat.player_Mana -= BulletMana;
+		}
+		//if(Input.GetAxis (KeyCode.Alpha1))
+		//{
+		//	shareStat.setTime = 0.0f;
+		//	SlowMo();
+		//}
+		if(Input.GetAxis ("CircleK1")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
+		{
+			shareStat.setTime = 0.0f;
+			laserBullet_NextFire = Time.time + laserBullet_FireRate;
+			ShootLaser();
+			shareStat.player_Mana -= LaserMana;
+		}
+		if(Input.GetAxis ("TriangleK1")>0 && Time.time > iceBullet_NextFire  && shareStat.player_Mana >= IceMana)
+		{
+			shareStat.setTime = 0.0f;
+			iceBullet_NextFire = Time.time + iceBullet_FireRate;
+			ShootIceBullet();
+			shareStat.player_Mana -= IceMana;
+		}
+
+		//ShootFlame();
+	}
+
+	void Keyboard2()
+	{
+		if(Input.GetAxis ("SquareK2")>0 && Time.time > normalBullet_NextFire && shareStat.player_Mana >= BulletMana)
+		{
+			shareStat.setTime = 0.0f;
+			normalBullet_NextFire = Time.time + normalBullet_FireRate;
+			ShootBullet();
+			shareStat.player_Mana -= BulletMana;
 		}
 		//if(Input.GetAxis (KeyCode.Alpha1))
 		//{
 		//	SlowMo();
 		//}
-		if(Input.GetAxis ("CircleK1")>0 && Time.time > laserBullet_NextFire  && shareStat.player_Mana >= 20)
+		if(Input.GetAxis ("CircleK2")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
 		{
+			shareStat.setTime = 0.0f;
 			laserBullet_NextFire = Time.time + laserBullet_FireRate;
 			ShootLaser();
-			shareStat.player_Mana -= 20;
+			shareStat.player_Mana -= LaserMana;
 		}
-		if(Input.GetAxis ("TriangleK1")>0 && Time.time > iceBullet_NextFire  && shareStat.player_Mana >= 5)
+		if(Input.GetAxis ("TriangleK2")>0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana)
 		{
+			shareStat.setTime = 0.0f;
+			iceBullet_NextFire = Time.time + iceBullet_FireRate;
+			ShootIceBullet();
+			shareStat.player_Mana -= IceMana;
+		}
+
+		//ShootFlame();
+	}
+
+	void Controller1()
+	{
+		if(Input.GetAxis ("SquareP1")>0 && Time.time > normalBullet_NextFire && shareStat.player_Mana >= BulletMana)
+		{
+			shareStat.setTime = 0.0f;
+			normalBullet_NextFire = Time.time + normalBullet_FireRate;
+			ShootBullet();
+			shareStat.player_Mana -= BulletMana;
+		}
+		//if(Input.GetAxis (KeyCode.Alpha1))
+		//{
+		//	SlowMo();
+		//}
+		if(Input.GetAxis ("CircleP1")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
+		{
+			shareStat.setTime = 0.0f;
+			laserBullet_NextFire = Time.time + laserBullet_FireRate;
+			ShootLaser();
+			shareStat.player_Mana -= LaserMana;
+		}
+		if(Input.GetAxis ("TriangleP1")>0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana)
+		{
+			shareStat.setTime = 0.0f;
 			iceBullet_NextFire = Time.time + iceBullet_FireRate;
 			ShootIceBullet();
 			shareStat.player_Mana -= 5;
@@ -116,76 +190,32 @@ public class PlayerCombat : MonoBehaviour {
 		//ShootFlame();
 	}
 
-	void Keyboard2()
-	{
-		if(Input.GetAxis ("SquareK2")>0 && Time.time > normalBullet_NextFire)
-		{
-			normalBullet_NextFire = Time.time + normalBullet_FireRate;
-			ShootBullet();
-		}
-		//if(Input.GetAxis (KeyCode.Alpha1))
-		//{
-		//	SlowMo();
-		//}
-		if(Input.GetAxis ("CircleK2")>0 && Time.time > laserBullet_NextFire)
-		{
-			laserBullet_NextFire = Time.time + laserBullet_FireRate;
-			ShootLaser();
-		}
-		if(Input.GetAxis ("TriangleK2")>0 && Time.time > iceBullet_NextFire)
-		{
-			iceBullet_NextFire = Time.time + iceBullet_FireRate;
-			ShootIceBullet();
-		}
-
-		//ShootFlame();
-	}
-
-	void Controller1()
-	{
-		if(Input.GetAxis ("SquareP1")>0 && Time.time > normalBullet_NextFire)
-		{
-			normalBullet_NextFire = Time.time + normalBullet_FireRate;
-			ShootBullet();
-		}
-		//if(Input.GetAxis (KeyCode.Alpha1))
-		//{
-		//	SlowMo();
-		//}
-		if(Input.GetAxis ("CircleP1")>0 && Time.time > laserBullet_NextFire)
-		{
-			laserBullet_NextFire = Time.time + laserBullet_FireRate;
-			ShootLaser();
-		}
-		if(Input.GetAxis ("TriangleP1")>0 && Time.time > iceBullet_NextFire)
-		{
-			iceBullet_NextFire = Time.time + iceBullet_FireRate;
-			ShootIceBullet();
-		}
-
-		//ShootFlame();
-	}
-
 	void Controller2()
 	{
-		if(Input.GetAxis ("SquareP2")>0 && Time.time > normalBullet_NextFire)
+		if(Input.GetAxis ("SquareP2")>0 && Time.time > normalBullet_NextFire && shareStat.player_Mana >= BulletMana)
 		{
+			shareStat.setTime = 0.0f;
 			normalBullet_NextFire = Time.time + normalBullet_FireRate;
 			ShootBullet();
+			shareStat.player_Mana -= BulletMana;
 		}
 		//if(Input.GetAxis (KeyCode.Alpha1))
 		//{
 		//	SlowMo();
 		//}
-		if(Input.GetAxis ("CircleP2")>0 && Time.time > laserBullet_NextFire)
+		if(Input.GetAxis ("CircleP2")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
 		{
+			shareStat.setTime = 0.0f;
 			laserBullet_NextFire = Time.time + laserBullet_FireRate;
 			ShootLaser();
+			shareStat.player_Mana -= LaserMana;
 		}
-		if(Input.GetAxis ("TriangleP2")>0 && Time.time > iceBullet_NextFire)
+		if(Input.GetAxis ("TriangleP2")>0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana)
 		{
+			shareStat.setTime = 0.0f;
 			iceBullet_NextFire = Time.time + iceBullet_FireRate;
 			ShootIceBullet();
+			shareStat.player_Mana -= IceMana;
 		}
 
 		//ShootFlame();
@@ -274,14 +304,15 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootFlame()
 	{
-		if (shareStat.player_Mana >= 5 && Input.GetKey (KeyCode.K)) {
+		if (shareStat.player_Mana >= BaseFireMana && Input.GetKey (KeyCode.K)) {
 			fireDuration += Time.deltaTime;
 			flame_Particles.Play();
 			if (fireDuration >= 0.5f) {
-				shareStat.player_Mana -= 5;
+				shareStat.setTime = 0.0f;
+				shareStat.player_Mana -= FireMana;
 				fireDuration = 0;
 			}
-			if (shareStat.player_Mana < 5) {
+			if (shareStat.player_Mana < FireMana) {
 				flame_Particles.Stop ();
 			}
 		}

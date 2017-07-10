@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class ManaCostScript : MonoBehaviour {
 
-	public GameObject Player;
+	public GameObject GameManager;
 	SharedStats shrStat;
 	Slider slider;
 
 	// Use this for initialization
 	void Start () {
-		Player = GameObject.Find ("Player");
+		GameManager = GameObject.Find ("GameManager");
 		slider = GetComponent<Slider> ();
-		shrStat = Player.GetComponent<SharedStats> ();
+		shrStat = GameManager.GetComponent<SharedStats> ();
 	}
 	
 	// Update is called once per frame
