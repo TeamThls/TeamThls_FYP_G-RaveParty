@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyCollider : MonoBehaviour {
 
 	public float enemy_Health = 100.0f;
+	public SharedStats sharedstats;
 	[SerializeField] SpriteRenderer spr_Ren;
 	[SerializeField] Animator anim;
 	[SerializeField] ParticleSystem p_BloodOnDeath;
@@ -14,6 +15,7 @@ public class EnemyCollider : MonoBehaviour {
 	void Start () 
 	{
 		rgBody = GetComponent<Rigidbody2D>();
+		sharedstats = GameObject.Find ("GameManager").GetComponent<SharedStats> ();
 
 	}
 	
@@ -33,6 +35,9 @@ public class EnemyCollider : MonoBehaviour {
 				Time.timeScale = 1.0f;
 				Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
 				this.gameObject.SetActive(false);
+				sharedstats.player_Gold += 100;
+				sharedstats.player_Score += 100;
+
 			}
 		}
 

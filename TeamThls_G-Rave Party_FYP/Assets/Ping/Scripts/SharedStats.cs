@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class SharedStats : MonoBehaviour {
 
-	public int player_Health;
-	public int player_MaxHealth;
+	public float player_Health;
+	public float player_MaxHealth;
 
-	public int player_Mana;
-	public int player_MaxMana;
+	public float player_Mana;
+	public float player_MaxMana;
 
-	public int player_gold;
+	public int player_Gold = 0;
+	public int player_Score = 0;
 	public int Bullet_Damage;
 	public int Fire_Damage;
 	public int Ice_Damage;
@@ -30,7 +31,7 @@ public class SharedStats : MonoBehaviour {
 	void Update () {
 		setTime += Time.deltaTime;
 		if (player_Health > player_MaxHealth) {
-			player_Health = player_MaxHealth;
+			//player_Health = player_MaxHealth;
 		}
 
 		if (player_Mana > player_MaxMana) {
