@@ -9,12 +9,17 @@ public class EnemyMovement : MonoBehaviour {
 	public bool detection = false;
 	public bool inCd = false;
 	public GameObject player;
+	public GameObject GameManager;
 
 	Vector3 newPos = new Vector3();
 	Vector3 newPos2 = new Vector3();
 	Vector3 newPos3 = new Vector3();
 
 	public bool isAttack = false;
+
+	public bool isDamage = false;
+
+	public int damage;
 
 	public float step;
 	public float speed;
@@ -28,6 +33,7 @@ public class EnemyMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find ("Player");
+		GameManager = GameObject.Find ("GameManager");
 	}
 	
 	// Update is called once per frame
@@ -68,8 +74,11 @@ public class EnemyMovement : MonoBehaviour {
 		}
 		if (isAttack == true && inCd == false && counter == 0) {
 			transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
-			if (this.transform.position == newPos) {
+			isDamage = true;
+			if (this.transform.position == newPos && isDamage == true) {
 				counter = 1;
+				GameManager.GetComponent<SharedStats> ().player_Health -= damage;
+				isDamage = false;
 			}
 		}
 		if (isAttack == true && inCd == false && counter == 1) {
@@ -82,8 +91,11 @@ public class EnemyMovement : MonoBehaviour {
 		}
 		if (isAttack == true && inCd == false && counter == 3) {
 			transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
-			if (this.transform.position == newPos) {
+			isDamage = true;
+			if (this.transform.position == newPos && isDamage == true) {
 				counter = 4;
+				GameManager.GetComponent<SharedStats> ().player_Health -= damage;
+				isDamage = false;
 			}
 		}
 		if (isAttack == true && inCd == false && counter == 4) {

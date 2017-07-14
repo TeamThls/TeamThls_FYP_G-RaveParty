@@ -12,6 +12,7 @@ public class SharedStats : MonoBehaviour {
 
 	public int player_Gold = 0;
 	public int player_Score = 0;
+
 	public int Bullet_Damage;
 	public int Fire_Damage;
 	public int Ice_Damage;
