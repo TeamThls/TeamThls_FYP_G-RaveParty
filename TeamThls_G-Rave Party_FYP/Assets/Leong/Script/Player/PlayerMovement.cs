@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour {
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
 			,Mathf.Clamp(transform.position.y, camera_MinScreenLimit.y + 1, camera_MaxScreenLimit.y - 1), transform.position.z);
 
-		Debug.Log(transform.position.y + " , " + camera_MinScreenLimit.y);
+		
 
 
 		if(transform.position.y <= camera_MinScreenLimit.y + 1 ||
@@ -206,7 +206,7 @@ public class PlayerMovement : MonoBehaviour {
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
 			,Mathf.Clamp(transform.position.y, camera_MinScreenLimit.y + 1, camera_MaxScreenLimit.y - 1), transform.position.z);
 
-		Debug.Log(transform.position.y + " , " + camera_MinScreenLimit.y);
+		
 		if(transform.position.y <= camera_MinScreenLimit.y + 1||
 		   transform.position.y >= camera_MaxScreenLimit.y - 1)
 		   {

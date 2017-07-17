@@ -69,7 +69,8 @@ public class IceBullet : MonoBehaviour {
 		{
 			cameraShake.Shake(0.5f, 0.1f);
 			col.GetComponent<EnemyCollider>().enemy_Health -= iceBullet_Damage;
-			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
+			col.GetComponent<EnemyCollider>().IceBulletReaction();
+
 			//Destroy(this.gameObject);
 		}
 	}

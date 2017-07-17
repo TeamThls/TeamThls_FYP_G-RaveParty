@@ -55,6 +55,7 @@ public class PlayerCombat : MonoBehaviour {
 	Bullet bullet;
 	IceBullet iceBullet;
 	LaserBeam laserBeam;
+	Fire fire;
 
 	ParticleSystem tempPar;
 
@@ -67,6 +68,7 @@ public class PlayerCombat : MonoBehaviour {
 		bullet = bullet_Obj.GetComponent<Bullet>();
 		iceBullet = iceBullet_Obj.GetComponent<IceBullet>();
 		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
+		fire = flame_Particles.GetComponent<Fire>();
 		movementScript = GetComponent<PlayerMovement>();
 		GameManager = GameObject.Find ("GameManager");
 		shareStat = GameManager.GetComponent<SharedStats> ();
@@ -125,7 +127,7 @@ public class PlayerCombat : MonoBehaviour {
 			shareStat.player_Mana -= IceMana;
 		}
 
-		//ShootFlame();
+		ShootFlame();
 	}
 
 	void Keyboard2()
@@ -304,10 +306,28 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootFlame()
 	{
-		if (shareStat.player_Mana >= BaseFireMana && Input.GetKey (KeyCode.K)) {
+		if (shareStat.player_Mana >= BaseFireMana && Input.GetKey (KeyCode.K)) 
+		{
+			if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+			{
+				fire.fire_Direction = Fire.Fire_SpawnDirection.Right;
+			}
+			else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+			{
+				fire.fire_Direction = Fire.Fire_SpawnDirection.Left;
+			}
+			else if(movementScript.player_isUp == true)
+			{
+				fire.fire_Direction = Fire.Fire_SpawnDirection.Up;
+			}
+			else if(movementScript.player_isDown == true)
+			{
+				fire.fire_Direction = Fire.Fire_SpawnDirection.Down;
+			}
 			fireDuration += Time.deltaTime;
 			flame_Particles.Play();
-			if (fireDuration >= 0.5f) {
+			if (fireDuration >= 0.5f) 
+			{
 				shareStat.setTime = 0.0f;
 				shareStat.player_Mana -= FireMana;
 				fireDuration = 0;

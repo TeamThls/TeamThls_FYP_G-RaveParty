@@ -5,11 +5,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
 	[SerializeField] float bullet_Speed = 13.0f;
-	[SerializeField] float bullet_Time = 0.0f;
+	float bullet_Time = 0.0f;
 	public GameObject player;
 	public Movement movementScript;
 	public Transform gun;
+	[SerializeField] ParticleSystem spark_Particle;
 	public int bullet_Damage = 10;
+
 	public enum Bullet_SpawnDirection
 	{
 		Up, Down, Left, Right
@@ -62,13 +64,44 @@ public class Bullet : MonoBehaviour {
 		}
 	}
 
+	void BulletSparkEffect(GameObject collider)
+	{
+		ParticleSystem.VelocityOverLifetimeModule spark_Velocity = spark_Particle.velocityOverLifetime;
+		if(bullet_Direction == Bullet_SpawnDirection.Right)
+		{
+			spark_Velocity.x = -5.0f;
+			spark_Velocity.y = 0.0f;
+			Instantiate(spark_Particle, new Vector3(collider.transform.position.x - 1.5f, collider.transform.position.y, -0.5f), Quaternion.identity);
+		}
+		else if(bullet_Direction == Bullet_SpawnDirection.Left)
+		{
+			spark_Velocity.x = 5.0f;
+			spark_Velocity.y = 0.0f;
+			Instantiate(spark_Particle, new Vector3(collider.transform.position.x + 1.5f, collider.transform.position.y, -0.5f), Quaternion.identity);
+
+		}
+		else if(bullet_Direction == Bullet_SpawnDirection.Up) 
+		{
+			spark_Velocity.x = 0.0f;
+			spark_Velocity.y = -10.0f;
+			Instantiate(spark_Particle, new Vector3(collider.transform.position.x, collider.transform.position.y - 0.5f, -0.5f), Quaternion.identity);
+		}
+		else if(bullet_Direction == Bullet_SpawnDirection.Down) 
+		{
+			spark_Velocity.x = 0.0f;
+			spark_Velocity.y = 10.0f;
+			Instantiate(spark_Particle, new Vector3(collider.transform.position.x, collider.transform.position.y + 0.5f, -0.5f), Quaternion.identity);
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D col)
 	{
 		if(col.CompareTag("Enemy"))
 		{
 			cameraShake.Shake(0.3f, 0.1f);
 			col.GetComponent<EnemyCollider>().enemy_Health -= bullet_Damage;
-			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
+			BulletSparkEffect(col.gameObject);
+			col.GetComponent<EnemyCollider>().NormalBulletReaction();
 			Destroy(this.gameObject);
 		}
 	}

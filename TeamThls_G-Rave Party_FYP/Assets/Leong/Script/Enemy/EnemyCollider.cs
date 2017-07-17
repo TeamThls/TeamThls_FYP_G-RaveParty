@@ -16,6 +16,7 @@ public class EnemyCollider : MonoBehaviour {
 	{
 		rgBody = GetComponent<Rigidbody2D>();
 		sharedstats = GameObject.Find ("GameManager").GetComponent<SharedStats> ();
+		anim = GetComponent<Animator>();
 
 	}
 	
@@ -26,7 +27,7 @@ public class EnemyCollider : MonoBehaviour {
 		{
 			// WIP, a tiny pause when killed an enemy 
 			death_PauseTimer += Time.deltaTime;
-			if(death_PauseTimer < 0.01f)
+			if(death_PauseTimer < 0.017f)
 			{
 				Time.timeScale = 0.01f;
 			}
@@ -34,7 +35,14 @@ public class EnemyCollider : MonoBehaviour {
 			{
 				Time.timeScale = 1.0f;
 				Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
-				this.gameObject.SetActive(false);
+				if(transform.parent != null)
+				{
+					Destroy(transform.parent.gameObject);
+				}
+				else
+				{
+					Destroy(this.gameObject);
+				}
 				sharedstats.player_Gold += 100;
 				sharedstats.player_Score += 100;
 
@@ -43,8 +51,13 @@ public class EnemyCollider : MonoBehaviour {
 
 	}
 
-	public void WhitenedWhenHit()
+	public void NormalBulletReaction()
 	{
 		anim.Play("EnemyHitted");
+	}
+
+	public void IceBulletReaction()
+	{
+		anim.Play("EnemyHittedWithIce");
 	}
 }

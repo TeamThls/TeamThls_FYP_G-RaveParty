@@ -10,12 +10,14 @@ public class LaserBeam : MonoBehaviour {
 	float laser_Speed = 100.0f;
 	float laser_Time;
 
-	public int laser_Damage = 100;
+	public int laser_Damage = 1;
+	BoxCollider2D laser_Collider;
 
+	public float laser_Collider_SizeY;
 
 	public enum Laser_SpawnDirection
 	{
-		Up, Down, Left, Right
+		Up, Down, Left, Right, Unassigned
 	}
 
 	public Laser_SpawnDirection laser_Direction;
@@ -25,17 +27,20 @@ public class LaserBeam : MonoBehaviour {
 	void Start () 
 	{
 		cameraShake = Camera.main.GetComponent<CameraShake>();
-
+		laser_Collider = GetComponent<BoxCollider2D>();
+		laser_Collider_SizeY = laser_Collider.size.y;
+		laser_Collider.enabled = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		LaserDirection();
+		laser_Collider.enabled = true;
+
 		line_Ren.SetPosition(0, new Vector3(1, 0, 0));
 		line_Ren.SetPosition(1, new Vector3(30, 0, 0));
 		laser_Time += Time.deltaTime;
-
 
 
 		if(line_Ren_Decrease == false)
@@ -49,9 +54,11 @@ public class LaserBeam : MonoBehaviour {
 		else
 		{
 			line_Ren.widthMultiplier -= laser_Speed * Time.deltaTime;
+			laser_Collider_SizeY -= 5 * Time.deltaTime;
+			laser_Collider.size = new Vector2(laser_Collider.size.x, laser_Collider_SizeY);
 			if(line_Ren.widthMultiplier < 0.0)
 			{
-				this.gameObject.SetActive(false);
+				Destroy(this.gameObject);
 			}
 		}
 
@@ -62,11 +69,12 @@ public class LaserBeam : MonoBehaviour {
 
 	}
 
+	// There's a logic issue with the laser for being default to right
 	void LaserDirection ()
 	{
 		if(laser_Direction == Laser_SpawnDirection.Right)
 		{
-			
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 		}
 		else if(laser_Direction == Laser_SpawnDirection.Left)
 		{
@@ -76,7 +84,7 @@ public class LaserBeam : MonoBehaviour {
 		{			
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
 		}
-		else
+		else if(laser_Direction == Laser_SpawnDirection.Down)
 		{
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
 		}
@@ -86,10 +94,14 @@ public class LaserBeam : MonoBehaviour {
 	{
 		if(col.CompareTag("Enemy"))
 		{
+			EnemyCollider enemy_Collider = col.GetComponent<EnemyCollider>();
+			//ParticleSystem.MinMaxGradient blood_Color = enemy_Collider.p_BloodOnDeath.main.startColor;
 			cameraShake.Shake(0.7f, 0.2f);
-			col.GetComponent<EnemyCollider>().enemy_Health -= laser_Damage;
-			col.GetComponent<EnemyCollider>().WhitenedWhenHit();
-			//Destroy(this.gameObject);
+			//blood_Color.
+			enemy_Collider.enemy_Health -= laser_Damage;
+			enemy_Collider.NormalBulletReaction();
+
 		}
+
 	}
 }

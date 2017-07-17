@@ -12,10 +12,21 @@ public class ParticleEffectsBehaviours : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		if(sharedParticles.isStopped == true)
 		{
 			Destroy(this.gameObject);
 		}
+	}
+
+	void OnParticleCollision(GameObject col)
+	{
+		if(this.name == "Ice2")
+		{
+			//Debug.Log("YO");
+
+		}
+
 	}
 }
