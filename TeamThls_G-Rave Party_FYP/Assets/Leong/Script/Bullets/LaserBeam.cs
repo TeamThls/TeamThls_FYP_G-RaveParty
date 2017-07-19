@@ -95,12 +95,9 @@ public class LaserBeam : MonoBehaviour {
 		if(col.CompareTag("Enemy"))
 		{
 			EnemyCollider enemy_Collider = col.GetComponent<EnemyCollider>();
-			//ParticleSystem.MinMaxGradient blood_Color = enemy_Collider.p_BloodOnDeath.main.startColor;
-			cameraShake.Shake(0.7f, 0.2f);
-			//blood_Color.
+			enemy_Collider.LaserBulletReaction();
 			enemy_Collider.enemy_Health -= laser_Damage;
-			enemy_Collider.NormalBulletReaction();
-
+			cameraShake.Shake(1.0f, 0.4f);
 		}
 
 	}

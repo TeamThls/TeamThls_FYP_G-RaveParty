@@ -7,10 +7,12 @@ public class HealthDeviceHealing : MonoBehaviour {
 
 	public GameObject healthDevice;
 	SpriteRenderer healthDevice_Spr;
+	SharedStats allPlayer_SharedStats;
 	// Use this for initialization
 	void Start () {
 		healthDevice = GameObject.Find("P_HealDevice");
 		healthDevice_Spr = healthDevice.GetComponent<SpriteRenderer>();
+		allPlayer_SharedStats = GameObject.Find("GameManager").GetComponent<SharedStats>();
 	}
 	
 	// Update is called once per frame
@@ -21,12 +23,12 @@ public class HealthDeviceHealing : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D col)
 	{
-		if(col.gameObject.name == "Player")
+		if(col.gameObject.name == "Player" || col.gameObject.name == "Player2") 
 		{
-			if(col.gameObject.GetComponent<SharedStats>().player_Health < 100)
+			if(allPlayer_SharedStats.player_Health < allPlayer_SharedStats.player_MaxHealth)
 			{
 				healthDevice_Spr.color = Color.black;
-				col.gameObject.GetComponent<SharedStats>().player_Health = 100;
+				allPlayer_SharedStats.player_Health = allPlayer_SharedStats.player_MaxHealth;
 				Debug.Log("Heal");
 			}
 			else

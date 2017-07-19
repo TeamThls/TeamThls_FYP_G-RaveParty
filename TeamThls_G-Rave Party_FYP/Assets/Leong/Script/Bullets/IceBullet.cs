@@ -67,11 +67,10 @@ public class IceBullet : MonoBehaviour {
 	{
 		if(col.CompareTag("Enemy"))
 		{
+			EnemyCollider enemy_Collider = col.GetComponent<EnemyCollider>();
 			cameraShake.Shake(0.5f, 0.1f);
-			col.GetComponent<EnemyCollider>().enemy_Health -= iceBullet_Damage;
-			col.GetComponent<EnemyCollider>().IceBulletReaction();
-
-			//Destroy(this.gameObject);
+			enemy_Collider.IceBulletReaction();
+			enemy_Collider.enemy_Health -= iceBullet_Damage;
 		}
 	}
 }

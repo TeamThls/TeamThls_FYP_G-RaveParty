@@ -38,7 +38,7 @@ public class PlayerCombat : MonoBehaviour {
 	[SerializeField] float normalBullet_NextFire = 0.0f;
 	[SerializeField] float laserBullet_NextFire = 0.0f;
 	[SerializeField] float iceBullet_NextFire = 0.0f;
-
+	[SerializeField] float iceBullet_CastDelay;
 	public float fireDuration = 0.0f;
 
 	public bool isSlowMo = false;
@@ -250,31 +250,43 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootIceBullet()
 	{
+		
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Right;
 			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
-			Instantiate(iceBullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(1.0f));
 
 		}
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Left;
 			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 3.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
-			Instantiate(iceBullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, -0.1f), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(1.0f));
 		}
 		else if(movementScript.player_isUp == true)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Up;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, gun.position.z - 1), Quaternion.identity);
-			Instantiate(iceBullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, -0.1f), Quaternion.identity);
-
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x, gun.position.y + 1.0f, gun.position.z - 1), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(1.0f));
 		}
 		else if(movementScript.player_isDown == true)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Down;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, gun.position.z - 1), Quaternion.identity);
-			Instantiate(iceBullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, -0.1f), Quaternion.identity);
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x, gun.position.y - 1.0f, gun.position.z - 1), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(1.0f));
 		}
 
 	}
@@ -355,6 +367,32 @@ public class PlayerCombat : MonoBehaviour {
 			Time.timeScale = 1.0f;
 		}
 
+	}
+
+	IEnumerator WaitForIceBullet(float updateTime)
+	{
+		yield return new WaitForSeconds(updateTime);
+		if(iceBullet.bullet_Direction == IceBullet.Bullet_SpawnDirection.Right)
+		{
+			Instantiate(iceBullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+		else if(iceBullet.bullet_Direction == IceBullet.Bullet_SpawnDirection.Left)
+		{
+			Instantiate(iceBullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, -0.1f), Quaternion.identity);
+
+		}
+		else if(iceBullet.bullet_Direction == IceBullet.Bullet_SpawnDirection.Up)
+		{
+			Instantiate(iceBullet_Obj, new Vector3(gun.position.x, gun.position.y + 1.0f, -0.1f), Quaternion.identity);
+		
+		}
+		else if(iceBullet.bullet_Direction == IceBullet.Bullet_SpawnDirection.Down)
+		{
+			Instantiate(iceBullet_Obj, new Vector3(gun.position.x, gun.position.y - 1.0f, -0.1f), Quaternion.identity);
+		
+		}
+		movementScript.player_rgBody.gravityScale = 3;
+		movementScript.enabled = true;
 	}
 
 }

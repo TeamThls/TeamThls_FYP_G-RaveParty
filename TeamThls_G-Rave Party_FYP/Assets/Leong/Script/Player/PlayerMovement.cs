@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 	public bool player_grounded;
 	Animator anim;
 	SpriteRenderer player_spriteRen;
-	Rigidbody2D player_rgBody;
+	public Rigidbody2D player_rgBody;
 	GameObject player1, player2;
 	public Player_Controller player_Control;
 

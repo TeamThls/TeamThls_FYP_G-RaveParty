@@ -9,15 +9,22 @@ public class EnemyCollider : MonoBehaviour {
 	[SerializeField] SpriteRenderer spr_Ren;
 	[SerializeField] Animator anim;
 	[SerializeField] ParticleSystem p_BloodOnDeath;
+	[SerializeField] ParticleSystem p_DustOnDeath;
+	[SerializeField] ParticleSystem p_BurnedOnDeath;
 	Rigidbody2D rgBody;
 	float death_PauseTimer = 0.0f;
+	public enum enemy_DeathState
+	{
+		Normal, Ice, Fire, Laser
+	}
+	public enemy_DeathState enemy_CurrentState;
 	// Use this for initialization
 	void Start () 
 	{
 		rgBody = GetComponent<Rigidbody2D>();
 		sharedstats = GameObject.Find ("GameManager").GetComponent<SharedStats> ();
 		anim = GetComponent<Animator>();
-
+		
 	}
 	
 	// Update is called once per frame
@@ -34,7 +41,7 @@ public class EnemyCollider : MonoBehaviour {
 			else
 			{
 				Time.timeScale = 1.0f;
-				Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
+				DeathFunction();
 				if(transform.parent != null)
 				{
 					Destroy(transform.parent.gameObject);
@@ -48,16 +55,53 @@ public class EnemyCollider : MonoBehaviour {
 
 			}
 		}
+	}
+
+	void DeathFunction()
+	{
+		var main = p_BloodOnDeath.main;
+		if(enemy_CurrentState == enemy_DeathState.Normal)
+		{
+			main.startColor = Color.yellow;
+			Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
+		}
+		else if(enemy_CurrentState == enemy_DeathState.Ice)
+		{
+			main.startColor = Color.cyan;
+			Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
+		}
+		else if(enemy_CurrentState == enemy_DeathState.Laser)
+		{
+			Instantiate(p_DustOnDeath, transform.position, Quaternion.identity);
+		}
+		else if(enemy_CurrentState == enemy_DeathState.Fire)
+		{
+			Instantiate(p_BurnedOnDeath, transform.position, Quaternion.identity);
+		}
 
 	}
 
 	public void NormalBulletReaction()
 	{
 		anim.Play("EnemyHitted");
+		enemy_CurrentState = enemy_DeathState.Normal;
 	}
 
 	public void IceBulletReaction()
 	{
-		anim.Play("EnemyHittedWithIce");
+		anim.Play("EnemyHittedByIce");
+		enemy_CurrentState = enemy_DeathState.Ice;
+	}
+
+	public void LaserBulletReaction()
+	{
+		enemy_CurrentState = enemy_DeathState.Laser;
+	}
+
+	public void BurnedReaction()
+	{
+		anim.Play("EnemyHittedByFire");
+		enemy_CurrentState = enemy_DeathState.Fire;
 	}
 }
+
