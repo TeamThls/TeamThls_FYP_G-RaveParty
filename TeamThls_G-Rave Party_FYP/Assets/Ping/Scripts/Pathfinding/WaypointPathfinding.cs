@@ -9,7 +9,9 @@ public class WaypointPathfinding : MonoBehaviour {
 	public List<GameObject> TargetList;		// used to calculate the distance
 	public GameObject t_Waypoint;			// target waypoint to move;
 	public GameObject target;				// player;
-	public GameObject Manager;
+	public GameObject Manager;				// waypoint manager
+	public GameObject GameManager;			// gameManager
+	SharedStats shareStat;
 
 	public int num;							// waypoint temp count;
 	public int counter;						// for double checking;
@@ -30,13 +32,20 @@ public class WaypointPathfinding : MonoBehaviour {
 	public bool detect = false;				// checking for combat
 	public bool flipx;						// checking for combat
 
+	public bool enemy_groundCheck = false;	// checking is the enemy on ground or not, to avoid enemy combat enabled while jumping
+	public float setTime = 0.0f;			// next attack cd time
+	public float AttackTime = 0.0f;			// when setTime reach this, enemy will attack player
+
 	// Use this for initialization
 	void Start () {
 		rgd = GetComponent<Rigidbody2D> ();
 		target = GameObject.Find ("Player");
 		Manager = GameObject.Find ("WaypointMap");
+		GameManager = GameObject.Find ("GameManager");
 		WaypointManager WayManager = Manager.GetComponent<WaypointManager> ();
 		//t_Waypoint = TargetList [0];
+
+		shareStat = GameManager.GetComponent<SharedStats> ();
 
 		// get the nearest waypoint to move when spawned
 		for(int i = 0 ; i < WayManager.childList.Count(); i++){
@@ -68,11 +77,12 @@ public class WaypointPathfinding : MonoBehaviour {
 
 			if(hitInfo.collider != null)
 			{
-				Debug.Log("Collided");
-				if(hitInfo.collider.gameObject == target)
+				if(hitInfo.collider.gameObject.tag == "Player")
 				{
-					Debug.Log("PlayerCollided");
-					detect = true;
+					if (enemy_groundCheck == true) {
+						detect = true;
+					}
+					target = hitInfo.collider.gameObject;
 				}
 				else
 				{
@@ -92,9 +102,12 @@ public class WaypointPathfinding : MonoBehaviour {
 
 			if(hitInfo.collider != null)
 			{
-				if(hitInfo.collider.gameObject.name == "Player")
+				if(hitInfo.collider.gameObject.tag == "Player")
 				{
-					detect = true;
+					if (enemy_groundCheck == true) {
+						detect = true;
+					}
+					target = hitInfo.collider.gameObject;
 				}
 				else
 				{
@@ -110,6 +123,7 @@ public class WaypointPathfinding : MonoBehaviour {
 
 
 		if (detect == false) {
+			setTime = 0.0f;
 			step = speed * Time.deltaTime;
 			distance = Vector3.Distance (this.gameObject.transform.position, target.transform.position);
 		
@@ -148,7 +162,11 @@ public class WaypointPathfinding : MonoBehaviour {
 			}
 		} 
 		else if (detect == true) {
-			
+			setTime += Time.deltaTime;
+			if (setTime >= AttackTime) {
+				shareStat.player_Health -= 1;
+				setTime = 0.0f;
+			}
 		}
 
 	}

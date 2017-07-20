@@ -40,9 +40,11 @@ public class ShopAgent : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerStay2D(Collider2D player){
-		if (Shop.gameObject.activeInHierarchy == false && inCD == false) {
-			Shop.gameObject.SetActive(true);
+	void OnTriggerStay2D(Collider2D other){
+		if (other.tag == "Player") {
+			if (Shop.gameObject.activeInHierarchy == false && inCD == false) {
+				Shop.gameObject.SetActive(true);
+			}
 		}
 	}
 }
