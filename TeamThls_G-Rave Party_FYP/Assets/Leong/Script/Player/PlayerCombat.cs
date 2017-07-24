@@ -38,7 +38,7 @@ public class PlayerCombat : MonoBehaviour {
 	[SerializeField] float normalBullet_NextFire = 0.0f;
 	[SerializeField] float laserBullet_NextFire = 0.0f;
 	[SerializeField] float iceBullet_NextFire = 0.0f;
-	[SerializeField] float iceBullet_CastDelay;
+	[SerializeField] float iceBullet_CastDelay = 0.5f;
 	public float fireDuration = 0.0f;
 
 	public bool isSlowMo = false;
@@ -262,7 +262,7 @@ public class PlayerCombat : MonoBehaviour {
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
-			StartCoroutine(WaitForIceBullet(1.0f));
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
 
 		}
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
@@ -272,7 +272,7 @@ public class PlayerCombat : MonoBehaviour {
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
-			StartCoroutine(WaitForIceBullet(1.0f));
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
 		}
 		else if(movementScript.player_isUp == true)
 		{
@@ -281,7 +281,7 @@ public class PlayerCombat : MonoBehaviour {
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
-			StartCoroutine(WaitForIceBullet(1.0f));
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
 		}
 		else if(movementScript.player_isDown == true)
 		{
@@ -290,7 +290,7 @@ public class PlayerCombat : MonoBehaviour {
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
-			StartCoroutine(WaitForIceBullet(1.0f));
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
 		}
 
 	}

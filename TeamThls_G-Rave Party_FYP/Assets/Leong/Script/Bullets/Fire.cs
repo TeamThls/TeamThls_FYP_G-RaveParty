@@ -5,9 +5,6 @@ using UnityEngine;
 public class Fire : MonoBehaviour {
 
 	public float fire_Damage = 0.2f;
-	//public GameObject player;
-	public Movement movementScript;
-	public Transform gun;
 	public enum Fire_SpawnDirection
 	{
 		Up, Down, Left, Right
