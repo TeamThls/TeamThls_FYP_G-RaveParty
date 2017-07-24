@@ -59,6 +59,8 @@ public class EnemyCollider : MonoBehaviour {
 
 	void DeathFunction()
 	{
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Kill);
+
 		var main = p_BloodOnDeath.main;
 		if(enemy_CurrentState == enemy_DeathState.Normal)
 		{

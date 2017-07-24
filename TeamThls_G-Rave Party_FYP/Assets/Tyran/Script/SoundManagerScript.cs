@@ -7,6 +7,12 @@ public enum AudioClipID
 	BGM_MAIN_MENU = 0,
 	BGM_PHRASE = 1,
 	BGM_GAMEOVER = 2,
+	SFX_Laser = 3,
+	SFX_Ice = 4,
+	SFX_Kill = 5,
+	SFX_FB = 6,
+	SFX_MB = 7,
+
 
 
 	TOTAL = 9001

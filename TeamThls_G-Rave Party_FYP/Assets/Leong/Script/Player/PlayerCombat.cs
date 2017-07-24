@@ -225,6 +225,9 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootBullet()
 	{	
+
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_MB);
+
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Right;
@@ -250,6 +253,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootIceBullet()
 	{
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Ice);
 		
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
@@ -294,6 +298,8 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootLaser()
 	{
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Laser);
+
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Right;

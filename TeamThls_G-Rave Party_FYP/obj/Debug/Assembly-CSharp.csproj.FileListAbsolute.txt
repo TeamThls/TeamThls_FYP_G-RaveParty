@@ -91,3 +91,36 @@ C:\Users\zayli\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp
 C:\Users\zayli\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\zayli\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.VR.xml
 C:\Users\zayli\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.pdb
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Assembly-CSharp.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Mono.Cecil.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\nunit.framework.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEditor.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEditor.iOS.Extensions.Common.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.Analytics.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.HoloLens.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.Networking.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.TestRunner.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.UI.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.VR.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Unity.SerializationLogic.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Unity.DataContract.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Unity.UNetWeaver.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Unity.CecilTools.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEditor.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.UI.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.Networking.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.TestRunner.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\nunit.framework.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.Analytics.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.HoloLens.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.VR.xml
+D:\Very good\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+D:\Very good\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.dll
+D:\Very good\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.pdb
