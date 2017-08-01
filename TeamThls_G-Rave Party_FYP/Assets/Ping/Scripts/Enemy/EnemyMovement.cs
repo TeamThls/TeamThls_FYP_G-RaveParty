@@ -9,7 +9,11 @@ public class EnemyMovement : MonoBehaviour {
 	public bool detection = false;
 	public bool inCd = false;
 	public GameObject player;
+	public GameObject player1;
+	public GameObject player2;
 	public GameObject GameManager;
+
+	public bool multiplayer = true;
 
 	Vector3 newPos = new Vector3();
 	Vector3 newPos2 = new Vector3();
@@ -32,7 +36,19 @@ public class EnemyMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find ("Player");
+		player1 = GameObject.Find ("Player");
+		player2 = GameObject.Find ("Player2");
+		if (multiplayer == true) {
+			int num = Random.Range (1, 10);
+			if (num < 5) {
+				player = player1;
+			} else if (num >= 5) {
+				player = player2;
+			}
+		} 
+		else if (multiplayer == false) {
+			player = GameObject.Find ("Player");
+		}
 		GameManager = GameObject.Find ("GameManager");
 	}
 	

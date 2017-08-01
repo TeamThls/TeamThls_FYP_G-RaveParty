@@ -12,6 +12,10 @@ public class WaypointPathfinding : MonoBehaviour {
 	public GameObject Manager;				// waypoint manager
 	public GameObject GameManager;			// gameManager
 	SharedStats shareStat;
+	public GameObject Player;
+	public GameObject Player2;
+
+	public bool multiplayer = true;
 
 	public int num;							// waypoint temp count;
 	public int counter;						// for double checking;
@@ -39,7 +43,21 @@ public class WaypointPathfinding : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rgd = GetComponent<Rigidbody2D> ();
-		target = GameObject.Find ("Player");
+		if (multiplayer == true) {
+			float a = Vector3.Distance (this.transform.position, Player.transform.position);
+			float b = Vector3.Distance (this.transform.position, Player2.transform.position);
+
+			if (a > b) {
+				target = Player;
+			} 
+			else if (b > a) {
+				target = Player2;
+			}
+		}
+		else if (multiplayer == false) {
+			target = GameObject.Find ("Player");
+		}
+
 		Manager = GameObject.Find ("WaypointMap");
 		GameManager = GameObject.Find ("GameManager");
 		WaypointManager WayManager = Manager.GetComponent<WaypointManager> ();
