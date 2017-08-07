@@ -11,6 +11,7 @@ public class EnemyCollider : MonoBehaviour {
 	[SerializeField] ParticleSystem p_BloodOnDeath;
 	[SerializeField] ParticleSystem p_DustOnDeath;
 	[SerializeField] ParticleSystem p_BurnedOnDeath;
+	[SerializeField] ParticleSystem p_Soul;
 	Rigidbody2D rgBody;
 	float death_PauseTimer = 0.0f;
 	public enum enemy_DeathState
@@ -80,7 +81,7 @@ public class EnemyCollider : MonoBehaviour {
 		{
 			Instantiate(p_BurnedOnDeath, transform.position, Quaternion.identity);
 		}
-
+		Instantiate(p_Soul, transform.position, Quaternion.identity);
 	}
 
 	public void NormalBulletReaction()
