@@ -22,6 +22,10 @@ public class SharedStats : MonoBehaviour {
 	public float maxDuration;
 	public int ManaReg;
 
+	public bool OnFire = false;
+	public bool OnIce = false;
+	public bool OnLaser = false;
+
 	// Use this for initialization
 	void Start () {
 		player_Health = player_MaxHealth;

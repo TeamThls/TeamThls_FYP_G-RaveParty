@@ -112,19 +112,22 @@ public class PlayerCombat : MonoBehaviour {
 		//	shareStat.setTime = 0.0f;
 		//	SlowMo();
 		//}
-		if(Input.GetAxis ("CircleK1")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
-		{
-			shareStat.setTime = 0.0f;
-			laserBullet_NextFire = Time.time + laserBullet_FireRate;
-			ShootLaser();
-			shareStat.player_Mana -= LaserMana;
+		if(shareStat.OnLaser == true){
+			if(Input.GetAxis ("CircleK1")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
+			{
+				shareStat.setTime = 0.0f;
+				laserBullet_NextFire = Time.time + laserBullet_FireRate;
+				ShootLaser();
+				shareStat.player_Mana -= LaserMana;
+			}
 		}
-		if(Input.GetAxis ("TriangleK1")>0 && Time.time > iceBullet_NextFire  && shareStat.player_Mana >= IceMana)
-		{
-			shareStat.setTime = 0.0f;
-			iceBullet_NextFire = Time.time + iceBullet_FireRate;
-			ShootIceBullet();
-			shareStat.player_Mana -= IceMana;
+		if (shareStat.OnIce == true) {
+			if (Input.GetAxis ("TriangleK1") > 0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana) {
+				shareStat.setTime = 0.0f;
+				iceBullet_NextFire = Time.time + iceBullet_FireRate;
+				ShootIceBullet ();
+				shareStat.player_Mana -= IceMana;
+			}
 		}
 
 		ShootFlame();
@@ -143,21 +146,23 @@ public class PlayerCombat : MonoBehaviour {
 		//{
 		//	SlowMo();
 		//}
-		if(Input.GetAxis ("CircleK2")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
-		{
-			shareStat.setTime = 0.0f;
-			laserBullet_NextFire = Time.time + laserBullet_FireRate;
-			ShootLaser();
-			shareStat.player_Mana -= LaserMana;
-		}
-		if(Input.GetAxis ("TriangleK2")>0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana)
-		{
-			shareStat.setTime = 0.0f;
-			iceBullet_NextFire = Time.time + iceBullet_FireRate;
-			ShootIceBullet();
-			shareStat.player_Mana -= IceMana;
+		if (shareStat.OnLaser == true) {
+			if (Input.GetAxis ("CircleK2") > 0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana) {
+				shareStat.setTime = 0.0f;
+				laserBullet_NextFire = Time.time + laserBullet_FireRate;
+				ShootLaser ();
+				shareStat.player_Mana -= LaserMana;
+			}
 		}
 
+		if (shareStat.OnIce == true) {
+			if (Input.GetAxis ("TriangleK2") > 0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana) {
+				shareStat.setTime = 0.0f;
+				iceBullet_NextFire = Time.time + iceBullet_FireRate;
+				ShootIceBullet ();
+				shareStat.player_Mana -= IceMana;
+			}
+		}
 		//ShootFlame();
 	}
 
@@ -174,19 +179,22 @@ public class PlayerCombat : MonoBehaviour {
 		//{
 		//	SlowMo();
 		//}
-		if(Input.GetAxis ("CircleP1")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
-		{
-			shareStat.setTime = 0.0f;
-			laserBullet_NextFire = Time.time + laserBullet_FireRate;
-			ShootLaser();
-			shareStat.player_Mana -= LaserMana;
+		if (shareStat.OnLaser == true) {
+			if (Input.GetAxis ("CircleP1") > 0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana) {
+				shareStat.setTime = 0.0f;
+				laserBullet_NextFire = Time.time + laserBullet_FireRate;
+				ShootLaser ();
+				shareStat.player_Mana -= LaserMana;
+			}
 		}
-		if(Input.GetAxis ("TriangleP1")>0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana)
-		{
-			shareStat.setTime = 0.0f;
-			iceBullet_NextFire = Time.time + iceBullet_FireRate;
-			ShootIceBullet();
-			shareStat.player_Mana -= 5;
+
+		if (shareStat.OnIce == true) {
+			if (Input.GetAxis ("TriangleP1") > 0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana) {
+				shareStat.setTime = 0.0f;
+				iceBullet_NextFire = Time.time + iceBullet_FireRate;
+				ShootIceBullet ();
+				shareStat.player_Mana -= 5;
+			}
 		}
 
 		//ShootFlame();
@@ -205,19 +213,22 @@ public class PlayerCombat : MonoBehaviour {
 		//{
 		//	SlowMo();
 		//}
-		if(Input.GetAxis ("CircleP2")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
-		{
-			shareStat.setTime = 0.0f;
-			laserBullet_NextFire = Time.time + laserBullet_FireRate;
-			ShootLaser();
-			shareStat.player_Mana -= LaserMana;
+		if (shareStat.OnLaser == true) {
+			if (Input.GetAxis ("CircleP2") > 0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana) {
+				shareStat.setTime = 0.0f;
+				laserBullet_NextFire = Time.time + laserBullet_FireRate;
+				ShootLaser ();
+				shareStat.player_Mana -= LaserMana;
+			}
 		}
-		if(Input.GetAxis ("TriangleP2")>0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana)
-		{
-			shareStat.setTime = 0.0f;
-			iceBullet_NextFire = Time.time + iceBullet_FireRate;
-			ShootIceBullet();
-			shareStat.player_Mana -= IceMana;
+
+		if (shareStat.OnIce == true) {
+			if (Input.GetAxis ("TriangleP2") > 0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana) {
+				shareStat.setTime = 0.0f;
+				iceBullet_NextFire = Time.time + iceBullet_FireRate;
+				ShootIceBullet ();
+				shareStat.player_Mana -= IceMana;
+			}
 		}
 
 		//ShootFlame();
@@ -324,39 +335,30 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootFlame()
 	{
-		if (shareStat.player_Mana >= BaseFireMana && Input.GetKey (KeyCode.K)) 
-		{
-			if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
-			{
-				fire.fire_Direction = Fire.Fire_SpawnDirection.Right;
-			}
-			else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
-			{
-				fire.fire_Direction = Fire.Fire_SpawnDirection.Left;
-			}
-			else if(movementScript.player_isUp == true)
-			{
-				fire.fire_Direction = Fire.Fire_SpawnDirection.Up;
-			}
-			else if(movementScript.player_isDown == true)
-			{
-				fire.fire_Direction = Fire.Fire_SpawnDirection.Down;
-			}
-			fireDuration += Time.deltaTime;
-			flame_Particles.Play();
-			if (fireDuration >= 0.5f) 
-			{
-				shareStat.setTime = 0.0f;
-				shareStat.player_Mana -= FireMana;
-				fireDuration = 0;
-			}
-			if (shareStat.player_Mana < FireMana) {
+		if (shareStat.OnFire == true) {
+			if (shareStat.player_Mana >= BaseFireMana && Input.GetKey (KeyCode.K)) {
+				if (movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false) {
+					fire.fire_Direction = Fire.Fire_SpawnDirection.Right;
+				} else if (movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false) {
+					fire.fire_Direction = Fire.Fire_SpawnDirection.Left;
+				} else if (movementScript.player_isUp == true) {
+					fire.fire_Direction = Fire.Fire_SpawnDirection.Up;
+				} else if (movementScript.player_isDown == true) {
+					fire.fire_Direction = Fire.Fire_SpawnDirection.Down;
+				}
+				fireDuration += Time.deltaTime;
+				flame_Particles.Play ();
+				if (fireDuration >= 0.5f) {
+					shareStat.setTime = 0.0f;
+					shareStat.player_Mana -= FireMana;
+					fireDuration = 0;
+				}
+				if (shareStat.player_Mana < FireMana) {
+					flame_Particles.Stop ();
+				}
+			} else if (Input.GetKeyUp (KeyCode.K)) {
 				flame_Particles.Stop ();
 			}
-		}
-
-		else if (Input.GetKeyUp (KeyCode.K)) {
-			flame_Particles.Stop ();
 		}
 
 	}
