@@ -155,3 +155,4 @@ C:\Users\PC-16\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp
 C:\Users\PC-16\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\PC-16\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\UnityEngine.VR.xml
 C:\Users\PC-16\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Tyran\Desktop\TeamThls_FYP\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Facebook.Unity.Settings.dll

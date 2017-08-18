@@ -41,13 +41,15 @@ public class GUIManagerScript : MonoBehaviour {
 	public Image playerMana;
 	public Text playerGold;
 	public Text playerScore;
-
-
+	public bool paused = false;
+	public Canvas PauseUI;
+	private string scene;
 
 	// Use this for initialization
 	void Start () 
 	{
-		
+		PauseUI.enabled = false;
+
 	}
 	
 	// Update is called once per frame
@@ -58,6 +60,45 @@ public class GUIManagerScript : MonoBehaviour {
 		playerGold.text = sharedstats.player_Gold.ToString();
 		playerScore.text = sharedstats.player_Score.ToString();
 
+		if(paused)
+		{
+			PauseUI.enabled = true;
+			Time.timeScale = 0;
+		}
+		if(!paused)
+		{
+			PauseUI.enabled = false;
+
+			Time.timeScale = 1;
+		}
 		//Debug.Log (playerHealth.fillAmount);
+	}
+
+
+	public void PauseButton()
+	{
+		
+		paused = !paused;
+
+	}
+
+	public void ChangeScene (string sceneName)
+	{
+		
+		scene = sceneName;
+		Invoke ("ChangeSceneDelay",1.0f);
+	}
+
+	void ChangeSceneDelay ()
+	{
+		SceneManager.LoadScene (scene);
+	}
+
+
+	public void Restart()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+
 	}
 }
