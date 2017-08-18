@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/MultiPlayer Level.unity
+- path: Assets/Scene/Control Scheme.unity
   isLoaded: 1
   isActive: 1

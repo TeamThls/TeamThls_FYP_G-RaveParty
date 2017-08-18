@@ -42,13 +42,13 @@ public class GUIManagerScript : MonoBehaviour {
 	public Text playerGold;
 	public Text playerScore;
 	public bool paused = false;
-	public Canvas PauseUI;
+	//public Canvas PauseUI;
 	private string scene;
 
 	// Use this for initialization
 	void Start () 
 	{
-		PauseUI.enabled = false;
+		//PauseUI.enabled = false;
 
 	}
 	
@@ -60,7 +60,7 @@ public class GUIManagerScript : MonoBehaviour {
 		playerGold.text = sharedstats.player_Gold.ToString();
 		playerScore.text = sharedstats.player_Score.ToString();
 
-		if(paused)
+		/*if(paused)
 		{
 			PauseUI.enabled = true;
 			Time.timeScale = 0;
@@ -70,7 +70,7 @@ public class GUIManagerScript : MonoBehaviour {
 			PauseUI.enabled = false;
 
 			Time.timeScale = 1;
-		}
+		}*/
 		//Debug.Log (playerHealth.fillAmount);
 	}
 
