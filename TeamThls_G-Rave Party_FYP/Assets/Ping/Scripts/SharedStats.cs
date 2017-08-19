@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SharedStats : MonoBehaviour {
 
+	public GameObject player1;
+	public GameObject player2;
+
 	public float player_Health;
 	public float player_MaxHealth;
 
@@ -27,6 +30,15 @@ public class SharedStats : MonoBehaviour {
 	public bool OnLaser = false;
 
 	// Use this for initialization
+	void Awake() {
+		player1 = GameObject.Find ("Player");
+		player2 = GameObject.Find ("Player2");
+
+		if (player2 == null) {
+			player2 = GameObject.Find ("Player");
+		}
+	}
+
 	void Start () {
 		player_Health = player_MaxHealth;
 		player_Mana = player_MaxMana;

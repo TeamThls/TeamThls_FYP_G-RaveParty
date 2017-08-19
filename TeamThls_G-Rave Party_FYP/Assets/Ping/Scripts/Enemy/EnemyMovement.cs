@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour {
 	public GameObject player1;
 	public GameObject player2;
 	public GameObject GameManager;
+	SharedStats stts;
 
 	public bool multiplayer = true;
 
@@ -36,8 +37,12 @@ public class EnemyMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player1 = GameObject.Find ("Player");
-		player2 = GameObject.Find ("Player2");
+		GameManager = GameObject.Find ("GameManager");
+		stts = GameManager.GetComponent<SharedStats> ();
+
+		player1 = stts.player1;
+		player2 = stts.player2;
+
 		if (multiplayer == true) {
 			int num = Random.Range (1, 10);
 			if (num < 5) {
@@ -49,7 +54,6 @@ public class EnemyMovement : MonoBehaviour {
 		else if (multiplayer == false) {
 			player = GameObject.Find ("Player");
 		}
-		GameManager = GameObject.Find ("GameManager");
 	}
 	
 	// Update is called once per frame

@@ -43,6 +43,15 @@ public class WaypointPathfinding : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rgd = GetComponent<Rigidbody2D> ();
+		Manager = GameObject.Find ("WaypointMap");
+		GameManager = GameObject.Find ("GameManager");
+		WaypointManager WayManager = Manager.GetComponent<WaypointManager> ();
+		//t_Waypoint = TargetList [0];
+		shareStat = GameManager.GetComponent<SharedStats> ();
+
+		Player = shareStat.player1;
+		Player2 = shareStat.player2;
+
 		if (multiplayer == true) {
 			float a = Vector3.Distance (this.transform.position, Player.transform.position);
 			float b = Vector3.Distance (this.transform.position, Player2.transform.position);
@@ -58,12 +67,7 @@ public class WaypointPathfinding : MonoBehaviour {
 			target = GameObject.Find ("Player");
 		}
 
-		Manager = GameObject.Find ("WaypointMap");
-		GameManager = GameObject.Find ("GameManager");
-		WaypointManager WayManager = Manager.GetComponent<WaypointManager> ();
-		//t_Waypoint = TargetList [0];
 
-		shareStat = GameManager.GetComponent<SharedStats> ();
 
 		// get the nearest waypoint to move when spawned
 		for(int i = 0 ; i < WayManager.childList.Count(); i++){
