@@ -13,7 +13,6 @@ public class EnemyCollider : MonoBehaviour {
 	[SerializeField] ParticleSystem p_BurnedOnDeath;
 	[SerializeField] ParticleSystem p_Soul;
 	Rigidbody2D rgBody;
-	TimeManagement timeManager;
 	float death_PauseTimer = 0.0f;
 	public enum enemy_DeathState
 	{
@@ -26,10 +25,6 @@ public class EnemyCollider : MonoBehaviour {
 		rgBody = GetComponent<Rigidbody2D>();
 		sharedstats = GameObject.Find ("GameManager").GetComponent<SharedStats> ();
 		anim = GetComponent<Animator>();
-		if(timeManager == null)
-		{
-			timeManager = GameObject.Find("TimeManager").GetComponent<TimeManagement>();
-		}
 		
 	}
 	
@@ -42,7 +37,7 @@ public class EnemyCollider : MonoBehaviour {
 			death_PauseTimer += Time.deltaTime;
 			if(death_PauseTimer < 0.017f)
 			{
-				Time.timeScale = 0.015f;
+				Time.timeScale = 0.01f;
 			}
 			else
 			{
@@ -57,7 +52,7 @@ public class EnemyCollider : MonoBehaviour {
 					Destroy(this.gameObject);
 				}
 				sharedstats.player_Gold += 100;
-				//sharedstats.player_Score += 100;
+				sharedstats.player_Score += 100;
 
 			}
 		}

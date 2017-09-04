@@ -15,14 +15,12 @@ public class PlayerMovement : MonoBehaviour {
 	public float player_WalkSpeed = 10.0f;
 	public float player_horizontalSpeed;
 	public float player_JumpStrength = 20.0f;
-	public float player_TimeFactor = 1.0f;
 	public bool player_isWalking = false;
 	public bool player_isLeft = false;
 	public bool player_isRight = true;
 	public bool player_isUp = false;
 	public bool player_isDown = false;
 	public bool player_grounded;
-
 	Animator anim;
 	SpriteRenderer player_spriteRen;
 	public Rigidbody2D player_rgBody;
@@ -106,14 +104,14 @@ public class PlayerMovement : MonoBehaviour {
 			player_isWalking = true;
 		}
 
-		player_horizontalSpeed = move.x * player_WalkSpeed * player_TimeFactor;
+		player_horizontalSpeed = move.x * player_WalkSpeed;
 		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
 
 
 
 		if(Input.GetButtonDown("JumpK1") && player_grounded)
 		{
-			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
+			player_rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
 			player_grounded = false;
 		}
 
@@ -189,13 +187,13 @@ public class PlayerMovement : MonoBehaviour {
 			player_isWalking = true;
 		}
 
-		player_horizontalSpeed = move.x * player_WalkSpeed * player_TimeFactor;
+		player_horizontalSpeed = move.x * player_WalkSpeed;
 		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
 
 
 		if(Input.GetButtonDown("JumpK2") && player_grounded)
 		{
-			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
+			player_rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
 			player_grounded = false;
 		}
 
@@ -269,12 +267,12 @@ public class PlayerMovement : MonoBehaviour {
 			player_isWalking = true;
 		}
 
-		player_horizontalSpeed = move.x * player_WalkSpeed * player_TimeFactor;
+		player_horizontalSpeed = move.x * player_WalkSpeed;
 		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
 
 		if(Input.GetButtonDown("JumpP1") && player_grounded)
 		{
-			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
+			player_rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
 			player_grounded = false;
 		}
 
@@ -332,13 +330,13 @@ public class PlayerMovement : MonoBehaviour {
 			player_isWalking = true;
 		}
 
-		player_horizontalSpeed = move.x * player_WalkSpeed * player_TimeFactor;
+		player_horizontalSpeed = move.x * player_WalkSpeed;
 		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
 		//rgBody.AddForce (new Vector2 (player_horizontalSpeed, 0.0f), ForceMode2D.Impulse);
 
 		if(Input.GetButtonDown("JumpP2") && player_grounded)
 		{
-			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
+			player_rgBody.AddForce(Vector2.up * player_JumpStrength, ForceMode2D.Impulse);
 			player_grounded = false;
 		}
 
