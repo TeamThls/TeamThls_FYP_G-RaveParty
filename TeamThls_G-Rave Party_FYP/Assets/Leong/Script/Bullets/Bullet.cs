@@ -5,7 +5,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
 	[SerializeField] float bullet_Speed = 13.0f;
+
 	float bullet_Time = 0.0f;
+	public float bullet_TimeFactor = 1.0f;
 	public GameObject player;
 	public Movement movementScript;
 	public Transform gun;
@@ -44,22 +46,22 @@ public class Bullet : MonoBehaviour {
 	{
 		if(bullet_Direction == Bullet_SpawnDirection.Right)
 		{
-			transform.Translate(Vector2.right * bullet_Speed * Time.deltaTime, Space.World);
+			transform.Translate(Vector2.right * bullet_Speed * bullet_TimeFactor * Time.deltaTime, Space.World);
 		}
 		else if(bullet_Direction == Bullet_SpawnDirection.Left)
 		{
-			transform.Translate(Vector2.left * bullet_Speed * Time.deltaTime, Space.World);
+			transform.Translate(Vector2.left * bullet_Speed * bullet_TimeFactor * Time.deltaTime, Space.World);
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
 
 		}
 		else if(bullet_Direction == Bullet_SpawnDirection.Up)
 		{
-			transform.Translate(Vector2.up * bullet_Speed * Time.deltaTime, Space.World);
+			transform.Translate(Vector2.up * bullet_Speed * bullet_TimeFactor * Time.deltaTime, Space.World);
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
 		}
 		else
 		{
-			transform.Translate(Vector2.down * bullet_Speed * Time.deltaTime, Space.World);
+			transform.Translate(Vector2.down * bullet_Speed * bullet_TimeFactor * Time.deltaTime, Space.World);
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
 		}
 	}

@@ -236,28 +236,27 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootBullet()
 	{	
-
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_MB);
 
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Right;
-			Instantiate(bullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, 0.0f), Quaternion.identity);
 		}
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Left;
-			Instantiate(bullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, 0.0f), Quaternion.identity);
 		}
 		else if(movementScript.player_isUp == true)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Up;
-			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, -0.1f), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, 0.0f), Quaternion.identity);
 		}
 		else if(movementScript.player_isDown == true)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Down;
-			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, -0.1f), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, 0.0f), Quaternion.identity);
 		}
 
 	}
