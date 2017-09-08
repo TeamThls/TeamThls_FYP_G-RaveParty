@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyCollider : MonoBehaviour {
 
-	public float enemy_Health = 100.0f;
+	public float enemy_Health;
 	public SharedStats sharedstats;
 	[SerializeField] SpriteRenderer spr_Ren;
 	[SerializeField] Animator anim;
@@ -24,7 +24,7 @@ public class EnemyCollider : MonoBehaviour {
 	void Start () 
 	{
 		rgBody = GetComponent<Rigidbody2D>();
-		sharedstats = GameObject.Find ("GameManager").GetComponent<SharedStats> ();
+		sharedstats = GameObject.Find ("GameManager").GetComponent<SharedStats>();
 		anim = GetComponent<Animator>();
 		if(timeManager == null)
 		{
@@ -99,6 +99,7 @@ public class EnemyCollider : MonoBehaviour {
 	{
 		anim.Play("EnemyHittedByIce");
 		enemy_CurrentState = enemy_DeathState.Ice;
+		StartCoroutine(IceBulletSlow(2.0f));
 	}
 
 	public void LaserBulletReaction()
@@ -110,6 +111,27 @@ public class EnemyCollider : MonoBehaviour {
 	{
 		anim.Play("EnemyHittedByFire");
 		enemy_CurrentState = enemy_DeathState.Fire;
+	}
+
+	public IEnumerator IceBulletSlow(float duration)
+	{
+		if(this.gameObject.GetComponent<WaypointPathfinding>() != null)
+		{
+			WaypointPathfinding wp = this.gameObject.GetComponent<WaypointPathfinding>();
+			wp.speed = 2.0f;
+			Debug.Log("OH!");
+			yield return new WaitForSeconds(duration);
+			wp.speed = 4.0f;
+		}
+		else
+		{
+			EnemyMovement em = this.gameObject.GetComponent<EnemyMovement>();
+			em.speed = 2.0f;
+			Debug.Log("OH13");
+			yield return new WaitForSeconds(duration);
+			em.speed = 4.0f;
+		}
+
 	}
 }
 

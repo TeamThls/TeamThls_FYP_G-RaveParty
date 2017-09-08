@@ -42,6 +42,7 @@ public class PlayerCombat : MonoBehaviour {
 	public float fireDuration = 0.0f;
 
 	public bool isSlowMo = false;
+	public bool isShootingIce = false;
 
 	//float updateTime = 1.0f;
 
@@ -264,11 +265,12 @@ public class PlayerCombat : MonoBehaviour {
 	void ShootIceBullet()
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Ice);
-		
+		isShootingIce = true;
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Right;
 			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
@@ -400,6 +402,7 @@ public class PlayerCombat : MonoBehaviour {
 		}
 		movementScript.player_rgBody.gravityScale = 3;
 		movementScript.enabled = true;
+		isShootingIce = false;
 	}
 
 }

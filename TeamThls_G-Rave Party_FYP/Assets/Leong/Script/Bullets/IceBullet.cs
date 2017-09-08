@@ -6,6 +6,7 @@ public class IceBullet : MonoBehaviour {
 
 	[SerializeField] float iceBullet_Speed = 13.0f;
 	[SerializeField] float iceBullet_Time = 0.0f;
+	public float iceBullet_TimeFactor = 1.0f;
 	public int iceBullet_Damage = 30;
 	//public GameObject player;
 	public Movement movementScript;
@@ -43,22 +44,22 @@ public class IceBullet : MonoBehaviour {
 	{
 		if(bullet_Direction == Bullet_SpawnDirection.Right)
 		{
-			transform.Translate(Vector2.right * iceBullet_Speed * Time.deltaTime, Space.World);
+			transform.Translate(Vector2.right * iceBullet_Speed * iceBullet_TimeFactor * Time.deltaTime, Space.World);
 		}
 		else if(bullet_Direction == Bullet_SpawnDirection.Left)
 		{
-			transform.Translate(Vector2.left * iceBullet_Speed * Time.deltaTime, Space.World);
+			transform.Translate(Vector2.left * iceBullet_Speed * iceBullet_TimeFactor * Time.deltaTime, Space.World);
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
 
 		}
 		else if(bullet_Direction == Bullet_SpawnDirection.Up)
 		{
-			transform.Translate(Vector2.up * iceBullet_Speed * Time.deltaTime, Space.World);
+			transform.Translate(Vector2.up * iceBullet_Speed * iceBullet_TimeFactor * Time.deltaTime, Space.World);
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
 		}
 		else
 		{
-			transform.Translate(Vector2.down * iceBullet_Speed * Time.deltaTime, Space.World);
+			transform.Translate(Vector2.down * iceBullet_Speed * iceBullet_TimeFactor * Time.deltaTime, Space.World);
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
 		}
 	}

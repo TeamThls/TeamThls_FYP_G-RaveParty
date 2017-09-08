@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 613}
   m_MaxSize: {x: 18008, y: 18063}
   vertical: 0
-  controlID: 117
+  controlID: 115
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 442}
   m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
-  controlID: 118
+  controlID: 116
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -305,8 +305,8 @@ MonoBehaviour:
     y: 0
     width: 390
     height: 947
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -417,9 +417,9 @@ MonoBehaviour:
     height: 316
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7af3ffff
-    m_LastClickedID: -3206
-    m_ExpandedIDs: 7af3ffff44f5ffff18fbffff2cfbffffdefbffff00000000
+    m_SelectedIDs: b8faffff
+    m_LastClickedID: -1352
+    m_ExpandedIDs: d400feff4a62ffffe6e2ffff6af3ffffccf9ffffdefbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: Enemy
@@ -430,7 +430,7 @@ MonoBehaviour:
         y: 0
         width: 0
         height: 0
-      m_UserData: -2748
+      m_UserData: -3222
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -479,7 +479,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Leong/Script/Environment
+    - Assets/Leong/Script/Bullets
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -491,7 +491,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 6c240000
     m_LastClickedID: 9324
-    m_ExpandedIDs: 000000003226000074260000762600007e260000b0260000ba2600001e27000034270000a4270000b0270000ba280000e028000038290000e2290000662a00006a2a00000a3900000c3900000e3900001039000012390000
+    m_ExpandedIDs: 000000003226000074260000b0260000bc2600001e270000a4270000e2280000d42900006c2a0000722a0000223900002439000026390000283900002a390000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -516,24 +516,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 395}
+    scrollPos: {x: 0, y: 120}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003226000074260000762600007e260000b0260000ba2600001e27000034270000a4270000b0270000ba280000e028000038290000e2290000662a00006a2a00000a3900000c3900000e3900001039000012390000
+    m_ExpandedIDs: 000000003226000074260000b02600001e270000a4270000e22800006c2a0000722a0000223900002439000026390000283900002a390000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: IceBullet
+      m_OriginalName: IceBullet
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 2078
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
@@ -627,14 +627,14 @@ MonoBehaviour:
     width: 1063
     height: 422
   m_SceneLighting: 1
-  lastFramingTime: 588.6457245212405
+  lastFramingTime: 3161.800505301395
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 6.128347, y: -16.423647, z: 0}
+    m_Target: {x: -11.52, y: -26.89, z: 0}
     speed: 2
-    m_Value: {x: 6.128347, y: -16.423647, z: 0}
+    m_Value: {x: -11.52, y: -26.89, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -661,9 +661,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 19.693693
+    m_Target: 29.9782
     speed: 2
-    m_Value: 19.693693
+    m_Value: 29.9782
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -783,7 +783,7 @@ MonoBehaviour:
     y: 92
     width: 388
     height: 926
-  m_ScrollPosition: {x: 0, y: 360}
+  m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 311

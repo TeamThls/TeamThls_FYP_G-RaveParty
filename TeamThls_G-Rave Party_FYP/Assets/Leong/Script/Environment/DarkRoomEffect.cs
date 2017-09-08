@@ -18,7 +18,7 @@ public class DarkRoomEffect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		darkRoom_Mat.color = Color.white;
-		ListingAllDarkRoomObjects();
+		//ListingAllDarkRoomObjects();
 	}
 	
 	// Update is called once per frame

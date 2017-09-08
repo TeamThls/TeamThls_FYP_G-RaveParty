@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour {
 	public bool player_isUp = false;
 	public bool player_isDown = false;
 	public bool player_grounded;
+	public bool player_SlowMo;
 
 	Animator anim;
 	SpriteRenderer player_spriteRen;
