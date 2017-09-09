@@ -157,3 +157,4 @@ C:\Users\PC-16\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp
 C:\Users\PC-16\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.pdb
 C:\Users\Tyran\Desktop\TeamThls_FYP\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Facebook.Unity.Settings.dll
 C:\Users\kh_xehanort\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Facebook.Unity.Settings.dll
+C:\Users\zayli\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\Facebook.Unity.Settings.dll

@@ -36,6 +36,7 @@ public class GUIManagerScript : MonoBehaviour {
 
 	//HUD
 	//Health
+	public GameObject GamaManager;
 	public SharedStats sharedstats;
 	public Image playerHealth;
 	public Image playerMana;
@@ -49,7 +50,8 @@ public class GUIManagerScript : MonoBehaviour {
 	void Start () 
 	{
 		//PauseUI.enabled = false;
-
+		GamaManager = GameObject.Find("GameManager");
+		sharedstats = GamaManager.GetComponent<SharedStats> ();
 	}
 	
 	// Update is called once per frame

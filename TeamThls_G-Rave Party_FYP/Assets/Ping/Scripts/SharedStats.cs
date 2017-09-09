@@ -29,6 +29,12 @@ public class SharedStats : MonoBehaviour {
 	public bool OnIce = false;
 	public bool OnLaser = false;
 
+	public int BulletMana;
+	public int FireMana;
+	public int BaseFireMana;
+	public int LaserMana;
+	public int IceMana;
+
 	// Use this for initialization
 	void Awake() {
 		player1 = GameObject.Find ("Player");

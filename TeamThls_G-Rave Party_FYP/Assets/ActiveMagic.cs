@@ -18,6 +18,7 @@ public class ActiveMagic : MonoBehaviour {
 		Manager = GameObject.Find ("GameManager");
 		sharestat = Manager.GetComponent<SharedStats> ();
 		spr = this.GetComponent<SpriteRenderer> ();
+		randomFunction ();
 	}
 	
 	// Update is called once per frame
@@ -26,7 +27,11 @@ public class ActiveMagic : MonoBehaviour {
 			spr.color = Color.gray;
 			currTime += Time.deltaTime;
 			if (currTime >= setTime) {
-				spr.color = Color.red;
+				temp = num;
+				randomFunction ();
+				if (num == temp) {
+					randomFunction ();
+				}
 				inCd = false;
 				currTime = 0.0f;
 			}
@@ -36,16 +41,23 @@ public class ActiveMagic : MonoBehaviour {
 			sharestat.OnFire = true;
 			sharestat.OnIce = false;
 			sharestat.OnLaser = false;
+			spr.color = Color.red;
 		} 
 		else if (num == 2) {
 			sharestat.OnFire = false;
 			sharestat.OnIce = true;
 			sharestat.OnLaser = false;
+			spr.color = Color.blue;
 		} 
 		else if (num == 3) {
 			sharestat.OnFire = false;
 			sharestat.OnIce = false;
 			sharestat.OnLaser = true;
+			spr.color = Color.green;
+		}
+
+		if (inCd == true) {
+			spr.color = Color.gray;
 		}
 	}
 
@@ -56,11 +68,6 @@ public class ActiveMagic : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (inCd == false) {
 			if (other.tag == "Player") {
-				temp = num;
-				randomFunction ();
-				if (num == temp) {
-					randomFunction ();
-				}
 				inCd = true;
 			}
 		}

@@ -40,6 +40,9 @@ public class WaypointPathfinding : MonoBehaviour {
 	public float setTime = 0.0f;			// next attack cd time
 	public float AttackTime = 0.0f;			// when setTime reach this, enemy will attack player
 
+	public float a;
+	public float b;
+
 	// Use this for initialization
 	void Start () {
 		rgd = GetComponent<Rigidbody2D> ();
@@ -51,23 +54,6 @@ public class WaypointPathfinding : MonoBehaviour {
 
 		Player = shareStat.player1;
 		Player2 = shareStat.player2;
-
-		if (multiplayer == true) {
-			float a = Vector3.Distance (this.transform.position, Player.transform.position);
-			float b = Vector3.Distance (this.transform.position, Player2.transform.position);
-
-			if (a > b) {
-				target = Player;
-			} 
-			else if (b > a) {
-				target = Player2;
-			}
-		}
-		else if (multiplayer == false) {
-			target = GameObject.Find ("Player");
-		}
-
-
 
 		// get the nearest waypoint to move when spawned
 		for(int i = 0 ; i < WayManager.childList.Count(); i++){
@@ -82,6 +68,21 @@ public class WaypointPathfinding : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (target == null) {
+			a = Vector3.Distance (this.transform.position, Player.transform.position);
+			b = Vector3.Distance (this.transform.position, Player2.transform.position);
+
+			if (a >= b) {
+				target = Player;
+			} 
+			else if (b > a) {
+				target = Player2;
+			}
+		}
+		else {
+			target = GameObject.Find ("Player");
+		}
+
 		if (this.transform.position.x < xPos) {
 			flipx = false;
 			xPos = this.transform.position.x;

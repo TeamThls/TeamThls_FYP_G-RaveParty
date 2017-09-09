@@ -73,6 +73,12 @@ public class PlayerCombat : MonoBehaviour {
 		movementScript = GetComponent<PlayerMovement>();
 		GameManager = GameObject.Find ("GameManager");
 		shareStat = GameManager.GetComponent<SharedStats> ();
+
+		BulletMana = shareStat.BulletMana;
+		FireMana = shareStat.FireMana;
+		BaseFireMana = shareStat.BaseFireMana;
+		LaserMana = shareStat.LaserMana;
+		IceMana = shareStat.IceMana;
 	}
 
 	// Update is called once per frame
