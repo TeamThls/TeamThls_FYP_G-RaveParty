@@ -7,11 +7,11 @@ public class SharedStats : MonoBehaviour {
 	public GameObject player1;
 	public GameObject player2;
 
-	public float player_Health;
-	public float player_MaxHealth;
+	public int player_Health;
+	public int player_MaxHealth;
 
-	public float player_Mana;
-	public float player_MaxMana;
+	public int player_Mana;
+	public int player_MaxMana;
 
 	public int player_Gold = 0;
 	public int player_Score = 0;
@@ -34,6 +34,12 @@ public class SharedStats : MonoBehaviour {
 	public int BaseFireMana;
 	public int LaserMana;
 	public int IceMana;
+
+	public float FireDuration;
+	public float LaserDuration;
+	public float IceDuration;
+
+	public int FireRange;
 
 	// Use this for initialization
 	void Awake() {
