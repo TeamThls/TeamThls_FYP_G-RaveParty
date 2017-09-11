@@ -31,18 +31,23 @@ public class PlayerCombat : MonoBehaviour {
 	public GameObject GameManager;
 	SharedStats shareStat;
 
-	[SerializeField] float normalBullet_FireRate = 0.1f;
+	[SerializeField] float normalBullet_FireRate = 0.3f;
 	[SerializeField] float laserBullet_FireRate = 4.0f;
 	[SerializeField] float iceBullet_FireRate = 2.0f;
 
-	[SerializeField] float normalBullet_NextFire = 0.0f;
-	[SerializeField] float laserBullet_NextFire = 0.0f;
-	[SerializeField] float iceBullet_NextFire = 0.0f;
+	//	Obsolete Variables
+	//[SerializeField] float normalBullet_NextFire = 0.0f;
+	//[SerializeField] float laserBullet_NextFire = 0.0f;
+	//[SerializeField] float iceBullet_NextFire = 0.0f;
+
 	[SerializeField] float iceBullet_CastDelay = 0.5f;
 	public float fireDuration = 0.0f;
 
 	public bool isSlowMo = false;
 	public bool isShootingIce = false;
+	public bool canShootNormalBullet = true;
+	public bool canShootIceBullet = true;
+	public bool canShootLaser = true;
 
 	//float updateTime = 1.0f;
 
@@ -107,32 +112,30 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Keyboard1()
 	{
-		if(Input.GetAxis ("SquareK1")>0 && Time.time > normalBullet_NextFire  && shareStat.player_Mana >= BulletMana)
+		if(Input.GetAxis ("SquareK1") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
 			shareStat.setTime = 0.0f;
-			normalBullet_NextFire = Time.time + normalBullet_FireRate;
-			ShootBullet();
+			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
+
 		}
-		//if(Input.GetAxis (KeyCode.Alpha1))
-		//{
-		//	shareStat.setTime = 0.0f;
-		//	SlowMo();
-		//}
-		if(shareStat.OnLaser == true){
-			if(Input.GetAxis ("CircleK1")>0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana)
+
+		if(shareStat.OnLaser == true)
+		{
+			if(Input.GetAxis ("CircleK1") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
 			{
 				shareStat.setTime = 0.0f;
-				laserBullet_NextFire = Time.time + laserBullet_FireRate;
-				ShootLaser();
+				StartCoroutine(ShootLaser1(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
 		}
-		if (shareStat.OnIce == true) {
-			if (Input.GetAxis ("TriangleK1") > 0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana) {
+	
+		if (shareStat.OnIce == true) 
+		{
+			if (Input.GetAxis ("TriangleK1") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
+			{
 				shareStat.setTime = 0.0f;
-				iceBullet_NextFire = Time.time + iceBullet_FireRate;
-				ShootIceBullet ();
+				StartCoroutine(ShootIceBullet1(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
 		}
@@ -142,31 +145,32 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Keyboard2()
 	{
-		if(Input.GetAxis ("SquareK2")>0 && Time.time > normalBullet_NextFire && shareStat.player_Mana >= BulletMana)
+		if(Input.GetAxis ("SquareK2") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
 			shareStat.setTime = 0.0f;
-			normalBullet_NextFire = Time.time + normalBullet_FireRate;
-			ShootBullet();
+			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
+
 		}
-		//if(Input.GetAxis (KeyCode.Alpha1))
-		//{
-		//	SlowMo();
-		//}
-		if (shareStat.OnLaser == true) {
-			if (Input.GetAxis ("CircleK2") > 0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana) {
+
+		if (shareStat.OnLaser == true) 
+		{
+			if (Input.GetAxis ("CircleK2") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
+			{
 				shareStat.setTime = 0.0f;
-				laserBullet_NextFire = Time.time + laserBullet_FireRate;
-				ShootLaser ();
+
+				StartCoroutine(ShootLaser1(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
 		}
 
-		if (shareStat.OnIce == true) {
-			if (Input.GetAxis ("TriangleK2") > 0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana) {
+		if (shareStat.OnIce == true) 
+		{
+			if (Input.GetAxis ("TriangleK2") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
+			{
 				shareStat.setTime = 0.0f;
-				iceBullet_NextFire = Time.time + iceBullet_FireRate;
-				ShootIceBullet ();
+
+				StartCoroutine(ShootIceBullet1(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
 		}
@@ -175,32 +179,33 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Controller1()
 	{
-		if(Input.GetAxis ("SquareP1")>0 && Time.time > normalBullet_NextFire && shareStat.player_Mana >= BulletMana)
+		if(Input.GetAxis ("SquareP1") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
 			shareStat.setTime = 0.0f;
-			normalBullet_NextFire = Time.time + normalBullet_FireRate;
-			ShootBullet();
+			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
+
 		}
-		//if(Input.GetAxis (KeyCode.Alpha1))
-		//{
-		//	SlowMo();
-		//}
-		if (shareStat.OnLaser == true) {
-			if (Input.GetAxis ("CircleP1") > 0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana) {
+
+		if (shareStat.OnLaser == true) 
+		{
+			if (Input.GetAxis ("CircleP1") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
+			{
 				shareStat.setTime = 0.0f;
-				laserBullet_NextFire = Time.time + laserBullet_FireRate;
-				ShootLaser ();
+
+				StartCoroutine(ShootLaser1(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
 		}
 
-		if (shareStat.OnIce == true) {
-			if (Input.GetAxis ("TriangleP1") > 0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana) {
+		if (shareStat.OnIce == true) 
+		{
+			if (Input.GetAxis ("TriangleP1") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
+			{
 				shareStat.setTime = 0.0f;
-				iceBullet_NextFire = Time.time + iceBullet_FireRate;
-				ShootIceBullet ();
-				shareStat.player_Mana -= 5;
+
+				StartCoroutine(ShootIceBullet1(iceBullet_FireRate));
+				shareStat.player_Mana -= IceMana;
 			}
 		}
 
@@ -209,31 +214,31 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Controller2()
 	{
-		if(Input.GetAxis ("SquareP2")>0 && Time.time > normalBullet_NextFire && shareStat.player_Mana >= BulletMana)
+		if(Input.GetAxis ("SquareP2")>0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
 			shareStat.setTime = 0.0f;
-			normalBullet_NextFire = Time.time + normalBullet_FireRate;
-			ShootBullet();
+			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
+
 		}
-		//if(Input.GetAxis (KeyCode.Alpha1))
-		//{
-		//	SlowMo();
-		//}
-		if (shareStat.OnLaser == true) {
-			if (Input.GetAxis ("CircleP2") > 0 && Time.time > laserBullet_NextFire && shareStat.player_Mana >= LaserMana) {
+
+		if (shareStat.OnLaser == true) 
+		{
+			if (Input.GetAxis ("CircleP2") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
+			{
 				shareStat.setTime = 0.0f;
-				laserBullet_NextFire = Time.time + laserBullet_FireRate;
-				ShootLaser ();
+
+				StartCoroutine(ShootLaser1(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
 		}
 
 		if (shareStat.OnIce == true) {
-			if (Input.GetAxis ("TriangleP2") > 0 && Time.time > iceBullet_NextFire && shareStat.player_Mana >= IceMana) {
+			if (Input.GetAxis ("TriangleP2") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
+			{
 				shareStat.setTime = 0.0f;
-				iceBullet_NextFire = Time.time + iceBullet_FireRate;
-				ShootIceBullet ();
+
+				StartCoroutine(ShootIceBullet1(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
 		}
@@ -265,6 +270,34 @@ public class PlayerCombat : MonoBehaviour {
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Down;
 			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, 0.0f), Quaternion.identity);
 		}
+	}
+
+	IEnumerator ShootBullet1(float duration)
+	{
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_MB);
+		canShootNormalBullet = false;
+		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Right;
+			Instantiate(bullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, 0.0f), Quaternion.identity);
+		}
+		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Left;
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, 0.0f), Quaternion.identity);
+		}
+		else if(movementScript.player_isUp == true)
+		{
+			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Up;
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, 0.0f), Quaternion.identity);
+		}
+		else if(movementScript.player_isDown == true)
+		{
+			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Down;
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, 0.0f), Quaternion.identity);
+		}
+		yield return new WaitForSeconds(duration);
+		canShootNormalBullet = true;
 
 	}
 
@@ -310,13 +343,85 @@ public class PlayerCombat : MonoBehaviour {
 			movementScript.player_rgBody.gravityScale = 0;
 			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
 		}
+	}
 
+	IEnumerator ShootIceBullet1(float duration)
+	{
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Ice);
+		isShootingIce = true;
+		canShootIceBullet = false;
+		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Right;
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
+
+		}
+		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Left;
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 3.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
+		}
+		else if(movementScript.player_isUp == true)
+		{
+			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Up;
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x, gun.position.y + 1.0f, gun.position.z - 1), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
+		}
+		else if(movementScript.player_isDown == true)
+		{
+			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Down;
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x, gun.position.y - 1.0f, gun.position.z - 1), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
+		}
+		yield return new WaitForSeconds(duration);
+		canShootIceBullet = true;
 	}
 
 
 	void ShootLaser()
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Laser);
+		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Right;
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Left;
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+		else if(movementScript.player_isUp == true)
+		{
+			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Up;
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+		else if(movementScript.player_isDown == true)
+		{
+			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Down;
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+	}
+
+	IEnumerator ShootLaser1(float duration)
+	{	
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Laser);
+		canShootLaser = false;
 
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
@@ -338,6 +443,8 @@ public class PlayerCombat : MonoBehaviour {
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Down;
 			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
+		yield return new WaitForSeconds(duration);
+		canShootLaser = true;
 	}
 
 	void ShootFlame()

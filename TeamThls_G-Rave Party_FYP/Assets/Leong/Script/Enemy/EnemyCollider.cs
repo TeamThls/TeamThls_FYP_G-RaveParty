@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyCollider : MonoBehaviour {
 
 	public float enemy_Health;
+	[SerializeField] HealthDeviceHealing healthDevice;
 	public SharedStats sharedstats;
 	[SerializeField] SpriteRenderer spr_Ren;
 	[SerializeField] Animator anim;
@@ -29,6 +30,10 @@ public class EnemyCollider : MonoBehaviour {
 		if(timeManager == null)
 		{
 			timeManager = GameObject.Find("TimeManager").GetComponent<TimeManagement>();
+		}
+		if(healthDevice == null)
+		{
+			healthDevice = GameObject.Find("P_HealDeviceStand").GetComponent<HealthDeviceHealing>();
 		}
 		
 	}
@@ -57,6 +62,10 @@ public class EnemyCollider : MonoBehaviour {
 					Destroy(this.gameObject);
 				}
 				sharedstats.player_Gold += 100;
+				if(healthDevice.availableHealth < 5)
+				{
+					healthDevice.availableHealth += 1;
+				}
 				//sharedstats.player_Score += 100;
 
 			}
@@ -119,7 +128,7 @@ public class EnemyCollider : MonoBehaviour {
 		{
 			WaypointPathfinding wp = this.gameObject.GetComponent<WaypointPathfinding>();
 			wp.speed = 2.0f;
-			Debug.Log("OH!");
+
 			yield return new WaitForSeconds(duration);
 			wp.speed = 4.0f;
 		}
@@ -127,7 +136,7 @@ public class EnemyCollider : MonoBehaviour {
 		{
 			EnemyMovement em = this.gameObject.GetComponent<EnemyMovement>();
 			em.speed = 2.0f;
-			Debug.Log("OH13");
+
 			yield return new WaitForSeconds(duration);
 			em.speed = 4.0f;
 		}

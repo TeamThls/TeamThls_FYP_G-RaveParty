@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HealthDeviceHealing : MonoBehaviour {
 
 	public GameObject healthDevice;
+	public int availableHealth;
 	SpriteRenderer healthDevice_Spr;
 	SharedStats allPlayer_SharedStats;
 	// Use this for initialization
@@ -25,16 +26,25 @@ public class HealthDeviceHealing : MonoBehaviour {
 	{
 		if(col.gameObject.name == "Player" || col.gameObject.name == "Player2") 
 		{
-			if(allPlayer_SharedStats.player_Health < allPlayer_SharedStats.player_MaxHealth)
+			if(availableHealth == 5)
 			{
-				healthDevice_Spr.color = Color.black;
-				allPlayer_SharedStats.player_Health = allPlayer_SharedStats.player_MaxHealth;
-				Debug.Log("Heal");
+				if(allPlayer_SharedStats.player_Health < allPlayer_SharedStats.player_MaxHealth)
+				{
+					healthDevice_Spr.color = Color.black;
+					allPlayer_SharedStats.player_Health = allPlayer_SharedStats.player_MaxHealth;
+					Debug.Log("Heal");
+					availableHealth = 0;
+				}
+				else
+				{
+					Debug.Log("Already Max Health");
+				}
 			}
 			else
 			{
-				Debug.Log("Already Max Health");
+				Debug.Log(5 - availableHealth + " " + "Left, Kill More Enemies");
 			}
+
 		}
 	}
 
