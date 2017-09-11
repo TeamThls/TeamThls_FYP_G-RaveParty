@@ -7,11 +7,11 @@ public class SharedStats : MonoBehaviour {
 	public GameObject player1;
 	public GameObject player2;
 
-	public int player_Health;
-	public int player_MaxHealth;
+	public float player_Health;
+	public float player_MaxHealth;
 
-	public int player_Mana;
-	public int player_MaxMana;
+	public float player_Mana;
+	public float player_MaxMana;
 
 	public int player_Gold = 0;
 	public int player_Score = 0;
@@ -25,9 +25,9 @@ public class SharedStats : MonoBehaviour {
 	public float maxDuration;
 	public int ManaReg;
 
-	public bool OnFire = false;
-	public bool OnIce = false;
-	public bool OnLaser = false;
+	public bool OnFire;
+	public bool OnIce;
+	public bool OnLaser;
 
 	public int BulletMana;
 	public int FireMana;
@@ -39,7 +39,11 @@ public class SharedStats : MonoBehaviour {
 	public float LaserDuration;
 	public float IceDuration;
 
+	public float abilityDuration;
+
 	public int FireRange;
+
+	public int RandomNum;
 
 	// Use this for initialization
 	void Awake() {
@@ -59,6 +63,35 @@ public class SharedStats : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		setTime += Time.deltaTime;
+
+		if (OnFire == true) {
+			abilityDuration += Time.deltaTime;
+			if (abilityDuration >= FireDuration) {
+				Debug.Log ("work");
+				OnFire = false;
+				RandomNum = 0;
+				abilityDuration = 0.0f;
+			}
+		}
+
+		if (OnIce == true) {
+			abilityDuration += Time.deltaTime;
+			if (abilityDuration >= IceDuration) {
+				OnIce = false;
+				RandomNum = 0;
+				abilityDuration = 0.0f;
+			}
+		}
+
+		if (OnLaser == true) {
+			abilityDuration += Time.deltaTime;
+			if (abilityDuration >= LaserDuration) {
+				OnLaser = false;
+				RandomNum = 0;
+				abilityDuration = 0.0f;
+			}
+		}
+
 		if (player_Health > player_MaxHealth) {
 			//player_Health = player_MaxHealth;
 		}

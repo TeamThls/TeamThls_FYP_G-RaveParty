@@ -90,15 +90,15 @@ public class UpgradeDetails : MonoBehaviour {
 
 			// selection upgrade 3
 			if (num3 == 1) {
-				int temp = shrd.player_MaxHealth + upgradeHealth;
+				float temp = shrd.player_MaxHealth + upgradeHealth;
 				upgradeInfo03.text = "Increase Health from " + shrd.player_MaxHealth + " to " + temp;
 			} 
 			else if (num3 == 2) {
-				int temp = shrd.player_MaxMana + upgradeMana;
+				float temp = shrd.player_MaxMana + upgradeMana;
 				upgradeInfo03.text = "Increase Manapoint from " + shrd.player_MaxMana + " to " + temp;
 			}
 			else if (num3 == 3) {
-				int temp = shrd.ManaReg + upgradeManaRegen;
+				float temp = shrd.ManaReg + upgradeManaRegen;
 				upgradeInfo03.text = "Increase Manapoint Regen Speed from " + shrd.ManaReg + " to " + temp;
 			}
 		}

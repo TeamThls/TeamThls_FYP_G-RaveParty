@@ -22,11 +22,11 @@ public class PlayerCombat : MonoBehaviour {
 	public Transform gunCenter;
 	public Player_Controller player_Control;
 
-	public int BulletMana;
-	public int FireMana;
-	public int BaseFireMana;
-	public int LaserMana;
-	public int IceMana;
+	public float BulletMana;
+	public float FireMana;
+	public float BaseFireMana;
+	public float LaserMana;
+	public float IceMana;
 
 	public GameObject GameManager;
 	SharedStats shareStat;
@@ -117,7 +117,6 @@ public class PlayerCombat : MonoBehaviour {
 			shareStat.setTime = 0.0f;
 			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
-
 		}
 
 		if(shareStat.OnLaser == true)

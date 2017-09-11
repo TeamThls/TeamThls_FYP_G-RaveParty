@@ -10,7 +10,6 @@ public class ActiveMagic : MonoBehaviour {
 	public bool inCd = false;
 	public float setTime = 0.0f;
 	public float currTime = 0.0f;
-	public int num = 0;
 	public int temp = 0;
 
 	// Use this for initialization
@@ -23,37 +22,28 @@ public class ActiveMagic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (inCd == true) {
+		/*if (inCd == true) {
 			spr.color = Color.gray;
 			currTime += Time.deltaTime;
 			if (currTime >= setTime) {
-				temp = num;
+				temp = sharestat.RandomNum;
 				randomFunction ();
-				if (num == temp) {
+				if (sharestat.RandomNum == temp) {
 					randomFunction ();
 				}
 				inCd = false;
 				currTime = 0.0f;
 			}
+		}*/
+
+		if (inCd == true) {
+			currTime += Time.deltaTime;
+			spr.color = Color.gray;
 		}
 
-		if (num == 1) {
-			sharestat.OnFire = true;
-			sharestat.OnIce = false;
-			sharestat.OnLaser = false;
-			spr.color = Color.red;
-		} 
-		else if (num == 2) {
-			sharestat.OnFire = false;
-			sharestat.OnIce = true;
-			sharestat.OnLaser = false;
-			spr.color = Color.blue;
-		} 
-		else if (num == 3) {
-			sharestat.OnFire = false;
-			sharestat.OnIce = false;
-			sharestat.OnLaser = true;
-			spr.color = Color.green;
+		if (currTime >= setTime) {
+			inCd = false;
+			currTime = 0.0f;
 		}
 
 		if (inCd == true) {
@@ -62,12 +52,40 @@ public class ActiveMagic : MonoBehaviour {
 	}
 
 	void randomFunction(){
-		num = Random.Range (1, 4);
+		sharestat.RandomNum = Random.Range (1, 4);
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if (inCd == false) {
-			if (other.tag == "Player") {
+		if (other.tag == "Player") {
+			if (inCd == false) {
+				temp = sharestat.RandomNum;
+				randomFunction ();
+				if (sharestat.RandomNum == temp) {
+					randomFunction ();
+				}
+				if (sharestat.RandomNum == 1) {
+					sharestat.OnFire = true;
+					sharestat.OnIce = false;
+					sharestat.OnLaser = false;
+					spr.color = Color.red;
+				} 
+				else if (sharestat.RandomNum == 2) {
+					sharestat.OnFire = false;
+					sharestat.OnIce = true;
+					sharestat.OnLaser = false;
+					spr.color = Color.blue;
+				} 
+				else if (sharestat.RandomNum == 3) {
+					sharestat.OnFire = false;
+					sharestat.OnIce = false;
+					sharestat.OnLaser = true;
+					spr.color = Color.green;
+				} 
+				else if(sharestat.RandomNum == 0) {
+					sharestat.OnFire = false;
+					sharestat.OnIce = false;
+					sharestat.OnLaser = false;
+				}
 				inCd = true;
 			}
 		}

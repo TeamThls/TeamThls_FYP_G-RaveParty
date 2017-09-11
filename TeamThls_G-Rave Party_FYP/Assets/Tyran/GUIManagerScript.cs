@@ -59,6 +59,10 @@ public class GUIManagerScript : MonoBehaviour {
 	{
 		playerHealth.fillAmount = sharedstats.player_Health/sharedstats.player_MaxHealth;
 		playerMana.fillAmount = sharedstats.player_Mana/sharedstats.player_MaxMana;
+
+		//Debug.Log (playerMana.fillAmount);
+		//Debug.Log (sharedstats.player_Mana);
+
 		playerGold.text = sharedstats.player_Gold.ToString();
 		playerScore.text = sharedstats.player_Score.ToString();
 
