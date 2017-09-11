@@ -12,12 +12,16 @@ public class ActiveMagic : MonoBehaviour {
 	public float currTime = 0.0f;
 	public int temp = 0;
 
+	public GameObject cdText;
+
 	// Use this for initialization
 	void Start () {
 		Manager = GameObject.Find ("GameManager");
 		sharestat = Manager.GetComponent<SharedStats> ();
 		spr = this.GetComponent<SpriteRenderer> ();
 		randomFunction ();
+		cdText = GameObject.Find ("CD text");
+		//TextMesh cdt = cdText.GetComponent<TextMesh> ();
 	}
 	
 	// Update is called once per frame
@@ -38,6 +42,8 @@ public class ActiveMagic : MonoBehaviour {
 
 		if (inCd == true) {
 			currTime += Time.deltaTime;
+			cdText.GetComponent<TextMesh> ().text = currTime.ToString ();;
+			cdText.GetComponent<TextMesh> ().fontSize = 8;
 			spr.color = Color.gray;
 		}
 
