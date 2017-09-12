@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class TimeManagement : MonoBehaviour {
 
-	public float time_SlowDownFactor = 0.5f;
-	public GameObject tempPlayer1, tempPlayer2, tempEnemy, tempBullet;
+	public GameObject tempPlayer1, tempPlayer2;
 	public enum CurrentSlowMoState
 	{
 		Player, Enemy, Normal
@@ -29,18 +28,10 @@ public class TimeManagement : MonoBehaviour {
 
 	void Update()
 	{
-		//Time.timeScale += (1.0f / time_SlowDownFactor) * Time.unscaledDeltaTime;
-		//Time.timeScale = Mathf.Clamp(Time.timeScale, 0.0f, 1.0f);
+		
 	}
 
-	public void SlowMotion()
-	{	
-		Time.timeScale = time_SlowDownFactor;
-		Time.fixedDeltaTime = Time.timeScale * 0.02f;
-	}
 
-	// Instead of hard-coding every objects, put one more variable into every motions, multiply it with half of the value
-	// Take this in mind, once animation comes in, all these works probably need to redo
 	public void SlowDown(GameObject obj)
 	{
 		if(obj.layer == 10)
@@ -51,7 +42,6 @@ public class TimeManagement : MonoBehaviour {
 			PlayerCombat obj_pc = obj.GetComponentInParent<PlayerCombat>();
 			if(obj_pm.player_SlowMo == false)
 			{
-				//player_Count ++;
 				obj_pm.player_TimeFactor = 0.5f;
 				if(obj_pc.isShootingIce == true)
 				{
@@ -60,7 +50,6 @@ public class TimeManagement : MonoBehaviour {
 				else
 				{
 					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 0.8f;
-
 				}
 
 				obj_pm.player_SlowMo = true;
@@ -124,21 +113,32 @@ public class TimeManagement : MonoBehaviour {
 		}
 	}
 
+	// Reset every affected variables once the TimeFlow switch mode
 	public void ResetTime(GameObject obj)
 	{
 		if(obj.layer == 10)
 		{
 			// Reset back the time once the enum changed
 			PlayerMovement obj_pm = obj.GetComponentInParent<PlayerMovement>();
+			PlayerCombat obj_pc = obj.GetComponentInParent<PlayerCombat>();
 
 			if(obj_pm.player_SlowMo == true)
 			{
-
-				obj_pm.player_TimeFactor = 1.0f;
-				obj.GetComponentInParent<Rigidbody2D>().gravityScale = 3.0f;
-				obj_pm.player_SlowMo = false;		
+				if(obj_pc.isShootingIce == false)
+				{
+					obj_pm.player_TimeFactor = 1.0f;
+					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 3.0f;
+					obj_pm.player_SlowMo = false;	
+				}
+				else
+				{
+					obj_pm.player_TimeFactor = 1.0f;
+					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 0.0f;
+					obj_pm.player_SlowMo = false;	
+				}
 
 			}
+
 		}
 		if(obj.layer == 11)
 		{

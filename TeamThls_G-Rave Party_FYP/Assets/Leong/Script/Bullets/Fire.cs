@@ -28,10 +28,12 @@ public class Fire : MonoBehaviour {
 		FireParticlesDirection();
 	}
 
-	// 4-Way Shooting, transform.Translate is only temporary, will change to RigidBody2D soon
+
+
 	void FireParticlesDirection()
 	{
 		ParticleSystem.VelocityOverLifetimeModule fire_Velocity =  fire_ParticleSystem.velocityOverLifetime;
+
 		if(fire_Direction == Fire_SpawnDirection.Right)
 		{
 			transform.localPosition = new Vector2 (0.9f, 0.6f);
@@ -55,8 +57,8 @@ public class Fire : MonoBehaviour {
 			transform.localPosition = new Vector2 (0.0f, -1.0f);
 			fire_Velocity.x = 0.0f;
 			fire_Velocity.y = -5.0f;
-
 		}
+
 	}
 
 	void OnParticleCollision(GameObject obj)

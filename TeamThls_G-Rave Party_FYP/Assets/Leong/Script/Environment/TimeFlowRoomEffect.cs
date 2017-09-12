@@ -7,6 +7,9 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 	TimeManagement time_Script;
 
 	[SerializeField] float slowMoEffect_Time;
+	[SerializeField] float playerDuration = 5.0f;
+	[SerializeField] float enemyDuration = 15.0f;
+	[SerializeField] float normalDuration = 25.0f;
 
 	// Use this for initialization
 	void Start () 
@@ -46,11 +49,11 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 			if(time_Script.player_Count > 0)
 			{
 				slowMoEffect_Time += Time.deltaTime;
-				if(slowMoEffect_Time <= 5.0f)
+				if(slowMoEffect_Time <= playerDuration)
 				{
 					time_Script.currentSlowState = TimeManagement.CurrentSlowMoState.Player;
 				}
-				else if(slowMoEffect_Time <= 15.0f)
+				else if(slowMoEffect_Time <= enemyDuration)
 				{
 					time_Script.ResetTime(time_Script.tempPlayer1);
 					time_Script.ResetTime(time_Script.tempPlayer2);
@@ -59,7 +62,9 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 				else
 				{
 					time_Script.currentSlowState = TimeManagement.CurrentSlowMoState.Normal;
-					if(slowMoEffect_Time >= 20.0f)
+					time_Script.ResetTime(time_Script.tempPlayer1);
+					time_Script.ResetTime(time_Script.tempPlayer2);
+					if(slowMoEffect_Time >= normalDuration)
 					{
 						slowMoEffect_Time = 0.0f;
 					}

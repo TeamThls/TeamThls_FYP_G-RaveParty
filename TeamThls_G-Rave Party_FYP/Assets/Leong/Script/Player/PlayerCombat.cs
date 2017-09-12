@@ -245,7 +245,7 @@ public class PlayerCombat : MonoBehaviour {
 		//ShootFlame();
 	}
 
-	void ShootBullet()
+	/*void ShootBullet()
 	{	
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_MB);
 
@@ -269,7 +269,7 @@ public class PlayerCombat : MonoBehaviour {
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Down;
 			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, 0.0f), Quaternion.identity);
 		}
-	}
+	}*/
 
 	IEnumerator ShootBullet1(float duration)
 	{
@@ -300,7 +300,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	}
 
-	void ShootIceBullet()
+	/*void ShootIceBullet()
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Ice);
 		isShootingIce = true;
@@ -342,7 +342,7 @@ public class PlayerCombat : MonoBehaviour {
 			movementScript.player_rgBody.gravityScale = 0;
 			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
 		}
-	}
+	}*/
 
 	IEnumerator ShootIceBullet1(float duration)
 	{
@@ -392,7 +392,7 @@ public class PlayerCombat : MonoBehaviour {
 	}
 
 
-	void ShootLaser()
+	/*void ShootLaser()
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Laser);
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
@@ -415,7 +415,7 @@ public class PlayerCombat : MonoBehaviour {
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Down;
 			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
-	}
+	}*/
 
 	IEnumerator ShootLaser1(float duration)
 	{	
@@ -448,28 +448,43 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootFlame()
 	{
-		if (shareStat.OnFire == true) {
-			if (shareStat.player_Mana >= BaseFireMana && Input.GetKey (KeyCode.K)) {
-				if (movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false) {
+		if (shareStat.OnFire == true) 
+		{
+			if (shareStat.player_Mana >= BaseFireMana && Input.GetKey (KeyCode.K)) 
+			{
+				if (movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false) 
+				{
 					fire.fire_Direction = Fire.Fire_SpawnDirection.Right;
-				} else if (movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false) {
+				} 
+				else if (movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false) 
+				{
 					fire.fire_Direction = Fire.Fire_SpawnDirection.Left;
-				} else if (movementScript.player_isUp == true) {
+				} 
+				else if (movementScript.player_isUp == true) 
+				{
 					fire.fire_Direction = Fire.Fire_SpawnDirection.Up;
-				} else if (movementScript.player_isDown == true) {
+				} 
+				else if (movementScript.player_isDown == true) 
+				{
 					fire.fire_Direction = Fire.Fire_SpawnDirection.Down;
 				}
+
 				fireDuration += Time.deltaTime;
 				flame_Particles.Play ();
-				if (fireDuration >= 0.5f) {
+
+				if (fireDuration >= 0.5f) 
+				{
 					shareStat.setTime = 0.0f;
 					shareStat.player_Mana -= FireMana;
 					fireDuration = 0;
 				}
-				if (shareStat.player_Mana < FireMana) {
+				if (shareStat.player_Mana < FireMana) 
+				{
 					flame_Particles.Stop ();
 				}
-			} else if (Input.GetKeyUp (KeyCode.K)) {
+			} 
+			else if (Input.GetKeyUp (KeyCode.K)) 
+			{
 				flame_Particles.Stop ();
 			}
 		}
@@ -512,7 +527,16 @@ public class PlayerCombat : MonoBehaviour {
 			Instantiate(iceBullet_Obj, new Vector3(gun.position.x, gun.position.y - 1.0f, -0.1f), Quaternion.identity);
 		
 		}
-		movementScript.player_rgBody.gravityScale = 3;
+		if(movementScript.player_SlowMo == true)
+		{
+			movementScript.player_rgBody.gravityScale = 0.8f;
+				
+		}
+		else
+		{
+			movementScript.player_rgBody.gravityScale = 3;
+
+		}
 		movementScript.enabled = true;
 		isShootingIce = false;
 	}
