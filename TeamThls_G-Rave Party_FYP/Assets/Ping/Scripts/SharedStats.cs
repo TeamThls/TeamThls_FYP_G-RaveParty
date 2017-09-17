@@ -56,13 +56,37 @@ public class SharedStats : MonoBehaviour {
 	}
 
 	void Start () {
-		player_Health = player_MaxHealth;
-		player_Mana = player_MaxMana;
+		player_Health = GlobalControl.Instance.p_Health ;
+		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
+
+		player_Mana = GlobalControl.Instance.p_Mana;
+		player_MaxMana = GlobalControl.Instance.p_MaxMana;
+		ManaReg = GlobalControl.Instance.Mana_Reg;
+
+		player_Gold = GlobalControl.Instance.p_Gold;
+		player_Score = GlobalControl.Instance.p_Score;
+
+		Bullet_Damage = GlobalControl.Instance.B_Damage;
+		Fire_Damage = GlobalControl.Instance.F_Damage;
+		Ice_Damage = GlobalControl.Instance.I_Damage;
+		Laser_Damage = GlobalControl.Instance.L_Damage;
+
+		BulletMana = GlobalControl.Instance.B_Mana;
+		FireMana = GlobalControl.Instance.F_Mana;
+		BaseFireMana = GlobalControl.Instance.Base_Mana;
+		LaserMana = GlobalControl.Instance.L_Mana;
+		IceMana = GlobalControl.Instance.I_Mana;
+
+		FireDuration = GlobalControl.Instance.F_Duration;
+		LaserDuration = GlobalControl.Instance.L_Duration;
+		IceDuration = GlobalControl.Instance.I_Duration;
+		abilityDuration = GlobalControl.Instance.ablty_Duration;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		setTime += Time.deltaTime;
+		SaveStats ();
 
 		if (OnFire == true) {
 			abilityDuration += Time.deltaTime;
@@ -104,5 +128,33 @@ public class SharedStats : MonoBehaviour {
 			player_Mana += ManaReg;
 			setTime = maxDuration - 0.5f;
 		}
+	}
+
+	public void SaveStats(){
+		GlobalControl.Instance.p_Health = player_Health;
+		GlobalControl.Instance.p_MaxHealth = player_MaxHealth;
+
+		GlobalControl.Instance.p_Mana = player_Mana;
+		GlobalControl.Instance.p_MaxMana = player_MaxMana;
+		GlobalControl.Instance.Mana_Reg = ManaReg;
+
+		GlobalControl.Instance.p_Gold = player_Gold;
+		GlobalControl.Instance.p_Score = player_Score;
+
+		GlobalControl.Instance.B_Damage = Bullet_Damage;
+		GlobalControl.Instance.F_Damage = Fire_Damage;
+		GlobalControl.Instance.I_Damage = Ice_Damage;
+		GlobalControl.Instance.L_Damage = Laser_Damage;
+
+		GlobalControl.Instance.B_Mana = BulletMana;
+		GlobalControl.Instance.F_Mana = FireMana;
+		GlobalControl.Instance.Base_Mana = BaseFireMana;
+		GlobalControl.Instance.L_Mana = LaserMana;
+		GlobalControl.Instance.I_Mana = IceMana;
+
+		GlobalControl.Instance.F_Duration = FireDuration;
+		GlobalControl.Instance.L_Duration = LaserDuration;
+		GlobalControl.Instance.I_Duration = IceDuration;
+		GlobalControl.Instance.ablty_Duration = abilityDuration;
 	}
 }

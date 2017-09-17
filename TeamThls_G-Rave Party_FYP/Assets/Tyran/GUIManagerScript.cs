@@ -107,4 +107,9 @@ public class GUIManagerScript : MonoBehaviour {
 
 
 	}
+
+
+	public void NextScene(){
+		SceneManager.LoadScene (4);
+	}
 }

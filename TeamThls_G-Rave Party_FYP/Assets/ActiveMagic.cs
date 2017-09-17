@@ -10,7 +10,9 @@ public class ActiveMagic : MonoBehaviour {
 	public bool inCd = false;
 	public float setTime = 0.0f;
 	public float currTime = 0.0f;
+	public int num = 0;
 	public int temp = 0;
+	public bool randomed;
 
 	public GameObject cdText;
 
@@ -40,52 +42,66 @@ public class ActiveMagic : MonoBehaviour {
 			}
 		}*/
 
-		if (inCd == true) {
+		if (inCd == false && randomed == false) {
+			randomFunction ();
+			if (num == 1) {
+				spr.color = Color.red;
+				randomed = true;
+			} 
+			else if (num == 2) {
+				spr.color = Color.blue;
+				randomed = true;
+			} 
+			else if (num == 3) {
+				spr.color = Color.green;
+				randomed = true;
+			} 
+			else {
+				spr.color = Color.gray;
+			}
+		}
+
+		/*if (inCd == true) {
 			currTime += Time.deltaTime;
 			cdText.GetComponent<TextMesh> ().text = currTime.ToString ();;
 			cdText.GetComponent<TextMesh> ().fontSize = 8;
 			spr.color = Color.gray;
-		}
+		}*/
 
 		if (currTime >= setTime) {
 			inCd = false;
+			randomed = false;
 			currTime = 0.0f;
 		}
 
 		if (inCd == true) {
+			currTime += Time.deltaTime;
 			spr.color = Color.gray;
 		}
 	}
 
 	void randomFunction(){
-		sharestat.RandomNum = Random.Range (1, 4);
+		num = Random.Range (1, 4);
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
 			if (inCd == false) {
-				temp = sharestat.RandomNum;
-				randomFunction ();
-				if (sharestat.RandomNum == temp) {
-					randomFunction ();
-				}
+				sharestat.RandomNum = num;
 				if (sharestat.RandomNum == 1) {
 					sharestat.OnFire = true;
 					sharestat.OnIce = false;
 					sharestat.OnLaser = false;
-					spr.color = Color.red;
 				} 
 				else if (sharestat.RandomNum == 2) {
 					sharestat.OnFire = false;
 					sharestat.OnIce = true;
 					sharestat.OnLaser = false;
-					spr.color = Color.blue;
 				} 
 				else if (sharestat.RandomNum == 3) {
 					sharestat.OnFire = false;
 					sharestat.OnIce = false;
 					sharestat.OnLaser = true;
-					spr.color = Color.green;
 				} 
 				else if(sharestat.RandomNum == 0) {
 					sharestat.OnFire = false;
