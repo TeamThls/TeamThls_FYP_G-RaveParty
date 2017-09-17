@@ -31,7 +31,7 @@ public class IceBullet : MonoBehaviour {
 	void Update () 
 	{
 		BulletDirection();
-		line_Ren.widthMultiplier = Mathf.Clamp(iceBullet_Time * 10, 1, 15);
+		line_Ren.widthMultiplier = Mathf.Clamp(iceBullet_Time * 10, 1, 10);
 
 		iceBullet_Time += Time.deltaTime;
 		if(iceBullet_Time > 5.0f)

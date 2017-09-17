@@ -22,10 +22,6 @@ public class ParticleEffectsBehaviours : MonoBehaviour {
 
 	void OnParticleCollision(GameObject col)
 	{
-		if(this.name == "Ice2")
-		{
-			//Debug.Log("YO");
 
-		}
 	}
 }

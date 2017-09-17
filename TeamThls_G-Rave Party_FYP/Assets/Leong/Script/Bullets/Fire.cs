@@ -29,7 +29,6 @@ public class Fire : MonoBehaviour {
 	}
 
 
-
 	void FireParticlesDirection()
 	{
 		ParticleSystem.VelocityOverLifetimeModule fire_Velocity =  fire_ParticleSystem.velocityOverLifetime;

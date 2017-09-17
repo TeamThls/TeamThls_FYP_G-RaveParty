@@ -10,6 +10,7 @@ public class EnemyCollider : MonoBehaviour {
 	[SerializeField] SpriteRenderer spr_Ren;
 	[SerializeField] Animator anim;
 	[SerializeField] ParticleSystem p_BloodOnDeath;
+	[SerializeField] ParticleSystem p_IceBloodOnDeath;
 	[SerializeField] ParticleSystem p_DustOnDeath;
 	[SerializeField] ParticleSystem p_BurnedOnDeath;
 	[SerializeField] ParticleSystem p_Soul;
@@ -76,16 +77,16 @@ public class EnemyCollider : MonoBehaviour {
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Kill);
 
-		var main = p_BloodOnDeath.main;
+		//var main = p_BloodOnDeath.main;
 		if(enemy_CurrentState == enemy_DeathState.Normal)
 		{
-			main.startColor = Color.yellow;
+			//main.startColor = Color.yellow;
 			Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
 		}
 		else if(enemy_CurrentState == enemy_DeathState.Ice)
 		{
-			main.startColor = Color.cyan;
-			Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
+			//main.startColor = Color.cyan;
+			Instantiate(p_IceBloodOnDeath, transform.position, Quaternion.identity);
 		}
 		else if(enemy_CurrentState == enemy_DeathState.Laser)
 		{

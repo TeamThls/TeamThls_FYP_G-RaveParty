@@ -34,12 +34,15 @@ public class SoulAbsorb : MonoBehaviour {
 
 	void OnParticleCollision(GameObject obj)
 	{
-		Destroy(this.gameObject);
+		//Destroy(this.gameObject);
+		p_Soul.Stop();
+		StartCoroutine(Vanish(1.0f));
 	}
 
-	void Vanish()
+	IEnumerator Vanish(float duration)
 	{
-		
+		yield return new WaitForSeconds(duration);
+		Destroy(this.gameObject);
 	}
 }
 
