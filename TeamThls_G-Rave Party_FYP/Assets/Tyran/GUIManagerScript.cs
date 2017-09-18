@@ -66,6 +66,11 @@ public class GUIManagerScript : MonoBehaviour {
 		playerGold.text = sharedstats.player_Gold.ToString();
 		playerScore.text = sharedstats.player_Score.ToString();
 
+
+		if (sharedstats.player_Health <= 0) 
+		{
+			SceneManager.LoadScene("Game Over");
+		}
 		/*if(paused)
 		{
 			PauseUI.enabled = true;
