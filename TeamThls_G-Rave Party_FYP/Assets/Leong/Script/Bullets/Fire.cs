@@ -14,12 +14,14 @@ public class Fire : MonoBehaviour {
 	//[SerializeField] MeshRenderer mesh_Ren;
 	CameraShake cameraShake;
 	ParticleSystem fire_ParticleSystem;
+	//Transform player_Pos;
 
 	// Use this for initialization
 	void Start () 
 	{
 		cameraShake = Camera.main.GetComponent<CameraShake>();
 		fire_ParticleSystem = GetComponent<ParticleSystem>();
+
 	}
 	
 	// Update is called once per frame
@@ -32,30 +34,38 @@ public class Fire : MonoBehaviour {
 	void FireParticlesDirection()
 	{
 		ParticleSystem.VelocityOverLifetimeModule fire_Velocity =  fire_ParticleSystem.velocityOverLifetime;
+		//var speed = fire_ParticleSystem.main.startSpeed;
 
 		if(fire_Direction == Fire_SpawnDirection.Right)
 		{
 			transform.localPosition = new Vector2 (0.9f, 0.6f);
-			fire_Velocity.x = 5.0f;
-			fire_Velocity.y = 0.0f;
+			transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+			//speed = 5.0f;
+			//fire_Velocity.y = 0.0f;
 		}
 		else if(fire_Direction == Fire_SpawnDirection.Left)
 		{
 			transform.localPosition = new Vector2 (-0.9f, 0.6f);
-			fire_Velocity.x = -5.0f;
-			fire_Velocity.y = 0.0f;
+			transform.rotation = Quaternion.Euler(180.0f, 90.0f, 0.0f);
+
+			//speed = -5.0f;
+			//fire_Velocity.y = 0.0f;
 		}
 		else if(fire_Direction == Fire_SpawnDirection.Up)
 		{
 			transform.localPosition = new Vector2 (0.0f, 1.0f);
-			fire_Velocity.x = 0.0f;
-			fire_Velocity.y = 5.0f;
+			transform.rotation = Quaternion.Euler(270.0f, 90.0f, 0.0f);
+
+			//fire_Velocity.x = 0.0f;
+			//fire_Velocity.y = 5.0f;
 		}
 		else
 		{
 			transform.localPosition = new Vector2 (0.0f, -1.0f);
-			fire_Velocity.x = 0.0f;
-			fire_Velocity.y = -5.0f;
+			transform.rotation = Quaternion.Euler(90.0f, 90.0f, 0.0f);
+
+			//fire_Velocity.x = 0.0f;
+			//fire_Velocity.y = -5.0f;
 		}
 
 	}

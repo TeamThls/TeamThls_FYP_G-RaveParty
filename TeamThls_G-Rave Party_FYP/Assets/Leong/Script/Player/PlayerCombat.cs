@@ -106,8 +106,6 @@ public class PlayerCombat : MonoBehaviour {
 			Controller2 ();
 		}
 
-
-
 	}
 
 	void Keyboard1()
@@ -448,9 +446,9 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootFlame()
 	{
-		if (shareStat.OnFire == true) 
+		if (shareStat.OnFire == true && Input.GetKey (KeyCode.K) ) 
 		{
-			if (shareStat.player_Mana >= BaseFireMana && Input.GetKey (KeyCode.K)) 
+			if (shareStat.player_Mana >= BaseFireMana ) 
 			{
 				if (movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false) 
 				{
@@ -470,22 +468,36 @@ public class PlayerCombat : MonoBehaviour {
 				}
 
 				fireDuration += Time.deltaTime;
-				flame_Particles.Play ();
+				flame_Particles.Emit(1);
+				//flame_Particles.
+			}
 
-				if (fireDuration >= 0.5f) 
-				{
-					shareStat.setTime = 0.0f;
-					shareStat.player_Mana -= FireMana;
-					fireDuration = 0;
-				}
-				if (shareStat.player_Mana < FireMana) 
-				{
-					flame_Particles.Stop ();
-				}
-			} 
-			else if (Input.GetKeyUp (KeyCode.K)) 
+			if (fireDuration >= 0.5f) 
+			{
+				shareStat.setTime = 0.0f;
+				shareStat.player_Mana -= FireMana;
+				fireDuration = 0;
+			}
+			if (shareStat.player_Mana < FireMana) 
 			{
 				flame_Particles.Stop ();
+			}
+		}
+
+		else if (shareStat.OnFire == false || Input.GetKeyUp (KeyCode.K)) 
+		{
+			flame_Particles.Stop ();
+		}
+
+	}
+
+	void Flame()
+	{
+		if(Input.GetKeyDown(KeyCode.K))
+		{
+			if(flame_Particles.gameObject.activeInHierarchy != true)
+			{
+				Instantiate(flame_Particles, transform.position, Quaternion.identity);
 			}
 		}
 
