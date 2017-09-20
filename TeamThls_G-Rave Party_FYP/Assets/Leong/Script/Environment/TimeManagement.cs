@@ -26,12 +26,6 @@ public class TimeManagement : MonoBehaviour {
 		}
 	}
 
-	void Update()
-	{
-		
-	}
-
-
 	public void SlowDown(GameObject obj)
 	{
 		if(obj.layer == 10)
