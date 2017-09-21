@@ -5,23 +5,20 @@ using UnityEngine;
 public class DarkRoomEffect : MonoBehaviour {
 
 	[SerializeField] GameObject level_Obj;
-	public List<Light> darkRoom_Light;
+	[SerializeField] GameObject level_Vegetation;
+	[SerializeField] GameObject level_Props;
 	public List<SpriteRenderer> darkRoom_Obj;
 	public Material darkRoom_Mat;
 	public float currentColor_increaseValue;
-	public float currentLight_Range;
-	public int player_Count;
 	public enum darkRoom_State
 	{
 		Activated, Deactivated, Null
 	};
 	public darkRoom_State darkRoom_CurrentState = darkRoom_State.Null;
 	// Use this for initialization
-	void Start () 
-	{
+	void Start () {
 		darkRoom_Mat.color = Color.white;
 		//ListingAllDarkRoomObjects();
-		FindAffectedLights();
 	}
 	
 	// Update is called once per frame
@@ -30,37 +27,17 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(darkRoom_CurrentState == darkRoom_State.Activated && currentColor_increaseValue <= 1.0f)
 		{
 			currentColor_increaseValue += 0.001f;
-			currentLight_Range += 0.002f;
 			DarkenMaterialColor(currentColor_increaseValue);
-			DarkenLights(currentLight_Range);
 		}
 		else if(darkRoom_CurrentState == darkRoom_State.Deactivated && currentColor_increaseValue >= 0.0f)
 		{
 			currentColor_increaseValue -= 0.001f;
-			currentLight_Range -= 0.002f;
 			ResetMaterialColor(currentColor_increaseValue);
-			ResetLights(currentLight_Range);
 		}
 		if(darkRoom_Mat.color == Color.white)
 		{
 			darkRoom_CurrentState = darkRoom_State.Null;
 			currentColor_increaseValue = 0.0f;
-		}
-	}
-
-	public void PlusPlayerCount(GameObject obj)
-	{
-		if(obj.layer == 10)
-		{
-			player_Count ++;
-		}
-	}
-
-	public void ReducePlayerCount(GameObject obj)
-	{
-		if(obj.layer == 10)
-		{
-			player_Count --;
 		}
 	}
 
@@ -80,35 +57,39 @@ public class DarkRoomEffect : MonoBehaviour {
 		}
 	}
 
-	void FindAffectedLights()
+	void ListingAllDarkRoomObjects()
 	{
-		Transform light = GameObject.Find(this.transform.parent.name + " Light").GetComponent<Transform>();
-		foreach(Transform child in light)
+		if(level_Obj == null)
 		{
-			darkRoom_Light.Add(child.GetComponent<Light>());
+			level_Obj = GameObject.Find("Level 9");
 		}
-	}
-
-	void DarkenLights(float value)
-	{
-		if(darkRoom_Light != null)
+		if(level_Vegetation == null)
 		{
-			for(int i = 0; i < darkRoom_Light.Count; i++)
+			level_Vegetation = level_Obj.transform.Find("Vegetation").gameObject;
+		}
+		if(level_Props == null)
+		{
+			level_Props = level_Obj.transform.Find("Props").gameObject;
+		}
+		for(int i = 0; i < level_Obj.transform.childCount; i++)
+		{
+			if(level_Obj.transform.GetChild(i).GetComponent<SpriteRenderer>() != null)
 			{
-				darkRoom_Light[i].range = Mathf.Lerp(40.0f, 0.0f, value);
-				Debug.Log("MinusLightRange");
+				darkRoom_Obj.Add(level_Obj.transform.GetChild(i).GetComponent<SpriteRenderer>());
 			}
 		}
-	}
-
-	void ResetLights(float value)
-	{
-		if(darkRoom_Light != null)
+		for(int j = 0; j < level_Vegetation.transform.childCount; j++)
 		{
-			for(int i = 0; i < darkRoom_Light.Count; i++)
+			if(level_Vegetation.transform.GetChild(j).GetComponent<SpriteRenderer>() != null)
 			{
-				darkRoom_Light[i].range = Mathf.Lerp(40.0f, 0.0f, value);
-				Debug.Log("PlusLightRange");
+				darkRoom_Obj.Add(level_Vegetation.transform.GetChild(j).GetComponent<SpriteRenderer>());
+			}
+		}
+		for(int k = 0; k < level_Props.transform.childCount; k++)
+		{
+			if(level_Props.transform.GetChild(k).GetComponent<SpriteRenderer>() != null)
+			{
+				darkRoom_Obj.Add(level_Props.transform.GetChild(k).GetComponent<SpriteRenderer>());
 			}
 		}
 	}
@@ -118,7 +99,6 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(col.gameObject.layer == 10)
 		{
 			darkRoom_CurrentState = darkRoom_State.Activated;
-			player_Count++;
 		}
 	}
 
@@ -132,14 +112,9 @@ public class DarkRoomEffect : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		if(col.gameObject.layer == 10 && player_Count == 1)
+		if(col.gameObject.layer == 10)
 		{
 			darkRoom_CurrentState = darkRoom_State.Deactivated;
-			player_Count--;
-		}
-		else if(col.gameObject.layer == 10 && player_Count == 2)
-		{
-			player_Count--;
 		}
 	}
 }

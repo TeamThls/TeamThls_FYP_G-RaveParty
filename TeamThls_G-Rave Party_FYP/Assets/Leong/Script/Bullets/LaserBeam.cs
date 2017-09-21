@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class LaserBeam : MonoBehaviour {
 
-	//public LineRenderer line_Ren;
+	public LineRenderer line_Ren;
 	bool line_Ren_Decrease;
 
 	float laser_Speed = 100.0f;
 	float laser_Time;
 
 	public int laser_Damage = 1;
-	ParticleSystem laser_Particles;
+	BoxCollider2D laser_Collider;
 
 	public float laser_Collider_SizeY;
 
@@ -27,22 +27,18 @@ public class LaserBeam : MonoBehaviour {
 	void Start () 
 	{
 		cameraShake = Camera.main.GetComponent<CameraShake>();
-
-		if(laser_Particles == null)
-		{
-			laser_Particles = GetComponent<ParticleSystem>();
-		}
-		//laser_Collider_SizeY = laser_Collider.size.y;
-		//laser_Collider.enabled = false;
+		laser_Collider = GetComponent<BoxCollider2D>();
+		laser_Collider_SizeY = laser_Collider.size.y;
+		laser_Collider.enabled = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		LaserDirection();
-		//laser_Collider.enabled = true;
+		laser_Collider.enabled = true;
 
-		/*line_Ren.SetPosition(0, new Vector3(1, 0, 0));
+		line_Ren.SetPosition(0, new Vector3(1, 0, 0));
 		line_Ren.SetPosition(1, new Vector3(30, 0, 0));
 		laser_Time += Time.deltaTime;
 
@@ -69,7 +65,7 @@ public class LaserBeam : MonoBehaviour {
 		if(laser_Time > 1.2f)
 		{
 			Destroy(this.gameObject);
-		}*/
+		}
 
 	}
 
@@ -78,26 +74,19 @@ public class LaserBeam : MonoBehaviour {
 	{
 		if(laser_Direction == Laser_SpawnDirection.Right)
 		{
-			transform.Translate(Vector2.right * 100.0f * Time.deltaTime, Space.World);
-			transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 		}
 		else if(laser_Direction == Laser_SpawnDirection.Left)
 		{
-			//transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
-			transform.Translate(Vector2.left * 100.0f * Time.deltaTime, Space.World);
-			transform.rotation = Quaternion.Euler(180.0f, 90.0f, 0.0f);
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
 		}
 		else if(laser_Direction == Laser_SpawnDirection.Up)
 		{			
-			//transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
-			transform.Translate(Vector2.up * 100.0f * Time.deltaTime, Space.World);
-			transform.rotation = Quaternion.Euler(270.0f, 90.0f, 0.0f);
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
 		}
 		else if(laser_Direction == Laser_SpawnDirection.Down)
 		{
-			//transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
-			transform.Translate(Vector2.down * 100.0f * Time.deltaTime, Space.World);
-			transform.rotation = Quaternion.Euler(90.0f, 90.0f, 0.0f);
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
 		}
 	}
 
@@ -110,14 +99,6 @@ public class LaserBeam : MonoBehaviour {
 			enemy_Collider.enemy_Health -= laser_Damage;
 			cameraShake.Shake(1.0f, 0.4f);
 		}
-	}
 
-	void OnParticleCollision(GameObject obj)
-	{
-		EnemyCollider enemy_Collider = obj.GetComponent<EnemyCollider>();
-		enemy_Collider.LaserBulletReaction();
-		enemy_Collider.enemy_Health -= laser_Damage;
-		cameraShake.Shake(1.0f, 0.4f);
-		
 	}
 }

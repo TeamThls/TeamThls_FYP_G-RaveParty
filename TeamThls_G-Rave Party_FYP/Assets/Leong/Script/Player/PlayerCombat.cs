@@ -18,7 +18,6 @@ public class PlayerCombat : MonoBehaviour {
 	public GameObject iceBullet_Obj;
 	public ParticleSystem flame_Particles;
 	public ParticleSystem iceCasting_Particles;
-	public ParticleSystem muzzle_Particles;
 	public Transform gun;
 	public Transform gunCenter;
 	public Player_Controller player_Control;
@@ -114,7 +113,7 @@ public class PlayerCombat : MonoBehaviour {
 		if(Input.GetAxis ("SquareK1") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
 			shareStat.setTime = 0.0f;
-			StartCoroutine(ShootBullet(normalBullet_FireRate));
+			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
 		}
 
@@ -123,7 +122,7 @@ public class PlayerCombat : MonoBehaviour {
 			if(Input.GetAxis ("CircleK1") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
 			{
 				shareStat.setTime = 0.0f;
-				StartCoroutine(ShootLaser(laserBullet_FireRate));
+				StartCoroutine(ShootLaser1(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
 		}
@@ -133,7 +132,7 @@ public class PlayerCombat : MonoBehaviour {
 			if (Input.GetAxis ("TriangleK1") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
 			{
 				shareStat.setTime = 0.0f;
-				StartCoroutine(ShootIceBullet(iceBullet_FireRate));
+				StartCoroutine(ShootIceBullet1(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
 		}
@@ -146,7 +145,7 @@ public class PlayerCombat : MonoBehaviour {
 		if(Input.GetAxis ("SquareK2") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
 			shareStat.setTime = 0.0f;
-			StartCoroutine(ShootBullet(normalBullet_FireRate));
+			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
 
 		}
@@ -157,7 +156,7 @@ public class PlayerCombat : MonoBehaviour {
 			{
 				shareStat.setTime = 0.0f;
 
-				StartCoroutine(ShootLaser(laserBullet_FireRate));
+				StartCoroutine(ShootLaser1(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
 		}
@@ -168,7 +167,7 @@ public class PlayerCombat : MonoBehaviour {
 			{
 				shareStat.setTime = 0.0f;
 
-				StartCoroutine(ShootIceBullet(iceBullet_FireRate));
+				StartCoroutine(ShootIceBullet1(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
 		}
@@ -180,7 +179,7 @@ public class PlayerCombat : MonoBehaviour {
 		if(Input.GetAxis ("SquareP1") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
 			shareStat.setTime = 0.0f;
-			StartCoroutine(ShootBullet(normalBullet_FireRate));
+			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
 
 		}
@@ -191,7 +190,7 @@ public class PlayerCombat : MonoBehaviour {
 			{
 				shareStat.setTime = 0.0f;
 
-				StartCoroutine(ShootLaser(laserBullet_FireRate));
+				StartCoroutine(ShootLaser1(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
 		}
@@ -202,7 +201,7 @@ public class PlayerCombat : MonoBehaviour {
 			{
 				shareStat.setTime = 0.0f;
 
-				StartCoroutine(ShootIceBullet(iceBullet_FireRate));
+				StartCoroutine(ShootIceBullet1(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
 		}
@@ -215,7 +214,7 @@ public class PlayerCombat : MonoBehaviour {
 		if(Input.GetAxis ("SquareP2")>0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
 			shareStat.setTime = 0.0f;
-			StartCoroutine(ShootBullet(normalBullet_FireRate));
+			StartCoroutine(ShootBullet1(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
 
 		}
@@ -226,7 +225,7 @@ public class PlayerCombat : MonoBehaviour {
 			{
 				shareStat.setTime = 0.0f;
 
-				StartCoroutine(ShootLaser(laserBullet_FireRate));
+				StartCoroutine(ShootLaser1(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
 		}
@@ -236,7 +235,7 @@ public class PlayerCombat : MonoBehaviour {
 			{
 				shareStat.setTime = 0.0f;
 
-				StartCoroutine(ShootIceBullet(iceBullet_FireRate));
+				StartCoroutine(ShootIceBullet1(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
 		}
@@ -244,39 +243,106 @@ public class PlayerCombat : MonoBehaviour {
 		//ShootFlame();
 	}
 
-	IEnumerator ShootBullet(float duration)
+	/*void ShootBullet()
+	{	
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_MB);
+
+		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Right;
+			Instantiate(bullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, 0.0f), Quaternion.identity);
+		}
+		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Left;
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, 0.0f), Quaternion.identity);
+		}
+		else if(movementScript.player_isUp == true)
+		{
+			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Up;
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, 0.0f), Quaternion.identity);
+		}
+		else if(movementScript.player_isDown == true)
+		{
+			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Down;
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, 0.0f), Quaternion.identity);
+		}
+	}*/
+
+	IEnumerator ShootBullet1(float duration)
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_MB);
 		canShootNormalBullet = false;
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Right;
-			Instantiate(bullet_Obj, new Vector2(gun.position.x + 2.0f, gun.position.y), Quaternion.identity);
-			Instantiate(muzzle_Particles, new Vector2(gun.position.x + 2.0f, gun.position.y), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, 0.0f), Quaternion.identity);
 		}
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Left;
-			Instantiate(bullet_Obj, new Vector2(gun.position.x - 2.0f, gun.position.y), Quaternion.identity);
-			Instantiate(muzzle_Particles, new Vector2(gun.position.x - 2.0f, gun.position.y), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, 0.0f), Quaternion.identity);
 		}
 		else if(movementScript.player_isUp == true)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Up;
-			Instantiate(bullet_Obj, new Vector2(gun.position.x, gun.position.y + 2.0f), Quaternion.identity);
-			Instantiate(muzzle_Particles, new Vector2(gun.position.x, gun.position.y + 2.0f), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y + 1.0f, 0.0f), Quaternion.identity);
 		}
 		else if(movementScript.player_isDown == true)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Down;
-			Instantiate(bullet_Obj, new Vector2(gun.position.x, gun.position.y - 2.0f), Quaternion.identity);
-			Instantiate(muzzle_Particles, new Vector2(gun.position.x, gun.position.y - 2.0f), Quaternion.identity);
+			Instantiate(bullet_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y - 1.0f, 0.0f), Quaternion.identity);
 		}
 		yield return new WaitForSeconds(duration);
 		canShootNormalBullet = true;
+
 	}
 
-	IEnumerator ShootIceBullet(float duration)
+	/*void ShootIceBullet()
+	{
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Ice);
+		isShootingIce = true;
+		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Right;
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
+
+		}
+		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Left;
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 3.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
+		}
+		else if(movementScript.player_isUp == true)
+		{
+			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Up;
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x, gun.position.y + 1.0f, gun.position.z - 1), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
+		}
+		else if(movementScript.player_isDown == true)
+		{
+			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Down;
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x, gun.position.y - 1.0f, gun.position.z - 1), Quaternion.identity);
+			movementScript.enabled = false;
+			movementScript.player_rgBody.velocity = new Vector2(0, 0);
+			movementScript.player_rgBody.gravityScale = 0;
+			StartCoroutine(WaitForIceBullet(iceBullet_CastDelay));
+		}
+	}*/
+
+	IEnumerator ShootIceBullet1(float duration)
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Ice);
 		isShootingIce = true;
@@ -295,7 +361,7 @@ public class PlayerCombat : MonoBehaviour {
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Left;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 2.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 3.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
@@ -323,7 +389,33 @@ public class PlayerCombat : MonoBehaviour {
 		canShootIceBullet = true;
 	}
 
-	IEnumerator ShootLaser(float duration)
+
+	/*void ShootLaser()
+	{
+		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Laser);
+		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Right;
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
+		{
+			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Left;
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+		else if(movementScript.player_isUp == true)
+		{
+			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Up;
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+		else if(movementScript.player_isDown == true)
+		{
+			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Down;
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+		}
+	}*/
+
+	IEnumerator ShootLaser1(float duration)
 	{	
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Laser);
 		canShootLaser = false;
@@ -341,12 +433,12 @@ public class PlayerCombat : MonoBehaviour {
 		else if(movementScript.player_isUp == true)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Up;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
 		else if(movementScript.player_isDown == true)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Down;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
 		yield return new WaitForSeconds(duration);
 		canShootLaser = true;
