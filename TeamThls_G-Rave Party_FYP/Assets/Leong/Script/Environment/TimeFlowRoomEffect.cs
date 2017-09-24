@@ -11,12 +11,18 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 	[SerializeField] float enemyDuration = 15.0f;
 	[SerializeField] float normalDuration = 25.0f;
 
+	Camera cam;
+
 	// Use this for initialization
 	void Start () 
 	{
 		if(time_Script == null)
 		{
 			time_Script = GameObject.Find("TimeManager").GetComponent<TimeManagement>();
+		}
+		if(cam == null)
+		{
+			cam = Camera.main;
 		}
 	}
 	
@@ -40,6 +46,7 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 	{
 		time_Script.ResetTime(col.gameObject);
 		time_Script.ReducePlayerCount(col.gameObject);
+		cam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
 	}
 
 	void SlowMoCountdown()
@@ -52,18 +59,21 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 				if(slowMoEffect_Time <= playerDuration)
 				{
 					time_Script.currentSlowState = TimeManagement.CurrentSlowMoState.Player;
+					cam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = true;
 				}
 				else if(slowMoEffect_Time <= enemyDuration)
 				{
 					time_Script.ResetTime(time_Script.tempPlayer1);
 					time_Script.ResetTime(time_Script.tempPlayer2);
 					time_Script.currentSlowState = TimeManagement.CurrentSlowMoState.Enemy;
+					cam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
 				}
 				else
 				{
 					time_Script.currentSlowState = TimeManagement.CurrentSlowMoState.Normal;
 					time_Script.ResetTime(time_Script.tempPlayer1);
 					time_Script.ResetTime(time_Script.tempPlayer2);
+					cam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
 					if(slowMoEffect_Time >= normalDuration)
 					{
 						slowMoEffect_Time = 0.0f;
