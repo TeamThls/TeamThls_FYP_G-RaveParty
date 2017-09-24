@@ -22,7 +22,7 @@ public class WaypointPathfinding : MonoBehaviour {
 	public float minDist;					// stock the minimum distance from the waypoint;
 	public float distance;					// distance between this enemy with player;
 
-	public Rigidbody2D rgd;
+	Rigidbody2D rgd;
 
 	public GameObject temp = null;			// forget
 	public Waypoint TempWay;				// forget
@@ -39,6 +39,8 @@ public class WaypointPathfinding : MonoBehaviour {
 	public bool enemy_groundCheck = false;	// checking is the enemy on ground or not, to avoid enemy combat enabled while jumping
 	public float setTime = 0.0f;			// next attack cd time
 	public float AttackTime = 0.0f;			// when setTime reach this, enemy will attack player
+
+	public float jump;
 
 	public float a;
 	public float b;
@@ -63,11 +65,6 @@ public class WaypointPathfinding : MonoBehaviour {
 			}
 		}
 
-		flipx = this.gameObject.GetComponent<SpriteRenderer> ().flipX;
-	}
-	
-	// Update is called once per frame
-	void Update () {
 		if (target == null) {
 			a = Vector3.Distance (this.transform.position, Player.transform.position);
 			b = Vector3.Distance (this.transform.position, Player2.transform.position);
@@ -81,6 +78,20 @@ public class WaypointPathfinding : MonoBehaviour {
 		}
 		else {
 			target = GameObject.Find ("Player");
+		}
+
+		flipx = this.gameObject.GetComponent<SpriteRenderer> ().flipX;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		a = Vector3.Distance (this.transform.position, Player.transform.position);
+		b = Vector3.Distance (this.transform.position, Player2.transform.position);
+		if (a >= b) {
+			target = Player;
+		} 
+		else if (b > a) {
+			target = Player2;
 		}
 
 		if (this.transform.position.x < xPos) {
@@ -157,7 +168,7 @@ public class WaypointPathfinding : MonoBehaviour {
 			//stop movement
 			if (this.transform.position == TargetList [num].transform.position) {
 				canMove = false;
-				rgd.gravityScale = 1;
+				//rgd.gravityScale = 1;
 				temp = TargetList [num];			
 			}
 
@@ -197,7 +208,10 @@ public class WaypointPathfinding : MonoBehaviour {
 	// waypoint movement;
 	void Movement(){
 		transform.position = Vector3.MoveTowards(this.transform.position, t_Waypoint.transform.position, 0.05f);
-		rgd.gravityScale = 0;
+		if (t_Waypoint.transform.position.y - this.transform.position.y >= 1.5) {
+			rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
+		}
+		//rgd.gravityScale = 0;
 	}
 
 	// trigger waypoint for add next waypoint

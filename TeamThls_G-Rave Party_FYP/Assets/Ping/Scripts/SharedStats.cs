@@ -91,7 +91,6 @@ public class SharedStats : MonoBehaviour {
 		if (OnFire == true) {
 			abilityDuration += Time.deltaTime;
 			if (abilityDuration >= FireDuration) {
-				Debug.Log ("work");
 				OnFire = false;
 				RandomNum = 0;
 				abilityDuration = 0.0f;
