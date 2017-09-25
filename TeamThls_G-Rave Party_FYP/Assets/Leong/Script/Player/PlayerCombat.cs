@@ -331,22 +331,22 @@ public class PlayerCombat : MonoBehaviour {
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Right;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x + 2.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Left;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 2.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
 		else if(movementScript.player_isUp == true)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Up;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x, gun.position.y + 0.5f, -0.1f), Quaternion.identity);
 		}
 		else if(movementScript.player_isDown == true)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Down;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(laserBeam_Obj, new Vector3(gun.position.x, gun.position.y - 0.5f, -0.1f), Quaternion.identity);
 		}
 		yield return new WaitForSeconds(duration);
 		canShootLaser = true;
