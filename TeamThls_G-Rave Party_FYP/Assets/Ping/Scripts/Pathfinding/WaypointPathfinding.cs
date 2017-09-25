@@ -65,34 +65,14 @@ public class WaypointPathfinding : MonoBehaviour {
 			}
 		}
 
-		if (target == null) {
-			a = Vector3.Distance (this.transform.position, Player.transform.position);
-			b = Vector3.Distance (this.transform.position, Player2.transform.position);
-
-			if (a >= b) {
-				target = Player;
-			} 
-			else if (b > a) {
-				target = Player2;
-			}
-		}
-		else {
-			target = GameObject.Find ("Player");
-		}
+		targetDetection ();
 
 		flipx = this.gameObject.GetComponent<SpriteRenderer> ().flipX;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		a = Vector3.Distance (this.transform.position, Player.transform.position);
-		b = Vector3.Distance (this.transform.position, Player2.transform.position);
-		if (a >= b) {
-			target = Player;
-		} 
-		else if (b > a) {
-			target = Player2;
-		}
+		targetDetection ();
 
 		if (this.transform.position.x < xPos) {
 			flipx = false;
@@ -227,6 +207,17 @@ public class WaypointPathfinding : MonoBehaviour {
 			}
 			canCall = true;
 			counter = 1;
+		}
+	}
+
+	void targetDetection(){
+		a = Vector3.Distance (this.transform.position, Player.transform.position);
+		b = Vector3.Distance (this.transform.position, Player2.transform.position);
+		if (a < b) {
+			target = Player;
+		} 
+		else {
+			target = Player2;
 		}
 	}
 }

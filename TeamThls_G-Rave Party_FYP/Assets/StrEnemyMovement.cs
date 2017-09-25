@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour {
+public class StrEnemyMovement : MonoBehaviour {
 
 	public float maxDuration;
 	public float setTime;
@@ -30,6 +30,9 @@ public class EnemyMovement : MonoBehaviour {
 	public float speed;
 	public float dist;
 
+	public float boostStep;
+	public float boostSpeed;
+
 	public float totalDist;
 	public int counter;
 	public int xPos;
@@ -48,15 +51,16 @@ public class EnemyMovement : MonoBehaviour {
 
 		targetDetection ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		targetDetection ();
 
 		dist = Vector3.Distance (this.gameObject.transform.position, player.transform.position);
 		step = speed * Time.deltaTime;
+		boostStep = boostSpeed * Time.deltaTime;
 
-		newPos = new Vector3(player.transform.position.x, player.transform.position.y + 2, player.transform.position.z);
+		newPos = new Vector3(player.transform.position.x, player.transform.position.y + 1.0f, player.transform.position.z);
 		newPos2 = new Vector3(player.transform.position.x + xPos, player.transform.position.y + yPos, player.transform.position.z);
 		newPos3 = new Vector3(player.transform.position.x - xPos, player.transform.position.y + yPos, player.transform.position.z);
 
@@ -67,7 +71,7 @@ public class EnemyMovement : MonoBehaviour {
 		else if (dist < totalDist) {
 			isAttack = true;
 		}
-		
+
 		if(isAttack == false){
 			transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
 			/*
@@ -88,7 +92,7 @@ public class EnemyMovement : MonoBehaviour {
 			*/
 		}
 		if (isAttack == true && inCd == false && counter == 0) {
-			transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos, boostStep);
 			isDamage = true;
 			if (this.transform.position == newPos && isDamage == true) {
 				counter = 1;
@@ -97,7 +101,7 @@ public class EnemyMovement : MonoBehaviour {
 			}
 		}
 		if (isAttack == true && inCd == false && counter == 1) {
-			transform.position = Vector3.MoveTowards (this.transform.position, newPos2, step);
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos2, boostStep);
 			if (this.transform.position == newPos2) {
 				GetComponentInChildren<SpriteRenderer> ().flipX = true;
 				inCd = true;
@@ -105,7 +109,7 @@ public class EnemyMovement : MonoBehaviour {
 			}
 		}
 		if (isAttack == true && inCd == false && counter == 3) {
-			transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos, boostStep);
 			isDamage = true;
 			if (this.transform.position == newPos && isDamage == true) {
 				counter = 4;
@@ -114,7 +118,7 @@ public class EnemyMovement : MonoBehaviour {
 			}
 		}
 		if (isAttack == true && inCd == false && counter == 4) {
-			transform.position = Vector3.MoveTowards (this.transform.position, newPos3, step);
+			transform.position = Vector3.MoveTowards (this.transform.position, newPos3, boostStep);
 			if (this.transform.position == newPos3) {
 				GetComponentInChildren<SpriteRenderer> ().flipX = false;
 				inCd = true;
