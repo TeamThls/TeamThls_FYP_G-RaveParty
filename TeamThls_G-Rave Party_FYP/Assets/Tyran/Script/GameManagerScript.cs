@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +9,8 @@ public class GameManagerScript : MonoBehaviour
 
 	// Use this for initialization
 
-		
-	
+
+
 	public int numOfSamples = 8192; //Min: 64, Max: 8192
 
 	public AudioSource   aSource;
@@ -31,6 +32,7 @@ public class GameManagerScript : MonoBehaviour
 
 	public int score_singleplayer;
 	public int score_multiplayer;
+
 	void Start ()
 	{
 		SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_PHRASE);
@@ -57,10 +59,10 @@ public class GameManagerScript : MonoBehaviour
 		spawner     = new GameObject[k-1];
 
 		int o = 1;
-			for (int i = 0; i < band.Length; i++) 
-			{
-				band [i] = 0;
-				spawner [i] = GameObject.Instantiate (spawnpoint);
+		for (int i = 0; i < band.Length; i++) 
+		{
+			band [i] = 0;
+			spawner [i] = GameObject.Instantiate (spawnpoint);
 
 			/*spawner [i].transform.position = new Vector3 ((i-7+(i)/3) , -6 + o*3, -5);
 				if (o >= 3) 
@@ -71,7 +73,7 @@ public class GameManagerScript : MonoBehaviour
 				{
 					o++;
 				}*/
-			}
+		}
 		spawner [0].transform.position = new Vector3 (-20 ,0, 0);
 		spawner [0].SetActive (false);
 		spawner [1].transform.position = new Vector3 (-20 ,5, 0);
@@ -91,27 +93,42 @@ public class GameManagerScript : MonoBehaviour
 		spawner [11].transform.position = new Vector3 (10,5, 0);*/
 
 		spawner [3].transform.parent = spawn1.transform;
-		spawner [3].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [3].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [4].transform.parent = spawn2.transform;
-		spawner [4].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [4].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [5].transform.parent = spawn3.transform;
-		spawner [5].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [5].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [6].transform.parent = spawn4.transform;
-		spawner [6].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [6].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [7].transform.parent = spawn5.transform;
-		spawner [7].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [7].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [8].transform.parent = spawn6.transform;
-		spawner [8].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [8].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [9].transform.parent = spawn7.transform;
-		spawner [9].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [9].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [10].transform.parent = spawn8.transform;
-		spawner [10].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [10].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [11].transform.parent = spawn9.transform;
-		spawner [11].transform.localPosition = new Vector3 (0 ,0, 0);
+		spawner [11].transform.localPosition = new Vector3 (0 ,0, -5);
 
-		InvokeRepeating("check", 0.0f, 2.0f); // update at 15 fps
+		InvokeRepeating("check", 0.0f, 4.0f); // update at 15 fps
+		InvokeRepeating("spawncontrol", 0.0f, 1.0f/15.0f);
 
+	}
 
+	private void spawncontrol()
+	{
+		int k = 0;
+		for (int i = 0; i < freqData.Length; i++) 
+		{
+			float d = freqData[i];
+			float b = band[k];
+			band[k] = ( d > b )? d : b;
+			Vector3 tmp = new Vector3 (band [k] * 2, band [k] * 2, band [k] * 2);
+			spawner [k].transform.localScale = tmp;
+			band[k] = 0;
+			k++;
+		}
 	}
 
 	private void check()
@@ -132,12 +149,45 @@ public class GameManagerScript : MonoBehaviour
 			if (i > (crossover-2) )
 			{
 				crossover *= 2;   // frequency crossover point for each band.
-				Vector3 tmp = new Vector3 (band[k]*2,band[k]*2,band[k]*2 /*spawner[k].transform.position.z*/);
-				spawner[k].transform.localScale = tmp;
+
+
+
 				if (band [k]*2 >= 1.7f) 
 				{
 					spawner[k].GetComponent<SpawnBehaviour>().Spawn();
 				}
+				else if (band [11]*2 >= 1.6f && band [11]*2 < 1.7f  ) 
+				{
+					spawner[3].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[4].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[5].GetComponent<SpawnBehaviour>().Spawn();
+				}
+				else if (band [11]*2 >= 1.5f && band [11]*2 < 1.6f  ) 
+				{
+					spawner[6].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[7].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[8].GetComponent<SpawnBehaviour>().Spawn();
+				}
+				else if (band [11]*2 >= 1.4f && band [11]*2 < 1.5f  ) 
+				{
+					spawner[3].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[5].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[7].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[9].GetComponent<SpawnBehaviour>().Spawn();
+				}
+				else if (band [11]*2 > 1.3f && band [11]*2 < 1.4f  ) 
+				{
+					spawner[4].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[6].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[8].GetComponent<SpawnBehaviour>().Spawn();
+					spawner[10].GetComponent<SpawnBehaviour>().Spawn();
+				}
+				else if (band [k]*2 <= 1.3f) 
+				{
+					int r = Random.Range (3, 11);
+					spawner[r].GetComponent<SpawnBehaviour>().Spawn();
+				}
+
 				band[k] = 0;
 				k++;
 
