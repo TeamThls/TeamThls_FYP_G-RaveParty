@@ -32,14 +32,14 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(darkRoom_CurrentState == darkRoom_State.Activated && currentColor_increaseValue <= 1.0f)
 		{
 			currentColor_increaseValue += 0.001f;
-			currentLight_Range += 0.002f;
+			currentLight_Range += 0.001f;
 			DarkenMaterialColor(currentColor_increaseValue);
 			DarkenLights(currentLight_Range);
 		}
 		else if(darkRoom_CurrentState == darkRoom_State.Deactivated && currentColor_increaseValue >= 0.0f)
 		{
 			currentColor_increaseValue -= 0.001f;
-			currentLight_Range += 0.002f;
+			currentLight_Range -= 0.001f;
 			ResetMaterialColor(currentColor_increaseValue);
 			DarkenLights(currentLight_Range);
 		}
@@ -80,7 +80,6 @@ public class DarkRoomEffect : MonoBehaviour {
 		for(int i = 0; i < darkRoom_Light.Count; i++)
 		{
 			darkRoom_Light[i].range = Mathf.Lerp(40.0f, 0.0f, value);
-
 		}
 	}
 
@@ -102,6 +101,10 @@ public class DarkRoomEffect : MonoBehaviour {
 		{
 			darkRoom_CurrentState = darkRoom_State.Activated;
 		}
+		if(col.gameObject.layer == 8)
+		{
+			//col.GetComponent<SpriteRenderer>().color = darkRoom_Mat.color;
+		}
 	}
 
 	void OnTriggerStay2D(Collider2D col)
@@ -109,6 +112,11 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(col.gameObject.layer == 10 && darkRoom_CurrentState == darkRoom_State.Deactivated)
 		{
 			darkRoom_CurrentState = darkRoom_State.Activated;
+		}
+		if(col.gameObject.layer == 8)
+		{
+			col.GetComponent<Renderer>().material = darkRoom_Mat;
+			//Debug.Log(col.GetComponent<SpriteRenderer>().color);
 		}
 	}
 
@@ -118,5 +126,10 @@ public class DarkRoomEffect : MonoBehaviour {
 		{
 			darkRoom_CurrentState = darkRoom_State.Deactivated;
 		}
+		if(col.gameObject.layer == 8)
+		{
+			//col.GetComponent<SpriteRenderer>().color = Color.white;
+		}
 	}
+
 }

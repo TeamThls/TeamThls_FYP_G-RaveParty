@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Keyboard1()
 	{
-		anim.SetBool("IsWalking", player_isWalking);
+		//anim.SetBool("IsWalking", player_isWalking);
 		Vector2 move = Vector2.zero;
 		move.x = Input.GetAxis ("HorizontalK1");
 		move.y = Input.GetAxis ("VerticalK1");
@@ -148,7 +148,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Keyboard2()
 	{
-		anim.SetBool("IsWalking", player_isWalking);
+		//anim.SetBool("IsWalking", player_isWalking);
 		Vector2 move = Vector2.zero;
 		move.x = Input.GetAxis ("HorizontalK2");
 		move.y = Input.GetAxis ("VerticalK2");
@@ -228,7 +228,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Controller1()
 	{
-		anim.SetBool("IsWalking", player_isWalking);
+		//anim.SetBool("IsWalking", player_isWalking);
 		Vector2 move = Vector2.zero;
 		move.x = Input.GetAxis ("HorizontalP1");
 		move.y = Input.GetAxis ("VerticalP1");
@@ -291,7 +291,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Controller2()
 	{
-		anim.SetBool("IsWalking", player_isWalking);
+		//anim.SetBool("IsWalking", player_isWalking);
 		Vector2 move = Vector2.zero;
 		move.x = Input.GetAxis ("HorizontalP2");
 		move.y = Input.GetAxis ("VerticalP2");

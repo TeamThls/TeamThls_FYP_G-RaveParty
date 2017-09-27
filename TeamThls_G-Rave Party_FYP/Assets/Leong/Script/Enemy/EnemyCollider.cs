@@ -16,6 +16,7 @@ public class EnemyCollider : MonoBehaviour {
 	[SerializeField] ParticleSystem p_Soul;
 	Rigidbody2D rgBody;
 	TimeManagement timeManager;
+
 	float death_PauseTimer = 0.0f;
 	public enum enemy_DeathState
 	{
@@ -36,7 +37,7 @@ public class EnemyCollider : MonoBehaviour {
 		{
 			healthDevice = GameObject.Find("P_HealDeviceStand").GetComponent<HealthDeviceHealing>();
 		}
-		
+
 	}
 	
 	// Update is called once per frame
@@ -108,6 +109,7 @@ public class EnemyCollider : MonoBehaviour {
 	public void IceBulletReaction()
 	{
 		anim.Play("EnemyHittedByIce");
+
 		enemy_CurrentState = enemy_DeathState.Ice;
 		StartCoroutine(IceBulletSlow(2.0f));
 	}
@@ -120,6 +122,7 @@ public class EnemyCollider : MonoBehaviour {
 	public void BurnedReaction()
 	{
 		anim.Play("EnemyHittedByFire");
+
 		enemy_CurrentState = enemy_DeathState.Fire;
 	}
 

@@ -68,11 +68,17 @@ public class TimeManagement : MonoBehaviour {
 			{
 				obj.GetComponent<EnemyMovement>().speed = 2.0f;
 
-
 			}
 			else if(obj.GetComponent<EnemyMovement>() == null)
 			{
-				obj.GetComponent<WaypointPathfinding>().speed = 2.0f;
+				if(obj.GetComponent<WaypointPathfinding>() != null)
+				{
+					obj.GetComponent<WaypointPathfinding>().speed = 2.0f;
+				}
+				else
+				{
+					obj.GetComponent<StrEnemyMovement>().speed = 1.5f;
+				}
 
 			}
 		}
@@ -85,7 +91,14 @@ public class TimeManagement : MonoBehaviour {
 			}
 			else if(obj.GetComponent<EnemyMovement>() == null)
 			{
-				obj.GetComponent<WaypointPathfinding>().speed = 4.0f;
+				if(obj.GetComponent<WaypointPathfinding>() != null)
+				{
+					obj.GetComponent<WaypointPathfinding>().speed = 4.0f;
+				}
+				else
+				{
+					obj.GetComponent<StrEnemyMovement>().speed = 3.0f;
+				}
 			}
 		}
 			
@@ -153,7 +166,14 @@ public class TimeManagement : MonoBehaviour {
 			}
 			else
 			{
-				obj.GetComponent<WaypointPathfinding>().speed = 4.0f;
+				if(obj.GetComponent<WaypointPathfinding>() != null)
+				{
+					obj.GetComponent<WaypointPathfinding>().speed = 4.0f;
+				}
+				else
+				{
+					obj.GetComponent<StrEnemyMovement>().speed = 3.0f;
+				}
 			}
 		}	
 
