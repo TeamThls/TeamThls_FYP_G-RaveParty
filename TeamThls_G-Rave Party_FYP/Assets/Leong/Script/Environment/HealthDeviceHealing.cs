@@ -7,6 +7,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 
 	public GameObject healthDevice;
 	ParticleSystem healthDevice_Particles;
+	[SerializeField] ParticleSystem healParticles;
 	public int availableHealth;
 	SpriteRenderer healthDevice_Spr;
 	SharedStats allPlayer_SharedStats;
@@ -42,6 +43,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 					Debug.Log("Heal");
 					availableHealth = 0;
 					healthDevice_Particles.Stop();
+					Instantiate(healParticles, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
 				}
 				else
 				{

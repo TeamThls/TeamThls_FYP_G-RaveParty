@@ -43,34 +43,29 @@ public class EnemyCollider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(enemy_Health <= 0.0f)
+		if(enemy_Health <= 0)
 		{
 			// WIP, a tiny pause when killed an enemy 
-			death_PauseTimer += Time.deltaTime;
-			if(death_PauseTimer < 0.017f)
+			//death_PauseTimer += Time.deltaTime;
+
+			//Time.timeScale = 1.0f;
+			DeathFunction();
+			if(transform.parent != null)
 			{
-				Time.timeScale = 0.015f;
+				Destroy(transform.parent.gameObject);
 			}
 			else
 			{
-				Time.timeScale = 1.0f;
-				DeathFunction();
-				if(transform.parent != null)
-				{
-					Destroy(transform.parent.gameObject);
-				}
-				else
-				{
-					Destroy(this.gameObject);
-				}
-				sharedstats.player_Gold += 100;
-				if(healthDevice.availableHealth < 5)
-				{
-					healthDevice.availableHealth += 1;
-				}
-				//sharedstats.player_Score += 100;
-
+				Destroy(this.gameObject);
 			}
+			sharedstats.player_Gold += 100;
+			if(healthDevice.availableHealth < 5)
+			{
+				healthDevice.availableHealth += 1;
+			}
+			//sharedstats.player_Score += 100;
+
+			
 		}
 	}
 

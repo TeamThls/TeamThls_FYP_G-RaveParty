@@ -114,11 +114,11 @@ public class GameManagerScript : MonoBehaviour
 		spawner [11].transform.localPosition = new Vector3 (0 ,0, -5);
 
 		InvokeRepeating("check", 0.0f, 8.0f); // update at 15 fps
-		InvokeRepeating("spawncontrol", 0.0f, 1.0f/15.0f);
+		//InvokeRepeating("spawncontrol", 0.0f, 1.0f/15.0f);
 
 	}
 
-	private void spawncontrol()
+	/*private void spawncontrol()
 	{
 		int k = 0;
 		for (int i = 0; i < freqData.Length; i++) 
@@ -131,7 +131,7 @@ public class GameManagerScript : MonoBehaviour
 			band[k] = 0;
 			k++;
 		}
-	}
+	}*/
 
 	IEnumerator Wait()
 	{

@@ -17,7 +17,8 @@ public class PlayerCombat : MonoBehaviour {
 	public GameObject laserBeam_Obj;
 	public GameObject iceBullet_Obj;
 	public ParticleSystem flame_Particles;
-	public ParticleSystem iceCasting_Particles;
+	public ParticleSystem iceCasting_CurrentParticles;
+
 	public ParticleSystem muzzle_Particles;
 	public Transform gun;
 	public Transform gunCenter;
@@ -31,6 +32,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	public GameObject GameManager;
 	SharedStats shareStat;
+	BulletUpgrades bulletUpg_Script;
 
 	[SerializeField] float normalBullet_FireRate = 0.3f;
 	[SerializeField] float laserBullet_FireRate = 4.0f;
@@ -79,6 +81,7 @@ public class PlayerCombat : MonoBehaviour {
 		movementScript = GetComponent<PlayerMovement>();
 		GameManager = GameObject.Find ("GameManager");
 		shareStat = GameManager.GetComponent<SharedStats> ();
+		bulletUpg_Script = GetComponent<BulletUpgrades>();
 
 		BulletMana = shareStat.BulletMana;
 		FireMana = shareStat.FireMana;
@@ -284,7 +287,7 @@ public class PlayerCombat : MonoBehaviour {
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Right;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentCastingParticles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
 
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
@@ -295,7 +298,7 @@ public class PlayerCombat : MonoBehaviour {
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Left;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x - 2.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentCastingParticles, new Vector3(gun.position.x - 2.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
@@ -304,7 +307,7 @@ public class PlayerCombat : MonoBehaviour {
 		else if(movementScript.player_isUp == true)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Up;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x, gun.position.y + 1.0f, gun.position.z - 1), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentCastingParticles, new Vector3(gun.position.x, gun.position.y + 1.0f, gun.position.z - 1), Quaternion.identity);
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
@@ -313,7 +316,7 @@ public class PlayerCombat : MonoBehaviour {
 		else if(movementScript.player_isDown == true)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Down;
-			Instantiate(iceCasting_Particles, new Vector3(gun.position.x, gun.position.y - 1.0f, gun.position.z - 1), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentCastingParticles, new Vector3(gun.position.x, gun.position.y - 1.0f, gun.position.z - 1), Quaternion.identity);
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
 			movementScript.player_rgBody.gravityScale = 0;
@@ -376,7 +379,7 @@ public class PlayerCombat : MonoBehaviour {
 				}
 
 				fireDuration += Time.deltaTime;
-				flame_Particles.Emit(1);
+				flame_Particles.Emit(4);
 				//flame_Particles.
 			}
 
