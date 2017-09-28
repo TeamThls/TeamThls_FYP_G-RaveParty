@@ -35,7 +35,8 @@ public class GameManagerScript : MonoBehaviour
 
 	void Start ()
 	{
-		SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_PHRASE);
+		StartCoroutine (Wait ());
+		//SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_PHRASE);
 		freqData = new float[numOfSamples];
 
 		int n  = freqData.Length;
@@ -92,6 +93,7 @@ public class GameManagerScript : MonoBehaviour
 		spawner [10].transform.position = new Vector3 (0 ,5, 0);
 		spawner [11].transform.position = new Vector3 (10,5, 0);*/
 
+
 		spawner [3].transform.parent = spawn1.transform;
 		spawner [3].transform.localPosition = new Vector3 (0 ,0, -5);
 		spawner [4].transform.parent = spawn2.transform;
@@ -111,7 +113,7 @@ public class GameManagerScript : MonoBehaviour
 		spawner [11].transform.parent = spawn9.transform;
 		spawner [11].transform.localPosition = new Vector3 (0 ,0, -5);
 
-		InvokeRepeating("check", 0.0f, 4.0f); // update at 15 fps
+		InvokeRepeating("check", 0.0f, 8.0f); // update at 15 fps
 		InvokeRepeating("spawncontrol", 0.0f, 1.0f/15.0f);
 
 	}
@@ -129,6 +131,13 @@ public class GameManagerScript : MonoBehaviour
 			band[k] = 0;
 			k++;
 		}
+	}
+
+	IEnumerator Wait()
+	{
+		yield return new WaitForSeconds (10.0f);
+		SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_PHRASE);
+
 	}
 
 	private void check()
@@ -160,30 +169,31 @@ public class GameManagerScript : MonoBehaviour
 				{
 					spawner[3].GetComponent<SpawnBehaviour>().Spawn();
 					spawner[4].GetComponent<SpawnBehaviour>().Spawn();
-					spawner[5].GetComponent<SpawnBehaviour>().Spawn();
+					//spawner[5].GetComponent<SpawnBehaviour>().Spawn();
 				}
 				else if (band [11]*2 >= 1.5f && band [11]*2 < 1.6f  ) 
 				{
 					spawner[6].GetComponent<SpawnBehaviour>().Spawn();
 					spawner[7].GetComponent<SpawnBehaviour>().Spawn();
-					spawner[8].GetComponent<SpawnBehaviour>().Spawn();
+					//spawner[8].GetComponent<SpawnBehaviour>().Spawn();
 				}
 				else if (band [11]*2 >= 1.4f && band [11]*2 < 1.5f  ) 
 				{
-					spawner[3].GetComponent<SpawnBehaviour>().Spawn();
+					//spawner[3].GetComponent<SpawnBehaviour>().Spawn();
 					spawner[5].GetComponent<SpawnBehaviour>().Spawn();
-					spawner[7].GetComponent<SpawnBehaviour>().Spawn();
+					//spawner[7].GetComponent<SpawnBehaviour>().Spawn();
 					spawner[9].GetComponent<SpawnBehaviour>().Spawn();
 				}
 				else if (band [11]*2 > 1.3f && band [11]*2 < 1.4f  ) 
 				{
-					spawner[4].GetComponent<SpawnBehaviour>().Spawn();
-					spawner[6].GetComponent<SpawnBehaviour>().Spawn();
+					//spawner[4].GetComponent<SpawnBehaviour>().Spawn();
+					//spawner[6].GetComponent<SpawnBehaviour>().Spawn();
 					spawner[8].GetComponent<SpawnBehaviour>().Spawn();
 					spawner[10].GetComponent<SpawnBehaviour>().Spawn();
 				}
-				else if (band [k]*2 <= 1.3f) 
+				else if (band [k]*2 <= 1.3f && band [11]*2 > 0.9f ) 
 				{
+					//spawner[3].GetComponent<SpawnBehaviour>().Spawn();
 					int r = Random.Range (3, 11);
 					spawner[r].GetComponent<SpawnBehaviour>().Spawn();
 				}
