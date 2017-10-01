@@ -17,7 +17,7 @@ public class EnemyCollider : MonoBehaviour {
 	Rigidbody2D rgBody;
 	TimeManagement timeManager;
 
-	float death_PauseTimer = 0.0f;
+	//float death_PauseTimer = 0.0f;
 	public enum enemy_DeathState
 	{
 		Normal, Ice, Fire, Laser

@@ -9,6 +9,7 @@ public class DarkRoomEffect : MonoBehaviour {
 	public List<SpriteRenderer> darkRoom_Obj;
 	public List<Light> darkRoom_Light;
 	public Material darkRoom_Mat;
+	public Material darkRoom_AltMat;
 	public float currentColor_increaseValue;
 	public float currentLight_Range;
 	public int player_Count;
@@ -48,6 +49,7 @@ public class DarkRoomEffect : MonoBehaviour {
 			darkRoom_CurrentState = darkRoom_State.Null;
 			currentColor_increaseValue = 0.0f;
 		}
+		darkRoom_AltMat.color = darkRoom_Mat.color;
 	}
 
 	void DarkenMaterialColor(float value)
@@ -55,6 +57,7 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(darkRoom_Mat.color != Color.black)
 		{
 			darkRoom_Mat.color = Color.Lerp(Color.white, Color.black, value);
+			//darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
 		}
 	}
 
@@ -63,6 +66,7 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(darkRoom_Mat.color != Color.white)
 		{
 			darkRoom_Mat.color = Color.Lerp(Color.white, Color.black, value);
+			//darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
 		}
 	}
 
