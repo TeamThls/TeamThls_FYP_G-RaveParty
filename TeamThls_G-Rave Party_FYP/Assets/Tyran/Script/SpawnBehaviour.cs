@@ -5,7 +5,10 @@ using UnityEngine;
 public class SpawnBehaviour : MonoBehaviour {
 
 	public bool isSpawning;
-	public GameObject enemy;
+	public GameObject enemy1;
+	public GameObject enemy2;
+	public GameObject enemy3;
+	public int r;
 	//public GameObject zeroObj;
 
 
@@ -24,7 +27,23 @@ public class SpawnBehaviour : MonoBehaviour {
 	public void Spawn()
 	{
 		//InvokeRepeating("actualspawn", 0.0f, 10.0f);
-		Instantiate(enemy, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
+		r = Random.Range (1, 3);
+		if (r == 1)
+		{
+
+			Instantiate (enemy1, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
+		}
+		else if (r == 2)
+		{
+
+			Instantiate (enemy2, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
+		}
+		else if (r == 3)
+		{
+
+			Instantiate (enemy3, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
+		}
+
 	}
 
 
