@@ -18,11 +18,17 @@ public class BulletUpgrades : MonoBehaviour {
 		First, Second, Final	
 	};
 	[SerializeField] IceLevel ice_CurrentLevel;
+
 	public ParticleSystem ice_CurrentCastingParticles;
+	public GameObject ice_CurrentObj;
 
 	[SerializeField] ParticleSystem ice_FirstCastingParticles;
 	[SerializeField] ParticleSystem ice_SecondCastingParticles;
 	[SerializeField] ParticleSystem ice_FinalCastingParticles;
+
+	[SerializeField] GameObject iceBullet_FirstObj;
+	[SerializeField] GameObject iceBullet_SecondObj;
+	[SerializeField] GameObject iceBullet_FinalObj;
 
 	[SerializeField] FireLevel fire_CurrentLevel;
 	[SerializeField] LaserLevel laser_CurrentLevel;
@@ -47,18 +53,44 @@ public class BulletUpgrades : MonoBehaviour {
 
 	void CheckUpgrades()
 	{
-		// Add New Particles in each levels
-		if(ice_CurrentLevel == IceLevel.First)
+		switch(ice_CurrentLevel)
 		{
-			ice_CurrentCastingParticles = ice_FirstCastingParticles;
+			case IceLevel.First:
+				ice_CurrentCastingParticles = ice_FirstCastingParticles;
+				ice_CurrentObj = iceBullet_FirstObj;
+				break;
+			case IceLevel.Second:
+				ice_CurrentCastingParticles = ice_SecondCastingParticles;
+				ice_CurrentObj = iceBullet_SecondObj;
+				break;
+			case IceLevel.Final:
+				ice_CurrentCastingParticles = ice_FinalCastingParticles;
+				ice_CurrentObj = iceBullet_FinalObj;
+				break;
 		}
-		else if(ice_CurrentLevel == IceLevel.Second)
+		switch(fire_CurrentLevel)
 		{
-			ice_CurrentCastingParticles = ice_SecondCastingParticles;
+			case FireLevel.First:
+				
+				break;
+			case FireLevel.Second:
+					
+				break;
+			case FireLevel.Final:
+				
+				break;
 		}
-		else if(ice_CurrentLevel == IceLevel.Final)
+		switch(laser_CurrentLevel)
 		{
-			ice_CurrentCastingParticles = ice_FinalCastingParticles;
+			case LaserLevel.First:
+
+				break;
+			case LaserLevel.Second:
+
+				break;
+			case LaserLevel.Final:
+
+				break;
 		}
 	}
 }

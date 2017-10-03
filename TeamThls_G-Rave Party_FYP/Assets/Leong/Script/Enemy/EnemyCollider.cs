@@ -29,6 +29,7 @@ public class EnemyCollider : MonoBehaviour {
 		rgBody = GetComponent<Rigidbody2D>();
 		sharedstats = GameObject.Find ("GameManager").GetComponent<SharedStats>();
 		anim = GetComponent<Animator>();
+		spr_Ren = GetComponent<SpriteRenderer>();
 		if(timeManager == null)
 		{
 			timeManager = GameObject.Find("TimeManager").GetComponent<TimeManagement>();

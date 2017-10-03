@@ -17,6 +17,8 @@ public class PlayerCombat : MonoBehaviour {
 	public GameObject laserBeam_Obj;
 	public GameObject iceBullet_Obj;
 	public ParticleSystem flame_Particles;
+	public ParticleSystem flame_SecondParticles;
+	public ParticleSystem flame_FinalParticles;
 	public ParticleSystem iceCasting_CurrentParticles;
 
 	public ParticleSystem muzzle_Particles;
@@ -175,7 +177,8 @@ public class PlayerCombat : MonoBehaviour {
 				shareStat.player_Mana -= IceMana;
 			}
 		}
-		//ShootFlame();
+		ShootFlame();
+
 	}
 
 	void Controller1()
@@ -209,8 +212,8 @@ public class PlayerCombat : MonoBehaviour {
 				shareStat.player_Mana -= IceMana;
 			}
 		}
+		ShootFlame();
 
-		//ShootFlame();
 	}
 
 	void Controller2()
@@ -243,8 +246,8 @@ public class PlayerCombat : MonoBehaviour {
 				shareStat.player_Mana -= IceMana;
 			}
 		}
+		ShootFlame();
 
-		//ShootFlame();
 	}
 
 	IEnumerator ShootBullet(float duration)
@@ -380,7 +383,7 @@ public class PlayerCombat : MonoBehaviour {
 
 				fireDuration += Time.deltaTime;
 				flame_Particles.Emit(4);
-				//flame_Particles.
+
 			}
 
 			if (fireDuration >= 0.5f) 
@@ -398,18 +401,6 @@ public class PlayerCombat : MonoBehaviour {
 		else if (shareStat.OnFire == false || Input.GetKeyUp (KeyCode.K)) 
 		{
 			flame_Particles.Stop ();
-		}
-
-	}
-
-	void Flame()
-	{
-		if(Input.GetKeyDown(KeyCode.K))
-		{
-			if(flame_Particles.gameObject.activeInHierarchy != true)
-			{
-				Instantiate(flame_Particles, transform.position, Quaternion.identity);
-			}
 		}
 
 	}
@@ -453,12 +444,10 @@ public class PlayerCombat : MonoBehaviour {
 		if(movementScript.player_SlowMo == true)
 		{
 			movementScript.player_rgBody.gravityScale = 0.8f;
-				
 		}
 		else
 		{
 			movementScript.player_rgBody.gravityScale = 3;
-
 		}
 		movementScript.enabled = true;
 		isShootingIce = false;

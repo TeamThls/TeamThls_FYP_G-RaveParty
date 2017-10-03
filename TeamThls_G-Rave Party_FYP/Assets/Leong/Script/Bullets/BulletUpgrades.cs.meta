@@ -1,10 +1,24 @@
 fileFormatVersion: 2
 guid: ddbcc935174c2f34daa0c71716cc4bb9
-timeCreated: 1506521615
+timeCreated: 1506965781
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ice_CurrentCastingParticles: {instanceID: 0}
+  - ice_CurrentObj: {instanceID: 0}
+  - ice_FirstCastingParticles: {fileID: 198030991442041940, guid: ab8ef2a56afbbb34b83f6ef14a4ef834,
+      type: 2}
+  - ice_SecondCastingParticles: {fileID: 198030991442041940, guid: dd4bd3ee25b2d444180f824817d7a85a,
+      type: 2}
+  - ice_FinalCastingParticles: {fileID: 198171009947537318, guid: 9aa8bcbb7fd636f40bdc1e1b856c528e,
+      type: 2}
+  - iceBullet_FirstObj: {fileID: 1968983370680786, guid: d52fd5f3b8050d840a653903dbe388f5,
+      type: 2}
+  - iceBullet_SecondObj: {fileID: 1556931076470490, guid: ec9de6653bbfae5488044d03f69ea99d,
+      type: 2}
+  - iceBullet_FinalObj: {fileID: 1556931076470490, guid: ec9de6653bbfae5488044d03f69ea99d,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
