@@ -76,28 +76,24 @@ public class LaserBeam : MonoBehaviour {
 	// There's a logic issue with the laser for being default to right
 	void LaserDirection ()
 	{
-		if(laser_Direction == Laser_SpawnDirection.Right)
+		switch(laser_Direction)
 		{
-			transform.Translate(Vector2.right * 100.0f * Time.deltaTime, Space.World);
-			transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
-		}
-		else if(laser_Direction == Laser_SpawnDirection.Left)
-		{
-			//transform.rotation = Quaternion.Euler(0.0f, 0.0f, 180.0f);
-			transform.Translate(Vector2.left * 100.0f * Time.deltaTime, Space.World);
-			transform.rotation = Quaternion.Euler(180.0f, 90.0f, 0.0f);
-		}
-		else if(laser_Direction == Laser_SpawnDirection.Up)
-		{			
-			//transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
-			transform.Translate(Vector2.up * 100.0f * Time.deltaTime, Space.World);
-			transform.rotation = Quaternion.Euler(270.0f, 90.0f, 0.0f);
-		}
-		else if(laser_Direction == Laser_SpawnDirection.Down)
-		{
-			//transform.rotation = Quaternion.Euler(0.0f, 0.0f, 270.0f);
-			transform.Translate(Vector2.down * 100.0f * Time.deltaTime, Space.World);
-			transform.rotation = Quaternion.Euler(90.0f, 90.0f, 0.0f);
+			case Laser_SpawnDirection.Right:
+				transform.Translate(Vector2.right * 100.0f * Time.deltaTime, Space.World);
+				transform.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+				break;
+			case Laser_SpawnDirection.Left:
+				transform.Translate(Vector2.left * 100.0f * Time.deltaTime, Space.World);
+				transform.rotation = Quaternion.Euler(180.0f, 90.0f, 0.0f);
+				break;
+			case Laser_SpawnDirection.Up:
+				transform.Translate(Vector2.up * 100.0f * Time.deltaTime, Space.World);
+				transform.rotation = Quaternion.Euler(270.0f, 90.0f, 0.0f);
+				break;
+			case Laser_SpawnDirection.Down:
+				transform.Translate(Vector2.down * 100.0f * Time.deltaTime, Space.World);
+				transform.rotation = Quaternion.Euler(90.0f, 90.0f, 0.0f);
+				break;
 		}
 	}
 

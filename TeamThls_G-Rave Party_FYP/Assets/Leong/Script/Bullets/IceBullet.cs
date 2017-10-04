@@ -7,7 +7,7 @@ public class IceBullet : MonoBehaviour {
 	[SerializeField] float iceBullet_Speed = 13.0f;
 	[SerializeField] float iceBullet_Time = 0.0f;
 	public float iceBullet_TimeFactor = 1.0f;
-	public int iceBullet_Damage = 30;
+	public int iceBullet_Damage;
 	//public GameObject player;
 	public Movement movementScript;
 	public Transform gun;

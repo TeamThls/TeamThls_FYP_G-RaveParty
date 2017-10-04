@@ -15,11 +15,13 @@ public class PlayerCombat : MonoBehaviour {
 
 	public GameObject bullet_Obj;
 	public GameObject laserBeam_Obj;
-	public GameObject iceBullet_Obj;
+	//public GameObject iceBullet_CurrentObj;
+
 	public ParticleSystem flame_Particles;
 	public ParticleSystem flame_SecondParticles;
 	public ParticleSystem flame_FinalParticles;
-	public ParticleSystem iceCasting_CurrentParticles;
+	//public ParticleSystem iceCasting_CurrentParticles;
+
 
 	public ParticleSystem muzzle_Particles;
 	public Transform gun;
@@ -40,11 +42,6 @@ public class PlayerCombat : MonoBehaviour {
 	[SerializeField] float laserBullet_FireRate = 4.0f;
 	[SerializeField] float iceBullet_FireRate = 2.0f;
 
-	//	Obsolete Variables
-	//[SerializeField] float normalBullet_NextFire = 0.0f;
-	//[SerializeField] float laserBullet_NextFire = 0.0f;
-	//[SerializeField] float iceBullet_NextFire = 0.0f;
-
 	[SerializeField] float iceBullet_CastDelay = 0.5f;
 	public float fireDuration = 0.0f;
 
@@ -54,13 +51,6 @@ public class PlayerCombat : MonoBehaviour {
 	public bool canShootIceBullet = true;
 	public bool canShootLaser = true;
 
-	//float updateTime = 1.0f;
-
-	Vector3 offset;
-	Vector3 objPos;
-	Vector3 pos;
-
-	float angle;
 
 	private IEnumerator coroutine;
 	Bullet bullet;
@@ -68,22 +58,20 @@ public class PlayerCombat : MonoBehaviour {
 	LaserBeam laserBeam;
 	Fire fire;
 
-	ParticleSystem tempPar;
-
 	PlayerMovement movementScript;
 
 	// Use this for initialization
 	void Start () 
 	{
 		//StartCoroutine(Shoot());
+		bulletUpg_Script = GetComponent<BulletUpgrades>();
+		//iceBullet_CurrentObj = bulletUpg_Script.ice_CurrentObj;
 		bullet = bullet_Obj.GetComponent<Bullet>();
-		iceBullet = iceBullet_Obj.GetComponent<IceBullet>();
 		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
 		fire = flame_Particles.GetComponent<Fire>();
 		movementScript = GetComponent<PlayerMovement>();
 		GameManager = GameObject.Find ("GameManager");
 		shareStat = GameManager.GetComponent<SharedStats> ();
-		bulletUpg_Script = GetComponent<BulletUpgrades>();
 
 		BulletMana = shareStat.BulletMana;
 		FireMana = shareStat.FireMana;
@@ -285,6 +273,7 @@ public class PlayerCombat : MonoBehaviour {
 	IEnumerator ShootIceBullet(float duration)
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Ice);
+		iceBullet = bulletUpg_Script.ice_CurrentObj.GetComponent<IceBullet>();
 		isShootingIce = true;
 		canShootIceBullet = false;
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
@@ -424,21 +413,21 @@ public class PlayerCombat : MonoBehaviour {
 		yield return new WaitForSeconds(updateTime);
 		if(iceBullet.bullet_Direction == IceBullet.Bullet_SpawnDirection.Right)
 		{
-			Instantiate(iceBullet_Obj, new Vector3(gun.position.x + 1.0f, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentObj, new Vector3(gun.position.x + 1.0f, gun.position.y, -0.1f), Quaternion.identity);
 		}
 		else if(iceBullet.bullet_Direction == IceBullet.Bullet_SpawnDirection.Left)
 		{
-			Instantiate(iceBullet_Obj, new Vector3(gun.position.x - 3.0f, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentObj, new Vector3(gun.position.x - 3.0f, gun.position.y, -0.1f), Quaternion.identity);
 
 		}
 		else if(iceBullet.bullet_Direction == IceBullet.Bullet_SpawnDirection.Up)
 		{
-			Instantiate(iceBullet_Obj, new Vector3(gun.position.x, gun.position.y + 1.0f, -0.1f), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentObj, new Vector3(gun.position.x, gun.position.y + 1.0f, -0.1f), Quaternion.identity);
 		
 		}
 		else if(iceBullet.bullet_Direction == IceBullet.Bullet_SpawnDirection.Down)
 		{
-			Instantiate(iceBullet_Obj, new Vector3(gun.position.x, gun.position.y - 1.0f, -0.1f), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentObj, new Vector3(gun.position.x, gun.position.y - 1.0f, -0.1f), Quaternion.identity);
 		
 		}
 		if(movementScript.player_SlowMo == true)

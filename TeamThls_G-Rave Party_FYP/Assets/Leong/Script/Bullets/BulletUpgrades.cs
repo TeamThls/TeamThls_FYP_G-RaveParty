@@ -40,6 +40,7 @@ public class BulletUpgrades : MonoBehaviour {
 	{
 		playerCom = this.gameObject.GetComponent<PlayerCombat>();
 		ice_CurrentCastingParticles = ice_FirstCastingParticles;
+		ice_CurrentObj = iceBullet_FirstObj;
 		ice_CurrentLevel = IceLevel.First;
 		fire_CurrentLevel = FireLevel.First;
 		laser_CurrentLevel = LaserLevel.First;
@@ -48,7 +49,7 @@ public class BulletUpgrades : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		CheckUpgrades();
 	}
 
 	void CheckUpgrades()
@@ -58,15 +59,20 @@ public class BulletUpgrades : MonoBehaviour {
 			case IceLevel.First:
 				ice_CurrentCastingParticles = ice_FirstCastingParticles;
 				ice_CurrentObj = iceBullet_FirstObj;
+				playerCom.IceMana = 10;
 				break;
+
 			case IceLevel.Second:
 				ice_CurrentCastingParticles = ice_SecondCastingParticles;
 				ice_CurrentObj = iceBullet_SecondObj;
+				playerCom.IceMana = 5;
 				break;
+
 			case IceLevel.Final:
 				ice_CurrentCastingParticles = ice_FinalCastingParticles;
 				ice_CurrentObj = iceBullet_FinalObj;
 				break;
+
 		}
 		switch(fire_CurrentLevel)
 		{
@@ -74,7 +80,7 @@ public class BulletUpgrades : MonoBehaviour {
 				
 				break;
 			case FireLevel.Second:
-					
+				
 				break;
 			case FireLevel.Final:
 				
@@ -83,10 +89,10 @@ public class BulletUpgrades : MonoBehaviour {
 		switch(laser_CurrentLevel)
 		{
 			case LaserLevel.First:
-
+				
 				break;
 			case LaserLevel.Second:
-
+				
 				break;
 			case LaserLevel.Final:
 
