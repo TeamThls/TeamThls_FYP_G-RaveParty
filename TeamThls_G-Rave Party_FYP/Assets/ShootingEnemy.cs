@@ -37,6 +37,8 @@ public class ShootingEnemy : MonoBehaviour {
 	private float a;
 	private float b;
 
+	public bool changePos;
+
 	// Use this for initialization
 	void Start () {
 		Manager = GameObject.Find ("GameManager");
@@ -49,27 +51,68 @@ public class ShootingEnemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		targetDetection ();
 		step = speed * Time.deltaTime;
-		setTime += Time.deltaTime;
-		if (setTime >= targetTime) {
+
+		if (changePos == false) {
+			targetDetection ();
+			setTime += Time.deltaTime;
+			float distance = Vector3.Distance (this.transform.position, Target.transform.position);
+			if (setTime >= targetTime) {
+				if (attackMode == false) {
+					attackMode = true;
+					setTime = 0.0f;
+				}
+				else if (attackMode == true) {
+					attackMode = false;
+					setTime = 0.0f;
+				}
+			}
 			if (attackMode == false) {
-				attackMode = true;
-				setTime = 0.0f;
+				flyingMode ();
 			}
-			else if (attackMode == true) {
-				attackMode = false;
-				setTime = 0.0f;
+			if (attackMode == true) {
+				shootDuration += Time.deltaTime;
+				if (shootDuration >= maxDuration) {
+					Instantiate (bullet, this.transform.position, Quaternion.identity);
+					shootDuration = 0.0f;
+				}
 			}
+			/*if (distance >= targetDist) {
+				flyingMode ();
+			}
+			else {
+				shootDuration += Time.deltaTime;
+				if (shootDuration >= maxDuration) {
+					Instantiate (bullet, this.transform.position, Quaternion.identity);
+					shootDuration = 0.0f;
+				}
+			}*/
 		}
-		if (attackMode == false) {
-			flyingMode ();
-		}
-		if (attackMode == true) {
-			shootDuration += Time.deltaTime;
-			if (shootDuration >= maxDuration) {
-				Instantiate (bullet, this.transform.position, Quaternion.identity);
-				shootDuration = 0.0f;
+		else {
+			if (this.transform.position.x >= maxX) {
+				Vector3 newPos = new Vector3 (maxX, maxY, 0.0f);
+				transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+				if (this.transform.position.y == maxY) {
+					newPos = new Vector3 (minX, maxY, 0.0f);
+					transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+					if (this.transform.position.x == minX) {
+						changePos = false;
+					}
+				}
+			} 
+			else if (this.transform.position.x <= minX) {
+				Vector3 newPos = new Vector3 (minX, maxY, 0.0f);
+				transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+				if (this.transform.position.y == maxY) {
+					Vector3 newPos2 = new Vector3 (maxX, maxY, 0.0f);
+					transform.position = Vector3.MoveTowards (this.transform.position, newPos2, step);
+					if (this.transform.position.x == maxX) {
+						changePos = false;
+					}
+				}
+			} 
+			else {
+				changePos = false;
 			}
 		}
 	}
@@ -77,26 +120,28 @@ public class ShootingEnemy : MonoBehaviour {
 	void flyingMode()
 	{
 		dist = Vector3.Distance (this.transform.position, Target.transform.position);
-		if (this.transform.position.x >= Target.transform.position.x) {
+		if (this.transform.position.x > Target.transform.position.x) {
 			float posX;
-			if (this.transform.position.x + targetX >= maxX) {
+			if (Target.transform.position.x + targetX > maxX) {
 				posX = maxX;
+				changePos = true;
 			} 
 			else {
-				posX = this.transform.position.x + targetX;
+				posX = Target.transform.position.x + targetX;
 			}
-			newPos = new Vector3 (posX, Target.transform.position.y + 2, this.transform.position.z);
+			newPos = new Vector3 (posX, Target.transform.position.y + 1, this.transform.position.z);
 		}
 		else if (this.transform.position.x < Target.transform.position.x)
 		{
 			float posX;
 			if (Target.transform.position.x - targetX < minX) {
 				posX = minX;
+				changePos = true;
 			} 
 			else {
 				posX = Target.transform.position.x - targetX;
 			}
-			newPos = new Vector3 (posX, Target.transform.position.y + 2, this.transform.position.z);
+			newPos = new Vector3 (posX, Target.transform.position.y + 1, this.transform.position.z);
 		}
 		transform.position = Vector3.MoveTowards (this.transform.position, newPos, step); 
 	}

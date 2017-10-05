@@ -196,7 +196,6 @@ public class WaypointPathfinding : MonoBehaviour {
 
 	// trigger waypoint for add next waypoint
 	void OnTriggerEnter2D(Collider2D other){
-		rgd.gravityScale = 1;
 		TempWay = other.GetComponent<Waypoint> ();
 		counter = 0;
 		N_List = new List<GameObject> ();
