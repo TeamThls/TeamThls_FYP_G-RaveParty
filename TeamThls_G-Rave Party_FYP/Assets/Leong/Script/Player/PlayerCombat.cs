@@ -17,9 +17,7 @@ public class PlayerCombat : MonoBehaviour {
 	public GameObject laserBeam_Obj;
 	//public GameObject iceBullet_CurrentObj;
 
-	public ParticleSystem flame_Particles;
-	public ParticleSystem flame_SecondParticles;
-	public ParticleSystem flame_FinalParticles;
+
 	//public ParticleSystem iceCasting_CurrentParticles;
 
 
@@ -63,12 +61,11 @@ public class PlayerCombat : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		//StartCoroutine(Shoot());
+		
 		bulletUpg_Script = GetComponent<BulletUpgrades>();
-		//iceBullet_CurrentObj = bulletUpg_Script.ice_CurrentObj;
+
 		bullet = bullet_Obj.GetComponent<Bullet>();
 		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
-		fire = flame_Particles.GetComponent<Fire>();
 		movementScript = GetComponent<PlayerMovement>();
 		GameManager = GameObject.Find ("GameManager");
 		shareStat = GameManager.GetComponent<SharedStats> ();
@@ -351,6 +348,7 @@ public class PlayerCombat : MonoBehaviour {
 	{
 		if (shareStat.OnFire == true && Input.GetKey (KeyCode.K) ) 
 		{
+			fire = bulletUpg_Script.fire_CurrentObj.GetComponent<Fire>();
 			if (shareStat.player_Mana >= BaseFireMana ) 
 			{
 				if (movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false) 
@@ -371,7 +369,7 @@ public class PlayerCombat : MonoBehaviour {
 				}
 
 				fireDuration += Time.deltaTime;
-				flame_Particles.Emit(4);
+				bulletUpg_Script.fire_CurrentObj.Emit(2);
 
 			}
 
@@ -383,13 +381,13 @@ public class PlayerCombat : MonoBehaviour {
 			}
 			if (shareStat.player_Mana < FireMana) 
 			{
-				flame_Particles.Stop ();
+				bulletUpg_Script.fire_CurrentObj.Stop ();
 			}
 		}
 
 		else if (shareStat.OnFire == false || Input.GetKeyUp (KeyCode.K)) 
 		{
-			flame_Particles.Stop ();
+			bulletUpg_Script.fire_CurrentObj.Stop ();
 		}
 
 	}

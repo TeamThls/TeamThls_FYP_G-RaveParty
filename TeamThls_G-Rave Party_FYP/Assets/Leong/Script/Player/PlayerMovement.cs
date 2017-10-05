@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 	public bool player_grounded;
 	public bool player_SlowMo;
 
-	Animator anim;
+	//Animator anim;
 	SpriteRenderer player_spriteRen;
 	public Rigidbody2D player_rgBody;
 	GameObject player1, player2;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start () 
 	{
 		player_rgBody = GetComponent<Rigidbody2D>();
-		anim = transform.Find("Sprite").GetComponent<Animator>();
+		//anim = transform.Find("Sprite").GetComponent<Animator>();
 		player_spriteRen = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 		player1 = GameObject.Find("Player");
 		player2 = GameObject.Find("Player2");

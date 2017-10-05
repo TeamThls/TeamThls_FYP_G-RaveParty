@@ -5,10 +5,10 @@ using UnityEngine;
 public class LaserBeam : MonoBehaviour {
 
 	//public LineRenderer line_Ren;
-	bool line_Ren_Decrease;
+	//bool line_Ren_Decrease;
 
-	float laser_Speed = 100.0f;
-	float laser_Time;
+	//float laser_Speed = 100.0f;
+	//float laser_Time;
 
 	public int laser_Damage = 1;
 	ParticleSystem laser_Particles;
@@ -97,7 +97,7 @@ public class LaserBeam : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D col)
+	/*void OnTriggerEnter2D(Collider2D col)
 	{
 		if(col.CompareTag("Enemy"))
 		{
@@ -106,7 +106,7 @@ public class LaserBeam : MonoBehaviour {
 			enemy_Collider.enemy_Health -= laser_Damage;
 			cameraShake.Shake(1.0f, 0.4f);
 		}
-	}
+	}*/
 
 	void OnParticleCollision(GameObject obj)
 	{

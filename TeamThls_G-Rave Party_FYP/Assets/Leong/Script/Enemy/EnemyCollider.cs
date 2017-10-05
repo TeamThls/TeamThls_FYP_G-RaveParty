@@ -7,14 +7,14 @@ public class EnemyCollider : MonoBehaviour {
 	public float enemy_Health;
 	[SerializeField] HealthDeviceHealing healthDevice;
 	public SharedStats sharedstats;
-	[SerializeField] SpriteRenderer spr_Ren;
+	//[SerializeField] SpriteRenderer spr_Ren;
 	[SerializeField] Animator anim;
 	[SerializeField] ParticleSystem p_BloodOnDeath;
 	[SerializeField] ParticleSystem p_IceBloodOnDeath;
 	[SerializeField] ParticleSystem p_DustOnDeath;
 	[SerializeField] ParticleSystem p_BurnedOnDeath;
 	[SerializeField] ParticleSystem p_Soul;
-	Rigidbody2D rgBody;
+	//Rigidbody2D rgBody;
 	TimeManagement timeManager;
 
 	//float death_PauseTimer = 0.0f;
@@ -26,10 +26,10 @@ public class EnemyCollider : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		rgBody = GetComponent<Rigidbody2D>();
+		//rgBody = GetComponent<Rigidbody2D>();
 		sharedstats = GameObject.Find ("GameManager").GetComponent<SharedStats>();
 		anim = GetComponent<Animator>();
-		spr_Ren = GetComponent<SpriteRenderer>();
+		//spr_Ren = GetComponent<SpriteRenderer>();
 		if(timeManager == null)
 		{
 			timeManager = GameObject.Find("TimeManager").GetComponent<TimeManagement>();

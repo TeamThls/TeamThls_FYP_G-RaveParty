@@ -21,14 +21,21 @@ public class BulletUpgrades : MonoBehaviour {
 
 	public ParticleSystem ice_CurrentCastingParticles;
 	public GameObject ice_CurrentObj;
+	public ParticleSystem fire_CurrentObj;
 
 	[SerializeField] ParticleSystem ice_FirstCastingParticles;
 	[SerializeField] ParticleSystem ice_SecondCastingParticles;
 	[SerializeField] ParticleSystem ice_FinalCastingParticles;
 
+	public ParticleSystem fire_FirstObj;
+	public ParticleSystem fire_SecondObj;
+	public ParticleSystem fire_FinalObj;
+
 	[SerializeField] GameObject iceBullet_FirstObj;
 	[SerializeField] GameObject iceBullet_SecondObj;
 	[SerializeField] GameObject iceBullet_FinalObj;
+
+	Fire fire_Script;
 
 	[SerializeField] FireLevel fire_CurrentLevel;
 	[SerializeField] LaserLevel laser_CurrentLevel;
@@ -77,13 +84,21 @@ public class BulletUpgrades : MonoBehaviour {
 		switch(fire_CurrentLevel)
 		{
 			case FireLevel.First:
-				
+				fire_CurrentObj = fire_FirstObj;
+				fire_Script = fire_CurrentObj.GetComponent<Fire>();
+				fire_Script.fire_Damage = 0.1f;
 				break;
+
 			case FireLevel.Second:
-				
+				fire_CurrentObj = fire_SecondObj;
+				fire_Script = fire_CurrentObj.GetComponent<Fire>();
+				fire_Script.fire_Damage = 0.15f;
 				break;
+
 			case FireLevel.Final:
-				
+				fire_CurrentObj = fire_FinalObj;
+				fire_Script = fire_CurrentObj.GetComponent<Fire>();
+				fire_Script.fire_Damage = 0.15f;
 				break;
 		}
 		switch(laser_CurrentLevel)

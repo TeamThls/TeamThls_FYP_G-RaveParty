@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour {
 
-	public float fire_Damage = 0.2f;
+	public float fire_Damage = 0.1f;
 	public enum Fire_SpawnDirection
 	{
 		Up, Down, Left, Right
