@@ -23,6 +23,7 @@ public class DarkRoomEffect : MonoBehaviour {
 	void Start () 
 	{
 		darkRoom_Mat.color = Color.white;
+		darkRoom_AltMat.color = Color.white;
 		//ListingAllDarkRoomObjects();
 		FindAffectedLights();
 	}
@@ -33,40 +34,42 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(darkRoom_CurrentState == darkRoom_State.Activated && currentColor_increaseValue <= 1.0f)
 		{
 			currentColor_increaseValue += 0.001f;
-			currentLight_Range += 0.001f;
+			//currentLight_Range += 0.001f;
 			DarkenMaterialColor(currentColor_increaseValue);
-			DarkenLights(currentLight_Range);
+			//DarkenLights(currentLight_Range);
 		}
 		else if(darkRoom_CurrentState == darkRoom_State.Deactivated && currentColor_increaseValue >= 0.0f)
 		{
 			currentColor_increaseValue -= 0.001f;
-			currentLight_Range -= 0.001f;
+			//currentLight_Range -= 0.001f;
 			ResetMaterialColor(currentColor_increaseValue);
-			DarkenLights(currentLight_Range);
+			//DarkenLights(currentLight_Range);
 		}
-		if(darkRoom_Mat.color == Color.white)
+		if(darkRoom_AltMat.color == Color.white)
 		{
 			darkRoom_CurrentState = darkRoom_State.Null;
 			currentColor_increaseValue = 0.0f;
 		}
-		darkRoom_AltMat.color = darkRoom_Mat.color;
+		darkRoom_Mat.color = new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f);
 	}
 
 	void DarkenMaterialColor(float value)
 	{
-		if(darkRoom_Mat.color != Color.black)
+		if(darkRoom_AltMat.color != Color.black)
 		{
-			darkRoom_Mat.color = Color.Lerp(Color.white, Color.black, value);
+			darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
 			//darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
+			//darkRoom_Mat.color = Color.Lerp(Color.white, new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f), value);
 		}
 	}
 
 	void ResetMaterialColor(float value)
 	{
-		if(darkRoom_Mat.color != Color.white)
+		if(darkRoom_AltMat.color != Color.white)
 		{
-			darkRoom_Mat.color = Color.Lerp(Color.white, Color.black, value);
+			darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
 			//darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
+			//darkRoom_Mat.color = Color.Lerp(Color.white, new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f), value);
 		}
 	}
 

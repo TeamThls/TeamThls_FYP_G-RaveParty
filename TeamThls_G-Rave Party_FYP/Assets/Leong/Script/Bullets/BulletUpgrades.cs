@@ -17,7 +17,7 @@ public class BulletUpgrades : MonoBehaviour {
 	{
 		First, Second, Final	
 	};
-	[SerializeField] IceLevel ice_CurrentLevel;
+	public IceLevel ice_CurrentLevel;
 
 	public ParticleSystem ice_CurrentCastingParticles;
 	public GameObject ice_CurrentObj;
@@ -36,6 +36,7 @@ public class BulletUpgrades : MonoBehaviour {
 	[SerializeField] GameObject iceBullet_FinalObj;
 
 	Fire fire_Script;
+	public IceBullet iceBullet;
 
 	[SerializeField] FireLevel fire_CurrentLevel;
 	[SerializeField] LaserLevel laser_CurrentLevel;
@@ -48,9 +49,13 @@ public class BulletUpgrades : MonoBehaviour {
 		playerCom = this.gameObject.GetComponent<PlayerCombat>();
 		ice_CurrentCastingParticles = ice_FirstCastingParticles;
 		ice_CurrentObj = iceBullet_FirstObj;
-		ice_CurrentLevel = IceLevel.First;
-		fire_CurrentLevel = FireLevel.First;
-		laser_CurrentLevel = LaserLevel.First;
+		//ice_CurrentLevel = IceLevel.First;
+		//fire_CurrentLevel = FireLevel.First;
+		//laser_CurrentLevel = LaserLevel.First;
+		if(iceBullet == null)
+		{
+			iceBullet = ice_CurrentObj.GetComponent<IceBullet>();
+		}
 	}
 	
 	// Update is called once per frame
@@ -66,6 +71,7 @@ public class BulletUpgrades : MonoBehaviour {
 			case IceLevel.First:
 				ice_CurrentCastingParticles = ice_FirstCastingParticles;
 				ice_CurrentObj = iceBullet_FirstObj;
+				iceBullet.currentLevel = 1;
 				playerCom.IceMana = 10;
 				break;
 
@@ -73,11 +79,13 @@ public class BulletUpgrades : MonoBehaviour {
 				ice_CurrentCastingParticles = ice_SecondCastingParticles;
 				ice_CurrentObj = iceBullet_SecondObj;
 				playerCom.IceMana = 5;
+				iceBullet.currentLevel = 2;
 				break;
 
 			case IceLevel.Final:
 				ice_CurrentCastingParticles = ice_FinalCastingParticles;
 				ice_CurrentObj = iceBullet_FinalObj;
+				iceBullet.currentLevel = 3;
 				break;
 
 		}

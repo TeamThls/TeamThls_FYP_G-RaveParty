@@ -187,7 +187,7 @@ public class WaypointPathfinding : MonoBehaviour {
 
 	// waypoint movement;
 	void Movement(){
-		transform.position = Vector3.MoveTowards(this.transform.position, t_Waypoint.transform.position, 0.05f);
+		transform.position = Vector3.MoveTowards(this.transform.position, t_Waypoint.transform.position, step);
 		if (t_Waypoint.transform.position.y - this.transform.position.y >= 1.5) {
 			rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
 		}

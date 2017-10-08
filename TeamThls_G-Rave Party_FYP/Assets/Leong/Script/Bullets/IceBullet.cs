@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IceBullet : MonoBehaviour {
 
+	public int currentLevel;
 	[SerializeField] float iceBullet_Speed = 13.0f;
 	[SerializeField] float iceBullet_Time = 0.0f;
 	public float iceBullet_TimeFactor = 1.0f;
@@ -18,7 +19,7 @@ public class IceBullet : MonoBehaviour {
 	public Bullet_SpawnDirection bullet_Direction;
 
 	//[SerializeField] MeshRenderer mesh_Ren;
-	[SerializeField] LineRenderer line_Ren;
+	//[SerializeField] LineRenderer line_Ren;
 	CameraShake cameraShake;
 
 	// Use this for initialization
@@ -31,7 +32,7 @@ public class IceBullet : MonoBehaviour {
 	void Update () 
 	{
 		BulletDirection();
-		line_Ren.widthMultiplier = Mathf.Clamp(iceBullet_Time * 10, 1, 10);
+		//line_Ren.widthMultiplier = Mathf.Clamp(iceBullet_Time * 10, 1, 10);
 
 		iceBullet_Time += Time.deltaTime;
 		if(iceBullet_Time > 5.0f)
@@ -70,7 +71,14 @@ public class IceBullet : MonoBehaviour {
 		{
 			EnemyCollider enemy_Collider = col.GetComponent<EnemyCollider>();
 			cameraShake.Shake(0.5f, 0.1f);
-			enemy_Collider.IceBulletReaction();
+			if(currentLevel == 3)
+			{
+				enemy_Collider.IceBulletStunReaction();
+			}
+			else
+			{
+				enemy_Collider.IceBulletReaction();
+			}
 			enemy_Collider.enemy_Health -= iceBullet_Damage;
 		}
 	}

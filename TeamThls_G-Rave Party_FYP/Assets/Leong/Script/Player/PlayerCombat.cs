@@ -52,7 +52,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	private IEnumerator coroutine;
 	Bullet bullet;
-	IceBullet iceBullet;
+	public IceBullet iceBullet;
 	LaserBeam laserBeam;
 	Fire fire;
 
@@ -61,9 +61,7 @@ public class PlayerCombat : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		
 		bulletUpg_Script = GetComponent<BulletUpgrades>();
-
 		bullet = bullet_Obj.GetComponent<Bullet>();
 		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
 		movementScript = GetComponent<PlayerMovement>();
@@ -271,6 +269,7 @@ public class PlayerCombat : MonoBehaviour {
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Ice);
 		iceBullet = bulletUpg_Script.ice_CurrentObj.GetComponent<IceBullet>();
+		bulletUpg_Script.iceBullet = iceBullet;
 		isShootingIce = true;
 		canShootIceBullet = false;
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)

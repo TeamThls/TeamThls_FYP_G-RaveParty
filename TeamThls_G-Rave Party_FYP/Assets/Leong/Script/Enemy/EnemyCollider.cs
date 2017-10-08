@@ -110,6 +110,14 @@ public class EnemyCollider : MonoBehaviour {
 		StartCoroutine(IceBulletSlow(2.0f));
 	}
 
+	public void IceBulletStunReaction()
+	{
+		anim.Play("EnemyHittedByIce");
+
+		enemy_CurrentState = enemy_DeathState.Ice;
+		StartCoroutine(IceBulletStun(2.0f));
+	}
+
 	public void LaserBulletReaction()
 	{
 		enemy_CurrentState = enemy_DeathState.Laser;
@@ -140,6 +148,14 @@ public class EnemyCollider : MonoBehaviour {
 			yield return new WaitForSeconds(duration);
 			em.speed = 4.0f;
 		}
+		else if(this.gameObject.GetComponent<StrEnemyMovement>() != null)
+		{
+			StrEnemyMovement em = this.gameObject.GetComponent<StrEnemyMovement>();
+			em.speed = 2.0f;
+
+			yield return new WaitForSeconds(duration);
+			em.speed = 4.0f;
+		}
 		else if(this.gameObject.GetComponent<ShootingEnemy>() != null)
 		{
 			ShootingEnemy se = this.gameObject.GetComponent<ShootingEnemy>();
@@ -148,8 +164,42 @@ public class EnemyCollider : MonoBehaviour {
 			yield return new WaitForSeconds(duration);
 			se.speed = 4.0f;
 		}
+	}
 
+	public IEnumerator IceBulletStun(float duration)
+	{
+		if(this.gameObject.GetComponent<WaypointPathfinding>() != null)
+		{
+			WaypointPathfinding wp = this.gameObject.GetComponent<WaypointPathfinding>();
+			wp.speed = 0.0f;
 
+			yield return new WaitForSeconds(duration);
+			wp.speed = 4.0f;
+		}
+		else if(this.gameObject.GetComponent<EnemyMovement>() != null)
+		{
+			EnemyMovement em = this.gameObject.GetComponent<EnemyMovement>();
+			em.speed = 0.0f;
+
+			yield return new WaitForSeconds(duration);
+			em.speed = 4.0f;
+		}
+		else if(this.gameObject.GetComponent<StrEnemyMovement>() != null)
+		{
+			StrEnemyMovement em = this.gameObject.GetComponent<StrEnemyMovement>();
+			em.speed = 0.0f;
+
+			yield return new WaitForSeconds(duration);
+			em.speed = 4.0f;
+		}
+		else if(this.gameObject.GetComponent<ShootingEnemy>() != null)
+		{
+			ShootingEnemy se = this.gameObject.GetComponent<ShootingEnemy>();
+			se.speed = 0.0f;
+
+			yield return new WaitForSeconds(duration);
+			se.speed = 4.0f;
+		}
 	}
 }
 
