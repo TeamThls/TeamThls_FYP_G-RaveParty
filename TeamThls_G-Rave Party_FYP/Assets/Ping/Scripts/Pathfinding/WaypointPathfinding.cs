@@ -40,7 +40,9 @@ public class WaypointPathfinding : MonoBehaviour {
 	public float setTime = 0.0f;			// next attack cd time
 	public float AttackTime = 0.0f;			// when setTime reach this, enemy will attack player
 
+	public bool canJump;
 	public float jump;
+	public float jumpTime;
 
 	public float a;
 	public float b;
@@ -73,6 +75,13 @@ public class WaypointPathfinding : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		targetDetection ();
+		if (canJump == false) {
+			jumpTime += Time.deltaTime;
+			if (jumpTime >= 1.0f) {
+				canJump = true;
+				jumpTime = 0.0f;
+			}
+		}
 
 		if (this.transform.position.x < xPos) {
 			flipx = false;
@@ -148,7 +157,6 @@ public class WaypointPathfinding : MonoBehaviour {
 			//stop movement
 			if (this.transform.position == TargetList [num].transform.position) {
 				canMove = false;
-				//rgd.gravityScale = 1;
 				temp = TargetList [num];			
 			}
 
@@ -188,10 +196,12 @@ public class WaypointPathfinding : MonoBehaviour {
 	// waypoint movement;
 	void Movement(){
 		transform.position = Vector3.MoveTowards(this.transform.position, t_Waypoint.transform.position, step);
-		if (t_Waypoint.transform.position.y - this.transform.position.y >= 1.5) {
-			rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
+		if (canJump == true) {
+			if (t_Waypoint.transform.position.y - this.transform.position.y >= 2.0) {
+				rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
+				canJump = false;
+			}
 		}
-		//rgd.gravityScale = 0;
 	}
 
 	// trigger waypoint for add next waypoint

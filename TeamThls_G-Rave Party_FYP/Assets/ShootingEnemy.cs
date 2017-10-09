@@ -77,24 +77,14 @@ public class ShootingEnemy : MonoBehaviour {
 					shootDuration = 0.0f;
 				}
 			}
-			/*if (distance >= targetDist) {
-				flyingMode ();
-			}
-			else {
-				shootDuration += Time.deltaTime;
-				if (shootDuration >= maxDuration) {
-					Instantiate (bullet, this.transform.position, Quaternion.identity);
-					shootDuration = 0.0f;
-				}
-			}*/
 		}
 		else {
 			if (this.transform.position.x >= maxX) {
 				Vector3 newPos = new Vector3 (maxX, maxY, 0.0f);
 				transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
-				if (this.transform.position.y == maxY) {
-					newPos = new Vector3 (minX, maxY, 0.0f);
-					transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+				if (this.transform.position == newPos) {
+					Vector3 newPos2 = new Vector3 (minX, maxY, 0.0f);
+					transform.position = Vector3.MoveTowards (this.transform.position, newPos2, step);
 					if (this.transform.position.x == minX) {
 						changePos = false;
 					}
@@ -103,7 +93,7 @@ public class ShootingEnemy : MonoBehaviour {
 			else if (this.transform.position.x <= minX) {
 				Vector3 newPos = new Vector3 (minX, maxY, 0.0f);
 				transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
-				if (this.transform.position.y == maxY) {
+				if (this.transform.position == newPos) {
 					Vector3 newPos2 = new Vector3 (maxX, maxY, 0.0f);
 					transform.position = Vector3.MoveTowards (this.transform.position, newPos2, step);
 					if (this.transform.position.x == maxX) {
