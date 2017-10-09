@@ -18,28 +18,37 @@ public class BulletUpgrades : MonoBehaviour {
 		First, Second, Final	
 	};
 	public IceLevel ice_CurrentLevel;
+	public IceBullet iceBullet;
 
 	public ParticleSystem ice_CurrentCastingParticles;
 	public GameObject ice_CurrentObj;
-	public ParticleSystem fire_CurrentObj;
 
 	[SerializeField] ParticleSystem ice_FirstCastingParticles;
 	[SerializeField] ParticleSystem ice_SecondCastingParticles;
 	[SerializeField] ParticleSystem ice_FinalCastingParticles;
-
-	public ParticleSystem fire_FirstObj;
-	public ParticleSystem fire_SecondObj;
-	public ParticleSystem fire_FinalObj;
 
 	[SerializeField] GameObject iceBullet_FirstObj;
 	[SerializeField] GameObject iceBullet_SecondObj;
 	[SerializeField] GameObject iceBullet_FinalObj;
 
 	Fire fire_Script;
-	public IceBullet iceBullet;
-
 	[SerializeField] FireLevel fire_CurrentLevel;
+
+	[SerializeField] ParticleSystem fire_FirstObj;
+	[SerializeField] ParticleSystem fire_SecondObj;
+	[SerializeField] ParticleSystem fire_FinalObj;
+
+	public ParticleSystem fire_CurrentObj;
+
+	LaserBeam laser_Script;
 	[SerializeField] LaserLevel laser_CurrentLevel;
+
+	[SerializeField] ParticleSystem laser_FirstObj;
+	[SerializeField] ParticleSystem laser_SecondObj;
+	[SerializeField] ParticleSystem laser_FinalObj;
+
+	public ParticleSystem laser_CurrentObj;
+
 
 
 
@@ -112,13 +121,23 @@ public class BulletUpgrades : MonoBehaviour {
 		switch(laser_CurrentLevel)
 		{
 			case LaserLevel.First:
-				
+				laser_CurrentObj = laser_FirstObj;
+				laser_Script = laser_CurrentObj.GetComponent<LaserBeam>();
+				laser_Script.laser_Level = 1;
 				break;
-			case LaserLevel.Second:
-				
-				break;
-			case LaserLevel.Final:
 
+			case LaserLevel.Second:
+				laser_CurrentObj = laser_SecondObj;
+				laser_Script = laser_CurrentObj.GetComponent<LaserBeam>();
+				playerCom.LaserMana = 10;
+				laser_Script.laser_Level = 2;
+				break;
+
+			case LaserLevel.Final:
+				laser_CurrentObj = laser_FinalObj;
+				laser_Script = laser_CurrentObj.GetComponent<LaserBeam>();
+				playerCom.LaserMana = 10;
+				laser_Script.laser_Level = 3;
 				break;
 		}
 	}
