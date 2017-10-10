@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: ddbcc935174c2f34daa0c71716cc4bb9
-timeCreated: 1507038230
+timeCreated: 1507537804
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - iceBullet: {instanceID: 0}
   - ice_CurrentCastingParticles: {instanceID: 0}
   - ice_CurrentObj: {instanceID: 0}
   - ice_FirstCastingParticles: {fileID: 198030991442041940, guid: ab8ef2a56afbbb34b83f6ef14a4ef834,
@@ -19,6 +20,17 @@ MonoImporter:
       type: 2}
   - iceBullet_FinalObj: {fileID: 1021494322759358, guid: 13640be7c92c4234fb248eb37065919a,
       type: 2}
+  - fire_FirstObj: {instanceID: 0}
+  - fire_SecondObj: {instanceID: 0}
+  - fire_FinalObj: {instanceID: 0}
+  - fire_CurrentObj: {instanceID: 0}
+  - laser_FirstObj: {fileID: 198029265013998324, guid: 501b869d0c454944aa9d0bfe4dc7dab8,
+      type: 2}
+  - laser_SecondObj: {fileID: 198876419765531928, guid: 3237e02aa7af79c42925223bfd11e19a,
+      type: 2}
+  - laser_FinalObj: {fileID: 198444797165584204, guid: d1006c919b27f844e9e3db54d14b26c1,
+      type: 2}
+  - laser_CurrentObj: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

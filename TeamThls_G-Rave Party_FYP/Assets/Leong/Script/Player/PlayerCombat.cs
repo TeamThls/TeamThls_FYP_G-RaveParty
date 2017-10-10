@@ -13,13 +13,12 @@ public class PlayerCombat : MonoBehaviour {
 		Controller_2
 	}
 
-	public GameObject bullet_Obj;
-	public GameObject laserBeam_Obj;
+	[SerializeField] GameObject bullet_Obj;
+	[SerializeField] GameObject laserBeam_Obj;
 	//public GameObject iceBullet_CurrentObj;
 
 
 	//public ParticleSystem iceCasting_CurrentParticles;
-
 
 	public ParticleSystem muzzle_Particles;
 	public Transform gun;
@@ -52,9 +51,9 @@ public class PlayerCombat : MonoBehaviour {
 
 	private IEnumerator coroutine;
 	Bullet bullet;
-	public IceBullet iceBullet;
-	LaserBeam laserBeam;
-	Fire fire;
+	[SerializeField] IceBullet iceBullet;
+	[SerializeField] LaserBeam laserBeam;
+	[SerializeField] Fire fire;
 
 	PlayerMovement movementScript;
 
@@ -63,7 +62,7 @@ public class PlayerCombat : MonoBehaviour {
 	{
 		bulletUpg_Script = GetComponent<BulletUpgrades>();
 		bullet = bullet_Obj.GetComponent<Bullet>();
-		laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
+		//laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
 		movementScript = GetComponent<PlayerMovement>();
 		GameManager = GameObject.Find ("GameManager");
 		shareStat = GameManager.GetComponent<SharedStats> ();
@@ -317,27 +316,80 @@ public class PlayerCombat : MonoBehaviour {
 	IEnumerator ShootLaser(float duration)
 	{	
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Laser);
+		laserBeam = bulletUpg_Script.laser_CurrentObj.GetComponent<LaserBeam>();
+
 		canShootLaser = false;
 
+		// Shoot Right Direction
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Right;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x + 2.0f, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x + 4.0f, gun.position.y, -0.1f), Quaternion.identity);
+			// When Level 3, Shoot Three Laser in Northeast, East, Southeast directions
+
+			if(laserBeam.laser_Level == 3)
+			{
+				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Northeast;
+				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x + 4.0f, gun.position.y, -0.1f), Quaternion.identity);
+
+				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Southeast;
+				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x + 4.0f, gun.position.y, -0.1f), Quaternion.identity);
+
+			}
 		}
+		// Shoot left Direction
+
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Left;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x - 2.0f, gun.position.y, -0.1f), Quaternion.identity);
+			Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x - 4.0f, gun.position.y, -0.1f), Quaternion.identity);
+			// When Level 3, Shoot Three Laser in Northwest, West, Southwest directions
+
+			if(laserBeam.laser_Level == 3)
+			{
+				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Northwest;
+				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x - 4.0f, gun.position.y, -0.1f), Quaternion.identity);
+
+				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Southwest;
+				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x - 4.0f, gun.position.y, -0.1f), Quaternion.identity);
+
+			}
 		}
+		// Shoot Up Direction
+
 		else if(movementScript.player_isUp == true)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Up;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x, gun.position.y + 0.5f, -0.1f), Quaternion.identity);
+			Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y + 2.0f, -0.1f), Quaternion.identity);
+			// When Level 3, Shoot Three Laser in Northeast, North, Northwest directions
+
+			if(laserBeam.laser_Level == 3)
+			{
+				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Northeast;
+				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y + 2.0f, -0.1f), Quaternion.identity);
+
+				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Northwest;
+				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y + 2.0f, -0.1f), Quaternion.identity);
+
+			}
 		}
+		// Shoot Down Direction
+
 		else if(movementScript.player_isDown == true)
 		{
 			laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Down;
-			Instantiate(laserBeam_Obj, new Vector3(gun.position.x, gun.position.y - 0.5f, -0.1f), Quaternion.identity);
+			Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y - 2.0f, -0.1f), Quaternion.identity);
+			// When Level 3, Shoot Three Laser in Southeast, South, Southwest directions
+
+			if(laserBeam.laser_Level == 3)
+			{
+				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Southeast;
+				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y - 2.0f, -0.1f), Quaternion.identity);
+
+				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Southwest;
+				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y - 2.0f, -0.1f), Quaternion.identity);
+
+			}
 		}
 		yield return new WaitForSeconds(duration);
 		canShootLaser = true;
