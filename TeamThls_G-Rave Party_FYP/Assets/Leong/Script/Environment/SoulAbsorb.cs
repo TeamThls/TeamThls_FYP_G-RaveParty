@@ -43,7 +43,7 @@ public class SoulAbsorb : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(duration);
 		sharedStats.player_Score += 100;
-		//Destroy(this.gameObject);
+		Destroy(this.gameObject);
 	}
 }
 

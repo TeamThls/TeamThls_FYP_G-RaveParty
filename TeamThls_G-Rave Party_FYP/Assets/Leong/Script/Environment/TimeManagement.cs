@@ -43,7 +43,7 @@ public class TimeManagement : MonoBehaviour {
 				}
 				else
 				{
-					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 0.7f;
+					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 0.6f;
 				}
 
 				obj_pm.player_SlowMo = true;
@@ -142,7 +142,7 @@ public class TimeManagement : MonoBehaviour {
 				if(obj_pc.isShootingIce == false)
 				{
 					obj_pm.player_TimeFactor = 1.0f;
-					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 2.5f;
+					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 2.4f;
 					obj_pm.player_SlowMo = false;	
 				}
 				else

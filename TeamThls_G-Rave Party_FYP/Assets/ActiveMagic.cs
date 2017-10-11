@@ -13,6 +13,7 @@ public class ActiveMagic : MonoBehaviour {
 	public int num = 0;
 	public int temp = 0;
 	public bool randomed;
+	[SerializeField] Tutorial tutorial_Object;
 
 	public GameObject cdText;
 
@@ -23,6 +24,10 @@ public class ActiveMagic : MonoBehaviour {
 		spr = this.GetComponent<SpriteRenderer> ();
 		randomFunction ();
 		cdText = GameObject.Find ("CD text");
+		if(tutorial_Object == null)
+		{
+			tutorial_Object = GameObject.Find("Tutorial").GetComponent<Tutorial>();
+		}
 		//TextMesh cdt = cdText.GetComponent<TextMesh> ();
 	}
 	
@@ -84,9 +89,16 @@ public class ActiveMagic : MonoBehaviour {
 		num = Random.Range (1, 4);
 	}
 
-	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag == "Player") {
-			if (inCd == false) {
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.tag == "Player") 
+		{
+			if(tutorial_Object.magicBook_StartCounting == false)
+			{
+				tutorial_Object.magicBook_StartCounting = true;
+			}
+			if (inCd == false) 
+			{
 				sharestat.RandomNum = num;
 				if (sharestat.RandomNum == 1) {
 					sharestat.OnFire = true;
