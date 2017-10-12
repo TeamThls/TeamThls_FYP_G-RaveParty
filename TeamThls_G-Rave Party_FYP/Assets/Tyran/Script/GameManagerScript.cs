@@ -32,6 +32,7 @@ public class GameManagerScript : MonoBehaviour
 
 	public int score_singleplayer;
 	public int score_multiplayer;
+	public float spawnrate;
 
 	void Start ()
 	{
@@ -113,7 +114,7 @@ public class GameManagerScript : MonoBehaviour
 		spawner [11].transform.parent = spawn9.transform;
 		spawner [11].transform.localPosition = new Vector3 (0 ,0, -5);
 
-		InvokeRepeating("check", 0.0f, 8.0f); // update at 15 fps
+		//InvokeRepeating("check", 0.0f, 8.0f); // update at 15 fps
 		//InvokeRepeating("spawncontrol", 0.0f, 1.0f/15.0f);
 
 	}
@@ -137,7 +138,7 @@ public class GameManagerScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds (10.0f);
 		SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_PHRASE);
-
+		InvokeRepeating("check", 0.0f, spawnrate);
 	}
 
 	private void check()

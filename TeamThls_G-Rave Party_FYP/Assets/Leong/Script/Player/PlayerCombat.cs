@@ -105,27 +105,32 @@ public class PlayerCombat : MonoBehaviour {
 			shareStat.player_Mana -= BulletMana;
 		}
 
-		if(shareStat.OnLaser == true)
+
+		if(Input.GetAxis ("CircleK1") > 0)
 		{
-			if(Input.GetAxis ("CircleK1") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
+			if(shareStat.OnLaser == true && canShootLaser == true && shareStat.player_Mana >= LaserMana)
 			{
 				shareStat.setTime = 0.0f;
 				StartCoroutine(ShootLaser(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
-		}
-	
-		if (shareStat.OnIce == true) 
-		{
-			if (Input.GetAxis ("TriangleK1") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
+			else if (shareStat.OnIce == true && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
 			{
 				shareStat.setTime = 0.0f;
 				StartCoroutine(ShootIceBullet(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
-		}
+			else if (shareStat.OnFire == true) 
+			{
+				shareStat.setTime = 0.0f;
+				ShootFlame();
+				//shareStat.player_Mana -= IceMana;
+			}
 
-		ShootFlame();
+		}
+	
+
+			//if (Input.GetAxis ("TriangleK1") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
 	}
 
 	void Keyboard2()
@@ -138,28 +143,28 @@ public class PlayerCombat : MonoBehaviour {
 
 		}
 
-		if (shareStat.OnLaser == true) 
+		if(Input.GetAxis ("CircleK2") > 0)
 		{
-			if (Input.GetAxis ("CircleK2") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
+			if(shareStat.OnLaser == true && canShootLaser == true && shareStat.player_Mana >= LaserMana)
 			{
 				shareStat.setTime = 0.0f;
-
 				StartCoroutine(ShootLaser(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
-		}
-
-		if (shareStat.OnIce == true) 
-		{
-			if (Input.GetAxis ("TriangleK2") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
+			else if (shareStat.OnIce == true && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
 			{
 				shareStat.setTime = 0.0f;
-
 				StartCoroutine(ShootIceBullet(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
+			else if (shareStat.OnFire == true) 
+			{
+				shareStat.setTime = 0.0f;
+				ShootFlame();
+				//shareStat.player_Mana -= IceMana;
+			}
+
 		}
-		ShootFlame();
 
 	}
 
@@ -173,28 +178,28 @@ public class PlayerCombat : MonoBehaviour {
 
 		}
 
-		if (shareStat.OnLaser == true) 
+		if(Input.GetAxis ("CircleP1") > 0)
 		{
-			if (Input.GetAxis ("CircleP1") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
+			if(shareStat.OnLaser == true && canShootLaser == true && shareStat.player_Mana >= LaserMana)
 			{
 				shareStat.setTime = 0.0f;
-
 				StartCoroutine(ShootLaser(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
-		}
-
-		if (shareStat.OnIce == true) 
-		{
-			if (Input.GetAxis ("TriangleP1") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
+			else if (shareStat.OnIce == true && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
 			{
 				shareStat.setTime = 0.0f;
-
 				StartCoroutine(ShootIceBullet(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
+			else if (shareStat.OnFire == true) 
+			{
+				shareStat.setTime = 0.0f;
+				ShootFlame();
+				//shareStat.player_Mana -= IceMana;
+			}
+
 		}
-		ShootFlame();
 
 	}
 
@@ -208,27 +213,28 @@ public class PlayerCombat : MonoBehaviour {
 
 		}
 
-		if (shareStat.OnLaser == true) 
+		if(Input.GetAxis ("CircleP2") > 0)
 		{
-			if (Input.GetAxis ("CircleP2") > 0 && canShootLaser == true && shareStat.player_Mana >= LaserMana)
+			if(shareStat.OnLaser == true && canShootLaser == true && shareStat.player_Mana >= LaserMana)
 			{
 				shareStat.setTime = 0.0f;
-
 				StartCoroutine(ShootLaser(laserBullet_FireRate));
 				shareStat.player_Mana -= LaserMana;
 			}
-		}
-
-		if (shareStat.OnIce == true) {
-			if (Input.GetAxis ("TriangleP2") > 0 && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
+			else if (shareStat.OnIce == true && canShootIceBullet == true && shareStat.player_Mana >= IceMana) 
 			{
 				shareStat.setTime = 0.0f;
-
 				StartCoroutine(ShootIceBullet(iceBullet_FireRate));
 				shareStat.player_Mana -= IceMana;
 			}
+			else if (shareStat.OnFire == true) 
+			{
+				shareStat.setTime = 0.0f;
+				ShootFlame();
+				//shareStat.player_Mana -= IceMana;
+			}
+
 		}
-		ShootFlame();
 
 	}
 
