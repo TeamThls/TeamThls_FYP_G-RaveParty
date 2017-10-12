@@ -77,7 +77,7 @@ public class WaypointPathfinding : MonoBehaviour {
 		targetDetection ();
 		if (canJump == false) {
 			jumpTime += Time.deltaTime;
-			if (jumpTime >= 1.0f) {
+			if (jumpTime >= 0.6f) {
 				canJump = true;
 				jumpTime = 0.0f;
 			}

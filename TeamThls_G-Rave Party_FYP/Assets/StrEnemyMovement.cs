@@ -12,6 +12,7 @@ public class StrEnemyMovement : MonoBehaviour {
 	public GameObject player1;
 	public GameObject player2;
 	public GameObject GameManager;
+	SpriteRenderer sprite;
 	SharedStats stts;
 
 	public bool multiplayer = true;
@@ -43,6 +44,7 @@ public class StrEnemyMovement : MonoBehaviour {
 	void Start () {
 		GameManager = GameObject.Find ("GameManager");
 		stts = GameManager.GetComponent<SharedStats> ();
+		sprite = this.GetComponent<SpriteRenderer> ();
 
 		player1 = stts.player1;
 		player2 = stts.player2;
@@ -53,6 +55,12 @@ public class StrEnemyMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		targetDetection ();
+		if (player.transform.position.x > this.transform.position.x) {
+			sprite.flipX = true;
+		} 
+		else {
+			sprite.flipX = false;
+		}
 
 		dist = Vector3.Distance (this.gameObject.transform.position, player.transform.position);
 		step = speed * Time.deltaTime;
