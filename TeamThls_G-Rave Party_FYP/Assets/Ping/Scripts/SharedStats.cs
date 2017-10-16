@@ -6,6 +6,7 @@ public class SharedStats : MonoBehaviour {
 
 	public GameObject player1;
 	public GameObject player2;
+	public GameObject UpgradeMenu;
 
 	public float player_Health;
 	public float player_MaxHealth;
@@ -84,11 +85,14 @@ public class SharedStats : MonoBehaviour {
 	public int RandomNum;
 
 	public bool levelPassed;
+	public float endDuration;
 
 	// Use this for initialization
 	void Awake() {
 		player1 = GameObject.Find ("Player");
 		player2 = GameObject.Find ("Player2");
+		UpgradeMenu = GameObject.Find ("UpgradeMenu");
+		UpgradeMenu.SetActive (false);
 
 		if (player2 == null) {
 			player2 = GameObject.Find ("Player");
@@ -206,6 +210,16 @@ public class SharedStats : MonoBehaviour {
 		if (setTime >= maxDuration) {
 			player_Mana += ManaReg;
 			setTime = maxDuration - 0.5f;
+		}
+
+		if (levelPassed == true) {
+			endDuration += Time.deltaTime;
+			UpgradeMenu.SetActive (true);
+			if (endDuration >= 15.0f) {
+				SceneManager.LoadScene (7);
+				levelPassed = false;
+				endDuration = 0.0f;
+			}
 		}
 	}
 

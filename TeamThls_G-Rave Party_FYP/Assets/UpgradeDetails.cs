@@ -75,6 +75,10 @@ public class UpgradeDetails : MonoBehaviour {
 			"\nLaser Damage : " + shrd.Laser_Damage +
 			"\nLaser Mana : " + shrd.LaserMana;
 
+		if (selected == true) {
+			shrd.endDuration += 15.0f;
+		}
+
 		if (stage == 1) {
 			// selection upgrade 1
 			if (num == 1) {
