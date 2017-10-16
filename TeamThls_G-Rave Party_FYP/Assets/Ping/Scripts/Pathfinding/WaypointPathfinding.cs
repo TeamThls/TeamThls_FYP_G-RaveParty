@@ -25,6 +25,7 @@ public class WaypointPathfinding : MonoBehaviour {
 	Rigidbody2D rgd;
 
 	public GameObject temp = null;			// forget
+	public GameObject temp2;
 	public Waypoint TempWay;				// forget
 
 	public float speed;						// Speed while in movement
@@ -47,12 +48,17 @@ public class WaypointPathfinding : MonoBehaviour {
 	public float a;
 	public float b;
 
+	public float stopDuration;
+	public bool changeDetect;
+
+	WaypointManager WayManager;
+
 	// Use this for initialization
 	void Start () {
 		rgd = GetComponent<Rigidbody2D> ();
 		Manager = GameObject.Find ("WaypointMap");
 		GameManager = GameObject.Find ("GameManager");
-		WaypointManager WayManager = Manager.GetComponent<WaypointManager> ();
+		WayManager = Manager.GetComponent<WaypointManager> ();
 		//t_Waypoint = TargetList [0];
 		shareStat = GameManager.GetComponent<SharedStats> ();
 
@@ -84,6 +90,20 @@ public class WaypointPathfinding : MonoBehaviour {
 				canJump = true;
 				jumpTime = 0.0f;
 			}
+		}
+
+		if (stopDuration >= 3.0f) {
+			changeDetect = true;
+		}
+
+		if (changeDetect == true) {
+			for(int i = 0 ; i < WayManager.childList.Count(); i++){
+				t_Waypoint = WayManager.childList [i];
+				if (WayManager.childList [i].GetComponent<Waypoint> ().W_Dist < t_Waypoint.GetComponent<Waypoint> ().W_Dist) {
+					t_Waypoint = WayManager.childList [i];
+				}
+			}
+			changeDetect = false;
 		}
 
 		if (this.transform.position.x < xPos) {
@@ -176,8 +196,12 @@ public class WaypointPathfinding : MonoBehaviour {
 			if (canCall == false && counter == 2) {
 				minDist = N_List [0].GetComponent<Waypoint> ().totalDist;
 				t_Waypoint = N_List [0];
+				stopDuration = 0.0f;
 				for (int i = 0; i < N_List.Count (); i++) {
 					if (N_List [i].GetComponent<Waypoint> ().totalDist < t_Waypoint.GetComponent<Waypoint> ().totalDist) {
+						if (N_List [i] == temp) {
+							N_List.Remove (N_List [i]);
+						}
 						t_Waypoint = N_List [i];
 					}
 				}
@@ -199,6 +223,7 @@ public class WaypointPathfinding : MonoBehaviour {
 	// waypoint movement;
 	void Movement(){
 		transform.position = Vector3.MoveTowards(this.transform.position, t_Waypoint.transform.position, step);
+		stopDuration += Time.deltaTime;
 		//if (canJump == true) {
 			if (t_Waypoint.transform.position.y - this.transform.position.y >= 2.0) {
 				rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
