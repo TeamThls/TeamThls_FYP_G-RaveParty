@@ -46,8 +46,11 @@ public class StrEnemyMovement : MonoBehaviour {
 		stts = GameManager.GetComponent<SharedStats> ();
 		sprite = this.GetComponent<SpriteRenderer> ();
 
-		player1 = stts.player1;
-		player2 = stts.player2;
+		player1 = GameObject.Find ("Player");
+		player2 = GameObject.Find ("Player2");
+		if (player2 == null) {
+			player2 = player;
+		}
 
 		targetDetection ();
 	}

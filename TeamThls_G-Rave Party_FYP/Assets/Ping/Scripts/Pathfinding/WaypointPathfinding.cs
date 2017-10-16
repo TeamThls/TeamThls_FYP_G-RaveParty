@@ -56,8 +56,11 @@ public class WaypointPathfinding : MonoBehaviour {
 		//t_Waypoint = TargetList [0];
 		shareStat = GameManager.GetComponent<SharedStats> ();
 
-		Player = shareStat.player1;
-		Player2 = shareStat.player2;
+		Player = GameObject.Find ("Player");
+		Player2 = GameObject.Find ("Player2");
+		if (Player2 == null) {
+			Player2 = Player;
+		}
 
 		// get the nearest waypoint to move when spawned
 		for(int i = 0 ; i < WayManager.childList.Count(); i++){
