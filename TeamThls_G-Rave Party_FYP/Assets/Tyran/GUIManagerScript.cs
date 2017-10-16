@@ -46,6 +46,13 @@ public class GUIManagerScript : MonoBehaviour {
 	//public Canvas PauseUI;
 	private string scene;
 
+	public Transform UpgradeMenu;
+
+	void Awake(){
+		UpgradeMenu = this.transform.GetChild (7);
+		UpgradeMenu.gameObject.SetActive (false);
+	}
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -66,6 +73,10 @@ public class GUIManagerScript : MonoBehaviour {
 		playerGold.text = sharedstats.player_Gold.ToString();
 		playerScore.text = sharedstats.player_Score.ToString();
 
+
+		if (sharedstats.levelPassed == true) {
+			UpgradeMenu.gameObject.SetActive (true);
+		}
 
 		
 		/*if(paused)
