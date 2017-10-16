@@ -70,8 +70,8 @@ public class GUIManagerScript : MonoBehaviour {
 		//Debug.Log (playerMana.fillAmount);
 		//Debug.Log (sharedstats.player_Mana);
 
-		playerGold.text = sharedstats.player_Gold.ToString();
-		playerScore.text = sharedstats.player_Score.ToString();
+		//playerGold.text = sharedstats.player_Gold.ToString();
+		playerScore.text = "Score: " + sharedstats.player_Score.ToString();
 
 
 		if (sharedstats.levelPassed == true) {

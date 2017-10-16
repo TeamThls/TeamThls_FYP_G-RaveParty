@@ -403,7 +403,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	void ShootFlame()
 	{
-		if (shareStat.OnFire == true && Input.GetKey (KeyCode.K) ) 
+		if (shareStat.OnFire == true )//&& Input.GetKey (KeyCode.K) ) 
 		{
 			fire = bulletUpg_Script.fire_CurrentObj.GetComponent<Fire>();
 			if (shareStat.player_Mana >= BaseFireMana ) 
