@@ -11,7 +11,7 @@ public class GameOverManager : MonoBehaviour {
 	public Text playerGold;
 	public Text playerScore;
 	private string scene;
-
+	public Text playerWin;
 	// Use this for initialization
 	void Start () 
 	{
@@ -22,7 +22,18 @@ public class GameOverManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		sharedstats.Reset ();
+
 		playerScore.text = sharedstats.player_Score.ToString();
+		if (sharedstats.levelPassed) 
+		{
+			playerWin.enabled = true;
+		}
+		else if (!sharedstats.levelPassed) 
+		{
+			playerWin.enabled = false;
+		}
+
 	}
 
 	public void ChangeScene (string sceneName)
@@ -30,10 +41,12 @@ public class GameOverManager : MonoBehaviour {
 		//SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_BUTTONPRESSED1);
 		scene = sceneName;
 		Invoke ("ChangeSceneDelay",1.0f);
+
 	}
 
 	void ChangeSceneDelay ()
 	{
+		sharedstats.levelPassed = false;
 		SceneManager.LoadScene (scene);
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class SharedStats : MonoBehaviour {
 
 	public GameObject player1;
@@ -43,7 +43,47 @@ public class SharedStats : MonoBehaviour {
 
 	public int FireRange;
 
+	//reset values
+	public float resetplayer_Health;
+	public float resetplayer_MaxHealth;
+
+	public float resetplayer_Mana;
+	public float resetplayer_MaxMana;
+
+	public int resetplayer_Gold = 0;
+	public int resetplayer_Score = 0;
+
+	public int resetBullet_Damage;
+	public int resetFire_Damage;
+	public int resetIce_Damage;
+	public int resetLaser_Damage;
+
+	public float resetsetTime;
+	public float resetmaxDuration;
+	public int resetManaReg;
+
+	public bool resetOnFire;
+	public bool resetOnIce;
+	public bool resetOnLaser;
+
+	public int resetBulletMana;
+	public int resetFireMana;
+	public int resetBaseFireMana;
+	public int resetLaserMana;
+	public int resetIceMana;
+
+	public float resetFireDuration;
+	public float resetLaserDuration;
+	public float resetIceDuration;
+
+	public float resetabilityDuration;
+
+	public int resetFireRange;
+
+
 	public int RandomNum;
+
+	public bool levelPassed;
 
 	// Use this for initialization
 	void Awake() {
@@ -53,9 +93,47 @@ public class SharedStats : MonoBehaviour {
 		if (player2 == null) {
 			player2 = GameObject.Find ("Player");
 		}
+
+		resetplayer_Health = GlobalControl.Instance.p_Health ;
+		resetplayer_MaxHealth = GlobalControl.Instance.p_MaxHealth;
+
+		resetplayer_Mana = GlobalControl.Instance.p_Mana;
+		resetplayer_MaxMana = GlobalControl.Instance.p_MaxMana;
+		resetManaReg = GlobalControl.Instance.Mana_Reg;
+
+		resetplayer_Gold = GlobalControl.Instance.p_Gold;
+		resetplayer_Score = GlobalControl.Instance.p_Score;
+
+		resetBullet_Damage = GlobalControl.Instance.B_Damage;
+		resetFire_Damage = GlobalControl.Instance.F_Damage;
+		resetIce_Damage = GlobalControl.Instance.I_Damage;
+		resetLaser_Damage = GlobalControl.Instance.L_Damage;
+
+		resetBulletMana = GlobalControl.Instance.B_Mana;
+		resetFireMana = GlobalControl.Instance.F_Mana;
+		resetBaseFireMana = GlobalControl.Instance.Base_Mana;
+		resetLaserMana = GlobalControl.Instance.L_Mana;
+		resetIceMana = GlobalControl.Instance.I_Mana;
+
+		resetFireDuration = GlobalControl.Instance.F_Duration;
+		resetLaserDuration = GlobalControl.Instance.L_Duration;
+		resetIceDuration = GlobalControl.Instance.I_Duration;
+		resetabilityDuration = GlobalControl.Instance.ablty_Duration;
 	}
 
-	void Start () {
+	//void Start () {
+
+	void OnEnable()
+	{
+			SceneManager.sceneLoaded += OnSceneLoaded;
+	}
+	void OnDisable()
+	{
+			SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	void OnSceneLoaded(Scene Scene,LoadSceneMode mode)
+	{
 		player_Health = GlobalControl.Instance.p_Health ;
 		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
 
@@ -81,6 +159,8 @@ public class SharedStats : MonoBehaviour {
 		LaserDuration = GlobalControl.Instance.L_Duration;
 		IceDuration = GlobalControl.Instance.I_Duration;
 		abilityDuration = GlobalControl.Instance.ablty_Duration;
+
+		//Reset ();
 	}
 	
 	// Update is called once per frame
@@ -155,5 +235,34 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.L_Duration = LaserDuration;
 		GlobalControl.Instance.I_Duration = IceDuration;
 		GlobalControl.Instance.ablty_Duration = abilityDuration;
+	}
+
+	public void Reset()
+	{
+		GlobalControl.Instance.p_Health = resetplayer_Health;
+		GlobalControl.Instance.p_MaxHealth = resetplayer_MaxHealth;
+
+		GlobalControl.Instance.p_Mana = resetplayer_Mana;
+		GlobalControl.Instance.p_MaxMana = resetplayer_MaxMana;
+		GlobalControl.Instance.Mana_Reg = resetManaReg;
+
+		GlobalControl.Instance.p_Gold = resetplayer_Gold;
+		GlobalControl.Instance.p_Score = resetplayer_Score;
+
+		GlobalControl.Instance.B_Damage = resetBullet_Damage;
+		GlobalControl.Instance.F_Damage = resetFire_Damage;
+		GlobalControl.Instance.I_Damage = resetIce_Damage;
+		GlobalControl.Instance.L_Damage = resetLaser_Damage;
+
+		GlobalControl.Instance.B_Mana = resetBulletMana;
+		GlobalControl.Instance.F_Mana = resetFireMana;
+		GlobalControl.Instance.Base_Mana = resetBaseFireMana;
+		GlobalControl.Instance.L_Mana = resetLaserMana;
+		GlobalControl.Instance.I_Mana = resetIceMana;
+
+		GlobalControl.Instance.F_Duration = resetFireDuration;
+		GlobalControl.Instance.L_Duration = resetLaserDuration;
+		GlobalControl.Instance.I_Duration = resetIceDuration;
+		GlobalControl.Instance.ablty_Duration = resetabilityDuration;
 	}
 }

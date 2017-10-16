@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour 
 {
@@ -34,8 +35,26 @@ public class GameManagerScript : MonoBehaviour
 	public int score_multiplayer;
 	public float spawnrate;
 
-	void Start ()
+	public GameObject GamaManager;
+	public SharedStats sharedstats;
+	void Start()
 	{
+		
+	}
+	void OnEnable()
+	{
+		SceneManager.sceneLoaded += OnSceneLoaded;
+	}
+	void OnDisable()
+	{
+		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	void OnSceneLoaded(Scene Scene,LoadSceneMode mode)
+	{
+		GamaManager = GameObject.Find ("GameManager");
+		sharedstats = GamaManager.GetComponent<SharedStats> ();
+		aSource = GameObject.Find ("BGMAudioSource").GetComponent<AudioSource>();
 		StartCoroutine (Wait ());
 		//SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_PHRASE);
 		freqData = new float[numOfSamples];
@@ -139,10 +158,24 @@ public class GameManagerScript : MonoBehaviour
 		yield return new WaitForSeconds (10.0f);
 		SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_PHRASE);
 		InvokeRepeating("check", 0.0f, spawnrate);
+		InvokeRepeating("deathcheck", 0.0f, 1.0f);
+	}
+	private void deathcheck()
+	{
+		if (SoundManagerScript.Instance.CheckBGM()) 
+		{
+			sharedstats.levelPassed = true;
+			SceneManager.LoadScene("Game Over");
+		}
+		if (sharedstats.player_Health <= 0) 
+		{
+			SceneManager.LoadScene("Game Over");
+		}
 	}
 
 	private void check()
 	{
+		
 		aSource.GetOutputData(freqData, 0/*, FFTWindow.Rectangular*/);
 
 		int k = 0;

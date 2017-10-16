@@ -109,6 +109,19 @@ public class SoundManagerScript : MonoBehaviour
 		bgmAudioSource.Play();
 	}
 
+	public bool CheckBGM()
+	{
+		if (!bgmAudioSource.isPlaying) 
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+			
+	}
+	
 	public void PauseBGM()
 	{
 		if(bgmAudioSource.isPlaying)
