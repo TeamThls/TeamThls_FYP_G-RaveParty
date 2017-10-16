@@ -7,7 +7,9 @@ public class Compass : MonoBehaviour {
 
 	public Transform magicBook, healthStation, cameraTransform;
 	[SerializeField] RectTransform magicBookArrow_UITransform, healthStation_UITransform;
-
+	[SerializeField] ActiveMagic magic_Script;
+	[SerializeField] HealthDeviceHealing health_Script;
+	[SerializeField] Image magicSpr, healthSpr;
 
 	void Start () 
 	{
@@ -28,14 +30,34 @@ public class Compass : MonoBehaviour {
 		{
 			healthStation_UITransform = GameObject.Find ("HealthArrow").GetComponent<RectTransform>();
 		}
+		magic_Script = magicBook.GetComponent<ActiveMagic>();
+		health_Script = GameObject.Find ("P_HealDeviceStand").GetComponent<HealthDeviceHealing>();
+		magicSpr = transform.GetChild(0).GetComponent<Image>();
+		healthSpr = transform.GetChild(1).GetComponent<Image>();
 	}
 
-	void FixedUpdate () 
+	void Update () 
 	{
-		RotateCompass(magicBook, magicBookArrow_UITransform);
-		RotateCompass(healthStation, healthStation_UITransform);
+		if(magic_Script.inCd == false)
+		{
+			EnableCompass(magicBookArrow_UITransform, magicSpr);
+			RotateCompass(magicBook, magicBookArrow_UITransform);
+		}
+		else
+		{
+			HideCompass(magicBookArrow_UITransform, magicSpr);
+		}
+		if(health_Script.availableHealth == 5)
+		{
+			EnableCompass(healthStation_UITransform, healthSpr);
+			RotateCompass(healthStation, healthStation_UITransform);
+		}
+		else
+		{
+			HideCompass(healthStation_UITransform, healthSpr);
+		}
 	}
-	//
+
 	void RotateCompass(Transform Obj, RectTransform UIImage)
 	{
 		if(Obj.position.x < cameraTransform.position.x)
@@ -53,7 +75,7 @@ public class Compass : MonoBehaviour {
 			{
 				UIImage.rotation = Quaternion.Euler(0, 0, 270);
 			}
-//			Debug.Log("Left");	
+	
 		}
 		else if(Obj.position.x > cameraTransform.position.x)
 		{
@@ -69,20 +91,31 @@ public class Compass : MonoBehaviour {
 			{
 				UIImage.rotation = Quaternion.Euler(0, 0, 90);
 			}
-//			Debug.Log("Right");	
+
 		}
 		else if(Obj.position.y > cameraTransform.position.y)
 		{
 			
 			UIImage.rotation = Quaternion.Euler(0, 0, 180);
-//			Debug.Log("Up");	
+
 		}
 		else if(Obj.position.y < cameraTransform.position.y)
 		{
 			UIImage.rotation = Quaternion.Euler(0, 0, 0);
-//			Debug.Log("Down");	
+
 		}
 	}
 
+	void HideCompass (RectTransform UIImage, Image img)
+	{
+		img.color = Color.gray;
+		UIImage.GetComponent<Image>().enabled = false;
+	}
+
+	void EnableCompass (RectTransform UIImage, Image img)
+	{
+		img.color = Color.white;
+		UIImage.GetComponent<Image>().enabled = true;
+	}
 
 }

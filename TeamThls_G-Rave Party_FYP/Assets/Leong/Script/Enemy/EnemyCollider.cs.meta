@@ -1,10 +1,24 @@
 fileFormatVersion: 2
 guid: d0ae7972249088b4aa9e645e9d1a87cb
-timeCreated: 1496035507
+timeCreated: 1508129853
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthDevice: {instanceID: 0}
+  - sharedstats: {instanceID: 0}
+  - anim: {instanceID: 0}
+  - p_BloodOnDeath: {fileID: 198230061868771976, guid: bef1d04ccc2296d4bb1d72ae5d92a3d8,
+      type: 2}
+  - p_IceBloodOnDeath: {fileID: 198230061868771976, guid: d25ccde7ac6413c4d86cc1f1d30d113d,
+      type: 2}
+  - p_DustOnDeath: {fileID: 198230061868771976, guid: 640755cf772772d4aa68b178833a627d,
+      type: 2}
+  - p_BurnedOnDeath: {fileID: 198616526131249538, guid: aaca6a02837b73941bd05377e3d5c01f,
+      type: 2}
+  - p_Soul: {fileID: 198664582461303062, guid: 635aee6645360dc44a5c8f246b7f21af, type: 2}
+  - p_HealthSoul: {fileID: 198664582461303062, guid: 01e494c93ac7be34e97e0846e68d801b,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

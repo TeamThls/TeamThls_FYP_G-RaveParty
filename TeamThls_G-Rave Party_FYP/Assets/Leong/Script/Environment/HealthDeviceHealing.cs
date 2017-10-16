@@ -13,10 +13,11 @@ public class HealthDeviceHealing : MonoBehaviour {
 	SharedStats allPlayer_SharedStats;
 	[SerializeField] Tutorial tutorial_Object;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		healthDevice = GameObject.Find("P_HealDevice");
 		healthDevice_Particles = healthDevice.transform.GetComponentInChildren<ParticleSystem>();
-		availableHealth = 5;
+		availableHealth = 0;
 		healthDevice_Spr = healthDevice.GetComponent<SpriteRenderer>();
 		allPlayer_SharedStats = GameObject.Find("GameManager").GetComponent<SharedStats>();
 		if(tutorial_Object == null)
@@ -33,14 +34,20 @@ public class HealthDeviceHealing : MonoBehaviour {
 			healthDevice_Spr.color = Color.white;
 			healthDevice_Particles.Play();
 		}
+		else if(availableHealth < 5)
+		{
+			healthDevice_Spr.color = Color.black;
+			healthDevice_Particles.Stop();
+		}
 	}
 
-	void OnCollisionEnter2D(Collision2D col)
+	void OnTriggerEnter2D(Collider2D col)
 	{
-		if(col.gameObject.name == "Player" || col.gameObject.name == "Player2") 
+		if(col.gameObject.layer == 10) 
 		{
 			if(availableHealth == 5)
 			{
+				Debug.Log("Stand");
 				if(allPlayer_SharedStats.player_Health < allPlayer_SharedStats.player_MaxHealth)
 				{
 					tutorial_Object.healthStand_StartCounting = true;

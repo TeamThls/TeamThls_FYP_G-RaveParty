@@ -42,10 +42,14 @@ public class UpgradeDetails : MonoBehaviour {
 	public int upgradeMana;
 	public int upgradeManaRegen;
 
+	BulletUpgrades player1_Upgrade, player2_Upgrade;
+
 	// Use this for initialization
 	void Start () {
 		GameManager = GameObject.Find ("GameManager");
 		shrd = GameManager.GetComponent<SharedStats> ();
+		player1_Upgrade = GameObject.Find("Player").GetComponent<BulletUpgrades>();
+		player2_Upgrade = GameObject.Find("Player2").GetComponent<BulletUpgrades>();
 		selected = false;
 		stage = stageNum;
 
@@ -75,17 +79,25 @@ public class UpgradeDetails : MonoBehaviour {
 			// selection upgrade 1
 			if (num == 1) {
 				upgradeInfo01.text = "Reduce Laser Mana Usage from " + shrd.LaserMana + " to " + laserMana;
+				player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
+				player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
 			} 
 			else if (num == 2) {
 				upgradeInfo01.text = "Increase Laser Ability Duration from " + shrd.LaserDuration + " to " + laserDuration;
+				player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
+				player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
 			}
 
 			// selection upgrade 2
 			if (num2 == 1) {
 				upgradeInfo02.text = "Reduce Ice Mana Usage from " + shrd.IceMana + " to " + iceMana;
+				player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
+				player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
 			} 
 			else if (num2 == 2) {
 				upgradeInfo02.text = "Increase Ice Ability Duration from " + shrd.IceDuration + " to " + iceDuration;
+				player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
+				player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
 			}
 
 			// selection upgrade 3

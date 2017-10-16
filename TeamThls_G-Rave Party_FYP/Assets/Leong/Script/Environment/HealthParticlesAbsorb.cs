@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealthParticlesAbsorb : MonoBehaviour {
 
 	[SerializeField] Transform healthCross_Obj;
+	[SerializeField] HealthDeviceHealing healthScript;
 	ParticleSystem p_HealthSoul;
 
 	// Use this for initialization
@@ -13,6 +14,10 @@ public class HealthParticlesAbsorb : MonoBehaviour {
 		if(healthCross_Obj == null)
 		{
 			healthCross_Obj = GameObject.Find("P_HealDevice").GetComponent<Transform>();
+		}
+		if(healthScript == null)
+		{
+			healthScript = GameObject.Find("P_HealDeviceStand").GetComponent<HealthDeviceHealing>();
 		}
 		p_HealthSoul = GetComponent<ParticleSystem>();
 	}
@@ -27,11 +32,18 @@ public class HealthParticlesAbsorb : MonoBehaviour {
 	{
 		p_HealthSoul.Stop();
 		StartCoroutine(Vanish(1.0f));
+
 	}
 
 	IEnumerator Vanish(float duration)
 	{
 		yield return new WaitForSeconds(duration);
+
+		if(healthScript.availableHealth < 5)
+		{
+			healthScript.availableHealth += 1;
+		}
+
 		Destroy(this.gameObject);
 	}
 }

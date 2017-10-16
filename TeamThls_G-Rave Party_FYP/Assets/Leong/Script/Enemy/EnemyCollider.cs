@@ -14,6 +14,7 @@ public class EnemyCollider : MonoBehaviour {
 	[SerializeField] ParticleSystem p_DustOnDeath;
 	[SerializeField] ParticleSystem p_BurnedOnDeath;
 	[SerializeField] ParticleSystem p_Soul;
+	[SerializeField] ParticleSystem p_HealthSoul;
 	//Rigidbody2D rgBody;
 	TimeManagement timeManager;
 
@@ -57,14 +58,11 @@ public class EnemyCollider : MonoBehaviour {
 			}
 			else
 			{
+				Instantiate(p_HealthSoul, transform.position, Quaternion.identity);
 				Destroy(this.gameObject);
+
 			}
 			sharedstats.player_Gold += 100;
-			if(healthDevice.availableHealth < 5)
-			{
-				healthDevice.availableHealth += 1;
-			}
-			//sharedstats.player_Score += 100;
 
 			
 		}
