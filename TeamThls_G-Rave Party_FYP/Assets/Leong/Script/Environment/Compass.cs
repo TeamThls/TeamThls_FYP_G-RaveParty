@@ -10,6 +10,8 @@ public class Compass : MonoBehaviour {
 	[SerializeField] ActiveMagic magic_Script;
 	[SerializeField] HealthDeviceHealing health_Script;
 	[SerializeField] Image magicSpr, healthSpr;
+	//[SerializeField] ParticleSystem health_Particles, magic_Particles;
+	Animator health_Anim, magic_Anim;
 
 	void Start () 
 	{
@@ -33,28 +35,32 @@ public class Compass : MonoBehaviour {
 		magic_Script = magicBook.GetComponent<ActiveMagic>();
 		health_Script = GameObject.Find ("P_HealDeviceStand").GetComponent<HealthDeviceHealing>();
 		magicSpr = transform.GetChild(0).GetComponent<Image>();
+		magic_Anim = transform.GetChild(0).GetComponent<Animator>();
 		healthSpr = transform.GetChild(1).GetComponent<Image>();
+		health_Anim = transform.GetChild(1).GetComponent<Animator>();
 	}
 
 	void Update () 
 	{
 		if(magic_Script.inCd == false)
 		{
-			EnableCompass(magicBookArrow_UITransform, magicSpr);
+			EnableCompass(magicBookArrow_UITransform, magic_Anim);
 			RotateCompass(magicBook, magicBookArrow_UITransform);
+			//magic_Particles.Play();
 		}
 		else
 		{
-			HideCompass(magicBookArrow_UITransform, magicSpr);
+			HideCompass(magicBookArrow_UITransform, magic_Anim);
 		}
 		if(health_Script.availableHealth == 5)
 		{
-			EnableCompass(healthStation_UITransform, healthSpr);
+			EnableCompass(healthStation_UITransform, health_Anim);
 			RotateCompass(healthStation, healthStation_UITransform);
+			//health_Particles.Play();
 		}
 		else
 		{
-			HideCompass(healthStation_UITransform, healthSpr);
+			HideCompass(healthStation_UITransform, health_Anim);
 		}
 	}
 
@@ -106,16 +112,19 @@ public class Compass : MonoBehaviour {
 		}
 	}
 
-	void HideCompass (RectTransform UIImage, Image img)
+	void HideCompass (RectTransform UIImage, Animator anim)
 	{
-		img.color = Color.gray;
+		anim.Play("Fade");
+
 		UIImage.GetComponent<Image>().enabled = false;
+		Debug.Log("Hide");
 	}
 
-	void EnableCompass (RectTransform UIImage, Image img)
+	void EnableCompass (RectTransform UIImage, Animator anim)
 	{
-		img.color = Color.white;
+		anim.Play("Glow");
 		UIImage.GetComponent<Image>().enabled = true;
+		Debug.Log("Glow");
 	}
 
 }

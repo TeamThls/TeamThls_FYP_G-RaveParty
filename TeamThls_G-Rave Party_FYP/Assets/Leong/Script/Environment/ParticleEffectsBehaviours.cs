@@ -19,9 +19,4 @@ public class ParticleEffectsBehaviours : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 	}
-
-	void OnParticleCollision(GameObject col)
-	{
-
-	}
 }

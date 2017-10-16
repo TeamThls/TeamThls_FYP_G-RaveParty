@@ -14,6 +14,9 @@ public class DarkRoomEffect : MonoBehaviour {
 	public float currentLight_Range;
 	public int player_Count;
 
+	[SerializeField] float timeToActivate;
+	[SerializeField] bool isTutorialRoom;
+
 	public enum darkRoom_State
 	{
 		Activated, Deactivated, Null
@@ -31,26 +34,38 @@ public class DarkRoomEffect : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(darkRoom_CurrentState == darkRoom_State.Activated && currentColor_increaseValue <= 1.0f)
+		if(isTutorialRoom == true)
 		{
-			currentColor_increaseValue += 0.001f;
-			//currentLight_Range += 0.001f;
-			DarkenMaterialColor(currentColor_increaseValue);
-			//DarkenLights(currentLight_Range);
+			timeToActivate += Time.deltaTime;
+			if(timeToActivate > 10.0f)
+			{
+				isTutorialRoom = false;
+				timeToActivate = 0.0f;
+			}
 		}
-		else if(darkRoom_CurrentState == darkRoom_State.Deactivated && currentColor_increaseValue >= 0.0f)
+		else
 		{
-			currentColor_increaseValue -= 0.001f;
-			//currentLight_Range -= 0.001f;
-			ResetMaterialColor(currentColor_increaseValue);
-			//DarkenLights(currentLight_Range);
+			if(darkRoom_CurrentState == darkRoom_State.Activated && currentColor_increaseValue <= 1.0f)
+			{
+				currentColor_increaseValue += 0.001f;
+				DarkenMaterialColor(currentColor_increaseValue);
+
+			}
+			else if(darkRoom_CurrentState == darkRoom_State.Deactivated && currentColor_increaseValue >= 0.0f)
+			{
+				currentColor_increaseValue -= 0.001f;
+				ResetMaterialColor(currentColor_increaseValue);
+
+			}
+			if(darkRoom_AltMat.color == Color.white)
+			{
+				darkRoom_CurrentState = darkRoom_State.Null;
+				currentColor_increaseValue = 0.0f;
+
+			}
+			darkRoom_Mat.color = new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f);
 		}
-		if(darkRoom_AltMat.color == Color.white)
-		{
-			darkRoom_CurrentState = darkRoom_State.Null;
-			currentColor_increaseValue = 0.0f;
-		}
-		darkRoom_Mat.color = new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f);
+
 	}
 
 	void DarkenMaterialColor(float value)
@@ -58,8 +73,7 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(darkRoom_AltMat.color != Color.black)
 		{
 			darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
-			//darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
-			//darkRoom_Mat.color = Color.Lerp(Color.white, new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f), value);
+
 		}
 	}
 
@@ -68,8 +82,6 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(darkRoom_AltMat.color != Color.white)
 		{
 			darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
-			//darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
-			//darkRoom_Mat.color = Color.Lerp(Color.white, new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f), value);
 		}
 	}
 
@@ -108,10 +120,6 @@ public class DarkRoomEffect : MonoBehaviour {
 		{
 			darkRoom_CurrentState = darkRoom_State.Activated;
 		}
-		if(col.gameObject.layer == 8)
-		{
-			//col.GetComponent<SpriteRenderer>().color = darkRoom_Mat.color;
-		}
 	}
 
 	void OnTriggerStay2D(Collider2D col)
@@ -123,7 +131,7 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(col.gameObject.layer == 8)
 		{
 			col.GetComponent<Renderer>().material = darkRoom_Mat;
-			//Debug.Log(col.GetComponent<SpriteRenderer>().color);
+
 		}
 	}
 
@@ -132,10 +140,6 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(col.gameObject.layer == 10)
 		{
 			darkRoom_CurrentState = darkRoom_State.Deactivated;
-		}
-		if(col.gameObject.layer == 8)
-		{
-			//col.GetComponent<SpriteRenderer>().color = Color.white;
 		}
 	}
 

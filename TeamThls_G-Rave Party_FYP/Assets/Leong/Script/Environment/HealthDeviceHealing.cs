@@ -11,7 +11,6 @@ public class HealthDeviceHealing : MonoBehaviour {
 	public int availableHealth;
 	SpriteRenderer healthDevice_Spr;
 	SharedStats allPlayer_SharedStats;
-	[SerializeField] Tutorial tutorial_Object;
 	// Use this for initialization
 	void Start () 
 	{
@@ -20,10 +19,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 		availableHealth = 0;
 		healthDevice_Spr = healthDevice.GetComponent<SpriteRenderer>();
 		allPlayer_SharedStats = GameObject.Find("GameManager").GetComponent<SharedStats>();
-		if(tutorial_Object == null)
-		{
-			tutorial_Object = GameObject.Find("Tutorial").GetComponent<Tutorial>();
-		}
+
 	}
 	
 	// Update is called once per frame
@@ -47,10 +43,8 @@ public class HealthDeviceHealing : MonoBehaviour {
 		{
 			if(availableHealth == 5)
 			{
-				Debug.Log("Stand");
 				if(allPlayer_SharedStats.player_Health < allPlayer_SharedStats.player_MaxHealth)
 				{
-					tutorial_Object.healthStand_StartCounting = true;
 					healthDevice_Spr.color = Color.black;
 					allPlayer_SharedStats.player_Health = allPlayer_SharedStats.player_MaxHealth;
 					Debug.Log("Heal");
