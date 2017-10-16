@@ -77,7 +77,7 @@ public class WaypointPathfinding : MonoBehaviour {
 		targetDetection ();
 		if (canJump == false) {
 			jumpTime += Time.deltaTime;
-			if (jumpTime >= 0.6f) {
+			if (jumpTime >= 0.5f) {
 				canJump = true;
 				jumpTime = 0.0f;
 			}
@@ -196,11 +196,11 @@ public class WaypointPathfinding : MonoBehaviour {
 	// waypoint movement;
 	void Movement(){
 		transform.position = Vector3.MoveTowards(this.transform.position, t_Waypoint.transform.position, step);
-		if (canJump == true) {
+		//if (canJump == true) {
 			if (t_Waypoint.transform.position.y - this.transform.position.y >= 2.0) {
 				rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
-				canJump = false;
-			}
+			//	canJump = false;
+			//}
 		}
 	}
 

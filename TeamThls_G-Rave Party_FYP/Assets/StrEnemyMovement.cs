@@ -56,10 +56,10 @@ public class StrEnemyMovement : MonoBehaviour {
 	void Update () {
 		targetDetection ();
 		if (player.transform.position.x > this.transform.position.x) {
-			sprite.flipX = true;
+			sprite.flipX = false;
 		} 
 		else {
-			sprite.flipX = false;
+			sprite.flipX = true;
 		}
 
 		dist = Vector3.Distance (this.gameObject.transform.position, player.transform.position);

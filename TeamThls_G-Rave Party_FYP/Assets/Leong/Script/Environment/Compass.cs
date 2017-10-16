@@ -53,7 +53,7 @@ public class Compass : MonoBehaviour {
 			{
 				UIImage.rotation = Quaternion.Euler(0, 0, 270);
 			}
-			Debug.Log("Left");	
+//			Debug.Log("Left");	
 		}
 		else if(Obj.position.x > cameraTransform.position.x)
 		{
@@ -69,18 +69,18 @@ public class Compass : MonoBehaviour {
 			{
 				UIImage.rotation = Quaternion.Euler(0, 0, 90);
 			}
-			Debug.Log("Right");	
+//			Debug.Log("Right");	
 		}
 		else if(Obj.position.y > cameraTransform.position.y)
 		{
 			
 			UIImage.rotation = Quaternion.Euler(0, 0, 180);
-			Debug.Log("Up");	
+//			Debug.Log("Up");	
 		}
 		else if(Obj.position.y < cameraTransform.position.y)
 		{
 			UIImage.rotation = Quaternion.Euler(0, 0, 0);
-			Debug.Log("Down");	
+//			Debug.Log("Down");	
 		}
 	}
 

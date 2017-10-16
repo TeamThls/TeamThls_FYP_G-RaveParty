@@ -4,136 +4,132 @@ using UnityEngine;
 
 public class ShootingEnemy : MonoBehaviour {
 
-	public GameObject Manager;
+	public GameObject Target;
 	public GameObject Player;
 	public GameObject Player2;
-	public GameObject Target;
 
-	public GameObject bullet;
+	public GameObject Path01;
+	public GameObject Path02;
 
-	SharedStats shrd;
+	public GameObject Bullet;
 
-	public float maxX;
-	public float minX;
-	public float maxY;
-	public float minY;
+	float a;
+	float b;
 
-	public float dist;
-	public float targetDist;
-	Vector3 newPos;
+	float q;
+	float w;
+
+	public bool touched;
+	public int num;
+	public GameObject targetMove;
+	public GameObject targetMove2;
+	float setTime;
+	public bool detect;
+
+	public bool checkPos;
 
 	public float targetX;
-
-	public float setTime;
-	public float targetTime;
-	public bool attackMode;
-
-	public float shootDuration;
-	public float maxDuration;
+	public float targetDist;
+	public float DistLimit;
 
 	public float speed;
 	public float step;
 
-	private float a;
-	private float b;
+	public float FireTime;
+	public float FireDuration;
 
-	public bool changePos;
+	public bool RunMode;
+	public bool fireMode;
+
+	public Vector3 newPos;
 
 	// Use this for initialization
 	void Start () {
-		Manager = GameObject.Find ("GameManager");
 		Player = GameObject.Find ("Player");
 		Player2 = GameObject.Find ("Player2");
-		shrd = Manager.GetComponent<SharedStats> ();
-		Target = Player;
-		targetDetection ();
+		if (Player2 == null) {
+			Player2 = Player;
+		}
+
+		Path01 = GameObject.Find ("Path01");
+		Path02 = GameObject.Find ("Path02");
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		step = speed * Time.deltaTime;
+		targetDetection ();
 
-		if (changePos == false) {
-			targetDetection ();
+		if (RunMode == true) {
+			RunFromPlayer ();
+		}
+		else if (RunMode == false) {
+			FindPlayer ();
+		}
+
+		if (touched == true) {
 			setTime += Time.deltaTime;
-			float distance = Vector3.Distance (this.transform.position, Target.transform.position);
-			if (setTime >= targetTime) {
-				if (attackMode == false) {
-					attackMode = true;
-					setTime = 0.0f;
-				}
-				else if (attackMode == true) {
-					attackMode = false;
-					setTime = 0.0f;
-				}
-			}
-			if (attackMode == false) {
-				flyingMode ();
-			}
-			if (attackMode == true) {
-				shootDuration += Time.deltaTime;
-				if (shootDuration >= maxDuration) {
-					Instantiate (bullet, this.transform.position, Quaternion.identity);
-					shootDuration = 0.0f;
-				}
+			if (setTime >= 3.0f) {
+				touched = false;
+				setTime = 0.0f;
 			}
 		}
-		else {
-			if (this.transform.position.x >= maxX) {
-				Vector3 newPos = new Vector3 (maxX, maxY, 0.0f);
-				transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
-				if (this.transform.position == newPos) {
-					Vector3 newPos2 = new Vector3 (minX, maxY, 0.0f);
-					transform.position = Vector3.MoveTowards (this.transform.position, newPos2, step);
-					if (this.transform.position.x == minX) {
-						changePos = false;
-					}
-				}
-			} 
-			else if (this.transform.position.x <= minX) {
-				Vector3 newPos = new Vector3 (minX, maxY, 0.0f);
-				transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
-				if (this.transform.position == newPos) {
-					Vector3 newPos2 = new Vector3 (maxX, maxY, 0.0f);
-					transform.position = Vector3.MoveTowards (this.transform.position, newPos2, step);
-					if (this.transform.position.x == maxX) {
-						changePos = false;
-					}
-				}
-			} 
-			else {
-				changePos = false;
+
+		if (targetDist < DistLimit) {
+			RunMode = true;
+			fireMode = false;
+		}
+
+		if (fireMode == true) {
+			FireTime += Time.deltaTime;
+			if (FireTime >= FireDuration) {
+				Instantiate (Bullet, this.transform.position, Quaternion.identity);
+				FireTime = 0.0f;
 			}
+		}
+
+		if (num >= 2) {
+			RunMode = false;
+			detect = false;
+			checkPos = false;
+			num = 0;
 		}
 	}
 
-	void flyingMode()
-	{
-		dist = Vector3.Distance (this.transform.position, Target.transform.position);
-		if (this.transform.position.x > Target.transform.position.x) {
-			float posX;
-			if (Target.transform.position.x + targetX > maxX) {
-				posX = maxX;
-				changePos = true;
-			} 
-			else {
-				posX = Target.transform.position.x + targetX;
+	void RunFromPlayer(){
+		if (detect == false) {
+			q = Vector3.Distance (this.transform.position, Path01.transform.position);
+			w = Vector3.Distance (this.transform.position, Path02.transform.position);
+			if (q > w) {
+				targetMove = Path02;
+				targetMove2 = Path01;
 			}
-			newPos = new Vector3 (posX, Target.transform.position.y + 1, this.transform.position.z);
-		}
-		else if (this.transform.position.x < Target.transform.position.x)
-		{
-			float posX;
-			if (Target.transform.position.x - targetX < minX) {
-				posX = minX;
-				changePos = true;
-			} 
-			else {
-				posX = Target.transform.position.x - targetX;
+			else if (w > q) {
+				targetMove = Path01;
+				targetMove2 = Path02;
 			}
-			newPos = new Vector3 (posX, Target.transform.position.y + 1, this.transform.position.z);
+			detect = true;
 		}
-		transform.position = Vector3.MoveTowards (this.transform.position, newPos, step); 
+		if (num == 0) {
+			this.transform.position = Vector3.MoveTowards (this.transform.position, targetMove.transform.position, step);
+		}
+		else if (num == 1) {
+			this.transform.position = Vector3.MoveTowards (this.transform.position, targetMove2.transform.position, step);
+		}
+	}
+
+	void FindPlayer(){
+		if (checkPos == false) {
+			if (this.transform.position.x < Target.transform.position.x) {
+				newPos = new Vector3 (Target.transform.position.x - targetX, Target.transform.position.y + 1, Target.transform.position.z);
+			}
+			if (this.transform.position.x > Target.transform.position.x) {
+				newPos = new Vector3 (Target.transform.position.x + targetX, Target.transform.position.y + 1, Target.transform.position.z);
+			}
+			checkPos = true;
+		}
+		targetDist = Vector3.Distance (newPos, Target.transform.position);
+		this.transform.position = Vector3.MoveTowards (this.transform.position, newPos, step);
+		fireMode = true;
 	}
 
 	void targetDetection()
@@ -146,6 +142,15 @@ public class ShootingEnemy : MonoBehaviour {
 		} 
 		else if (a < b) {
 			Target = Player;
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.tag == "Path") {
+			if (touched == false) {
+				num = num + 1;
+				touched = true;
+			}
 		}
 	}
 
