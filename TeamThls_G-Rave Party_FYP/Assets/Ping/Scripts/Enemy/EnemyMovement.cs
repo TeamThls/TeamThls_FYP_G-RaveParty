@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour {
 		GameManager = GameObject.Find ("GameManager");
 		stts = GameManager.GetComponent<SharedStats> ();
 
-		player = GameObject.Find ("Player");
+		player1 = GameObject.Find ("Player");
 		player2 = GameObject.Find ("Player2");
 		if (player2 == null) {
 			player2 = player;

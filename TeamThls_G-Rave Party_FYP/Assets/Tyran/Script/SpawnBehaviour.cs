@@ -26,11 +26,13 @@ public class SpawnBehaviour : MonoBehaviour {
 
 	public void Spawn()
 	{
+		//Instantiate (enemy2, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);	
 		//InvokeRepeating("actualspawn", 0.0f, 10.0f);
 		r = Random.Range (1, 4);
+		Debug.Log (r);
 		if (r == 1)
 		{
-
+			
 			Instantiate (enemy1, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
 		}
 		else if (r == 2)
