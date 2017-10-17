@@ -170,8 +170,13 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Controller1()
 	{
+		if (Input.GetAxis ("SquareP1") > 0) 
+		{
+			Debug.Log ("Strangefake");
+		}
 		if(Input.GetAxis ("SquareP1") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
 		{
+			Debug.Log ("Shoot");
 			shareStat.setTime = 0.0f;
 			StartCoroutine(ShootBullet(normalBullet_FireRate));
 			shareStat.player_Mana -= BulletMana;
