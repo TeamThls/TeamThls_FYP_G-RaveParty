@@ -27,7 +27,7 @@ public class SpawnBehaviour : MonoBehaviour {
 	public void Spawn()
 	{
 		//InvokeRepeating("actualspawn", 0.0f, 10.0f);
-		r = Random.Range (1, 3);
+		r = Random.Range (1, 4);
 		if (r == 1)
 		{
 
