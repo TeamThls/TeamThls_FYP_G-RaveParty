@@ -112,5 +112,14 @@ public class Bullet : MonoBehaviour {
 			BulletSparkEffect(col.gameObject);
 			Destroy(this.gameObject);
 		}
+		if(col.CompareTag("ShootEnemy"))
+		{
+			EnemyCollider enemy_Collider = col.GetComponent<EnemyCollider>();
+			cameraShake.Shake(0.3f, 0.1f);
+			enemy_Collider.NormalBulletReaction();
+			enemy_Collider.enemy_Health -= bullet_Damage;
+			BulletSparkEffect(col.gameObject);
+			Destroy(this.gameObject);
+		}
 	}
 }

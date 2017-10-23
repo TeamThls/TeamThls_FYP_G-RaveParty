@@ -54,8 +54,8 @@ public class GUIManagerScript : MonoBehaviour {
 	public GameObject magicRune;
 	ActiveMagic Magic;
 	public bool triggered;
-	float setTime;
-	float setTime2;
+	public float setTime;
+	public float setTime2;
 	bool reset;
 
 	void Awake(){

@@ -15,6 +15,7 @@ public class bulletMovement : MonoBehaviour {
 	float b;
 
 	public float speed;
+	public float setTime;
 
 	public bool isRight;
 
@@ -36,11 +37,15 @@ public class bulletMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		setTime += Time.deltaTime;
 		if (isRight) {
 			this.transform.Translate (Vector3.right * speed * Time.deltaTime);
 		} 
 		else if (!isRight) {
 			this.transform.Translate (Vector3.left * speed * Time.deltaTime);
+		}
+		if (setTime >= 10.0f) {
+			Destroy (this.gameObject);
 		}
 	}
 
