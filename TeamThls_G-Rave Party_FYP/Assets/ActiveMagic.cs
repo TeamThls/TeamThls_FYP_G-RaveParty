@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActiveMagic : MonoBehaviour {
 
 	public GameObject Manager;
+	public GameObject GUI;
 	SharedStats sharestat;
 	SpriteRenderer spr;
 	public bool inCd = false;
@@ -20,6 +21,7 @@ public class ActiveMagic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Manager = GameObject.Find ("GameManager");
+		GUI = GameObject.Find ("GUI");
 		sharestat = Manager.GetComponent<SharedStats> ();
 		spr = this.GetComponent<SpriteRenderer> ();
 		randomFunction ();
@@ -77,11 +79,16 @@ public class ActiveMagic : MonoBehaviour {
 			inCd = false;
 			randomed = false;
 			currTime = 0.0f;
+			this.GetComponent<SpriteRenderer> ().enabled = true;
 		}
 
 		if (inCd == true) {
 			currTime += Time.deltaTime;
 			spr.color = Color.gray;
+			this.GetComponent<SpriteRenderer> ().enabled = false;
+			if (GUI.GetComponent<GUIManagerScript> ().setTime == 0.0f) {
+				GUI.GetComponent<GUIManagerScript> ().triggered = true;
+			}
 		}
 	}
 
@@ -121,6 +128,7 @@ public class ActiveMagic : MonoBehaviour {
 					sharestat.OnLaser = false;
 				}
 				inCd = true;
+
 			}
 		}
 	}

@@ -46,11 +46,25 @@ public class GUIManagerScript : MonoBehaviour {
 	//public Canvas PauseUI;
 	private string scene;
 
+	public Transform Compass;
 	public Transform UpgradeMenu;
+	public Transform bookIcon;
+	public Transform bookCompass;
+
+	public GameObject magicRune;
+	ActiveMagic Magic;
+	public bool triggered;
+	float setTime;
+	float setTime2;
+	bool reset;
 
 	void Awake(){
+		magicRune = GameObject.Find ("MagicSkill");
+		Compass = this.transform.GetChild (6);
 		UpgradeMenu = this.transform.GetChild (7);
 		UpgradeMenu.gameObject.SetActive (false);
+		bookIcon = Compass.GetChild (0);
+		bookCompass = Compass.GetChild (2);
 	}
 
 	// Use this for initialization
@@ -59,6 +73,7 @@ public class GUIManagerScript : MonoBehaviour {
 		//PauseUI.enabled = false;
 		GamaManager = GameObject.Find("GameManager");
 		sharedstats = GamaManager.GetComponent<SharedStats> ();
+		Magic = magicRune.GetComponent<ActiveMagic> ();
 	}
 	
 	// Update is called once per frame
@@ -73,6 +88,31 @@ public class GUIManagerScript : MonoBehaviour {
 		//playerGold.text = sharedstats.player_Gold.ToString();
 		playerScore.text = "Score: " + sharedstats.player_Score.ToString();
 
+		if (Magic.inCd == false) {
+			bookCompass.GetComponent<Image> ().enabled = true;
+		}
+		else if (Magic.inCd == true) {
+			bookCompass.GetComponent<Image> ().enabled = false;
+		}
+		if (triggered == true) {
+			bookIcon.GetComponent<Image> ().fillAmount = 0;
+			reset = true;
+			triggered = false;
+		}
+
+		if (reset == true) {
+			setTime += Time.deltaTime;
+			setTime2 += Time.deltaTime;
+			if (setTime2 >= 1.0f) {
+				bookIcon.GetComponent<Image> ().fillAmount += 1.0f / Magic.setTime;
+				setTime2 = 0.0f;
+			}
+			if (setTime >= 45.0f) {
+				triggered = false;
+				setTime = 0.0f;
+				bookIcon.GetComponent<Image> ().fillAmount = 1.0f;
+			}
+		}
 
 		if (sharedstats.levelPassed == true) {
 			UpgradeMenu.gameObject.SetActive (true);
