@@ -117,14 +117,14 @@ public class Compass : MonoBehaviour {
 		anim.Play("Fade");
 
 		UIImage.GetComponent<Image>().enabled = false;
-		Debug.Log("Hide");
+
 	}
 
 	void EnableCompass (RectTransform UIImage, Animator anim)
 	{
 		anim.Play("Glow");
 		UIImage.GetComponent<Image>().enabled = true;
-		Debug.Log("Glow");
+
 	}
 
 }

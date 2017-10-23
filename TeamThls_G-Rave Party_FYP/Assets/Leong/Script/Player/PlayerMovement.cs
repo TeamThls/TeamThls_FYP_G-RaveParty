@@ -136,11 +136,20 @@ public class PlayerMovement : MonoBehaviour {
 		   Debug.Log("Teleport");
 		   		if(this.gameObject.name == "Player")
 		   		{
-		   			player1.transform.position = player2.transform.position;
+		   			if(player2 != null)
+		   			{
+						player1.transform.position = player2.transform.position;
+		   				
+		   			}
+
 		   		}
 		   		else
 		   		{
-		   			player2.transform.position = player1.transform.position;
+		   			if(player1 != null)
+		   			{
+						player2.transform.position = player1.transform.position;
+		   				
+		   			}
 		   		}
 		   }
 
