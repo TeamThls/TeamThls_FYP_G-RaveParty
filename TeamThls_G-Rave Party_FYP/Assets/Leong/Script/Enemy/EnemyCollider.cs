@@ -58,7 +58,6 @@ public class EnemyCollider : MonoBehaviour {
 			}
 			else
 			{
-				Instantiate(p_HealthSoul, transform.position, Quaternion.identity);
 				Destroy(this.gameObject);
 
 			}
@@ -92,6 +91,7 @@ public class EnemyCollider : MonoBehaviour {
 			Instantiate(p_BurnedOnDeath, transform.position, Quaternion.identity);
 		}
 		Instantiate(p_Soul, transform.position, Quaternion.identity);
+		Instantiate(p_HealthSoul, transform.position, Quaternion.identity);
 	}
 
 	public void NormalBulletReaction()
