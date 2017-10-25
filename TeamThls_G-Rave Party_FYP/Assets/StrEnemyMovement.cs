@@ -14,6 +14,7 @@ public class StrEnemyMovement : MonoBehaviour {
 	public GameObject GameManager;
 	SpriteRenderer sprite;
 	SharedStats stts;
+	CameraShake cam_Shake;
 
 	public bool multiplayer = true;
 
@@ -40,11 +41,14 @@ public class StrEnemyMovement : MonoBehaviour {
 	public float a;
 	public float b;
 
+	[SerializeField] ParticleSystem playerDamaged_Particles;
+
 	// Use this for initialization
 	void Start () {
 		GameManager = GameObject.Find ("GameManager");
 		stts = GameManager.GetComponent<SharedStats> ();
 		sprite = this.GetComponent<SpriteRenderer> ();
+		cam_Shake = Camera.main.GetComponent<CameraShake>();
 
 		player1 = GameObject.Find ("Player");
 		player2 = GameObject.Find ("Player2");
@@ -87,6 +91,14 @@ public class StrEnemyMovement : MonoBehaviour {
 			if (this.transform.position == newPos && isDamage == true) {
 				counter = 1;
 				GameManager.GetComponent<SharedStats> ().player_Health -= damage;
+
+				if(player != null)
+				{
+					player.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+					Instantiate(playerDamaged_Particles, player.transform.position, Quaternion.identity);
+					cam_Shake.Shake(0.4f, 0.2f);
+				}
+
 				isDamage = false;
 			}
 			/*
@@ -112,6 +124,12 @@ public class StrEnemyMovement : MonoBehaviour {
 			if (this.transform.position == newPos && isDamage == true) {
 				counter = 1;
 				GameManager.GetComponent<SharedStats> ().player_Health -= damage;
+				if(player != null)
+				{
+					player.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+					Instantiate(playerDamaged_Particles, player.transform.position, Quaternion.identity);
+					cam_Shake.Shake(0.4f, 0.2f);
+				}
 				isDamage = false;
 			}
 		}
@@ -129,6 +147,14 @@ public class StrEnemyMovement : MonoBehaviour {
 			if (this.transform.position == newPos && isDamage == true) {
 				counter = 4;
 				GameManager.GetComponent<SharedStats> ().player_Health -= damage;
+
+				if(player != null)
+				{
+					player.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+					Instantiate(playerDamaged_Particles, player.transform.position, Quaternion.identity);
+					cam_Shake.Shake(0.4f, 0.2f);
+				}
+
 				isDamage = false;
 			}
 		}

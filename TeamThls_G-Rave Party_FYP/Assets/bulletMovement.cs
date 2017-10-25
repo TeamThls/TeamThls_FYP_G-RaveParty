@@ -10,6 +10,8 @@ public class bulletMovement : MonoBehaviour {
 	public GameObject Target;
 
 	SharedStats shrd;
+	CameraShake cam_Shake;
+	[SerializeField] ParticleSystem playerDamaged_Particles;
 
 	float a;
 	float b;
@@ -25,6 +27,7 @@ public class bulletMovement : MonoBehaviour {
 		Player = GameObject.Find ("Player");
 		Player2 = GameObject.Find ("Player2");
 		shrd = Manager.GetComponent<SharedStats> ();
+		cam_Shake = Camera.main.GetComponent<CameraShake>();
 		Target = Player;
 		targetDetection ();
 		if (this.transform.position.x > Target.transform.position.x) {
@@ -53,6 +56,9 @@ public class bulletMovement : MonoBehaviour {
 	{
 		if (other.tag == "Player") {
 			shrd.player_Health -= 1;
+			other.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+			cam_Shake.Shake(0.4f, 0.2f);
+			Instantiate(playerDamaged_Particles, other.transform.position, Quaternion.identity);
 			Destroy (this.gameObject);
 		}
 	}

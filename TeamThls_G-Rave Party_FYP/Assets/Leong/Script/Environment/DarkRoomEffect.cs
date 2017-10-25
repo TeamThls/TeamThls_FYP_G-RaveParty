@@ -63,9 +63,14 @@ public class DarkRoomEffect : MonoBehaviour {
 				currentColor_increaseValue = 0.0f;
 
 			}
-			darkRoom_Mat.color = new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f);
+			ColorSmoothing();
 		}
 
+	}
+
+	void ColorSmoothing()
+	{
+		darkRoom_Mat.color = new Color(darkRoom_AltMat.color.r + 0.1f, darkRoom_AltMat.color.g + 0.1f, darkRoom_AltMat.color.b + 0.1f);
 	}
 
 	void DarkenMaterialColor(float value)

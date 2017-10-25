@@ -101,14 +101,11 @@ public class Compass : MonoBehaviour {
 		}
 		else if(Obj.position.y > cameraTransform.position.y)
 		{
-			
 			UIImage.rotation = Quaternion.Euler(0, 0, 180);
-
 		}
 		else if(Obj.position.y < cameraTransform.position.y)
 		{
 			UIImage.rotation = Quaternion.Euler(0, 0, 0);
-
 		}
 	}
 

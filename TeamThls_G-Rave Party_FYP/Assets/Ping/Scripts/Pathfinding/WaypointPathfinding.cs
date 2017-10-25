@@ -51,13 +51,18 @@ public class WaypointPathfinding : MonoBehaviour {
 	public float stopDuration;
 	public bool changeDetect;
 
+	[SerializeField] ParticleSystem playerDamaged_Particles;
+
 	WaypointManager WayManager;
+	CameraShake cam_Shake;
+
 
 	// Use this for initialization
 	void Start () {
 		rgd = GetComponent<Rigidbody2D> ();
 		Manager = GameObject.Find ("WaypointMap");
 		GameManager = GameObject.Find ("GameManager");
+		cam_Shake = Camera.main.GetComponent<CameraShake>();
 		WayManager = Manager.GetComponent<WaypointManager> ();
 		//t_Waypoint = TargetList [0];
 		shareStat = GameManager.GetComponent<SharedStats> ();
@@ -214,6 +219,11 @@ public class WaypointPathfinding : MonoBehaviour {
 			setTime += Time.deltaTime;
 			if (setTime >= AttackTime) {
 				shareStat.player_Health -= 1;
+
+				target.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+				cam_Shake.Shake(0.4f, 0.2f);
+				Instantiate(playerDamaged_Particles, target.transform.position, Quaternion.identity);
+
 				setTime = 0.0f;
 			}
 		}

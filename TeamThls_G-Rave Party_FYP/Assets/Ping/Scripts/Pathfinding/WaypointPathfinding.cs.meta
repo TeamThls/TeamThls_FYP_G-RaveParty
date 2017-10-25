@@ -1,10 +1,21 @@
 fileFormatVersion: 2
 guid: 5b00f71c4acbdc148af0c381a3141682
-timeCreated: 1498624975
+timeCreated: 1508950845
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - t_Waypoint: {instanceID: 0}
+  - target: {instanceID: 0}
+  - Manager: {instanceID: 0}
+  - GameManager: {instanceID: 0}
+  - Player: {instanceID: 0}
+  - Player2: {instanceID: 0}
+  - temp: {instanceID: 0}
+  - temp2: {instanceID: 0}
+  - TempWay: {instanceID: 0}
+  - playerDamaged_Particles: {fileID: 198178181253061040, guid: a97ae824e55cc524bb016a459a53d357,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
