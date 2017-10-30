@@ -14,7 +14,9 @@ public class MainMenuEventScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			ChangeScene ("Highscore");
+		}
 	}
 
 	void OnTriggerStay2D(Collider2D col)
@@ -29,7 +31,7 @@ public class MainMenuEventScript : MonoBehaviour {
 				}
 				else if (this.gameObject.name == "Leaderboard") 
 				{
-					//ChangeScene()
+					ChangeScene ("Highscore");
 				}
 				else if (this.gameObject.name == "Option") 
 				{

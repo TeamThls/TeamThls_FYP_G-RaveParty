@@ -8,6 +8,8 @@ public class GameOverManager : MonoBehaviour {
 
 	public GameObject GamaManager;
 	public SharedStats sharedstats;
+	public GameObject scoreManager;
+	public SaveGame saveGame;
 	public Text playerGold;
 	public Text playerScore;
 	private string scene;
@@ -16,12 +18,16 @@ public class GameOverManager : MonoBehaviour {
 	void Start () 
 	{
 		GamaManager = GameObject.Find("GameManager");
+		scoreManager = GameObject.Find ("HighscoreManager");
 		sharedstats = GamaManager.GetComponent<SharedStats> ();
+		saveGame = scoreManager.GetComponent<SaveGame> ();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		saveGame.tempScore = sharedstats.player_Score;
+		saveGame.saveDataToDisk ();
 		sharedstats.Reset ();
 
 		playerScore.text = sharedstats.player_Score.ToString();
