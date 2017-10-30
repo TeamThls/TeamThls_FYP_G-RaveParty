@@ -12,6 +12,8 @@ public class RuneBehaviour : MonoBehaviour {
 	[SerializeField] ParticleSystem rune_Molecule;
 	[SerializeField] bool isEnableToTake;
 
+	RuneColliderFunction runeCollider_Script;
+
 	bool startTime;
 
 	// Use this for initialization
@@ -28,6 +30,7 @@ public class RuneBehaviour : MonoBehaviour {
 		}
 		RandomizeNumber();
 		rune_Molecule = rune_Obj.transform.GetChild(0).GetComponent<ParticleSystem>();
+		runeCollider_Script = rune_Obj.transform.GetChild(3).GetComponent<RuneColliderFunction>();
 	}
 	
 	// Update is called once per frame
@@ -51,12 +54,14 @@ public class RuneBehaviour : MonoBehaviour {
 		{
 			if(rune_Molecule.isStopped == false)
 			{
+				runeCollider_Script.isAvailable = false;
 				rune_Molecule.Stop();
 			}
 			rune_Obj.transform.position = Vector2.MoveTowards (rune_Obj.transform.position, levels[currentRandomNumber].transform.position, Mathf.Lerp (0.01f, 0.25f, 0.25f));
 			if(rune_Obj.transform.position == levels[currentRandomNumber].transform.position)
 			{
 				RandomizeNumber();
+				runeCollider_Script.isAvailable = true;
 				startTime = true;
 
 			}

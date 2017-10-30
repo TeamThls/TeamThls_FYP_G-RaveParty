@@ -50,9 +50,6 @@ public class BulletUpgrades : MonoBehaviour {
 
 	public ParticleSystem laser_CurrentObj;
 
-
-
-
 	// Use this for initialization
 	void Start () 
 	{
