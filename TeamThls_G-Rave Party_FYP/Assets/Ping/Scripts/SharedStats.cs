@@ -36,6 +36,8 @@ public class SharedStats : MonoBehaviour {
 	public float LaserDuration;
 	public float IceDuration;
 
+	public float abilityExtendedDuration;
+
 	public float abilityDuration;
 
 	public int FireRange;
@@ -149,7 +151,7 @@ public class SharedStats : MonoBehaviour {
 		FireDuration = GlobalControl.Instance.F_Duration;
 		LaserDuration = GlobalControl.Instance.L_Duration;
 		IceDuration = GlobalControl.Instance.I_Duration;
-		abilityDuration = GlobalControl.Instance.ablty_Duration;
+		//abilityDuration = GlobalControl.Instance.ablty_Duration;
 
 		//Reset ();
 	}
@@ -161,28 +163,31 @@ public class SharedStats : MonoBehaviour {
 
 		if (OnFire == true) {
 			abilityDuration += Time.deltaTime;
-			if (abilityDuration >= FireDuration) {
+			if (abilityDuration >= FireDuration + abilityExtendedDuration) {
 				OnFire = false;
 				RandomNum = 0;
 				abilityDuration = 0.0f;
+				abilityExtendedDuration = 0.0f;
 			}
 		}
 
 		if (OnIce == true) {
 			abilityDuration += Time.deltaTime;
-			if (abilityDuration >= IceDuration) {
+			if (abilityDuration >= IceDuration + abilityExtendedDuration) {
 				OnIce = false;
 				RandomNum = 0;
 				abilityDuration = 0.0f;
-			}
+				abilityExtendedDuration = 0.0f;
+				}
 		}
 
 		if (OnLaser == true) {
 			abilityDuration += Time.deltaTime;
-			if (abilityDuration >= LaserDuration) {
+			if (abilityDuration >= LaserDuration + abilityExtendedDuration) {
 				OnLaser = false;
 				RandomNum = 0;
 				abilityDuration = 0.0f;
+				abilityExtendedDuration = 0.0f;
 			}
 		}
 

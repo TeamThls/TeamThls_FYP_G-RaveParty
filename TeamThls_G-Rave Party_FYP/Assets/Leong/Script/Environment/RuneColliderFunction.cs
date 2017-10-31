@@ -8,7 +8,9 @@ public class RuneColliderFunction : MonoBehaviour {
 	[SerializeField] List<ParticleSystem> rune_ChildParticles;
 	SharedStats sharedStats_Script;
 
-	public bool isAvailable;
+	[SerializeField] bool isAvailable;
+	[SerializeField] float timeToEnableRune;
+	[SerializeField] float currentTime;
 	// Use this for initialization
 	void Start () 
 	{
@@ -26,12 +28,28 @@ public class RuneColliderFunction : MonoBehaviour {
 	{
 		if(isAvailable == true)
 		{
-			for(int i = 0; i < rune_ChildParticles.Count; i++)
+			for(int i = 0; i < rune_ChildParticles.Count - 2; i++)
 			{
 				if(rune_ChildParticles[i].isPlaying == false)
 				{
 					rune_ChildParticles[i].Play();
 				}
+			}
+		}
+		else
+		{
+			for(int i = 0; i < rune_ChildParticles.Count - 2; i++)
+			{
+				if(rune_ChildParticles[i].isPlaying == true)
+				{
+					rune_ChildParticles[i].Stop();
+				}
+			}
+			currentTime += Time.deltaTime;
+			if(currentTime > timeToEnableRune)
+			{
+				isAvailable = true;
+				currentTime = 0.0f;
 			}
 		}
 	}
@@ -42,16 +60,10 @@ public class RuneColliderFunction : MonoBehaviour {
 		{
 			if(isAvailable == true)
 			{
-				for(int i = 0; i < rune_ChildParticles.Count; i++)
-				{
-					if(rune_ChildParticles[i].isPlaying == true)
-					{
-						rune_ChildParticles[i].Stop();
-						isAvailable = false;
-						RandomizeEffect();
-					}
-				}
+				isAvailable = false;
+				RandomizeEffect();
 			}
+			rune_ChildParticles[3].Emit(1);
 			Destroy(col.gameObject);
 		}
 	}
@@ -61,8 +73,8 @@ public class RuneColliderFunction : MonoBehaviour {
 		int randomizeNumber = Random.Range(0, 3);
 		switch(randomizeNumber)
 		{
-			case 1:
-				sharedStats_Script.player_Health += 50;
+			case 0:
+				sharedStats_Script.player_Health += 33;
 				if(sharedStats_Script.player_Health > sharedStats_Script.player_MaxHealth)
 				{
 					sharedStats_Script.player_Health = sharedStats_Script.player_MaxHealth;
@@ -70,15 +82,19 @@ public class RuneColliderFunction : MonoBehaviour {
 				Debug.Log("Healing");
 				break;
 
-			case 2:
-				sharedStats_Script.player_Mana += 50;
+			case 1:
+				sharedStats_Script.player_Mana += 33;
 				if(sharedStats_Script.player_Mana > sharedStats_Script.player_MaxMana)
 				{
 					sharedStats_Script.player_Mana = sharedStats_Script.player_MaxMana;
 				}
 				Debug.Log("Mana");	
 				break;
-				
+
+			case 2:
+				sharedStats_Script.abilityExtendedDuration = 30.0f;
+				Debug.Log("Extra 30 Sec for current ability!");
+				break;
 		}
 
 
