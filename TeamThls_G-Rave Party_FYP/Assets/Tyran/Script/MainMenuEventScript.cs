@@ -63,4 +63,8 @@ public class MainMenuEventScript : MonoBehaviour {
 		//SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_BUTTONPRESSED1);
 		Application.Quit();
 	}
+
+	public void goMainMenu(){
+		ChangeScene ("Main Menu");
+	}
 }
