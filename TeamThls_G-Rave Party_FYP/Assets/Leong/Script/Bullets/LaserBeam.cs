@@ -88,10 +88,19 @@ public class LaserBeam : MonoBehaviour {
 
 	void OnParticleCollision(GameObject obj)
 	{
-		EnemyCollider enemy_Collider = obj.GetComponent<EnemyCollider>();
-		enemy_Collider.LaserBulletReaction();
-		enemy_Collider.enemy_Health -= laser_Damage;
-		cameraShake.Shake(1.0f, 0.4f);
+		if(obj.GetComponent<EnemyCollider>() != null)
+		{
+			EnemyCollider enemy_Collider = obj.GetComponent<EnemyCollider>();
+			enemy_Collider.LaserBulletReaction();
+			enemy_Collider.enemy_Health -= laser_Damage;
+			cameraShake.Shake(1.0f, 0.4f);
+		}
+		else if(obj.GetComponent<RuneColliderFunction>() != null)
+		{
+		Debug.Log("RUne");
+			RuneColliderFunction rune_Collider = obj.GetComponent<RuneColliderFunction>();
+			rune_Collider.RuneDamage();
+		}
 		
 	}
 }

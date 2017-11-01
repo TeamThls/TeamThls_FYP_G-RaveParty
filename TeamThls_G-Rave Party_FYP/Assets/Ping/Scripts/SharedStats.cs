@@ -151,7 +151,7 @@ public class SharedStats : MonoBehaviour {
 		FireDuration = GlobalControl.Instance.F_Duration;
 		LaserDuration = GlobalControl.Instance.L_Duration;
 		IceDuration = GlobalControl.Instance.I_Duration;
-		//abilityDuration = GlobalControl.Instance.ablty_Duration;
+		abilityDuration = GlobalControl.Instance.ablty_Duration;
 
 		//Reset ();
 	}

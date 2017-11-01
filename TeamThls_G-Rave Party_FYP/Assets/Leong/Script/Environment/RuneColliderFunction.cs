@@ -58,16 +58,20 @@ public class RuneColliderFunction : MonoBehaviour {
 	{
 		if(col.gameObject.layer == 11)
 		{
-			if(isAvailable == true)
-			{
-				isAvailable = false;
-				RandomizeEffect();
-			}
-			rune_ChildParticles[3].Emit(1);
+			RuneDamage();
 			Destroy(col.gameObject);
 		}
 	}
 
+	public void RuneDamage()
+	{
+		if(isAvailable == true)
+		{
+			isAvailable = false;
+			RandomizeEffect();
+		}
+		rune_ChildParticles[3].Emit(1);
+	}
 	void RandomizeEffect()
 	{
 		int randomizeNumber = Random.Range(0, 3);

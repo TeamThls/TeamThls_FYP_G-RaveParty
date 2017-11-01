@@ -72,10 +72,18 @@ public class Fire : MonoBehaviour {
 
 	void OnParticleCollision(GameObject obj)
 	{
-		EnemyCollider enemy_Collider = obj.GetComponent<EnemyCollider>();
-		cameraShake.Shake(0.3f, 0.1f);
-		enemy_Collider.BurnedReaction();
-		enemy_Collider.enemy_Health -= fire_Damage;
-
+		if(obj.GetComponent<EnemyCollider>() != null)
+		{
+			EnemyCollider enemy_Collider = obj.GetComponent<EnemyCollider>();
+			cameraShake.Shake(0.3f, 0.1f);
+			enemy_Collider.BurnedReaction();
+			enemy_Collider.enemy_Health -= fire_Damage;
+		}
+		else if(obj.GetComponent<RuneColliderFunction>() != null)
+		{
+			Debug.Log("Rune");
+			RuneColliderFunction rune_Collider = obj.GetComponent<RuneColliderFunction>();
+			rune_Collider.RuneDamage();
+		}
 	}
 }
