@@ -52,6 +52,7 @@ public class UpgradeDetails : MonoBehaviour {
 		player2_Upgrade = GameObject.Find("Player2").GetComponent<BulletUpgrades>();
 		selected = false;
 		stage = stageNum;
+		shrd.wave_count = stage;
 
 		if (stage == 1) {
 			num = Random.Range (1, 3);

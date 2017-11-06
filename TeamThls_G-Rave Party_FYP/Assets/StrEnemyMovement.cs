@@ -40,6 +40,7 @@ public class StrEnemyMovement : MonoBehaviour {
 
 	public float a;
 	public float b;
+	public bool canRotate;
 
 	[SerializeField] ParticleSystem playerDamaged_Particles;
 

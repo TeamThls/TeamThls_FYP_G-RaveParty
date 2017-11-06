@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SharedStats : MonoBehaviour {
 
+	public string player_name;
+
 	public float player_Health;
 	public float player_MaxHealth;
 
@@ -12,6 +14,8 @@ public class SharedStats : MonoBehaviour {
 
 	public int player_Gold = 0;
 	public int player_Score = 0;
+
+	public int wave_count;
 
 	public int Bullet_Damage;
 	public int Fire_Damage;
@@ -51,6 +55,8 @@ public class SharedStats : MonoBehaviour {
 
 	public int resetplayer_Gold = 0;
 	public int resetplayer_Score = 0;
+
+	public int reset_Wave_Count = 0;
 
 	public int resetBullet_Damage;
 	public int resetFire_Damage;
@@ -97,6 +103,8 @@ public class SharedStats : MonoBehaviour {
 		resetplayer_Gold = GlobalControl.Instance.p_Gold;
 		resetplayer_Score = GlobalControl.Instance.p_Score;
 
+		reset_Wave_Count = GlobalControl.Instance.wave_count;
+
 		resetBullet_Damage = GlobalControl.Instance.B_Damage;
 		resetFire_Damage = GlobalControl.Instance.F_Damage;
 		resetIce_Damage = GlobalControl.Instance.I_Damage;
@@ -136,6 +144,8 @@ public class SharedStats : MonoBehaviour {
 
 		player_Gold = GlobalControl.Instance.p_Gold;
 		player_Score = GlobalControl.Instance.p_Score;
+
+		wave_count = GlobalControl.Instance.wave_count;
 
 		Bullet_Damage = GlobalControl.Instance.B_Damage;
 		Fire_Damage = GlobalControl.Instance.F_Damage;
@@ -225,6 +235,8 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.p_Gold = player_Gold;
 		GlobalControl.Instance.p_Score = player_Score;
 
+		GlobalControl.Instance.wave_count = wave_count;
+
 		GlobalControl.Instance.B_Damage = Bullet_Damage;
 		GlobalControl.Instance.F_Damage = Fire_Damage;
 		GlobalControl.Instance.I_Damage = Ice_Damage;
@@ -253,6 +265,8 @@ public class SharedStats : MonoBehaviour {
 
 		GlobalControl.Instance.p_Gold = resetplayer_Gold;
 		GlobalControl.Instance.p_Score = resetplayer_Score;
+
+		GlobalControl.Instance.wave_count = reset_Wave_Count;
 
 		GlobalControl.Instance.B_Damage = resetBullet_Damage;
 		GlobalControl.Instance.F_Damage = resetFire_Damage;

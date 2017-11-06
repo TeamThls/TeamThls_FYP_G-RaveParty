@@ -14,6 +14,10 @@ public class GameOverManager : MonoBehaviour {
 	public Text playerScore;
 	private string scene;
 	public Text playerWin;
+
+	public Transform field;
+	public InputField input_f;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -21,11 +25,14 @@ public class GameOverManager : MonoBehaviour {
 		scoreManager = GameObject.Find ("HighscoreManager");
 		sharedstats = GamaManager.GetComponent<SharedStats> ();
 		saveGame = scoreManager.GetComponent<SaveGame> ();
+		input_f = field.GetComponent<InputField> ();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		saveGame.tempName = sharedstats.player_name;
+		saveGame.tempWave = sharedstats.wave_count;
 		saveGame.tempScore = sharedstats.player_Score;
 		saveGame.saveDataToDisk ();
 		sharedstats.Reset ();
@@ -54,5 +61,11 @@ public class GameOverManager : MonoBehaviour {
 	{
 		sharedstats.levelPassed = false;
 		SceneManager.LoadScene (scene);
+	}
+
+	public void saveName(){
+		sharedstats.player_name = input_f.text;
+		saveGame.tempName = sharedstats.player_name;
+		saveGame.saveDataToDisk ();
 	}
 }

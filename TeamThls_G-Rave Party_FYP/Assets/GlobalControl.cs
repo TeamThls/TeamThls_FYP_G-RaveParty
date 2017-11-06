@@ -15,6 +15,8 @@ public class GlobalControl : MonoBehaviour {
 	public int p_Gold = 0;
 	public int p_Score = 0;
 
+	public int wave_count = 0;
+
 	public int B_Damage;
 	public int F_Damage;
 	public int I_Damage;
