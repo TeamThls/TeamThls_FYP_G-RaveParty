@@ -7,6 +7,8 @@ public class RuneColliderFunction : MonoBehaviour {
 	[SerializeField] ParticleSystem rune_Particles;
 	[SerializeField] List<ParticleSystem> rune_ChildParticles;
 	SharedStats sharedStats_Script;
+	[SerializeField] ParticleSystem player_CircleParticles;
+	[SerializeField] ParticleSystem player2_CircleParticles;
 
 	[SerializeField] bool isAvailable;
 	[SerializeField] float timeToEnableRune;
@@ -22,6 +24,8 @@ public class RuneColliderFunction : MonoBehaviour {
 			rune_ChildParticles.Add (rune_Particles.transform.GetChild(i).GetComponent<ParticleSystem>());
 		}
 		sharedStats_Script = GameObject.Find("GameManager").GetComponent<SharedStats>();
+		player_CircleParticles = GameObject.Find("Player").transform.GetChild(7).GetComponent<ParticleSystem>();
+		player2_CircleParticles = GameObject.Find("Player2").transform.GetChild(7).GetComponent<ParticleSystem>();
 	}
 
 	void Update()
@@ -68,6 +72,8 @@ public class RuneColliderFunction : MonoBehaviour {
 		if(isAvailable == true)
 		{
 			isAvailable = false;
+			player_CircleParticles.Emit(1);
+			player2_CircleParticles.Emit(1);
 			RandomizeEffect();
 		}
 		rune_ChildParticles[3].Emit(1);

@@ -142,7 +142,7 @@ public class TimeManagement : MonoBehaviour {
 				if(obj_pc.isShootingIce == false)
 				{
 					obj_pm.player_TimeFactor = 1.0f;
-					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 2.4f;
+					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 6.0f;
 					obj_pm.player_SlowMo = false;	
 				}
 				else
