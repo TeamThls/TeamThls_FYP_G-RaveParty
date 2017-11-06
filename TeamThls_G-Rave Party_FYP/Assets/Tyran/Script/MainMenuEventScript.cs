@@ -27,7 +27,7 @@ public class MainMenuEventScript : MonoBehaviour {
 			{
 				if (this.gameObject.name == "Play") 
 				{
-					ChangeScene ("Multiplayer Level");
+					ChangeScene ("Control Scheme 2");
 				}
 				else if (this.gameObject.name == "Leaderboard") 
 				{
