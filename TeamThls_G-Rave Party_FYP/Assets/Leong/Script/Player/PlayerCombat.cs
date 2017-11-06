@@ -496,7 +496,7 @@ public class PlayerCombat : MonoBehaviour {
 		}
 		else
 		{
-			movementScript.player_rgBody.gravityScale = 3;
+			movementScript.player_rgBody.gravityScale = 6;
 		}
 		movementScript.enabled = true;
 		isShootingIce = false;
