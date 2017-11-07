@@ -5,6 +5,7 @@ using UnityEngine;
 public class RuneColliderFunction : MonoBehaviour {
 
 	[SerializeField] ParticleSystem rune_Particles;
+	[SerializeField] ParticleSystem rune_PostExpl;
 	[SerializeField] List<ParticleSystem> rune_ChildParticles;
 	SharedStats sharedStats_Script;
 	[SerializeField] ParticleSystem player_CircleParticles;
@@ -19,13 +20,14 @@ public class RuneColliderFunction : MonoBehaviour {
 		isAvailable = true;
 		rune_Particles = GetComponentInParent<ParticleSystem>();
 
-		for(int i = 0; i < rune_Particles.transform.childCount - 1; i++)
+		for(int i = 0; i < rune_Particles.transform.childCount - 3; i++)
 		{
 			rune_ChildParticles.Add (rune_Particles.transform.GetChild(i).GetComponent<ParticleSystem>());
 		}
 		sharedStats_Script = GameObject.Find("GameManager").GetComponent<SharedStats>();
 		player_CircleParticles = GameObject.Find("Player").transform.GetChild(7).GetComponent<ParticleSystem>();
 		player2_CircleParticles = GameObject.Find("Player2").transform.GetChild(7).GetComponent<ParticleSystem>();
+		rune_PostExpl = rune_ChildParticles[4].GetComponent<ParticleSystem>();
 	}
 
 	void Update()
@@ -72,9 +74,11 @@ public class RuneColliderFunction : MonoBehaviour {
 		if(isAvailable == true)
 		{
 			isAvailable = false;
+			rune_PostExpl.Emit(250);
 			player_CircleParticles.Emit(1);
 			player2_CircleParticles.Emit(1);
 			RandomizeEffect();
+			Debug.Log("Rune Damaged");
 		}
 		rune_ChildParticles[3].Emit(1);
 	}

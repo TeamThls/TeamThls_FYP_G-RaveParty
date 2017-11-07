@@ -11,7 +11,7 @@ public class RuneBehaviour : MonoBehaviour {
 	[SerializeField] GameObject rune_Obj;
 	[SerializeField] ParticleSystem rune_Molecule;
 
-	bool startTime;
+	[SerializeField] bool startTime;
 
 	// Use this for initialization
 	void Start () 
@@ -26,7 +26,7 @@ public class RuneBehaviour : MonoBehaviour {
 			levels.Add(transform.GetChild(i).gameObject);
 		}
 		RandomizeNumber();
-		rune_Molecule = rune_Obj.transform.GetChild(0).GetComponent<ParticleSystem>();
+		rune_Molecule = rune_Obj.GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame

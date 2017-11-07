@@ -80,6 +80,12 @@ public class WaypointPathfinding : MonoBehaviour {
 				t_Waypoint = WayManager.childList [i];
 			}
 		}
+		// Get the first waypoint right at the start of the script to prevent null reference
+		if(TargetList[0] == null)
+		{
+			GameObject firstWaypoint = GameObject.Find ("waypoint").gameObject;
+			TargetList[0] = firstWaypoint;
+		}
 
 		targetDetection ();
 

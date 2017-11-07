@@ -14,6 +14,7 @@ public class EnemyCollider : MonoBehaviour {
 	[SerializeField] ParticleSystem p_DustOnDeath;
 	[SerializeField] ParticleSystem p_BurnedOnDeath;
 	[SerializeField] ParticleSystem p_Soul;
+	[SerializeField] ParticleSystem p_SpecialOnDeath;
 	[SerializeField] ParticleSystem p_HealthSoul;
 	//Rigidbody2D rgBody;
 	TimeManagement timeManager;
@@ -39,6 +40,7 @@ public class EnemyCollider : MonoBehaviour {
 		{
 			healthDevice = GameObject.Find("P_HealDeviceStand").GetComponent<HealthDeviceHealing>();
 		}
+
 
 	}
 	
@@ -72,24 +74,30 @@ public class EnemyCollider : MonoBehaviour {
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Kill);
 
 		//var main = p_BloodOnDeath.main;
-		if(enemy_CurrentState == enemy_DeathState.Normal)
+		if(gameObject.name == "SpecialWave")
 		{
-			//main.startColor = Color.yellow;
-			Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
+			Instantiate(p_SpecialOnDeath, transform.position, Quaternion.identity);
 		}
-		else if(enemy_CurrentState == enemy_DeathState.Ice)
+		else
 		{
-			//main.startColor = Color.cyan;
-			Instantiate(p_IceBloodOnDeath, transform.position, Quaternion.identity);
+			if(enemy_CurrentState == enemy_DeathState.Normal)
+			{
+				Instantiate(p_BloodOnDeath, transform.position, Quaternion.identity);
+			}
+			else if(enemy_CurrentState == enemy_DeathState.Ice)
+			{
+				Instantiate(p_IceBloodOnDeath, transform.position, Quaternion.identity);
+			}
+			else if(enemy_CurrentState == enemy_DeathState.Laser)
+			{
+				Instantiate(p_DustOnDeath, transform.position, Quaternion.identity);
+			}
+			else if(enemy_CurrentState == enemy_DeathState.Fire)
+			{
+				Instantiate(p_BurnedOnDeath, transform.position, Quaternion.identity);
+			}
 		}
-		else if(enemy_CurrentState == enemy_DeathState.Laser)
-		{
-			Instantiate(p_DustOnDeath, transform.position, Quaternion.identity);
-		}
-		else if(enemy_CurrentState == enemy_DeathState.Fire)
-		{
-			Instantiate(p_BurnedOnDeath, transform.position, Quaternion.identity);
-		}
+
 		Instantiate(p_Soul, transform.position, Quaternion.identity);
 		Instantiate(p_HealthSoul, transform.position, Quaternion.identity);
 	}
