@@ -35,10 +35,10 @@ public class RuneBehaviour : MonoBehaviour {
 		if(startTime == true)
 		{
 			timeForStationary += Time.deltaTime;
-			if(rune_Molecule.isStopped == true)
+			/*if(rune_Molecule.isStopped == true)
 			{
 				rune_Molecule.Play();
-			}
+			}*/
 
 			if(timeForStationary > timeToMove)
 			{
@@ -48,10 +48,10 @@ public class RuneBehaviour : MonoBehaviour {
 		}
 		else
 		{
-			if(rune_Molecule.isStopped == false)
+			/*if(rune_Molecule.isStopped == false)
 			{
 				rune_Molecule.Stop();
-			}
+			}*/
 			rune_Obj.transform.position = Vector2.MoveTowards (rune_Obj.transform.position, levels[currentRandomNumber].transform.position, Mathf.Lerp (0.01f, 0.25f, 0.25f));
 			if(rune_Obj.transform.position == levels[currentRandomNumber].transform.position)
 			{

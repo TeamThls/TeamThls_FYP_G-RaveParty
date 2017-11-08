@@ -5,7 +5,7 @@ using UnityEngine;
 public class RuneColliderFunction : MonoBehaviour {
 
 	[SerializeField] ParticleSystem rune_Particles;
-	[SerializeField] ParticleSystem rune_PostExpl;
+	//[SerializeField] ParticleSystem rune_Core;
 	[SerializeField] List<ParticleSystem> rune_ChildParticles;
 	SharedStats sharedStats_Script;
 	[SerializeField] ParticleSystem player_CircleParticles;
@@ -27,7 +27,6 @@ public class RuneColliderFunction : MonoBehaviour {
 		sharedStats_Script = GameObject.Find("GameManager").GetComponent<SharedStats>();
 		player_CircleParticles = GameObject.Find("Player").transform.GetChild(7).GetComponent<ParticleSystem>();
 		player2_CircleParticles = GameObject.Find("Player2").transform.GetChild(7).GetComponent<ParticleSystem>();
-		rune_PostExpl = rune_ChildParticles[4].GetComponent<ParticleSystem>();
 	}
 
 	void Update()
@@ -41,6 +40,10 @@ public class RuneColliderFunction : MonoBehaviour {
 					rune_ChildParticles[i].Play();
 				}
 			}
+			if(rune_Particles.isPlaying == false)
+			{
+				rune_Particles.Play();
+			}
 		}
 		else
 		{
@@ -49,7 +52,12 @@ public class RuneColliderFunction : MonoBehaviour {
 				if(rune_ChildParticles[i].isPlaying == true)
 				{
 					rune_ChildParticles[i].Stop();
+
 				}
+			}
+			if(rune_Particles.isPlaying == true)
+			{
+				rune_Particles.Stop();
 			}
 			currentTime += Time.deltaTime;
 			if(currentTime > timeToEnableRune)
@@ -74,7 +82,7 @@ public class RuneColliderFunction : MonoBehaviour {
 		if(isAvailable == true)
 		{
 			isAvailable = false;
-			rune_PostExpl.Emit(250);
+			rune_ChildParticles[4].Emit(250);
 			player_CircleParticles.Emit(1);
 			player2_CircleParticles.Emit(1);
 			RandomizeEffect();

@@ -73,7 +73,6 @@ public class EnemyCollider : MonoBehaviour {
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_Kill);
 
-		//var main = p_BloodOnDeath.main;
 		if(gameObject.name == "SpecialWave")
 		{
 			Instantiate(p_SpecialOnDeath, transform.position, Quaternion.identity);

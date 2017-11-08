@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: cd3aedd18febe0f409972c890ab3b1ce
-timeCreated: 1498626337
+timeCreated: 1510146983
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthDevice: {instanceID: 0}
+  - healParticles: {fileID: 198182661508648838, guid: 0625b55f2c9e7a14784cb4156f87b6fc,
+      type: 2}
+  - healUIParticles: {fileID: 198426145479643260, guid: 67738e2c0e6fdd54e8776a68e721d871,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

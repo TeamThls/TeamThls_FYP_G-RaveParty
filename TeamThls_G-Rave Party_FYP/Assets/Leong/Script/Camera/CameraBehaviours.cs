@@ -8,6 +8,8 @@ public class CameraBehaviours : MonoBehaviour {
 	public GameObject player2;
 	public PlayerCombat combat_Script;
 
+	Transform healthUI_Obj;
+
 	Camera mainCam;
 
 	Vector3 camera_CenterPoint;
@@ -26,36 +28,28 @@ public class CameraBehaviours : MonoBehaviour {
 		{
 			mainCam = Camera.main;
 		}
+
 	}
 
 	void Start ()
 	{
 		player = GameObject.Find("Player");
 		player2 = GameObject.Find("Player2");
+		healthUI_Obj = transform.GetChild(1).transform;
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		/*if(combat_Script.isSlowMo == true)
-		{
-			if(mainCam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().blurAmount < 8.1f)
-			{
-				mainCam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().blurAmount += 2.0f * Time.deltaTime;
-			}
-			else
-			{
-				mainCam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().blurAmount = 8.0f;
-			}
+		Vector3 camera_MinScreenLimit = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
 
-		}
-		else
-		{
-			if(mainCam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().blurAmount > 0.0f)
-			{
-				mainCam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().blurAmount -= 3.0f * Time.deltaTime;
-			}
-		}*/
+		// Max Screen Limit Vector3, take from camera screen width and height (Right Side)
+		Vector3 camera_MaxScreenLimit = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+		healthUI_Obj.position = new Vector3(Mathf.Clamp(healthUI_Obj.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
+			,Mathf.Clamp(healthUI_Obj.position.y, camera_MaxScreenLimit.y - 1, camera_MaxScreenLimit.y - 1), healthUI_Obj.position.z);
+
+
 
 		// Find the Center Point between two desired objects
 		camera_CenterPoint = (player.transform.position + player2.transform.position) / 2f;
