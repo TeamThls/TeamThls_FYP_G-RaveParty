@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 8d082d2b72402df4d85be1e5ede8fe68
-timeCreated: 1509349996
+timeCreated: 1510153715
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rune_Particles: {instanceID: 0}
+  - player_CircleParticles: {instanceID: 0}
+  - player2_CircleParticles: {instanceID: 0}
+  - healthUI_Particles: {fileID: 198426145479643260, guid: 67738e2c0e6fdd54e8776a68e721d871,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

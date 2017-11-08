@@ -23,27 +23,76 @@ public class MainMenuEventScript : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Player" ) 
 		{
-			if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
+			if (this.gameObject.name == "Play") 
 			{
-				if (this.gameObject.name == "Play") 
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
 				{
 					ChangeScene ("Control Scheme 2");
 				}
-				else if (this.gameObject.name == "Leaderboard") 
+			}
+			else if (this.gameObject.name == "Leaderboard") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
 				{
 					ChangeScene ("Highscore");
 				}
-				else if (this.gameObject.name == "Option") 
+			}
+			else if (this.gameObject.name == "Option") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
 				{
-					//ChangeScene()
+					
 				}
-				else if (this.gameObject.name == "Exit") 
+				//ChangeScene()
+			}
+			else if (this.gameObject.name == "Exit") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
 				{
-					Exit();
+					Exit();		
 				}
 			}
 			
 		}
+	}
+
+	void OnTriggerExit2D(Collider2D col)
+	{
+		if(col.gameObject.tag == "Player")
+		{
+			if(this.gameObject.name == "Play")
+			{
+				DisableSpriteI();
+			}
+			else if(this.gameObject.name == "Leaderboard") 
+			{
+				DisableSpriteI();
+			}
+			else if(this.gameObject.name == "Option") 
+			{
+				DisableSpriteI();
+			}
+			else if(this.gameObject.name == "Exit") 
+			{
+				DisableSpriteI();
+			}
+		}
+	}
+
+	void DisplaySpriteI()
+	{
+		transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+		transform.GetChild(1).GetComponent<Light>().enabled = true;
+	}
+
+	void DisableSpriteI()
+	{
+		transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+		transform.GetChild(1).GetComponent<Light>().enabled = false;
 	}
 
 	public void ChangeScene (string sceneName)

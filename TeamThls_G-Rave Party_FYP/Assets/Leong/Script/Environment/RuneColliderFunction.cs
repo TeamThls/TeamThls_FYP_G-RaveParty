@@ -10,6 +10,7 @@ public class RuneColliderFunction : MonoBehaviour {
 	SharedStats sharedStats_Script;
 	[SerializeField] ParticleSystem player_CircleParticles;
 	[SerializeField] ParticleSystem player2_CircleParticles;
+	[SerializeField] ParticleSystem healthUI_Particles;
 
 	[SerializeField] bool isAvailable;
 	[SerializeField] float timeToEnableRune;
@@ -101,6 +102,7 @@ public class RuneColliderFunction : MonoBehaviour {
 				{
 					sharedStats_Script.player_Health = sharedStats_Script.player_MaxHealth;
 				}
+				Instantiate(healthUI_Particles, transform.position, Quaternion.identity);
 				Debug.Log("Healing");
 				break;
 
