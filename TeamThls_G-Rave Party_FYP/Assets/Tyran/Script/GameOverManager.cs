@@ -31,11 +31,21 @@ public class GameOverManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		saveGame.tempName = sharedstats.player_name;
-		saveGame.tempWave = sharedstats.wave_count;
-		saveGame.tempScore = sharedstats.player_Score;
-		saveGame.saveDataToDisk ();
-		sharedstats.Reset ();
+		if (sharedstats.player_Number == 1) {
+			saveGame.tempName = sharedstats.player_name;
+			saveGame.tempWave = sharedstats.wave_count;
+			saveGame.tempScore = sharedstats.player_Score;
+			saveGame.saveDataToDisk ();
+			sharedstats.Reset ();
+		}
+		else if (sharedstats.player_Number == 2) {
+			saveGame.multiName = sharedstats.player_name;
+			saveGame.multiWave = sharedstats.wave_count;
+			saveGame.multiScore = sharedstats.player_Score;
+			saveGame.saveDataToDisk ();
+			sharedstats.Reset ();
+		}
+
 
 		playerScore.text = sharedstats.player_Score.ToString();
 		if (sharedstats.levelPassed) 
@@ -65,7 +75,12 @@ public class GameOverManager : MonoBehaviour {
 
 	public void saveName(){
 		sharedstats.player_name = input_f.text;
-		saveGame.tempName = sharedstats.player_name;
+		if (sharedstats.player_Number == 1) {
+			saveGame.tempName = sharedstats.player_name;
+		}
+		else if (sharedstats.player_Number == 2) {
+			saveGame.multiName = sharedstats.player_name;
+		}
 		saveGame.saveDataToDisk ();
 	}
 }

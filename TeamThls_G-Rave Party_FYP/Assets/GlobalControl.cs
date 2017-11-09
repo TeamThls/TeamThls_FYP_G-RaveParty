@@ -6,6 +6,7 @@ public class GlobalControl : MonoBehaviour {
 
 	public static GlobalControl Instance;
 
+	public int player_Num;
 	public float p_Health;
 	public float p_MaxHealth;
 

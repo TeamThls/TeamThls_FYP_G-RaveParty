@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyGroundChecker : MonoBehaviour {
 
-	WaypointPathfinding enemyMove;
+	public WaypointPathfinding enemyMove;
 
 	// Use this for initialization
 	void Start () 
@@ -12,27 +12,27 @@ public class EnemyGroundChecker : MonoBehaviour {
 		enemyMove = GetComponentInParent<WaypointPathfinding>();
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	void OnTriggerEnter2D(Collider2D col)
 	{
-		if(other.tag == "Ground")
+		if(col.CompareTag("Ground"))
 		{
 			enemyMove.enemy_groundCheck = true;
 		}
 
 	}
 
-	void OnTriggerStay2D(Collider2D other)
+	void OnTriggerStay2D(Collider2D col)
 	{
-		if(other.tag == "Ground")
+		if(col.CompareTag("Ground"))
 		{
 			enemyMove.enemy_groundCheck = true;
 		}
 
 	}
 
-	void OnTriggerExit2D(Collider2D other)
+	void OnTriggerExit2D(Collider2D col)
 	{
-		if(other.tag == "Ground")
+		if(col.CompareTag("Ground"))
 		{
 			enemyMove.enemy_groundCheck = false;
 		}

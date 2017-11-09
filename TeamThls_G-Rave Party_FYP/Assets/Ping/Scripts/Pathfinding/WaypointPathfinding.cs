@@ -38,8 +38,9 @@ public class WaypointPathfinding : MonoBehaviour {
 	public bool flipx;						// checking for combat
 
 	public bool enemy_groundCheck = false;	// checking is the enemy on ground or not, to avoid enemy combat enabled while jumping
-	public float setTime = 0.0f;			// next attack cd time
-	public float AttackTime = 0.0f;			// when setTime reach this, enemy will attack player
+	public float setTime;			// next attack cd time
+	public float AttackTime;		// when setTime reach this, enemy will attack player
+	public bool canAttack;
 
 	public bool canJump;
 	public float jump;
@@ -136,9 +137,9 @@ public class WaypointPathfinding : MonoBehaviour {
 			{
 				if(hitInfo.collider.gameObject.tag == "Player")
 				{
-					if (enemy_groundCheck == true) {
+					//if (enemy_groundCheck == true) {
 						detect = true;
-					}
+					//}
 					target = hitInfo.collider.gameObject;
 				}
 				else
@@ -161,9 +162,9 @@ public class WaypointPathfinding : MonoBehaviour {
 			{
 				if(hitInfo.collider.gameObject.tag == "Player")
 				{
-					if (enemy_groundCheck == true) {
+					//if (enemy_groundCheck == true) {
 						detect = true;
-					}
+					//}
 					target = hitInfo.collider.gameObject;
 				}
 				else
@@ -180,7 +181,7 @@ public class WaypointPathfinding : MonoBehaviour {
 
 
 		if (detect == false) {
-			setTime = 0.0f;
+			//setTime = 0.0f;
 			step = speed * Time.deltaTime;
 			distance = Vector3.Distance (this.gameObject.transform.position, target.transform.position);
 		
@@ -225,12 +226,11 @@ public class WaypointPathfinding : MonoBehaviour {
 			setTime += Time.deltaTime;
 			if (setTime >= AttackTime) {
 				shareStat.player_Health -= 1;
-
-				target.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
-				cam_Shake.Shake(0.4f, 0.2f);
-				Instantiate(playerDamaged_Particles, target.transform.position, Quaternion.identity);
-
+				Debug.Log ("hitting" + shareStat.player_Health);
 				setTime = 0.0f;
+				cam_Shake.Shake(0.4f, 0.2f);
+				target.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+				Instantiate(playerDamaged_Particles, target.transform.position, Quaternion.identity);
 			}
 		}
 

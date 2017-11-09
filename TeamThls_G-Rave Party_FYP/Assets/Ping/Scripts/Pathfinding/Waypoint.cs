@@ -27,6 +27,9 @@ public class Waypoint : MonoBehaviour {
 	void Start () {
 		Player = GameObject.Find("Player");
 		Player2 = GameObject.Find ("Player2");
+		if (Player2 == null) {
+			Player2 = Player;
+		}
 	}
 	
 	// Update is called once per frame

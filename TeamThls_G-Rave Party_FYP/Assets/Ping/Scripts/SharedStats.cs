@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class SharedStats : MonoBehaviour {
 
 	public string player_name;
+	public int player_Number;
 
 	public float player_Health;
 	public float player_MaxHealth;
@@ -47,6 +48,7 @@ public class SharedStats : MonoBehaviour {
 	public int FireRange;
 
 	//reset values
+	public int resetPlayer_Num;
 	public float resetplayer_Health;
 	public float resetplayer_MaxHealth;
 
@@ -85,7 +87,6 @@ public class SharedStats : MonoBehaviour {
 
 	public int resetFireRange;
 
-
 	public int RandomNum;
 
 	public bool levelPassed;
@@ -93,6 +94,7 @@ public class SharedStats : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake() {
+		resetPlayer_Num = GlobalControl.Instance.player_Num;
 		resetplayer_Health = GlobalControl.Instance.p_Health ;
 		resetplayer_MaxHealth = GlobalControl.Instance.p_MaxHealth;
 
@@ -135,6 +137,7 @@ public class SharedStats : MonoBehaviour {
 
 	void OnSceneLoaded(Scene Scene,LoadSceneMode mode)
 	{
+		player_Number = GlobalControl.Instance.player_Num;
 		player_Health = GlobalControl.Instance.p_Health ;
 		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
 
@@ -225,6 +228,7 @@ public class SharedStats : MonoBehaviour {
 	}
 
 	public void SaveStats(){
+		GlobalControl.Instance.player_Num = player_Number;
 		GlobalControl.Instance.p_Health = player_Health;
 		GlobalControl.Instance.p_MaxHealth = player_MaxHealth;
 
@@ -256,6 +260,7 @@ public class SharedStats : MonoBehaviour {
 
 	public void Reset()
 	{
+		GlobalControl.Instance.player_Num = resetPlayer_Num;
 		GlobalControl.Instance.p_Health = resetplayer_Health;
 		GlobalControl.Instance.p_MaxHealth = resetplayer_MaxHealth;
 

@@ -54,7 +54,7 @@ public class StrEnemyMovement : MonoBehaviour {
 		player1 = GameObject.Find ("Player");
 		player2 = GameObject.Find ("Player2");
 		if (player2 == null) {
-			player2 = player;
+			player2 = player1;
 		}
 
 		targetDetection ();
