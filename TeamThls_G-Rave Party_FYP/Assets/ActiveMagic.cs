@@ -127,6 +127,7 @@ public class ActiveMagic : MonoBehaviour {
 					sharestat.OnIce = false;
 					sharestat.OnLaser = false;
 				}
+				this.GetComponentInParent<MagicBookManager> ().Switch ();
 				inCd = true;
 
 			}

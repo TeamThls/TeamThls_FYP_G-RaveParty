@@ -42,7 +42,8 @@ public class SoulAbsorb : MonoBehaviour {
 	IEnumerator Vanish(float duration)
 	{
 		yield return new WaitForSeconds(duration);
-		sharedStats.player_Score += 100;
+		sharedStats.player_Score += (100 * sharedStats.ScoreMultiplier);
+		sharedStats.ScoreMultiplier++;
 		Destroy(this.gameObject);
 	}
 }

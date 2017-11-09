@@ -32,4 +32,11 @@ public class MagicBookManager : MonoBehaviour
 		}
 		
 	}
+
+	public void Switch()
+	{
+		r = Random.Range (0, 8);
+		magicSkillBook.transform.parent = this.transform.GetChild (r); 
+		magicSkillBook.transform.position = magicSkillBook.transform.parent.position;
+	}
 }

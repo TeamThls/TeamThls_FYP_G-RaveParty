@@ -38,6 +38,7 @@ public class GlobalControl : MonoBehaviour {
 	public float ablty_Duration;
 
 	public int F_Range;
+	public int Score_Mulitplier;
 
 	void Awake() {
 		if (Instance == null) {

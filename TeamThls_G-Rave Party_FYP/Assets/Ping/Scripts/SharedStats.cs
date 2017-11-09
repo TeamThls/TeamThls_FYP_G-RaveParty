@@ -24,6 +24,8 @@ public class SharedStats : MonoBehaviour {
 	public int Laser_Damage;
 
 	public float setTime;
+	public float setTimeScore;
+	public float maxScoreTime;
 	public float maxDuration;
 	public int ManaReg;
 
@@ -46,6 +48,8 @@ public class SharedStats : MonoBehaviour {
 	public float abilityDuration;
 
 	public int FireRange;
+
+	public int ScoreMultiplier;
 
 	//reset values
 	public int resetPlayer_Num;
@@ -92,6 +96,8 @@ public class SharedStats : MonoBehaviour {
 	public bool levelPassed;
 	public float endDuration;
 
+	public int resetScoreMultiplier;
+
 	// Use this for initialization
 	void Awake() {
 		resetPlayer_Num = GlobalControl.Instance.player_Num;
@@ -122,6 +128,8 @@ public class SharedStats : MonoBehaviour {
 		resetLaserDuration = GlobalControl.Instance.L_Duration;
 		resetIceDuration = GlobalControl.Instance.I_Duration;
 		resetabilityDuration = GlobalControl.Instance.ablty_Duration;
+
+		resetScoreMultiplier = GlobalControl.Instance.Score_Mulitplier;
 	}
 
 	//void Start () {
@@ -166,12 +174,15 @@ public class SharedStats : MonoBehaviour {
 		IceDuration = GlobalControl.Instance.I_Duration;
 		abilityDuration = GlobalControl.Instance.ablty_Duration;
 
+		ScoreMultiplier = GlobalControl.Instance.Score_Mulitplier;
+
 		//Reset ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		setTime += Time.deltaTime;
+		setTimeScore += Time.deltaTime;
 		SaveStats ();
 
 		if (OnFire == true) {
@@ -202,6 +213,17 @@ public class SharedStats : MonoBehaviour {
 				abilityDuration = 0.0f;
 				abilityExtendedDuration = 0.0f;
 			}
+		}
+
+		if (ScoreMultiplier < 1) 
+		{
+			ScoreMultiplier = 1;
+		}
+
+		if (setTimeScore >= maxScoreTime) 
+		{
+			ScoreMultiplier--;
+			setTimeScore = 0;
 		}
 
 		if (player_Health > player_MaxHealth) {
