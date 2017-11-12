@@ -11,6 +11,7 @@ public class HealthParticlesAbsorb : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		p_HealthSoul = GetComponent<ParticleSystem>();
 		if(healthCross_Obj == null)
 		{
 			healthCross_Obj = GameObject.Find("P_HealDevice").GetComponent<Transform>();
@@ -19,7 +20,6 @@ public class HealthParticlesAbsorb : MonoBehaviour {
 		{
 			healthScript = GameObject.Find("P_HealDeviceStand").GetComponent<HealthDeviceHealing>();
 		}
-		p_HealthSoul = GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame

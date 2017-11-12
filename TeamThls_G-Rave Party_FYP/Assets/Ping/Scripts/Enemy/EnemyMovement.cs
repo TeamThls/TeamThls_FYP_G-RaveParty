@@ -46,6 +46,7 @@ public class EnemyMovement : MonoBehaviour {
 		sprite = this.GetComponent<SpriteRenderer> ();
 		player1 = GameObject.Find ("Player");
 		player2 = GameObject.Find ("Player2");
+		player = player1;
 		if (player2 == null) {
 			player2 = player;
 		}

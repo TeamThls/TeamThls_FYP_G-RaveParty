@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CameraBehaviours : MonoBehaviour {
@@ -20,6 +21,7 @@ public class CameraBehaviours : MonoBehaviour {
 	float camera_Distance;
 	[SerializeField] float camera_MinDistance = 10.0f;
 	[SerializeField] float camera_MaxDistance = 40.0f;
+	[SerializeField] SceneManagement sceneManager;
 
 	// Use this for initialization
 	void Awake () 
@@ -33,13 +35,45 @@ public class CameraBehaviours : MonoBehaviour {
 
 	void Start ()
 	{
-		player = GameObject.Find("Player");
-		player2 = GameObject.Find("Player2");
+		sceneManager = mainCam.GetComponentInParent<SceneManagement>();
+
+		if(player == null)
+		{
+			player = GameObject.Find("Player");
+		}
+		if(player2 == null)
+		{
+			if(sceneManager.isSinglePlayer == true)
+			{
+				player2 = null;
+			}
+			else
+			{
+				player2 = GameObject.Find("Player2");
+			}
+		}
+
 		healthUI_Obj = transform.GetChild(1).transform;
 	}
 
-	// Update is called once per frame
 	void FixedUpdate () 
+	{
+		if(sceneManager.isSinglePlayer == false)
+		{
+			MultiplayerCamera();
+		}
+		else
+		{
+			transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -7.69f);
+		}
+	}
+
+	/*void SingleplayerCamera()
+	{
+		mainCam.
+	}*/
+
+	void MultiplayerCamera()
 	{
 		Vector3 camera_MinScreenLimit = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
 
@@ -74,3 +108,4 @@ public class CameraBehaviours : MonoBehaviour {
 		}
 	}
 }
+

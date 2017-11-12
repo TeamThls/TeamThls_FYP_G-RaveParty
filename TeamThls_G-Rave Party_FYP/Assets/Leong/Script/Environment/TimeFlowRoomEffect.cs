@@ -64,7 +64,10 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 				else if(slowMoEffect_Time <= enemyDuration)
 				{
 					time_Script.ResetTime(time_Script.tempPlayer1);
-					time_Script.ResetTime(time_Script.tempPlayer2);
+					if(time_Script.tempPlayer2 != null)
+					{
+						time_Script.ResetTime(time_Script.tempPlayer2);
+					}
 					time_Script.currentSlowState = TimeManagement.CurrentSlowMoState.Enemy;
 					cam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
 				}
@@ -72,7 +75,10 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 				{
 					time_Script.currentSlowState = TimeManagement.CurrentSlowMoState.Normal;
 					time_Script.ResetTime(time_Script.tempPlayer1);
-					time_Script.ResetTime(time_Script.tempPlayer2);
+					if(time_Script.tempPlayer2 != null)
+					{
+						time_Script.ResetTime(time_Script.tempPlayer2);
+					}
 					cam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
 					if(slowMoEffect_Time >= normalDuration)
 					{

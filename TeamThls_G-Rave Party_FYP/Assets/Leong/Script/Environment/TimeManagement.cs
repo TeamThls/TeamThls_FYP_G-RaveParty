@@ -12,17 +12,26 @@ public class TimeManagement : MonoBehaviour {
 	public CurrentSlowMoState currentSlowState = CurrentSlowMoState.Normal;
 	public bool timeFlow_ActivationStatus;
 	public int player_Count = 0;
+	SceneManagement sceneManager;
 
 
 	void Start()
 	{
+		sceneManager = Camera.main.GetComponentInParent<SceneManagement>();
 		if(tempPlayer1 == null)
 		{
 			tempPlayer1 = GameObject.Find("Player").transform.GetChild(1).gameObject;
 		}	
 		if(tempPlayer2 == null)
 		{
-			tempPlayer2 = GameObject.Find("Player2").transform.GetChild(1).gameObject;
+			if(sceneManager.isSinglePlayer == false)
+			{
+				tempPlayer2 = GameObject.Find("Player2").transform.GetChild(1).gameObject;
+			}
+			else
+			{
+				tempPlayer2 = null;
+			}
 		}
 	}
 

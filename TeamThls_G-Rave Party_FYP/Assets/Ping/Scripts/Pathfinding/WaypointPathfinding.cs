@@ -229,7 +229,7 @@ public class WaypointPathfinding : MonoBehaviour {
 				Debug.Log ("hitting" + shareStat.player_Health);
 				setTime = 0.0f;
 				cam_Shake.Shake(0.4f, 0.2f);
-				target.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+				target.GetComponent<Animator>().Play("PlayerDamaged");
 				Instantiate(playerDamaged_Particles, target.transform.position, Quaternion.identity);
 			}
 		}

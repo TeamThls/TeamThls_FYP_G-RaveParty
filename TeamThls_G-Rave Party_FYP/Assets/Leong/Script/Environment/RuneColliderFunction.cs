@@ -15,9 +15,13 @@ public class RuneColliderFunction : MonoBehaviour {
 	[SerializeField] bool isAvailable;
 	[SerializeField] float timeToEnableRune;
 	[SerializeField] float currentTime;
+
+	SceneManagement sceneManager;
+
 	// Use this for initialization
 	void Start () 
 	{
+		sceneManager = Camera.main.GetComponentInParent<SceneManagement>();
 		isAvailable = true;
 		rune_Particles = GetComponentInParent<ParticleSystem>();
 
@@ -27,7 +31,19 @@ public class RuneColliderFunction : MonoBehaviour {
 		}
 		sharedStats_Script = GameObject.Find("GameManager").GetComponent<SharedStats>();
 		player_CircleParticles = GameObject.Find("Player").transform.GetChild(7).GetComponent<ParticleSystem>();
-		player2_CircleParticles = GameObject.Find("Player2").transform.GetChild(7).GetComponent<ParticleSystem>();
+
+		if(player2_CircleParticles == null)
+		{
+			if(sceneManager.isSinglePlayer == false)
+			{
+				player2_CircleParticles = GameObject.Find("Player2").transform.GetChild(7).GetComponent<ParticleSystem>();
+			}
+			else
+			{
+				player2_CircleParticles = null;
+			}
+		}
+
 	}
 
 	void Update()
@@ -85,9 +101,11 @@ public class RuneColliderFunction : MonoBehaviour {
 			isAvailable = false;
 			rune_ChildParticles[4].Emit(250);
 			player_CircleParticles.Emit(1);
-			player2_CircleParticles.Emit(1);
+			if(player2_CircleParticles != null)
+			{
+				player2_CircleParticles.Emit(1);
+			}
 			RandomizeEffect();
-			Debug.Log("Rune Damaged");
 		}
 		rune_ChildParticles[3].Emit(1);
 	}
