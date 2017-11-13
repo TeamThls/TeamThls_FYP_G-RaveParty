@@ -10,6 +10,7 @@ public class GameOverManager : MonoBehaviour {
 	public SharedStats sharedstats;
 	public GameObject scoreManager;
 	public SaveGame saveGame;
+	public HighScore highscore;
 	public Text playerGold;
 	public Text playerScore;
 	private string scene;
@@ -18,6 +19,10 @@ public class GameOverManager : MonoBehaviour {
 	public Transform field;
 	public InputField input_f;
 
+	public int player_count;
+
+	public bool checking = false;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -25,28 +30,15 @@ public class GameOverManager : MonoBehaviour {
 		scoreManager = GameObject.Find ("HighscoreManager");
 		sharedstats = GamaManager.GetComponent<SharedStats> ();
 		saveGame = scoreManager.GetComponent<SaveGame> ();
+		highscore = scoreManager.GetComponent<HighScore>();
 		input_f = field.GetComponent<InputField> ();
+		player_count = sharedstats.player_Number;
+		checking = true;
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
-		if (sharedstats.player_Number == 1) {
-			saveGame.tempName = sharedstats.player_name;
-			saveGame.tempWave = sharedstats.wave_count;
-			saveGame.tempScore = sharedstats.player_Score;
-			saveGame.saveDataToDisk ();
-			sharedstats.Reset ();
-		}
-		else if (sharedstats.player_Number == 2) {
-			saveGame.multiName = sharedstats.player_name;
-			saveGame.multiWave = sharedstats.wave_count;
-			saveGame.multiScore = sharedstats.player_Score;
-			saveGame.saveDataToDisk ();
-			sharedstats.Reset ();
-		}
-
-
 		playerScore.text = sharedstats.player_Score.ToString();
 		if (sharedstats.levelPassed) 
 		{
@@ -57,14 +49,47 @@ public class GameOverManager : MonoBehaviour {
 			playerWin.enabled = false;
 		}
 
+		if (checking == false) {
+			if (player_count == 1) {
+				highscore.loadDataFromDisk ();
+
+				highscore.single_score = sharedstats.player_Score;
+				highscore.s_score.Add (sharedstats.player_Score);
+
+				highscore.s_Names.Add (sharedstats.player_name);
+				highscore.s_Wave.Add (sharedstats.wave_count);
+
+				highscore.saveDataToDisk ();
+
+				checking = true;
+			}
+			else if (player_count == 2) {
+				highscore.loadDataFromDisk ();
+
+				highscore.multi_score = sharedstats.player_Score;
+				highscore.m_score.Add (sharedstats.player_Score);
+
+				highscore.m_Names.Add (sharedstats.player_name);
+				highscore.m_Wave.Add (sharedstats.wave_count);
+
+				highscore.saveDataToDisk ();
+
+				checking = true;
+			}
+		}
+		if (checking == true) {
+			highscore.arrangeScore ();
+			highscore.saveDataToDisk ();
+
+			sharedstats.Reset ();
+		}
 	}
 
 	public void ChangeScene (string sceneName)
 	{
-		//SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_BUTTONPRESSED1);
+		//SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_BUTTONPRESSED1);.
 		scene = sceneName;
 		Invoke ("ChangeSceneDelay",1.0f);
-
 	}
 
 	void ChangeSceneDelay ()
@@ -75,12 +100,6 @@ public class GameOverManager : MonoBehaviour {
 
 	public void saveName(){
 		sharedstats.player_name = input_f.text;
-		if (sharedstats.player_Number == 1) {
-			saveGame.tempName = sharedstats.player_name;
-		}
-		else if (sharedstats.player_Number == 2) {
-			saveGame.multiName = sharedstats.player_name;
-		}
-		saveGame.saveDataToDisk ();
+		checking = false;
 	}
 }
