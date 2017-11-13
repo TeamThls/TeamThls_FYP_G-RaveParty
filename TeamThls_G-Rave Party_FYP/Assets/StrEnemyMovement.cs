@@ -123,7 +123,12 @@ public class StrEnemyMovement : MonoBehaviour {
 		}
 		if (isAttack == true && inCd == false && counter == 0) {
 			transform.position = Vector3.MoveTowards (this.transform.position, newPos, Booststep);
-			this.transform.rotation = Quaternion.Euler (0, 0, 315);
+			if (GetComponentInChildren<SpriteRenderer> ().flipX == true) {
+				this.transform.rotation = Quaternion.Euler (0, 0, 45);
+			}
+			else if (GetComponentInChildren<SpriteRenderer> ().flipX == false) {
+				this.transform.rotation = Quaternion.Euler (0, 0, 315);
+			}
 			isDamage = true;
 			if (this.transform.position == newPos && isDamage == true) {
 				counter = 1;
@@ -148,7 +153,12 @@ public class StrEnemyMovement : MonoBehaviour {
 		}
 		if (isAttack == true && inCd == false && counter == 3) {
 			transform.position = Vector3.MoveTowards (this.transform.position, newPos, Booststep);
-			this.transform.rotation = Quaternion.Euler (0, 0, 45);
+			if (GetComponentInChildren<SpriteRenderer> ().flipX == true) {
+				this.transform.rotation = Quaternion.Euler (0, 0, 45);
+			}
+			else if (GetComponentInChildren<SpriteRenderer> ().flipX == false) {
+				this.transform.rotation = Quaternion.Euler (0, 0, 315);
+			}
 			isDamage = true;
 			if (this.transform.position == newPos && isDamage == true) {
 				counter = 4;

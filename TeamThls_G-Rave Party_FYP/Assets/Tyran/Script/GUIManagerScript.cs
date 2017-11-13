@@ -52,7 +52,7 @@ public class GUIManagerScript : MonoBehaviour {
 	public Transform bookCompass;
 
 	public GameObject magicRune;
-	ActiveMagic Magic;
+	public ActiveMagic Magic;
 	public bool triggered;
 	public float setTime;
 	public float setTime2;
@@ -75,7 +75,7 @@ public class GUIManagerScript : MonoBehaviour {
 		sharedstats = GamaManager.GetComponent<SharedStats> ();
 		Magic = magicRune.GetComponent<ActiveMagic> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -84,6 +84,14 @@ public class GUIManagerScript : MonoBehaviour {
 
 		//Debug.Log (playerMana.fillAmount);
 		//Debug.Log (sharedstats.player_Mana);
+
+
+		if (sharedstats.levelPassed == true) {
+			UpgradeMenu.gameObject.SetActive (true);
+		} 
+		else {
+			UpgradeMenu.gameObject.SetActive (false);
+		}
 
 		//playerGold.text = sharedstats.player_Gold.ToString();
 		playerScore.text = "Score: " + sharedstats.player_Score.ToString();
@@ -114,11 +122,8 @@ public class GUIManagerScript : MonoBehaviour {
 			}
 		}
 
-		if (sharedstats.levelPassed == true) {
-			UpgradeMenu.gameObject.SetActive (true);
-		}
 
-		
+
 		/*if(paused)
 		{
 			PauseUI.enabled = true;
@@ -136,14 +141,14 @@ public class GUIManagerScript : MonoBehaviour {
 
 	public void PauseButton()
 	{
-		
+
 		paused = !paused;
 
 	}
 
 	public void ChangeScene (string sceneName)
 	{
-		
+
 		scene = sceneName;
 		Invoke ("ChangeSceneDelay",1.0f);
 	}

@@ -68,7 +68,7 @@ public class HighScore : MonoBehaviour {
 		text3.text = s_score [3].ToString ();
 		text4.text = s_score [4].ToString ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (counter == 0) {
@@ -136,8 +136,8 @@ public class HighScore : MonoBehaviour {
 		bf.Serialize(file, Score);
 		file.Close();
 	}
-		
-    //Loads the save data from the disk
+
+	//Loads the save data from the disk
 	public void loadDataFromDisk()
 	{
 		if (File.Exists (Application.temporaryCachePath + "/highscore.dat")) {
