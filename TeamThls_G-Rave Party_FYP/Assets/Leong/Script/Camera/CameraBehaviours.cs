@@ -64,7 +64,7 @@ public class CameraBehaviours : MonoBehaviour {
 		}
 		else
 		{
-			transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -7.69f);
+			transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 2, -7.69f);
 		}
 	}
 

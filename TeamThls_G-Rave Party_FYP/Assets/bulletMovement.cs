@@ -25,7 +25,12 @@ public class bulletMovement : MonoBehaviour {
 	void Start () {
 		Manager = GameObject.Find ("GameManager");
 		Player = GameObject.Find ("Player");
+
 		Player2 = GameObject.Find ("Player2");
+		if(Player2 == null)
+		{
+			Player2 = Player;
+		}
 		shrd = Manager.GetComponent<SharedStats> ();
 		cam_Shake = Camera.main.GetComponent<CameraShake>();
 		Target = Player;
@@ -48,7 +53,8 @@ public class bulletMovement : MonoBehaviour {
 			this.transform.Translate (Vector3.left * speed * Time.deltaTime);
 		}
 		if (setTime >= 10.0f) {
-			Destroy (this.gameObject);
+			StartCoroutine(Vanish(0.7f));
+
 		}
 	}
 
@@ -56,10 +62,10 @@ public class bulletMovement : MonoBehaviour {
 	{
 		if (other.tag == "Player") {
 			shrd.player_Health -= 1;
-			other.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+			other.GetComponent<Animator>().Play("PlayerDamaged");
 			cam_Shake.Shake(0.4f, 0.2f);
 			Instantiate(playerDamaged_Particles, other.transform.position, Quaternion.identity);
-			Destroy (this.gameObject);
+			StartCoroutine(Vanish(0.7f));
 		}
 	}
 
@@ -74,5 +80,13 @@ public class bulletMovement : MonoBehaviour {
 		else if (a < b) {
 			Target = Player;
 		}
+	}
+
+	IEnumerator Vanish(float duration)
+	{
+		transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+		GetComponent<BoxCollider2D>().enabled = false;
+		yield return new WaitForSeconds(duration);
+		Destroy (this.gameObject);
 	}
 }

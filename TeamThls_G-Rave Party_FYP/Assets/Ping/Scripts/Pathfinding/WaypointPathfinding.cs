@@ -28,6 +28,7 @@ public class WaypointPathfinding : MonoBehaviour {
 	public GameObject temp2;
 	public Waypoint TempWay;				// forget
 
+	public float maxSpeed;
 	public float speed;						// Speed while in movement
 	public float step;						// step = speed * time.deltatime
 	public float xPos;						// stock the old position 
@@ -67,6 +68,7 @@ public class WaypointPathfinding : MonoBehaviour {
 		WayManager = Manager.GetComponent<WaypointManager> ();
 		//t_Waypoint = TargetList [0];
 		shareStat = GameManager.GetComponent<SharedStats> ();
+		speed = maxSpeed;
 
 		Player = GameObject.Find ("Player");
 		Player2 = GameObject.Find ("Player2");

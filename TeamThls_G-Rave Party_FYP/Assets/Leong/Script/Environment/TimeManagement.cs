@@ -52,11 +52,10 @@ public class TimeManagement : MonoBehaviour {
 				}
 				else
 				{
-					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 0.6f;
+					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 1.5f;
 				}
 
 				obj_pm.player_SlowMo = true;
-				
 
 			}
 		}
@@ -75,22 +74,22 @@ public class TimeManagement : MonoBehaviour {
 		{
 			if(obj.GetComponent<EnemyMovement>() != null)
 			{
-				obj.GetComponent<EnemyMovement>().speed = 2.0f;
+				obj.GetComponent<EnemyMovement>().speed = obj.GetComponent<EnemyMovement>().maxSpeed / 2.0f;
 
 			}
 			else if(obj.GetComponent<EnemyMovement>() == null)
 			{
 				if(obj.GetComponent<WaypointPathfinding>() != null)
 				{
-					obj.GetComponent<WaypointPathfinding>().speed = 2.0f;
+					obj.GetComponent<WaypointPathfinding>().speed = obj.GetComponent<WaypointPathfinding>().maxSpeed / 2.0f;
 				}
 				else if(obj.GetComponent<StrEnemyMovement>() != null)
 				{
-					obj.GetComponent<StrEnemyMovement>().speed = 1.5f;
+					obj.GetComponent<StrEnemyMovement>().speed = obj.GetComponent<StrEnemyMovement>().maxSpeed / 2.0f;
 				}
 				else if(obj.GetComponent<ShootingEnemy>() != null)
 				{
-					obj.GetComponent<ShootingEnemy>().speed = 2.0f;
+					obj.GetComponent<ShootingEnemy>().speed = obj.GetComponent<ShootingEnemy>().maxSpeed / 2.0f;
 				}
 
 			}
@@ -100,25 +99,26 @@ public class TimeManagement : MonoBehaviour {
 		{
 			if(obj.GetComponent<EnemyMovement>() != null)
 			{
-				obj.GetComponent<EnemyMovement>().speed = 4.0f;
+				obj.GetComponent<EnemyMovement>().speed = obj.GetComponent<EnemyMovement>().maxSpeed;
+
 			}
 			else if(obj.GetComponent<EnemyMovement>() == null)
 			{
 				if(obj.GetComponent<WaypointPathfinding>() != null)
 				{
-					obj.GetComponent<WaypointPathfinding>().speed = 4.0f;
+					obj.GetComponent<WaypointPathfinding>().speed = obj.GetComponent<WaypointPathfinding>().maxSpeed;
 				}
 				else if(obj.GetComponent<StrEnemyMovement>() != null)
 				{
-					obj.GetComponent<StrEnemyMovement>().speed = 3.0f;
+					obj.GetComponent<StrEnemyMovement>().speed = obj.GetComponent<StrEnemyMovement>().maxSpeed;
 				}
 				else if(obj.GetComponent<ShootingEnemy>() != null)
 				{
-					obj.GetComponent<ShootingEnemy>().speed = 4.0f;
+					obj.GetComponent<ShootingEnemy>().speed = obj.GetComponent<ShootingEnemy>().maxSpeed;
 				}
+
 			}
 		}
-			
 	}
 
 	public void PlusPlayerCount(GameObject obj)
@@ -160,11 +160,9 @@ public class TimeManagement : MonoBehaviour {
 					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 0.0f;
 					obj_pm.player_SlowMo = false;	
 				}
-
 			}
-
 		}
-		if(obj.layer == 11)
+		if(obj.layer == 11 && currentSlowState != CurrentSlowMoState.Player)
 		{
 			if(obj.tag == "NormalBullet")
 			{
@@ -175,30 +173,34 @@ public class TimeManagement : MonoBehaviour {
 				obj.GetComponent<IceBullet>().iceBullet_TimeFactor = 1.0f;
 			}
 		}
-		if(obj.layer == 8)
+		if(obj.layer == 8 && currentSlowState != CurrentSlowMoState.Enemy)
 		{
+			StartCoroutine(DelayRecover(1.0f));
 			if(obj.GetComponent<EnemyMovement>() != null)
 			{
-				obj.GetComponent<EnemyMovement>().speed = 4.0f;
+				obj.GetComponent<EnemyMovement>().speed = obj.GetComponent<EnemyMovement>().maxSpeed;
 			}
-			else
+			else if(obj.GetComponent<EnemyMovement>() == null)
 			{
 				if(obj.GetComponent<WaypointPathfinding>() != null)
 				{
-					obj.GetComponent<WaypointPathfinding>().speed = 4.0f;
+					obj.GetComponent<WaypointPathfinding>().speed = obj.GetComponent<WaypointPathfinding>().maxSpeed;
 				}
 				else if(obj.GetComponent<StrEnemyMovement>() != null)
 				{
-					obj.GetComponent<StrEnemyMovement>().speed = 3.0f;
+					obj.GetComponent<StrEnemyMovement>().speed = obj.GetComponent<StrEnemyMovement>().maxSpeed;
 				}
 				else if(obj.GetComponent<ShootingEnemy>() != null)
 				{
-					obj.GetComponent<ShootingEnemy>().speed = 4.0f;
+					obj.GetComponent<ShootingEnemy>().speed = obj.GetComponent<ShootingEnemy>().maxSpeed;
 				}
 			}
 		}	
+	}
 
-		
+	IEnumerator DelayRecover(float duration)
+	{
+		yield return new WaitForSeconds(duration);
 	}
 
 }

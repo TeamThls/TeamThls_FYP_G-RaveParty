@@ -29,6 +29,7 @@ public class StrEnemyMovement : MonoBehaviour {
 	public int damage;
 
 	public float step;
+	public float maxSpeed;
 	public float speed;
 	public float Booststep;
 	public float dist;
@@ -50,6 +51,7 @@ public class StrEnemyMovement : MonoBehaviour {
 		stts = GameManager.GetComponent<SharedStats> ();
 		sprite = this.GetComponent<SpriteRenderer> ();
 		cam_Shake = Camera.main.GetComponent<CameraShake>();
+		speed = maxSpeed;
 
 		player1 = GameObject.Find ("Player");
 		player2 = GameObject.Find ("Player2");

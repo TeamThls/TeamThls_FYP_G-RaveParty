@@ -7,7 +7,8 @@ public class SceneManagement : MonoBehaviour {
 
 	public bool isSinglePlayer;
 	// Use this for initialization
-	void Start () {
+
+	void Awake () {
 		CheckSingleOrMulti();
 	}
 	

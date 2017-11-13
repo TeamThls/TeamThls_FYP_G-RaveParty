@@ -40,6 +40,10 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D col)
 	{
 		time_Script.SlowDown(col.gameObject);
+		if(col.gameObject.layer != 10)
+		{
+			time_Script.ResetTime(col.gameObject);
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D col)

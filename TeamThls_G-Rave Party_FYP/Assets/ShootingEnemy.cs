@@ -32,6 +32,7 @@ public class ShootingEnemy : MonoBehaviour {
 	public float targetDist;
 	public float DistLimit;
 
+	public float maxSpeed;
 	public float speed;
 	public float step;
 
@@ -50,7 +51,7 @@ public class ShootingEnemy : MonoBehaviour {
 		if (Player2 == null) {
 			Player2 = Player;
 		}
-
+		speed = maxSpeed;
 		Path01 = GameObject.Find ("Path01");
 		Path02 = GameObject.Find ("Path02");
 	}

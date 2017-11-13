@@ -28,6 +28,7 @@ public class EnemyMovement : MonoBehaviour {
 	public int damage;
 
 	public float step;
+	public float maxSpeed;
 	public float speed;
 	public float dist;
 
@@ -50,7 +51,7 @@ public class EnemyMovement : MonoBehaviour {
 		if (player2 == null) {
 			player2 = player;
 		}
-
+		speed = maxSpeed;
 		targetDetection ();
 	}
 	
