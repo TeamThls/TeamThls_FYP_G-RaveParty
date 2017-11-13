@@ -34,7 +34,6 @@ public class SoulAbsorb : MonoBehaviour {
 
 	void OnParticleCollision(GameObject obj)
 	{
-		//Destroy(this.gameObject);
 		p_Soul.Stop();
 		StartCoroutine(Vanish(1.0f));
 	}
