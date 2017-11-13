@@ -50,64 +50,65 @@ public class HighScore : MonoBehaviour {
 
 		loadDataFromDisk ();
 
-		text0.text = s_score [0].ToString ();
-		text1.text = s_score [1].ToString ();
-		text2.text = s_score [2].ToString ();
-		text3.text = s_score [3].ToString ();
-		text4.text = s_score [4].ToString ();
-
-		t_name0.text = s_Names[0];
-		t_name1.text = s_Names[1];
-		t_name2.text = s_Names[2];
-		t_name3.text = s_Names[3];
-		t_name4.text = s_Names[4];
-
 		t_wave0.text = s_Wave[0].ToString ();
 		t_wave1.text = s_Wave[1].ToString ();
 		t_wave2.text = s_Wave[2].ToString ();
 		t_wave3.text = s_Wave[3].ToString ();
 		t_wave4.text = s_Wave[4].ToString ();
+
+		t_name0.text = s_Names[0].ToString ();
+		t_name1.text = s_Names[1].ToString ();
+		t_name2.text = s_Names[2].ToString ();
+		t_name3.text = s_Names[3].ToString ();
+		t_name4.text = s_Names[4].ToString ();
+
+		text0.text = s_score [0].ToString ();
+		text1.text = s_score [1].ToString ();
+		text2.text = s_score [2].ToString ();
+		text3.text = s_score [3].ToString ();
+		text4.text = s_score [4].ToString ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (counter == 0) {
-			text0.text = s_score [0].ToString ();
-			text1.text = s_score [1].ToString ();
-			text2.text = s_score [2].ToString ();
-			text3.text = s_score [3].ToString ();
-			text4.text = s_score [4].ToString ();
-
-			t_name0.text = s_Names[0];
-			t_name1.text = s_Names[1];
-			t_name2.text = s_Names[2];
-			t_name3.text = s_Names[3];
-			t_name4.text = s_Names[4];
-
 			t_wave0.text = s_Wave[0].ToString ();
 			t_wave1.text = s_Wave[1].ToString ();
 			t_wave2.text = s_Wave[2].ToString ();
 			t_wave3.text = s_Wave[3].ToString ();
 			t_wave4.text = s_Wave[4].ToString ();
+
+			t_name0.text = s_Names[0].ToString ();
+			t_name1.text = s_Names[1].ToString ();
+			t_name2.text = s_Names[2].ToString ();
+			t_name3.text = s_Names[3].ToString ();
+			t_name4.text = s_Names[4].ToString ();
+
+			text0.text = s_score [0].ToString ();
+			text1.text = s_score [1].ToString ();
+			text2.text = s_score [2].ToString ();
+			text3.text = s_score [3].ToString ();
+			text4.text = s_score [4].ToString ();
 		}
 		if (counter == 1) {
+			t_wave0.text = m_Wave[0].ToString ();
+			t_wave1.text = m_Wave[1].ToString ();
+			t_wave2.text = m_Wave[2].ToString ();
+			t_wave3.text = m_Wave[3].ToString ();
+			t_wave4.text = m_Wave[4].ToString ();
+
+			t_name0.text = m_Names[0].ToString ();
+			t_name1.text = m_Names[1].ToString ();
+			t_name2.text = m_Names[2].ToString ();
+			t_name3.text = m_Names[3].ToString ();
+			t_name4.text = m_Names[4].ToString ();
+
 			text0.text = m_score [0].ToString ();
 			text1.text = m_score [1].ToString ();
 			text2.text = m_score [2].ToString ();
 			text3.text = m_score [3].ToString ();
 			text4.text = m_score [4].ToString ();
 
-			t_name0.text = m_Names[0];
-			t_name1.text = m_Names[1];
-			t_name2.text = m_Names[2];
-			t_name3.text = m_Names[3];
-			t_name4.text = m_Names[4];
-
-			t_wave0.text = m_Wave[0].ToString ();
-			t_wave1.text = m_Wave[1].ToString ();
-			t_wave2.text = m_Wave[2].ToString ();
-			t_wave3.text = m_Wave[3].ToString ();
-			t_wave4.text = m_Wave[4].ToString ();
 		}
 
 		if (counter >= 2) {
@@ -160,7 +161,7 @@ public class HighScore : MonoBehaviour {
 		}
 	}
 
-	public void arrangeScore(){
+	public void arrangeSingleScore(){
 		for (int i = 0; i < s_score.Count - 1; i++) {
 			int temp;
 			string t_name;
@@ -179,24 +180,6 @@ public class HighScore : MonoBehaviour {
 				s_Wave [i + 1] = t_wave;
 			}
 		}
-		for (int i = 0; i < m_score.Count; i++) {
-			int temp;
-			string t_name;
-			int t_wave;
-			if (m_score[i] <= m_score[i + 1]) {
-				temp = m_score[i];
-				t_name = m_Names [i];
-				t_wave = m_Wave [i];
-
-				m_score[i] = m_score[i + 1];
-				m_Names [i] = m_Names [i + 1];
-				m_Wave [i] = m_Wave [i + 1];
-
-				m_score[i + 1] = temp;
-				m_Names [i + 1] = t_name;
-				m_Wave [i + 1] = t_wave;
-			}
-		}
 		/*if (s_score.Count > 10) {
 			s_score.Remove (s_score [10]);
 		}
@@ -204,6 +187,28 @@ public class HighScore : MonoBehaviour {
 			m_score.Remove (m_score [10]);
 		}*/
 
+		saveDataToDisk ();
+	}
+
+	public void arrangeMultiScore(){
+		for (int j = 0; j < m_score.Count; j++) {
+			int temp;
+			string t_name;
+			int t_wave;
+			if (m_score[j] <= m_score[j + 1]) {
+				temp = m_score[j];
+				t_name = m_Names [j];
+				t_wave = m_Wave [j];
+
+				m_score[j] = m_score[j + 1];
+				m_Names [j] = m_Names [j + 1];
+				m_Wave [j] = m_Wave [j + 1];
+
+				m_score[j + 1] = temp;
+				m_Names [j + 1] = t_name;
+				m_Wave [j + 1] = t_wave;
+			}
+		}
 		saveDataToDisk ();
 	}
 

@@ -9,7 +9,7 @@ public class GameOverManager : MonoBehaviour {
 	public GameObject GamaManager;
 	public SharedStats sharedstats;
 	public GameObject scoreManager;
-	public SaveGame saveGame;
+	//public SaveGame saveGame;
 	public HighScore highscore;
 	public Text playerGold;
 	public Text playerScore;
@@ -29,7 +29,7 @@ public class GameOverManager : MonoBehaviour {
 		GamaManager = GameObject.Find("GameManager");
 		scoreManager = GameObject.Find ("HighscoreManager");
 		sharedstats = GamaManager.GetComponent<SharedStats> ();
-		saveGame = scoreManager.GetComponent<SaveGame> ();
+		//saveGame = scoreManager.GetComponent<SaveGame> ();
 		highscore = scoreManager.GetComponent<HighScore>();
 		input_f = field.GetComponent<InputField> ();
 		player_count = sharedstats.player_Number;
@@ -78,7 +78,8 @@ public class GameOverManager : MonoBehaviour {
 			}
 		}
 		if (checking == true) {
-			highscore.arrangeScore ();
+			highscore.arrangeSingleScore ();
+			highscore.arrangeMultiScore ();
 			highscore.saveDataToDisk ();
 
 			sharedstats.Reset ();
