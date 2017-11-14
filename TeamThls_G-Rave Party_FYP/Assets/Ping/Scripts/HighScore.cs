@@ -49,6 +49,7 @@ public class HighScore : MonoBehaviour {
 		m_score = new List<int>();
 
 		loadDataFromDisk ();
+		saveDataToDisk ();
 
 		t_wave0.text = s_Wave[0].ToString ();
 		t_wave1.text = s_Wave[1].ToString ();
