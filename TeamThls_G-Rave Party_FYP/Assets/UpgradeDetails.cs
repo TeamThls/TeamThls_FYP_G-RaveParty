@@ -102,12 +102,19 @@ public class UpgradeDetails : MonoBehaviour {
 		if (selected == false) {
 			if (stage == 1) {
 				if (num == 1) {
-					shrd.LaserMana = laserMana;
+					player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
+					player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
 					selected = true;
 				} else if (num == 2) {
-					shrd.LaserDuration = laserDuration;
+					player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
+					player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
 					selected = true;
 				}
+			}
+			if (stage == 2) {
+				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
+				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
+				selected = true;
 			}
 		}
 	}
@@ -116,12 +123,19 @@ public class UpgradeDetails : MonoBehaviour {
 		if (selected == false) {
 			if (stage == 1) {
 				if (num2 == 1) {
-					shrd.IceMana = iceMana;
+					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
+					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
 					selected = true;
 				} else if (num2 == 2) {
-					shrd.IceDuration = iceDuration;
+					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
+					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
 					selected = true;
 				}
+			}
+			if (stage == 2) {
+				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
+				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
+				selected = true;
 			}
 		}
 	}
@@ -133,11 +147,29 @@ public class UpgradeDetails : MonoBehaviour {
 					shrd.player_Health += upgradeHealth;
 					shrd.player_MaxHealth += upgradeHealth;
 					selected = true;
-				} else if (num3 == 2) {
+				} 
+				else if (num3 == 2) {
 					shrd.player_Mana += upgradeMana;
 					shrd.player_MaxMana += upgradeMana;
 					selected = true;
-				} else if (num3 == 3) {
+				} 
+				else if (num3 == 3) {
+					shrd.ManaReg = upgradeManaRegen;
+					selected = true;
+				}
+			}
+			if (stage == 2) {
+				if (num3 == 1) {
+					shrd.player_Health += upgradeHealth;
+					shrd.player_MaxHealth += upgradeHealth;
+					selected = true;
+				} 
+				else if (num3 == 2) {
+					shrd.player_Mana += upgradeMana;
+					shrd.player_MaxMana += upgradeMana;
+					selected = true;
+				} 
+				else if (num3 == 3) {
 					shrd.ManaReg = upgradeManaRegen;
 					selected = true;
 				}
@@ -155,22 +187,13 @@ public class UpgradeDetails : MonoBehaviour {
 				// selection upgrade 1
 				if (num == 1) {
 					message1.text = "Reduce Laser Mana Usage from " + shrd.LaserMana + " to " + laserMana;
-					player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
-					player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
-					selected = true;
 				} 
 				else if (num == 2) {
 					message1.text = "Increase Laser Ability Duration from " + shrd.LaserDuration + " to " + laserDuration;
-					player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
-					player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
-					selected = true;
 				}
 			}
 			if (stage == 2) {
 				message1.text = "Increase Fire Ability Damage by 50%";
-				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
-				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
-				selected = true;
 			}
 		}
 	}
@@ -185,22 +208,13 @@ public class UpgradeDetails : MonoBehaviour {
 				// selection upgrade 2
 				if (num2 == 1) {
 					message2.text = "Reduce Ice Mana Usage from " + shrd.IceMana + " to " + iceMana;
-					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
-					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
-					selected = true;
 				} 
 				else if (num2 == 2) {
 					message2.text = "Increase Ice Ability Duration from " + shrd.IceDuration + " to " + iceDuration;
-					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
-					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
-					selected = true;
 				}
 			}
 			if (stage == 2) {
 				message2.text = "Increase Fire Ability Duration from " + shrd.FireDuration + " to " + 15;
-				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
-				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
-				selected = true;
 			}
 		}
 	}
@@ -215,45 +229,30 @@ public class UpgradeDetails : MonoBehaviour {
 				// selection upgrade 3
 				if (num3 == 1) {
 					float temp = upgradeHealth + shrd.player_MaxHealth;
-					shrd.player_Health += upgradeHealth;
-					shrd.player_MaxHealth += upgradeHealth;
 					message3.text = "Increase Health from " + shrd.player_MaxHealth + " to " + temp;
-					selected = true;
 				} 
 				else if (num3 == 2) {
 					float temp = upgradeMana + shrd.player_MaxMana;
-					shrd.player_Mana += upgradeMana;
-					shrd.player_MaxMana += upgradeMana;
 					message3.text = "Increase Manapoint from " + shrd.player_MaxMana + " to " + temp;
-					selected = true;
 				}
 				else if (num3 == 3) {
 					float temp = upgradeManaRegen;
 					message3.text = "Increase Manapoint Regen Speed from " + shrd.ManaReg + " to " + temp;
-					shrd.ManaReg = upgradeManaRegen;
-					selected = true;
 				}
 			}
+
 			if (stage == 2) {
 				if (num3 == 1) {
 					float temp = upgradeHealth + shrd.player_MaxHealth;
-					shrd.player_Health += upgradeHealth;
-					shrd.player_MaxHealth += upgradeHealth;
 					message3.text = "Increase Health from " + shrd.player_MaxHealth + " to " + temp;
-					selected = true;
 				} 
 				else if (num3 == 2) {
 					float temp = upgradeMana + shrd.player_MaxMana;
-					shrd.player_Mana += upgradeMana;
-					shrd.player_MaxMana += upgradeMana;
 					message3.text = "Increase Manapoint from " + shrd.player_MaxMana + " to " + temp;
-					selected = true;
 				}
 				else if (num3 == 3) {
 					float temp = upgradeManaRegen;
 					message3.text = "Increase Manapoint Regen Speed from " + shrd.ManaReg + " to " + temp;
-					shrd.ManaReg = upgradeManaRegen;
-					selected = true;
 				}
 			}
 		}

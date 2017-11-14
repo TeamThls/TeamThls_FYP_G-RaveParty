@@ -130,6 +130,22 @@ public class HighScore : MonoBehaviour {
 		Score.single_Wave = s_Wave;
 		Score.multi_Wave = m_Wave;
 
+		if (Score.single_Scores.Count < 5) {
+			for (int i = 0; i < 5; i++) {
+				Score.single_Scores.Add (0);
+				Score.single_Name.Add ("Annoymous");
+				Score.single_Wave.Add (0);
+			}
+		}
+
+		if (Score.multi_Scores.Count < 5) {
+			for (int i = 0; i < 5; i++) {
+				Score.multi_Scores.Add (0);
+				Score.multi_Name.Add ("Annoymous");
+				Score.multi_Wave.Add (0);
+			}
+		}
+
 		Score.single_temp = single_score;
 		Score.multi_temp = multi_score;
 
