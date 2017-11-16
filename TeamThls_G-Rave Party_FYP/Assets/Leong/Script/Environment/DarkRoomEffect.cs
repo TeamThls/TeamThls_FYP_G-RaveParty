@@ -16,19 +16,31 @@ public class DarkRoomEffect : MonoBehaviour {
 
 	[SerializeField] float timeToActivate;
 	[SerializeField] bool isTutorialRoom;
+	[SerializeField] SharedStats sharedStats_Script;
+	[SerializeField] float damage_CurrentTime;
+	int darkness_Damage = 2;
+	float damage_MaxTime = 2.0f;
+	ScreenFlashingRedEffect redFlash_Script;
 
 	public enum darkRoom_State
 	{
 		Activated, Deactivated, Null
 	};
 	public darkRoom_State darkRoom_CurrentState = darkRoom_State.Null;
+
+	void Awake()
+	{
+		sharedStats_Script = GameObject.Find("GameManager").GetComponent<SharedStats>();
+		redFlash_Script = GameObject.Find("GUI").GetComponent<ScreenFlashingRedEffect>();
+	}
+
 	// Use this for initialization
 	void Start () 
 	{
 		darkRoom_Mat.color = Color.white;
 		darkRoom_AltMat.color = Color.white;
 		//ListingAllDarkRoomObjects();
-		FindAffectedLights();
+		//FindAffectedLights();
 	}
 	
 	// Update is called once per frame
@@ -63,6 +75,7 @@ public class DarkRoomEffect : MonoBehaviour {
 				currentColor_increaseValue = 0.0f;
 
 			}
+			DarknessDamage();
 			ColorSmoothing();
 		}
 
@@ -78,8 +91,8 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(darkRoom_AltMat.color != Color.black)
 		{
 			darkRoom_AltMat.color = Color.Lerp(Color.white, Color.black, value);
-
 		}
+
 	}
 
 	void ResetMaterialColor(float value)
@@ -90,7 +103,26 @@ public class DarkRoomEffect : MonoBehaviour {
 		}
 	}
 
-	void FindAffectedLights()
+	void DarknessDamage()
+	{
+		if(darkRoom_AltMat.color == Color.black)
+		{
+			damage_CurrentTime += Time.deltaTime;
+			if(damage_CurrentTime >= damage_MaxTime)
+			{
+				damage_CurrentTime = 0.0f;
+				sharedStats_Script.player_Health -= darkness_Damage;
+				StartCoroutine(redFlash_Script.ScreenFlash(0.1f));
+				//redFlash_Script.ScreenRed();
+			}
+		}
+		else
+		{
+			damage_CurrentTime = 0.0f;
+		}
+	}
+
+	/*void FindAffectedLights()
 	{
 		Transform light = GameObject.Find(this.transform.parent.name + " Light").GetComponent<Transform>();
 		foreach (Transform child in light)
@@ -117,7 +149,7 @@ public class DarkRoomEffect : MonoBehaviour {
 
 			}
 		}
-	}
+	}*/
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
@@ -136,7 +168,6 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(col.gameObject.layer == 8)
 		{
 			col.GetComponent<Renderer>().material = darkRoom_Mat;
-
 		}
 	}
 
@@ -145,6 +176,7 @@ public class DarkRoomEffect : MonoBehaviour {
 		if(col.gameObject.layer == 10)
 		{
 			darkRoom_CurrentState = darkRoom_State.Deactivated;
+			damage_CurrentTime = 0.0f;
 		}
 	}
 

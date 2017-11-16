@@ -24,6 +24,7 @@ public class PartyLightingEffects : MonoBehaviour {
 		colors_Array[5] = Color.red;
 		colors_Array[6] = Color.yellow;
 		colors_Array[7] = Color.white;
+		RandomizeLightColors();
 	}
 
 	// Update is called once per frame
