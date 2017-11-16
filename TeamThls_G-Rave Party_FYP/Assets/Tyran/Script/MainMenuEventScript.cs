@@ -23,7 +23,7 @@ public class MainMenuEventScript : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Player" ) 
 		{
-			if (this.gameObject.name == "Play") 
+			if (this.gameObject.name == "Co-op") 
 			{
 				DisplaySpriteI();
 				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
@@ -64,7 +64,7 @@ public class MainMenuEventScript : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			if(this.gameObject.name == "Play")
+			if(this.gameObject.name == "Co-op")
 			{
 				DisableSpriteI();
 			}
