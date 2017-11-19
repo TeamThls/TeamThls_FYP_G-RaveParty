@@ -112,7 +112,7 @@ public class EnemyCollider : MonoBehaviour {
 		anim.Play("EnemyHittedByIce");
 
 		enemy_CurrentState = enemy_DeathState.Ice;
-		StartCoroutine(IceBulletSlow(2.0f));
+		StartCoroutine(IceBulletSlow(4.0f));
 	}
 
 	public void IceBulletStunReaction()

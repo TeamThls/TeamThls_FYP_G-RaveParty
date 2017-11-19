@@ -19,7 +19,7 @@ public class SceneManagement : MonoBehaviour {
 
 	void CheckSingleOrMulti()
 	{
-		if(SceneManager.GetActiveScene().name == "Single-Player Level (Final)")
+		if(SceneManager.GetActiveScene().name == "Single-Player Level")
 		{
 			isSinglePlayer = true;
 		}

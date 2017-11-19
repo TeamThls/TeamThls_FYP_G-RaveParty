@@ -7,15 +7,15 @@ public class BulletUpgrades : MonoBehaviour {
 	PlayerCombat playerCom;
 	public enum IceLevel
 	{
-		Zero, First, Second, Final	
+		Zero, First, Second	
 	};
 	public enum FireLevel
 	{
-		Zero, First, Second, Final	
+		Zero, First, Second	
 	};
 	public enum LaserLevel
 	{
-		Zero, First, Second, Final	
+		Zero, First, Second
 	};
 	public IceLevel ice_CurrentLevel;
 	public IceBullet iceBullet;
@@ -80,6 +80,9 @@ public class BulletUpgrades : MonoBehaviour {
 				ice_CurrentCastingParticles = ice_FirstCastingParticles;
 				ice_CurrentObj = iceBullet_FirstObj;
 				iceBullet.currentLevel = 0;
+				playerCom.IceMana = 10;
+
+				stats_Script.IceMana = 10;
 				stats_Script.IceDuration = 10;
 				break;
 
@@ -87,21 +90,20 @@ public class BulletUpgrades : MonoBehaviour {
 				ice_CurrentCastingParticles = ice_FirstCastingParticles;
 				ice_CurrentObj = iceBullet_FirstObj;
 				iceBullet.currentLevel = 1;
-				playerCom.IceMana = 10;
+				playerCom.IceMana = 7;
+
+				stats_Script.IceMana = 7;
 				stats_Script.IceDuration = 15;
 				break;
 
 			case IceLevel.Second:
 				ice_CurrentCastingParticles = ice_SecondCastingParticles;
 				ice_CurrentObj = iceBullet_SecondObj;
-				playerCom.IceMana = 5;
-				iceBullet.currentLevel = 2;
-				break;
+				playerCom.IceMana = 7;
 
-			case IceLevel.Final:
-				ice_CurrentCastingParticles = ice_FinalCastingParticles;
-				ice_CurrentObj = iceBullet_FinalObj;
-				iceBullet.currentLevel = 3;
+				stats_Script.IceMana = 7;
+				stats_Script.IceDuration = 15;
+				iceBullet.currentLevel = 2;
 				break;
 
 		}
@@ -110,6 +112,9 @@ public class BulletUpgrades : MonoBehaviour {
 			case FireLevel.Zero:
 				fire_CurrentObj = fire_FirstObj;
 				fire_Script = fire_CurrentObj.GetComponent<Fire>();
+				playerCom.FireMana = 5;
+
+				stats_Script.FireMana = 5;
 				stats_Script.FireDuration = 10;
 				break;
 				
@@ -117,20 +122,22 @@ public class BulletUpgrades : MonoBehaviour {
 				fire_CurrentObj = fire_FirstObj;
 				fire_Script = fire_CurrentObj.GetComponent<Fire>();
 				fire_Script.fire_Damage = 0.1f;
+				playerCom.FireMana = 3.5f;
+
+				stats_Script.FireMana = 3;
 				stats_Script.FireDuration = 15;
 				break;
 
 			case FireLevel.Second:
 				fire_CurrentObj = fire_SecondObj;
 				fire_Script = fire_CurrentObj.GetComponent<Fire>();
+				playerCom.FireMana = 3.5f;
 				fire_Script.fire_Damage = 0.15f;
+
+				stats_Script.FireMana = 3;
+				stats_Script.FireDuration = 15;
 				break;
 
-			case FireLevel.Final:
-				fire_CurrentObj = fire_FinalObj;
-				fire_Script = fire_CurrentObj.GetComponent<Fire>();
-				fire_Script.fire_Damage = 0.15f;
-				break;
 		}
 		switch(laser_CurrentLevel)
 		{
@@ -138,6 +145,9 @@ public class BulletUpgrades : MonoBehaviour {
 				laser_CurrentObj = laser_FirstObj;
 				laser_Script = laser_CurrentObj.GetComponent<LaserBeam>();
 				laser_Script.laser_Level = 0;
+				playerCom.LaserMana = 20;
+
+				stats_Script.LaserMana = 20;
 				stats_Script.LaserDuration = 10;
 				break;
 				
@@ -145,22 +155,22 @@ public class BulletUpgrades : MonoBehaviour {
 				laser_CurrentObj = laser_FirstObj;
 				laser_Script = laser_CurrentObj.GetComponent<LaserBeam>();
 				laser_Script.laser_Level = 1;
+				playerCom.LaserMana = 14;
+
+				stats_Script.LaserMana = 14;
 				stats_Script.LaserDuration = 15;
 				break;
 
 			case LaserLevel.Second:
 				laser_CurrentObj = laser_SecondObj;
 				laser_Script = laser_CurrentObj.GetComponent<LaserBeam>();
-				playerCom.LaserMana = 10;
+				playerCom.LaserMana = 14;
+
+				stats_Script.LaserMana = 14;
+				stats_Script.LaserDuration = 15;
 				laser_Script.laser_Level = 2;
 				break;
 
-			case LaserLevel.Final:
-				laser_CurrentObj = laser_FinalObj;
-				laser_Script = laser_CurrentObj.GetComponent<LaserBeam>();
-				playerCom.LaserMana = 10;
-				laser_Script.laser_Level = 3;
-				break;
 		}
 	}
 }

@@ -97,7 +97,6 @@ public class LaserBeam : MonoBehaviour {
 		}
 		else if(obj.GetComponent<RuneColliderFunction>() != null)
 		{
-		Debug.Log("RUne");
 			RuneColliderFunction rune_Collider = obj.GetComponent<RuneColliderFunction>();
 			rune_Collider.RuneDamage();
 		}
