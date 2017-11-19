@@ -241,10 +241,24 @@ public class SharedStats : MonoBehaviour {
 
 		if (levelPassed == true) {
 			endDuration += Time.deltaTime;
-			if (endDuration >= 15.0f) {
-				SceneManager.LoadScene (7);
-				levelPassed = false;
-				endDuration = 0.0f;
+			if (endDuration >= 3.0f) {
+				if (wave_count == 1) {
+					GlobalControl.Instance.wave_count += 1;
+					levelPassed = false;
+					endDuration = 0.0f;
+					SceneManager.LoadScene (9);
+				}
+				else if (wave_count == 2) {
+					GlobalControl.Instance.wave_count += 1;
+					levelPassed = false;
+					endDuration = 0.0f;
+					SceneManager.LoadScene (10);
+				}
+				else {
+					levelPassed = false;
+					endDuration = 0.0f;
+					SceneManager.LoadScene("Game Over");
+				}
 			}
 		}
 	}

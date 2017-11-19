@@ -8,8 +8,6 @@ public class UpgradeDetails : MonoBehaviour {
 	SharedStats shrd;
 	GameObject GameManager;
 
-	public int wordSize;
-
 	public int stage;
 
 	public int num;
@@ -17,20 +15,6 @@ public class UpgradeDetails : MonoBehaviour {
 	public int num3;
 
 	public bool selected;
-
-	public int laserMana;
-	public int fireMana;
-	public int iceMana;
-
-	public int laserDamage;
-	public int fireDamage;
-	public int iceDamage;
-
-	public int laserDuration;
-	public int iceDuration;
-	public int fireDuration;
-
-	public int fireRange;
 
 	public int upgradeHealth;
 	public int upgradeMana;
@@ -60,8 +44,8 @@ public class UpgradeDetails : MonoBehaviour {
 		stage = shrd.wave_count;
 
 		magicBook = this.transform.GetChild (1);
-		magicSkill = this.transform.GetChild (2);
-		character = this.transform.GetChild (3);
+		magicSkill = this.transform.GetChild (3);
+		character = this.transform.GetChild (2);
 		detail01 = this.transform.GetChild (4);
 		detail02 = this.transform.GetChild (5);
 		detail03 = this.transform.GetChild (6);
@@ -99,6 +83,7 @@ public class UpgradeDetails : MonoBehaviour {
 	}
 
 	public void upgrade01(){
+		Debug.Log ("123123313");	
 		if (selected == false) {
 			if (stage == 1) {
 				if (num == 1) {
@@ -186,10 +171,10 @@ public class UpgradeDetails : MonoBehaviour {
 			if (stage == 1) {
 				// selection upgrade 1
 				if (num == 1) {
-					message1.text = "Reduce Laser Mana Usage from " + shrd.LaserMana + " to " + laserMana;
+					message1.text = "Reduce Laser Mana Usage from " + shrd.LaserMana + " to ";
 				} 
 				else if (num == 2) {
-					message1.text = "Increase Laser Ability Duration from " + shrd.LaserDuration + " to " + laserDuration;
+					message1.text = "Increase Laser Ability Duration from " + shrd.LaserDuration + " to ";
 				}
 			}
 			if (stage == 2) {
@@ -207,10 +192,10 @@ public class UpgradeDetails : MonoBehaviour {
 			if (stage == 1) {
 				// selection upgrade 2
 				if (num2 == 1) {
-					message2.text = "Reduce Ice Mana Usage from " + shrd.IceMana + " to " + iceMana;
+					message2.text = "Reduce Ice Mana Usage from " + shrd.IceMana + " to ";
 				} 
 				else if (num2 == 2) {
-					message2.text = "Increase Ice Ability Duration from " + shrd.IceDuration + " to " + iceDuration;
+					message2.text = "Increase Ice Ability Duration from " + shrd.IceDuration + " to ";
 				}
 			}
 			if (stage == 2) {

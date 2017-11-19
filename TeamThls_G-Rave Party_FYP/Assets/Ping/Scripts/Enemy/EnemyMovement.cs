@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour {
 	public GameObject player2;
 	public GameObject GameManager;
 	SharedStats stts;
-	SpriteRenderer sprite;
+	public SpriteRenderer sprite;
 
 	public bool multiplayer = true;
 
@@ -44,7 +44,7 @@ public class EnemyMovement : MonoBehaviour {
 	void Start () {
 		GameManager = GameObject.Find ("GameManager");
 		stts = GameManager.GetComponent<SharedStats> ();
-		sprite = this.GetComponent<SpriteRenderer> ();
+		sprite = this.GetComponentInChildren<SpriteRenderer> ();
 		player1 = GameObject.Find ("Player");
 		player2 = GameObject.Find ("Player2");
 		player = player1;
@@ -59,10 +59,11 @@ public class EnemyMovement : MonoBehaviour {
 	void Update () {
 		targetDetection ();
 		if (player.transform.position.x > this.transform.position.x) {
-			sprite.flipX = false;
+			
+			sprite.flipX = true;
 		} 
 		else {
-			sprite.flipX = true;
+			sprite.flipX = false;
 		}
 
 		dist = Vector3.Distance (this.gameObject.transform.position, player.transform.position);

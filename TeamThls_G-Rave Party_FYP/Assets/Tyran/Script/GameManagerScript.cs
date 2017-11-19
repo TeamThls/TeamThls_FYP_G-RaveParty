@@ -165,7 +165,7 @@ public class GameManagerScript : MonoBehaviour
 		if (SoundManagerScript.Instance.CheckBGM()) 
 		{
 			sharedstats.levelPassed = true;
-			SceneManager.LoadScene("Game Over");
+			//SceneManager.LoadScene("Game Over");
 		}
 		if (sharedstats.player_Health <= 0) 
 		{

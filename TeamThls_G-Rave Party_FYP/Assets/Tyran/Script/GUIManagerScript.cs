@@ -61,7 +61,7 @@ public class GUIManagerScript : MonoBehaviour {
 	void Awake(){
 		magicRune = GameObject.Find ("MagicSkill");
 		Compass = this.transform.GetChild (6);
-		UpgradeMenu = this.transform.GetChild (7);
+		UpgradeMenu = this.transform.GetChild (8);
 		UpgradeMenu.gameObject.SetActive (false);
 		bookIcon = Compass.GetChild (0);
 		bookCompass = Compass.GetChild (2);
@@ -86,7 +86,7 @@ public class GUIManagerScript : MonoBehaviour {
 		//Debug.Log (sharedstats.player_Mana);
 
 
-		if (sharedstats.levelPassed == true) {
+		if (sharedstats.levelPassed == true && sharedstats.wave_count <= 2) {
 			UpgradeMenu.gameObject.SetActive (true);
 		} 
 		else {
