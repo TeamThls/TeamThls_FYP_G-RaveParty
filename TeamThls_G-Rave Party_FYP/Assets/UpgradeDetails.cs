@@ -63,16 +63,22 @@ public class UpgradeDetails : MonoBehaviour {
 		if (open == false) {
 			stage = shrd.wave_count;
 			if (stage == 1) {
-				num = Random.Range (1, 3);
-				num2 = Random.Range (1, 3);
-				num3 = Random.Range (1, 4);
+				//num = Random.Range (1, 3);
+				//num2 = Random.Range (1, 3);
+				//num3 = Random.Range (1, 4);
+				num = 1;
+				num2 = 1;
+				num3 = 1;
 				open = true;
 			}
 
 			if (stage == 2) {
+				//num = 1;
+				//num2 = 1;
+				//num3 = Random.Range (1, 4);
 				num = 1;
 				num2 = 1;
-				num3 = Random.Range (1, 4);
+				num3 = 1;
 				open = true;
 			}
 		}
@@ -82,21 +88,24 @@ public class UpgradeDetails : MonoBehaviour {
 		}
 	}
 
-	public void upgrade01(){
-		Debug.Log ("123123313");	
+	public void upgrade01(){	
 		if (selected == false) {
 			if (stage == 1) {
 				if (num == 1) {
-					player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
-					player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
-					selected = true;
-				} else if (num == 2) {
 					player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
 					player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
+					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
+					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
+					player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
+					player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
 					selected = true;
 				}
 			}
 			if (stage == 2) {
+				player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
+				player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
+				player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
+				player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
 				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
 				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
 				selected = true;
@@ -108,18 +117,14 @@ public class UpgradeDetails : MonoBehaviour {
 		if (selected == false) {
 			if (stage == 1) {
 				if (num2 == 1) {
-					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
-					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
+					shrd.player_Health += upgradeHealth;
+					shrd.player_MaxHealth += upgradeHealth;
 					selected = true;
-				} else if (num2 == 2) {
-					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
-					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
-					selected = true;
-				}
+				} 
 			}
 			if (stage == 2) {
-				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
-				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
+				shrd.player_Mana += upgradeMana;
+				shrd.player_MaxMana += upgradeMana;
 				selected = true;
 			}
 		}
@@ -129,35 +134,15 @@ public class UpgradeDetails : MonoBehaviour {
 		if (selected == false) {
 			if (stage == 1) {
 				if (num3 == 1) {
-					shrd.player_Health += upgradeHealth;
-					shrd.player_MaxHealth += upgradeHealth;
+					shrd.abilityDuration += 15;
 					selected = true;
 				} 
-				else if (num3 == 2) {
-					shrd.player_Mana += upgradeMana;
-					shrd.player_MaxMana += upgradeMana;
-					selected = true;
-				} 
-				else if (num3 == 3) {
-					shrd.ManaReg = upgradeManaRegen;
-					selected = true;
-				}
 			}
 			if (stage == 2) {
 				if (num3 == 1) {
-					shrd.player_Health += upgradeHealth;
-					shrd.player_MaxHealth += upgradeHealth;
+					// no yet
 					selected = true;
 				} 
-				else if (num3 == 2) {
-					shrd.player_Mana += upgradeMana;
-					shrd.player_MaxMana += upgradeMana;
-					selected = true;
-				} 
-				else if (num3 == 3) {
-					shrd.ManaReg = upgradeManaRegen;
-					selected = true;
-				}
 			}
 		}
 	}
@@ -171,14 +156,11 @@ public class UpgradeDetails : MonoBehaviour {
 			if (stage == 1) {
 				// selection upgrade 1
 				if (num == 1) {
-					message1.text = "Reduce Laser Mana Usage from " + shrd.LaserMana + " to ";
+					message1.text = "All ability mana cost reduce by 30%";
 				} 
-				else if (num == 2) {
-					message1.text = "Increase Laser Ability Duration from " + shrd.LaserDuration + " to ";
-				}
 			}
 			if (stage == 2) {
-				message1.text = "Increase Fire Ability Damage by 50%";
+				message1.text = "Ice get 2 sec stun. \nLaser shoot 3 direction. \nFire longer range.";
 			}
 		}
 	}
@@ -192,14 +174,11 @@ public class UpgradeDetails : MonoBehaviour {
 			if (stage == 1) {
 				// selection upgrade 2
 				if (num2 == 1) {
-					message2.text = "Reduce Ice Mana Usage from " + shrd.IceMana + " to ";
+					message2.text = "Player health increase 40";
 				} 
-				else if (num2 == 2) {
-					message2.text = "Increase Ice Ability Duration from " + shrd.IceDuration + " to ";
-				}
 			}
 			if (stage == 2) {
-				message2.text = "Increase Fire Ability Duration from " + shrd.FireDuration + " to " + 15;
+				message2.text = "Player mana increase 150";
 			}
 		}
 	}
@@ -213,31 +192,13 @@ public class UpgradeDetails : MonoBehaviour {
 			if (stage == 1) {
 				// selection upgrade 3
 				if (num3 == 1) {
-					float temp = upgradeHealth + shrd.player_MaxHealth;
-					message3.text = "Increase Health from " + shrd.player_MaxHealth + " to " + temp;
-				} 
-				else if (num3 == 2) {
-					float temp = upgradeMana + shrd.player_MaxMana;
-					message3.text = "Increase Manapoint from " + shrd.player_MaxMana + " to " + temp;
-				}
-				else if (num3 == 3) {
-					float temp = upgradeManaRegen;
-					message3.text = "Increase Manapoint Regen Speed from " + shrd.ManaReg + " to " + temp;
+					message3.text = "Ability duration increase 15 second";
 				}
 			}
 
 			if (stage == 2) {
 				if (num3 == 1) {
-					float temp = upgradeHealth + shrd.player_MaxHealth;
-					message3.text = "Increase Health from " + shrd.player_MaxHealth + " to " + temp;
-				} 
-				else if (num3 == 2) {
-					float temp = upgradeMana + shrd.player_MaxMana;
-					message3.text = "Increase Manapoint from " + shrd.player_MaxMana + " to " + temp;
-				}
-				else if (num3 == 3) {
-					float temp = upgradeManaRegen;
-					message3.text = "Increase Manapoint Regen Speed from " + shrd.ManaReg + " to " + temp;
+					message3.text = "No yet";
 				}
 			}
 		}
