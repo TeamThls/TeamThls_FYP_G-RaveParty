@@ -12,8 +12,9 @@ public class DarkRoomEffect : MonoBehaviour {
 	public Material darkRoom_AltMat;
 	public float currentColor_increaseValue;
 	public float currentLight_Range;
-	public int player_Count;
+	int player_Count;
 
+	[SerializeField] float damageColor_Value;
 	[SerializeField] float timeToActivate;
 	[SerializeField] bool isTutorialRoom;
 	[SerializeField] SharedStats sharedStats_Script;
@@ -24,7 +25,7 @@ public class DarkRoomEffect : MonoBehaviour {
 
 	public enum darkRoom_State
 	{
-		Activated, Deactivated, Null
+		Activated, Deactivated, FullDark, Null
 	};
 	public darkRoom_State darkRoom_CurrentState = darkRoom_State.Null;
 
@@ -66,6 +67,7 @@ public class DarkRoomEffect : MonoBehaviour {
 			else if(darkRoom_CurrentState == darkRoom_State.Deactivated && currentColor_increaseValue >= 0.0f)
 			{
 				currentColor_increaseValue -= 0.001f;
+
 				ResetMaterialColor(currentColor_increaseValue);
 
 			}
@@ -74,6 +76,10 @@ public class DarkRoomEffect : MonoBehaviour {
 				darkRoom_CurrentState = darkRoom_State.Null;
 				currentColor_increaseValue = 0.0f;
 
+			}
+			if(darkRoom_AltMat.color == Color.black)
+			{
+				darkRoom_CurrentState = darkRoom_State.FullDark;
 			}
 			DarknessDamage();
 			ColorSmoothing();
@@ -103,53 +109,33 @@ public class DarkRoomEffect : MonoBehaviour {
 		}
 	}
 
+	// Needed Smoothing Lerping after damage
 	void DarknessDamage()
 	{
-		if(darkRoom_AltMat.color == Color.black)
+		if(darkRoom_CurrentState == darkRoom_State.FullDark)
 		{
+			
 			damage_CurrentTime += Time.deltaTime;
+			damageColor_Value += Time.deltaTime;
+			darkRoom_AltMat.color = Color.Lerp(Color.black, Color.red, 0.1f + (damageColor_Value * 0.25f));
+			
 			if(damage_CurrentTime >= damage_MaxTime)
 			{
 				damage_CurrentTime = 0.0f;
+				damageColor_Value = 0.0f;
+				darkRoom_AltMat.color = Color.Lerp(Color.black, Color.red, 0.1f);
 				sharedStats_Script.player_Health -= darkness_Damage;
-				StartCoroutine(redFlash_Script.ScreenFlash(0.1f));
-				//redFlash_Script.ScreenRed();
+
 			}
 		}
 		else
 		{
+			damageColor_Value = 0.0f;
 			damage_CurrentTime = 0.0f;
 		}
 	}
 
-	/*void FindAffectedLights()
-	{
-		Transform light = GameObject.Find(this.transform.parent.name + " Light").GetComponent<Transform>();
-		foreach (Transform child in light)
-		{
-			darkRoom_Light.Add(child.GetComponent<Light>());
-		}
-	}
 
-	void DarkenLights(float value)
-	{
-		for(int i = 0; i < darkRoom_Light.Count; i++)
-		{
-			darkRoom_Light[i].range = Mathf.Lerp(40.0f, 0.0f, value);
-		}
-	}
-
-	void ResetLights(float value)
-	{
-		if(darkRoom_Light != null)
-		{
-			for(int i = 0; i < darkRoom_Light.Count; i++)
-			{
-				darkRoom_Light[i].range = Mathf.Lerp(40.0f, 0.0f, value);
-
-			}
-		}
-	}*/
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
