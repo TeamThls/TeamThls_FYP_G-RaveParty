@@ -94,6 +94,7 @@ public class SharedStats : MonoBehaviour {
 	public int RandomNum;
 
 	public bool levelPassed;
+	public bool switchScene;
 	public float endDuration;
 
 	public int resetScoreMultiplier;
@@ -240,22 +241,24 @@ public class SharedStats : MonoBehaviour {
 		}
 
 		if (levelPassed == true) {
-			endDuration += Time.deltaTime;
-			if (endDuration >= 15.0f) {
+			if (switchScene == true) {
 				if (wave_count == 1) {
 					GlobalControl.Instance.wave_count += 1;
 					levelPassed = false;
+					switchScene = false;
 					endDuration = 0.0f;
-					SceneManager.LoadScene (9);
+					SceneManager.LoadScene (7);
 				}
 				else if (wave_count == 2) {
 					GlobalControl.Instance.wave_count += 1;
 					levelPassed = false;
+					switchScene = false;
 					endDuration = 0.0f;
-					SceneManager.LoadScene (10);
+					SceneManager.LoadScene (8);
 				}
 				else {
 					levelPassed = false;
+					switchScene = false;
 					endDuration = 0.0f;
 					SceneManager.LoadScene("Game Over");
 				}
@@ -296,6 +299,7 @@ public class SharedStats : MonoBehaviour {
 
 	public void Reset()
 	{
+		//Debug.Log ("work");
 		GlobalControl.Instance.player_Num = resetPlayer_Num;
 		GlobalControl.Instance.p_Health = resetplayer_Health;
 		GlobalControl.Instance.p_MaxHealth = resetplayer_MaxHealth;
@@ -324,5 +328,36 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.L_Duration = resetLaserDuration;
 		GlobalControl.Instance.I_Duration = resetIceDuration;
 		GlobalControl.Instance.ablty_Duration = resetabilityDuration;
+
+		player_Number = GlobalControl.Instance.player_Num;
+		player_Health = GlobalControl.Instance.p_Health ;
+		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
+
+		player_Mana = GlobalControl.Instance.p_Mana;
+		player_MaxMana = GlobalControl.Instance.p_MaxMana;
+		ManaReg = GlobalControl.Instance.Mana_Reg;
+
+		player_Gold = GlobalControl.Instance.p_Gold;
+		player_Score = GlobalControl.Instance.p_Score;
+
+		wave_count = GlobalControl.Instance.wave_count;
+
+		Bullet_Damage = GlobalControl.Instance.B_Damage;
+		Fire_Damage = GlobalControl.Instance.F_Damage;
+		Ice_Damage = GlobalControl.Instance.I_Damage;
+		Laser_Damage = GlobalControl.Instance.L_Damage;
+
+		BulletMana = GlobalControl.Instance.B_Mana;
+		FireMana = GlobalControl.Instance.F_Mana;
+		BaseFireMana = GlobalControl.Instance.Base_Mana;
+		LaserMana = GlobalControl.Instance.L_Mana;
+		IceMana = GlobalControl.Instance.I_Mana;
+
+		FireDuration = GlobalControl.Instance.F_Duration;
+		LaserDuration = GlobalControl.Instance.L_Duration;
+		IceDuration = GlobalControl.Instance.I_Duration;
+		abilityDuration = GlobalControl.Instance.ablty_Duration;
+
+		ScoreMultiplier = GlobalControl.Instance.Score_Mulitplier;
 	}
 }

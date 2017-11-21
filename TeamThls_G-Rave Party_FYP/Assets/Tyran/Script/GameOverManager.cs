@@ -88,7 +88,8 @@ public class GameOverManager : MonoBehaviour {
 
 	public void ChangeScene (string sceneName)
 	{
-		//SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_BUTTONPRESSED1);.
+		//SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_BUTTONPRESSED1);
+		sharedstats.Reset ();
 		scene = sceneName;
 		Invoke ("ChangeSceneDelay",1.0f);
 	}

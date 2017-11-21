@@ -99,6 +99,7 @@ public class UpgradeDetails : MonoBehaviour {
 					player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
 					player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
 					selected = true;
+					shrd.switchScene = true;
 				}
 			}
 			if (stage == 2) {
@@ -109,6 +110,7 @@ public class UpgradeDetails : MonoBehaviour {
 				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
 				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
 				selected = true;
+				shrd.switchScene = true;
 			}
 		}
 	}
@@ -120,12 +122,14 @@ public class UpgradeDetails : MonoBehaviour {
 					shrd.player_Health += upgradeHealth;
 					shrd.player_MaxHealth += upgradeHealth;
 					selected = true;
+					shrd.switchScene = true;
 				} 
 			}
 			if (stage == 2) {
 				shrd.player_Mana += upgradeMana;
 				shrd.player_MaxMana += upgradeMana;
 				selected = true;
+				shrd.switchScene = true;
 			}
 		}
 	}
@@ -136,12 +140,14 @@ public class UpgradeDetails : MonoBehaviour {
 				if (num3 == 1) {
 					shrd.abilityDuration += 15;
 					selected = true;
+					shrd.switchScene = true;
 				} 
 			}
 			if (stage == 2) {
 				if (num3 == 1) {
 					// no yet
 					selected = true;
+					shrd.switchScene = true;
 				} 
 			}
 		}

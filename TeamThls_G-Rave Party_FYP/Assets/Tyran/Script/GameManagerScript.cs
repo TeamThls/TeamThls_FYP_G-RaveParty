@@ -164,8 +164,20 @@ public class GameManagerScript : MonoBehaviour
 	{
 		if (SoundManagerScript.Instance.CheckBGM()) 
 		{
-			sharedstats.levelPassed = true;
+			//sharedstats.levelPassed = true;
 			//SceneManager.LoadScene("Game Over");
+			if(sharedstats.wave_count == 1){
+				sharedstats.levelPassed = true;
+				//SceneManager.LoadScene("Game Over");
+			}
+			if(sharedstats.wave_count == 2){
+				sharedstats.levelPassed = true;
+				//SceneManager.LoadScene("Game Over");
+			}
+			if(sharedstats.wave_count == 3){
+				sharedstats.levelPassed = true;
+				SceneManager.LoadScene("Game Over");
+			}
 		}
 		if (sharedstats.player_Health <= 0) 
 		{
