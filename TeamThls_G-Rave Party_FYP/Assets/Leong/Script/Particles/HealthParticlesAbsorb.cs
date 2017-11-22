@@ -39,7 +39,7 @@ public class HealthParticlesAbsorb : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(duration);
 
-		if(healthScript.availableHealth < 5)
+		if(healthScript.availableHealth < healthScript.health_Requirement)
 		{
 			healthScript.availableHealth += 1;
 		}

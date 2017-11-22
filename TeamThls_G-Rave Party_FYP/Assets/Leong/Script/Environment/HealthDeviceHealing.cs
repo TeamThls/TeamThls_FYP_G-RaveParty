@@ -9,7 +9,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 	ParticleSystem healthDevice_Particles;
 	[SerializeField] ParticleSystem healParticles;
 	[SerializeField] ParticleSystem healUIParticles;
-	[SerializeField] float health_Requirement;
+	public int health_Requirement;
 	public int availableHealth;
 	SpriteRenderer healthDevice_Spr;
 	SharedStats allPlayer_SharedStats;
@@ -19,6 +19,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 		healthDevice = GameObject.Find("P_HealDevice");
 		healthDevice_Particles = healthDevice.transform.GetComponentInChildren<ParticleSystem>();
 		availableHealth = 0;
+		health_Requirement = 10;
 		healthDevice_Spr = healthDevice.GetComponent<SpriteRenderer>();
 		allPlayer_SharedStats = GameObject.Find("GameManager").GetComponent<SharedStats>();
 

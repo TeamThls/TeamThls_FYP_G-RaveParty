@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour {
 	public bool player_isDown = false;
 	public bool player_grounded;
 	public bool player_SlowMo;
+	[SerializeField] ParticleSystem ground_Particles;
 
 	//Animator anim;
 	SpriteRenderer player_spriteRen;
@@ -38,6 +39,10 @@ public class PlayerMovement : MonoBehaviour {
 		player_spriteRen = transform.Find("Sprite").GetComponent<SpriteRenderer>();
 		player1 = GameObject.Find("Player");
 		player2 = GameObject.Find("Player2");
+		if(ground_Particles == null)
+		{
+			ground_Particles = this.transform.GetChild(9).GetComponent<ParticleSystem>();
+		}
 	}
 
 	// Update is called once per frame
@@ -105,6 +110,12 @@ public class PlayerMovement : MonoBehaviour {
 		else 
 		{
 			player_isWalking = true;
+
+		}
+		if(player_horizontalSpeed != 0.0f && player_grounded)
+		{
+			StartCoroutine(SpawnGroundDust(0.75f, 1));
+
 		}
 
 		player_horizontalSpeed = move.x * player_WalkSpeed * player_TimeFactor;
@@ -116,6 +127,8 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
 			player_grounded = false;
+			StartCoroutine(SpawnGroundDust(0.25f, 1));
+
 		}
 
 		// Min Screen Limit Vector3, everything is zero (Left Side)
@@ -198,6 +211,11 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			player_isWalking = true;
 		}
+		if(player_horizontalSpeed != 0.0f && player_grounded)
+		{
+			StartCoroutine(SpawnGroundDust(0.75f, 1));
+
+		}
 
 		player_horizontalSpeed = move.x * player_WalkSpeed * player_TimeFactor;
 		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
@@ -207,6 +225,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
 			player_grounded = false;
+			StartCoroutine(SpawnGroundDust(0.25f, 1));
 		}
 
 		// Min Screen Limit Vector3, everything is zero (Left Side)
@@ -278,6 +297,11 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			player_isWalking = true;
 		}
+		if(player_horizontalSpeed != 0.0f && player_grounded)
+		{
+			StartCoroutine(SpawnGroundDust(0.75f, 1));
+
+		}
 
 		player_horizontalSpeed = move.x * player_WalkSpeed * player_TimeFactor;
 		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
@@ -286,6 +310,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
 			player_grounded = false;
+			StartCoroutine(SpawnGroundDust(0.25f, 1));
 		}
 
 		// Min Screen Limit Vector3, everything is zero (Left Side)
@@ -340,6 +365,12 @@ public class PlayerMovement : MonoBehaviour {
 		else 
 		{
 			player_isWalking = true;
+
+		}
+		if(player_horizontalSpeed != 0.0f && player_grounded)
+		{
+			StartCoroutine(SpawnGroundDust(0.75f, 1));
+
 		}
 
 		player_horizontalSpeed = move.x * player_WalkSpeed * player_TimeFactor;
@@ -350,6 +381,8 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
 			player_grounded = false;
+			StartCoroutine(SpawnGroundDust(0.25f, 1));
+
 		}
 
 		// Min Screen Limit Vector3, everything is zero (Left Side)
@@ -372,5 +405,14 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			teleportingPlayer2.transform.position = teleportingPlayer1.transform.position;
 		}
+	}
+
+	// Put checking statement if want delay every movement
+	IEnumerator SpawnGroundDust(float interval, int particleEmission)
+	{
+		ground_Particles.Emit(particleEmission);
+	
+		yield return new WaitForSeconds(interval);
+
 	}
 }
