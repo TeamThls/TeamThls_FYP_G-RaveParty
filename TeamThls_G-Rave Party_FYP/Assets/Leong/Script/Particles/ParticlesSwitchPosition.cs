@@ -8,7 +8,13 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 	{
 		Player, Enemy
 	};
+
+	enum ParticleType
+	{
+		Wand, Ground
+	};
 	public Object current_Obj;
+	[SerializeField] ParticleType par_Type;
 	SpriteRenderer obj_Spr;
 	// Use this for initialization
 	void Start () {
@@ -29,15 +35,32 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 		{
 			if(obj_Spr.flipX == true)
 			{
-				transform.localPosition = new Vector2(-0.5f, transform.localPosition.y);
+				if(par_Type == ParticleType.Wand)
+				{
+					transform.localPosition = new Vector2(-0.55f, transform.localPosition.y);
+				}
+				else if(par_Type == ParticleType.Ground)
+				{
+					transform.localPosition = new Vector2(0.65f, transform.localPosition.y);
+						
+				}
 			}
 			else
 			{
-				transform.localPosition = new Vector2(0.5f, transform.localPosition.y);
+				if(par_Type == ParticleType.Wand)
+				{
+					transform.localPosition = new Vector2(0.55f, transform.localPosition.y);
+				}
+				else if(par_Type == ParticleType.Ground)
+				{
+					transform.localPosition = new Vector2(-0.65f, transform.localPosition.y);
+						
+				}
 			}
 		}
 		else
 		{
+			// 43.34f flipX, 133.34f !flipX
 			if(obj_Spr.flipX == true)
 			{
 				transform.localPosition = new Vector2(-1.08f, transform.localPosition.y);

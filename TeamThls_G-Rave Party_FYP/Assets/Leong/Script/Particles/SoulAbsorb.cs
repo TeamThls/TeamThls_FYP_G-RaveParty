@@ -23,6 +23,7 @@ public class SoulAbsorb : MonoBehaviour {
 		{
 			sharedStats = GameObject.Find("GameManager").GetComponent<SharedStats>();
 		}
+		ScoreStreakEffect();
 	}
 	
 	// Update is called once per frame
@@ -30,12 +31,20 @@ public class SoulAbsorb : MonoBehaviour {
 	{
 		player_Position = new Vector2(player.transform.position.x, player.transform.position.y);
 		transform.position = Vector2.MoveTowards(transform.position, new Vector3(player_Position.x, player_Position.y + 0.2f, player_Position.x - 0.1f), Mathf.Lerp(0.01f, 1.0f, 0.1f));
+
 	}
 
 	void OnParticleCollision(GameObject obj)
 	{
 		p_Soul.Stop();
 		StartCoroutine(Vanish(1.0f));
+	}
+
+	void ScoreStreakEffect()
+	{
+		var main = p_Soul.main;
+
+		main.startSize = (0.15f + (sharedStats.ScoreMultiplier * 0.15f));
 	}
 
 	IEnumerator Vanish(float duration)

@@ -130,7 +130,7 @@ public class SharedStats : MonoBehaviour {
 		resetIceDuration = GlobalControl.Instance.I_Duration;
 		resetabilityDuration = GlobalControl.Instance.ablty_Duration;
 
-		resetScoreMultiplier = GlobalControl.Instance.Score_Mulitplier;
+		resetScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
 	}
 
 	//void Start () {
@@ -175,7 +175,7 @@ public class SharedStats : MonoBehaviour {
 		IceDuration = GlobalControl.Instance.I_Duration;
 		abilityDuration = GlobalControl.Instance.ablty_Duration;
 
-		ScoreMultiplier = GlobalControl.Instance.Score_Mulitplier;
+		ScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
 
 		//Reset ();
 	}
@@ -388,6 +388,6 @@ public class SharedStats : MonoBehaviour {
 		IceDuration = GlobalControl.Instance.I_Duration;
 		abilityDuration = GlobalControl.Instance.ablty_Duration;
 
-		ScoreMultiplier = GlobalControl.Instance.Score_Mulitplier;
+		ScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
 	}
 }
