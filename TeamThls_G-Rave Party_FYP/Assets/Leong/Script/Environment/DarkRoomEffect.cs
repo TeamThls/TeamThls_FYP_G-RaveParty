@@ -21,7 +21,8 @@ public class DarkRoomEffect : MonoBehaviour {
 	[SerializeField] float damage_CurrentTime;
 	int darkness_Damage = 2;
 	float damage_MaxTime = 2.0f;
-	ScreenFlashingRedEffect redFlash_Script;
+	//ScreenFlashingRedEffect redFlash_Script;
+	public Animator player1_Anim, player2_Anim;
 
 	public enum darkRoom_State
 	{
@@ -32,7 +33,8 @@ public class DarkRoomEffect : MonoBehaviour {
 	void Awake()
 	{
 		sharedStats_Script = GameObject.Find("GameManager").GetComponent<SharedStats>();
-		redFlash_Script = GameObject.Find("GUI").GetComponent<ScreenFlashingRedEffect>();
+
+		//redFlash_Script = GameObject.Find("GUI").GetComponent<ScreenFlashingRedEffect>();
 	}
 
 	// Use this for initialization
@@ -40,6 +42,8 @@ public class DarkRoomEffect : MonoBehaviour {
 	{
 		darkRoom_Mat.color = Color.white;
 		darkRoom_AltMat.color = Color.white;
+		player1_Anim = GameObject.Find("Player").GetComponentInChildren<Animator>();
+		player2_Anim = GameObject.Find("Player2").GetComponentInChildren<Animator>();
 		//ListingAllDarkRoomObjects();
 		//FindAffectedLights();
 	}
@@ -114,7 +118,6 @@ public class DarkRoomEffect : MonoBehaviour {
 	{
 		if(darkRoom_CurrentState == darkRoom_State.FullDark)
 		{
-			
 			damage_CurrentTime += Time.deltaTime;
 			damageColor_Value += Time.deltaTime;
 			darkRoom_AltMat.color = Color.Lerp(Color.black, Color.red, 0.1f + (damageColor_Value * 0.25f));
@@ -125,7 +128,8 @@ public class DarkRoomEffect : MonoBehaviour {
 				damageColor_Value = 0.0f;
 				darkRoom_AltMat.color = Color.Lerp(Color.black, Color.red, 0.1f);
 				sharedStats_Script.player_Health -= darkness_Damage;
-
+				player1_Anim.Play("PlayerDamaged");
+				player2_Anim.Play("PlayerDamaged");
 			}
 		}
 		else

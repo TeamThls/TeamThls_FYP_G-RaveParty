@@ -9,6 +9,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 	ParticleSystem healthDevice_Particles;
 	[SerializeField] ParticleSystem healParticles;
 	[SerializeField] ParticleSystem healUIParticles;
+	[SerializeField] float health_Requirement;
 	public int availableHealth;
 	SpriteRenderer healthDevice_Spr;
 	SharedStats allPlayer_SharedStats;
@@ -31,7 +32,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 			healthDevice_Spr.color = Color.white;
 			healthDevice_Particles.Play();
 		}
-		else if(availableHealth < 5)
+		else if(availableHealth < health_Requirement)
 		{
 			healthDevice_Spr.color = Color.black;
 			healthDevice_Particles.Stop();
@@ -42,7 +43,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 	{
 		if(col.gameObject.layer == 10) 
 		{
-			if(availableHealth == 5)
+			if(availableHealth == health_Requirement)
 			{
 				if(allPlayer_SharedStats.player_Health < allPlayer_SharedStats.player_MaxHealth)
 				{
@@ -61,7 +62,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 			}
 			else
 			{
-				Debug.Log(5 - availableHealth + " " + "Left, Kill More Enemies");
+				Debug.Log(health_Requirement - availableHealth + " " + "Left, Kill More Enemies");
 			}
 
 		}

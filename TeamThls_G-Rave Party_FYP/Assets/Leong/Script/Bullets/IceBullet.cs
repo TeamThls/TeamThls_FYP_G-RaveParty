@@ -82,5 +82,19 @@ public class IceBullet : MonoBehaviour {
 			}
 			enemy_Collider.enemy_Health -= iceBullet_Damage;
 		}
+		else if(col.CompareTag("ShootEnemy"))
+		{
+			EnemyCollider enemy_Collider = col.GetComponent<EnemyCollider>();
+			cameraShake.Shake(0.5f, 0.1f);
+			if(currentLevel == 3)
+			{
+				enemy_Collider.IceBulletStunReaction();
+			}
+			else
+			{
+				enemy_Collider.IceBulletReaction();
+			}
+			enemy_Collider.enemy_Health -= iceBullet_Damage;
+		}
 	}
 }
