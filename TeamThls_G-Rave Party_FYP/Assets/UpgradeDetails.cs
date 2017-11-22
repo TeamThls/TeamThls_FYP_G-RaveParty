@@ -32,7 +32,12 @@ public class UpgradeDetails : MonoBehaviour {
 	public Text message2;
 	public Text message3;
 
+	public Transform timeRemain;
+	public Text timeMessage;
+
 	public bool open;
+
+	float time;
 
 	BulletUpgrades player1_Upgrade, player2_Upgrade;
 
@@ -50,11 +55,12 @@ public class UpgradeDetails : MonoBehaviour {
 		detail02 = this.transform.GetChild (5);
 		detail03 = this.transform.GetChild (6);
 
+		timeRemain = this.transform.GetChild (7);
+
 		player1_Upgrade = GameObject.Find("Player").GetComponent<BulletUpgrades>();
 		player2_Upgrade = GameObject.Find("Player2").GetComponent<BulletUpgrades>();
 		selected = false;
 		open = false;
-
 	}
 
 	// Update is called once per frame
@@ -86,6 +92,10 @@ public class UpgradeDetails : MonoBehaviour {
 		if (selected == true) {
 			shrd.endDuration += 15.0f;
 		}
+
+		time = 15.0f - shrd.endDuration;
+
+		timeMessage.text = "Next Level : " + time.ToString();
 	}
 
 	public void upgrade01(){	
@@ -113,6 +123,7 @@ public class UpgradeDetails : MonoBehaviour {
 				shrd.switchScene = true;
 			}
 		}
+
 	}
 
 	public void upgrade02(){

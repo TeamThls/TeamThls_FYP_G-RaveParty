@@ -102,7 +102,7 @@ public class SharedStats : MonoBehaviour {
 	// Use this for initialization
 	void Awake() {
 		resetPlayer_Num = GlobalControl.Instance.player_Num;
-		resetplayer_Health = GlobalControl.Instance.p_Health ;
+		resetplayer_Health = GlobalControl.Instance.p_MaxHealth;
 		resetplayer_MaxHealth = GlobalControl.Instance.p_MaxHealth;
 
 		resetplayer_Mana = GlobalControl.Instance.p_Mana;
@@ -147,7 +147,7 @@ public class SharedStats : MonoBehaviour {
 	void OnSceneLoaded(Scene Scene,LoadSceneMode mode)
 	{
 		player_Number = GlobalControl.Instance.player_Num;
-		player_Health = GlobalControl.Instance.p_Health ;
+		player_Health = GlobalControl.Instance.p_MaxHealth ;
 		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
 
 		player_Mana = GlobalControl.Instance.p_Mana;
@@ -241,26 +241,56 @@ public class SharedStats : MonoBehaviour {
 		}
 
 		if (levelPassed == true) {
-			if (switchScene == true) {
-				if (wave_count == 1) {
-					GlobalControl.Instance.wave_count += 1;
-					levelPassed = false;
-					switchScene = false;
-					endDuration = 0.0f;
-					SceneManager.LoadScene (7);
+			endDuration += Time.deltaTime;
+			if (endDuration >= 15.0f) {
+				switchScene = true;
+			}
+			if (player_Number == 1) {
+				if (switchScene == true) {
+					if (wave_count == 1) {
+						GlobalControl.Instance.wave_count += 1;
+						levelPassed = false;
+						switchScene = false;
+						endDuration = 0.0f;
+						SceneManager.LoadScene (9);
+					}
+					else if (wave_count == 2) {
+						GlobalControl.Instance.wave_count += 1;
+						levelPassed = false;
+						switchScene = false;
+						endDuration = 0.0f;
+						SceneManager.LoadScene (10);
+					}
+					else {
+						levelPassed = false;
+						switchScene = false;
+						endDuration = 0.0f;
+						SceneManager.LoadScene("Game Over");
+					}
 				}
-				else if (wave_count == 2) {
-					GlobalControl.Instance.wave_count += 1;
-					levelPassed = false;
-					switchScene = false;
-					endDuration = 0.0f;
-					SceneManager.LoadScene (8);
-				}
-				else {
-					levelPassed = false;
-					switchScene = false;
-					endDuration = 0.0f;
-					SceneManager.LoadScene("Game Over");
+			} 
+			else if (player_Number == 2) {
+				if (switchScene == true) {
+					if (wave_count == 1) {
+						GlobalControl.Instance.wave_count += 1;
+						levelPassed = false;
+						switchScene = false;
+						endDuration = 0.0f;
+						SceneManager.LoadScene (7);
+					}
+					else if (wave_count == 2) {
+						GlobalControl.Instance.wave_count += 1;
+						levelPassed = false;
+						switchScene = false;
+						endDuration = 0.0f;
+						SceneManager.LoadScene (8);
+					}
+					else {
+						levelPassed = false;
+						switchScene = false;
+						endDuration = 0.0f;
+						SceneManager.LoadScene("Game Over");
+					}
 				}
 			}
 		}
@@ -330,7 +360,7 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.ablty_Duration = resetabilityDuration;
 
 		player_Number = GlobalControl.Instance.player_Num;
-		player_Health = GlobalControl.Instance.p_Health ;
+		player_Health = GlobalControl.Instance.p_MaxHealth ;
 		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
 
 		player_Mana = GlobalControl.Instance.p_Mana;
