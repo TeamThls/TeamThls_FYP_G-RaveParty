@@ -19,8 +19,8 @@ public class DarkRoomEffect : MonoBehaviour {
 	[SerializeField] bool isTutorialRoom;
 	[SerializeField] SharedStats sharedStats_Script;
 	[SerializeField] float damage_CurrentTime;
-	int darkness_Damage = 2;
-	float damage_MaxTime = 2.0f;
+	int darkness_Damage = 1;
+	float damage_MaxTime = 3.0f;
 	//ScreenFlashingRedEffect redFlash_Script;
 	public Animator player1_Anim, player2_Anim;
 
