@@ -104,14 +104,23 @@ public class SharedStats : MonoBehaviour {
 	public int resetScoreMultiplier;
 
 	BulletUpgrades p1_Upgrade, p2_Upgrade;
+	SceneManagement sceneManagement;
 
 	public int abilitiesLevel;
 	public int resetAbilitiesLevel;
 
 	// Use this for initialization
 	void Awake() {
+		sceneManagement = Camera.main.GetComponentInParent<SceneManagement>();
 		p1_Upgrade = GameObject.Find("Player").GetComponent<BulletUpgrades>();
-		p2_Upgrade = GameObject.Find("Player2").GetComponent<BulletUpgrades>();
+		if(sceneManagement.isSinglePlayer != true)
+		{
+			p2_Upgrade = GameObject.Find("Player2").GetComponent<BulletUpgrades>();
+		}
+		else
+		{
+			p2_Upgrade = null;
+		}
 
 		resetPlayer_Num = GlobalControl.Instance.player_Num;
 		resetplayer_Health = GlobalControl.Instance.p_MaxHealth;

@@ -52,7 +52,7 @@ public class Compass : MonoBehaviour {
 		{
 			HideCompass(magicBookArrow_UITransform, magic_Anim);
 		}
-		if(health_Script.availableHealth == 5)
+		if(health_Script.availableHealth == health_Script.health_Requirement)
 		{
 			EnableCompass(healthStation_UITransform, health_Anim);
 			RotateCompass(healthStation, healthStation_UITransform);

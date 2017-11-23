@@ -18,6 +18,7 @@ public class DarkRoomEffect : MonoBehaviour {
 	[SerializeField] float timeToActivate;
 	[SerializeField] bool isTutorialRoom;
 	[SerializeField] SharedStats sharedStats_Script;
+	SceneManagement sceneManagement;
 	[SerializeField] float damage_CurrentTime;
 	int darkness_Damage = 1;
 	float damage_MaxTime = 3.0f;
@@ -33,7 +34,7 @@ public class DarkRoomEffect : MonoBehaviour {
 	void Awake()
 	{
 		sharedStats_Script = GameObject.Find("GameManager").GetComponent<SharedStats>();
-
+		sceneManagement = Camera.main.GetComponentInParent<SceneManagement>();
 		//redFlash_Script = GameObject.Find("GUI").GetComponent<ScreenFlashingRedEffect>();
 	}
 
@@ -43,7 +44,14 @@ public class DarkRoomEffect : MonoBehaviour {
 		darkRoom_Mat.color = Color.white;
 		darkRoom_AltMat.color = Color.white;
 		player1_Anim = GameObject.Find("Player").GetComponentInChildren<Animator>();
-		player2_Anim = GameObject.Find("Player2").GetComponentInChildren<Animator>();
+		if(sceneManagement.isSinglePlayer != true)
+		{
+			player2_Anim = GameObject.Find("Player2").GetComponentInChildren<Animator>();
+		}
+		else
+		{
+			player2_Anim = null;
+		}
 		//ListingAllDarkRoomObjects();
 		//FindAffectedLights();
 	}
@@ -129,7 +137,11 @@ public class DarkRoomEffect : MonoBehaviour {
 				darkRoom_AltMat.color = Color.Lerp(Color.black, Color.red, 0.1f);
 				sharedStats_Script.player_Health -= darkness_Damage;
 				player1_Anim.Play("PlayerDamaged");
-				player2_Anim.Play("PlayerDamaged");
+
+				if(player2_Anim != null)
+				{
+					player2_Anim.Play("PlayerDamaged");
+				}
 			}
 		}
 		else
