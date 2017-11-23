@@ -103,7 +103,7 @@ public class SharedStats : MonoBehaviour {
 
 	public int resetScoreMultiplier;
 
-	BulletUpgrades p1_Upgrade, p2_Upgrade;
+	[SerializeField] BulletUpgrades p1_Upgrade, p2_Upgrade;
 	SceneManagement sceneManagement;
 
 	public int abilitiesLevel;

@@ -64,7 +64,7 @@ public class MainMenuEventScript : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			if(this.gameObject.name == "Co-op")
+			if(this.gameObject.name == "Single")
 			{
 				DisableSpriteI();
 			}
@@ -72,7 +72,7 @@ public class MainMenuEventScript : MonoBehaviour {
 			{
 				DisableSpriteI();
 			}
-			else if(this.gameObject.name == "Option") 
+			else if(this.gameObject.name == "Co-op") 
 			{
 				DisableSpriteI();
 			}

@@ -41,7 +41,7 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 				}
 				else if(par_Type == ParticleType.Ground)
 				{
-					transform.localPosition = new Vector2(0.65f, transform.localPosition.y);
+					transform.localPosition = new Vector3(0.65f, transform.localPosition.y, -1.0f);
 						
 				}
 			}
@@ -53,7 +53,7 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 				}
 				else if(par_Type == ParticleType.Ground)
 				{
-					transform.localPosition = new Vector2(-0.65f, transform.localPosition.y);
+					transform.localPosition = new Vector3(-0.65f, transform.localPosition.y, -1.0f);
 						
 				}
 			}

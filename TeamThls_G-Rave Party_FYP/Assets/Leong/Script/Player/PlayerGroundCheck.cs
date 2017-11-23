@@ -11,7 +11,10 @@ public class PlayerGroundCheck : MonoBehaviour {
 	void Start () 
 	{
 		player = GetComponentInParent<PlayerMovement>();
-		ground_Particles = transform.parent.GetChild(9).GetComponent<ParticleSystem>();
+		if(ground_Particles == null)
+		{
+			ground_Particles = transform.parent.GetChild(9).GetComponent<ParticleSystem>();
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D col)
