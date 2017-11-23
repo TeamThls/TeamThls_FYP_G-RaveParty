@@ -102,23 +102,25 @@ public class UpgradeDetails : MonoBehaviour {
 		if (selected == false) {
 			if (stage == 1) {
 				if (num == 1) {
-					player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
+					/*player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
 					player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
 					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
 					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
 					player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
-					player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
+					player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;*/
+					shrd.abilitiesLevel = 2;
 					selected = true;
 					shrd.switchScene = true;
 				}
 			}
 			if (stage == 2) {
-				player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
+				/*player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
 				player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
 				player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
 				player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
 				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
-				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
+				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;*/
+				shrd.abilitiesLevel = 3;
 				selected = true;
 				shrd.switchScene = true;
 			}

@@ -103,8 +103,16 @@ public class SharedStats : MonoBehaviour {
 
 	public int resetScoreMultiplier;
 
+	BulletUpgrades p1_Upgrade, p2_Upgrade;
+
+	public int abilitiesLevel;
+	public int resetAbilitiesLevel;
+
 	// Use this for initialization
 	void Awake() {
+		p1_Upgrade = GameObject.Find("Player").GetComponent<BulletUpgrades>();
+		p2_Upgrade = GameObject.Find("Player2").GetComponent<BulletUpgrades>();
+
 		resetPlayer_Num = GlobalControl.Instance.player_Num;
 		resetplayer_Health = GlobalControl.Instance.p_MaxHealth;
 		resetplayer_MaxHealth = GlobalControl.Instance.p_MaxHealth;
@@ -137,6 +145,8 @@ public class SharedStats : MonoBehaviour {
 		resetScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
 
 		resetHealRequire = GlobalControl.Instance.healRequire;
+
+		resetAbilitiesLevel = GlobalControl.Instance.abilityLevel;
 	}
 
 	//void Start () {
@@ -184,6 +194,9 @@ public class SharedStats : MonoBehaviour {
 		ScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
 
 		healRequire = GlobalControl.Instance.healRequire;
+
+		abilitiesLevel = GlobalControl.Instance.abilityLevel;
+
 		//Reset ();
 	}
 	
@@ -193,6 +206,7 @@ public class SharedStats : MonoBehaviour {
 		setTimeScore += Time.deltaTime;
 		SaveStats ();
 
+		// ability duration
 		if (OnFire == true) {
 			abilityDuration += Time.deltaTime;
 			if (abilityDuration >= FireDuration + abilityExtendedDuration) {
@@ -247,6 +261,8 @@ public class SharedStats : MonoBehaviour {
 			setTime = maxDuration - 0.5f;
 		}
 
+
+		// checking winning or losing and switch scene
 		if (levelPassed == true) {
 			endDuration += Time.deltaTime;
 			if (endDuration >= 15.0f) {
@@ -333,6 +349,8 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.I_Duration = IceDuration;
 		GlobalControl.Instance.ablty_Duration = abilityDuration;
 		GlobalControl.Instance.healRequire = healRequire;
+
+		GlobalControl.Instance.abilityLevel = abilitiesLevel;
 	}
 
 	public void Reset()
@@ -369,6 +387,8 @@ public class SharedStats : MonoBehaviour {
 
 		GlobalControl.Instance.healRequire = resetHealRequire;
 
+		GlobalControl.Instance.abilityLevel = resetAbilitiesLevel;
+
 		player_Number = GlobalControl.Instance.player_Num;
 		player_Health = GlobalControl.Instance.p_MaxHealth ;
 		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
@@ -401,5 +421,7 @@ public class SharedStats : MonoBehaviour {
 		ScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
 
 		healRequire = GlobalControl.Instance.healRequire;
+
+		abilitiesLevel = GlobalControl.Instance.abilityLevel;
 	}
 }

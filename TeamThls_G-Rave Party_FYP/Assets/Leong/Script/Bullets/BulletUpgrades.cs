@@ -74,6 +74,21 @@ public class BulletUpgrades : MonoBehaviour {
 	void Update () 
 	{
 		CheckUpgrades();
+		if (stats_Script.abilitiesLevel == 1) {
+			ice_CurrentLevel = IceLevel.Zero;
+			fire_CurrentLevel = FireLevel.Zero;
+			laser_CurrentLevel = LaserLevel.Zero;
+		}
+		else if (stats_Script.abilitiesLevel == 2) {
+			ice_CurrentLevel = IceLevel.First;
+			fire_CurrentLevel = FireLevel.First;
+			laser_CurrentLevel = LaserLevel.First;
+		}
+		else if (stats_Script.abilitiesLevel == 3) {
+			ice_CurrentLevel = IceLevel.Second;
+			fire_CurrentLevel = FireLevel.Second;
+			laser_CurrentLevel = LaserLevel.Second;
+		}
 	}
 
 	void CheckUpgrades()

@@ -42,6 +42,8 @@ public class GlobalControl : MonoBehaviour {
 
 	public int healRequire;
 
+	public int abilityLevel;
+
 	void Awake() {
 		if (Instance == null) {
 			DontDestroyOnLoad (gameObject);
