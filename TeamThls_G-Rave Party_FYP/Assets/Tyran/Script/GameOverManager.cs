@@ -121,5 +121,13 @@ public class GameOverManager : MonoBehaviour {
 	public void wordCount(){
 		counter += 1;
 		messagebox.gameObject.SetActive (false);
+		if (Input.GetKeyDown (KeyCode.Backspace)) {
+			if (counter >= 1) {
+				counter -= 2;
+			}
+			if (counter <= 0) {
+				counter = 0;
+			}
+		}
 	}
 }
