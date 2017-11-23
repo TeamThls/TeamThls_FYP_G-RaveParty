@@ -156,7 +156,21 @@ public class GameManagerScript : MonoBehaviour
 	IEnumerator Wait()
 	{
 		yield return new WaitForSeconds (10.0f);
-		SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_PHRASE);
+		if(sharedstats.wave_count == 1)
+		{
+
+			SoundManagerScript.Instance.audioClipInfoList[0].audioClip = Resources.Load("PixelParty",typeof(AudioClip)) as AudioClip;
+		}
+		if(sharedstats.wave_count == 2)
+		{
+			SoundManagerScript.Instance.audioClipInfoList[0].audioClip = Resources.Load("CheatCodes",typeof(AudioClip)) as AudioClip;
+
+		}
+		if (sharedstats.wave_count == 3) 
+		{
+			SoundManagerScript.Instance.audioClipInfoList [0].audioClip = Resources.Load ("FadeX", typeof(AudioClip)) as AudioClip;
+		}
+		SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_LEVEL);
 		InvokeRepeating("check", 0.0f, spawnrate);
 		InvokeRepeating("deathcheck", 0.0f, 1.0f);
 	}

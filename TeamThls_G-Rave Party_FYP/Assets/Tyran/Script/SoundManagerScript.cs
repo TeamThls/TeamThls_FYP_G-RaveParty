@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public enum AudioClipID
 {
 	BGM_MAIN_MENU = 0,
-	BGM_PHRASE = 1,
+	BGM_LEVEL= 1,
 	BGM_GAMEOVER = 2,
 	SFX_Laser = 3,
 	SFX_Ice = 4,

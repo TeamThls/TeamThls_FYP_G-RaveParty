@@ -252,14 +252,14 @@ public class SharedStats : MonoBehaviour {
 						levelPassed = false;
 						switchScene = false;
 						endDuration = 0.0f;
-						SceneManager.LoadScene (9);
+						SceneManager.LoadScene ("Single-Player Level 2");
 					}
 					else if (wave_count == 2) {
 						GlobalControl.Instance.wave_count += 1;
 						levelPassed = false;
 						switchScene = false;
 						endDuration = 0.0f;
-						SceneManager.LoadScene (10);
+						SceneManager.LoadScene ("Single-Player Level 3");
 					}
 					else {
 						levelPassed = false;
@@ -276,14 +276,14 @@ public class SharedStats : MonoBehaviour {
 						levelPassed = false;
 						switchScene = false;
 						endDuration = 0.0f;
-						SceneManager.LoadScene (7);
+						SceneManager.LoadScene ("MultiPlayer Level 2");
 					}
 					else if (wave_count == 2) {
 						GlobalControl.Instance.wave_count += 1;
 						levelPassed = false;
 						switchScene = false;
 						endDuration = 0.0f;
-						SceneManager.LoadScene (8);
+						SceneManager.LoadScene ("MultiPlayer Level 3");
 					}
 					else {
 						levelPassed = false;

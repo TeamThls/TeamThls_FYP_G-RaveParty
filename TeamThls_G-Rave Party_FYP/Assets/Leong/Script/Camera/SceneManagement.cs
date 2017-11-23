@@ -8,7 +8,8 @@ public class SceneManagement : MonoBehaviour {
 	public bool isSinglePlayer;
 	// Use this for initialization
 
-	void Awake () {
+	void Awake () 
+	{
 		CheckSingleOrMulti();
 	}
 	
@@ -19,7 +20,7 @@ public class SceneManagement : MonoBehaviour {
 
 	void CheckSingleOrMulti()
 	{
-		if(SceneManager.GetActiveScene().name == "Single-Player Level")
+		if(SceneManager.GetActiveScene().name == "Single-Player Level" || SceneManager.GetActiveScene().name == "Single-Player Level 2" || SceneManager.GetActiveScene().name == "Single-Player Level 3")
 		{
 			isSinglePlayer = true;
 		}
