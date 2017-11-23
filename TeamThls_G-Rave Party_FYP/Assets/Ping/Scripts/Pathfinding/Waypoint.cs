@@ -39,7 +39,7 @@ public class Waypoint : MonoBehaviour {
 			target = Player;
 			totalDist = W_Dist + P_Dist;
 		}
-		else if (P_Dist > P2_Dist) {
+		else{
 			target = Player2;
 			totalDist = W_Dist + P2_Dist;
 		}

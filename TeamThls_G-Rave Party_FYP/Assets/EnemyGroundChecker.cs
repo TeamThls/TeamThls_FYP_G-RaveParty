@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemyGroundChecker : MonoBehaviour {
 
-	public WaypointPathfinding enemyMove;
+	public pathfinding enemyMove;
 
 	// Use this for initialization
 	void Start () 
 	{
-		enemyMove = GetComponentInParent<WaypointPathfinding>();
+		enemyMove = GetComponentInParent<pathfinding>();
 	}
 
 	void OnTriggerEnter2D(Collider2D col)

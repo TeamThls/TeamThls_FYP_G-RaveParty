@@ -25,7 +25,7 @@ public class WaypointPathfinding : MonoBehaviour {
 	Rigidbody2D rgd;
 
 	public GameObject temp = null;			// forget
-	public GameObject temp2;
+	//public GameObject temp2;
 	public Waypoint TempWay;				// forget
 
 	public float maxSpeed;
@@ -83,6 +83,9 @@ public class WaypointPathfinding : MonoBehaviour {
 				t_Waypoint = WayManager.childList [i];
 			}
 		}
+
+		targetDetection ();
+
 		// Get the first waypoint right at the start of the script to prevent null reference
 		if(TargetList[0] == null)
 		{
@@ -90,7 +93,7 @@ public class WaypointPathfinding : MonoBehaviour {
 			TargetList[0] = firstWaypoint;
 		}
 
-		targetDetection ();
+		temp = GameObject.Find ("waypoint").gameObject;
 
 		flipx = this.gameObject.GetComponent<SpriteRenderer> ().flipX;
 	}

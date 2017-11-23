@@ -8,6 +8,7 @@ public class SpawnBehaviour : MonoBehaviour {
 	public GameObject enemy1;
 	public GameObject enemy2;
 	public GameObject enemy3;
+	public GameObject enemy4;
 	public int r;
 	//public GameObject zeroObj;
 
@@ -28,7 +29,7 @@ public class SpawnBehaviour : MonoBehaviour {
 	{
 		//Instantiate (enemy2, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);	
 		//InvokeRepeating("actualspawn", 0.0f, 10.0f);
-		r = Random.Range (1, 4);
+		r = Random.Range (1, 5);
 		Debug.Log (r);
 		if (r == 1)
 		{
@@ -44,6 +45,11 @@ public class SpawnBehaviour : MonoBehaviour {
 		{
 
 			Instantiate (enemy3, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
+		}
+		else if (r == 4)
+		{
+
+			Instantiate (enemy4, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
 		}
 
 	}
