@@ -141,7 +141,7 @@ public class ShootingEnemy : MonoBehaviour {
 		if (a > b) {
 			Target = Player2;
 		} 
-		else if (a < b) {
+		else{
 			Target = Player;
 		}
 	}
