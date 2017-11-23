@@ -157,6 +157,7 @@ public class UpgradeDetails : MonoBehaviour {
 			if (stage == 2) {
 				if (num3 == 1) {
 					// no yet
+					shrd.healRequire = 10;
 					selected = true;
 					shrd.switchScene = true;
 				} 
@@ -215,7 +216,7 @@ public class UpgradeDetails : MonoBehaviour {
 
 			if (stage == 2) {
 				if (num3 == 1) {
-					message3.text = "No yet";
+					message3.text = "Health requirement decrease from 15 to 10";
 				}
 			}
 		}

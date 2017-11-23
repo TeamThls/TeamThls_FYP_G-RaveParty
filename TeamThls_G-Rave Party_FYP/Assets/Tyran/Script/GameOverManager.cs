@@ -23,6 +23,11 @@ public class GameOverManager : MonoBehaviour {
 
 	public bool checking = false;
 
+	public int counter;
+
+	public Transform messagebox;
+	public Text message;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -34,6 +39,9 @@ public class GameOverManager : MonoBehaviour {
 		input_f = field.GetComponent<InputField> ();
 		player_count = sharedstats.player_Number;
 		checking = true;
+		counter = 0;
+		messagebox = this.transform.GetChild (8);
+		messagebox.gameObject.SetActive (false);
 	}
 
 	// Update is called once per frame
@@ -52,7 +60,7 @@ public class GameOverManager : MonoBehaviour {
 		if (checking == false) {
 			if (player_count == 1) {
 				highscore.loadDataFromDisk ();
-
+			
 				highscore.single_score = sharedstats.player_Score;
 				highscore.s_score.Add (sharedstats.player_Score);
 
@@ -62,10 +70,9 @@ public class GameOverManager : MonoBehaviour {
 				highscore.saveDataToDisk ();
 
 				checking = true;
-			}
-			else if (player_count == 2) {
+			} else if (player_count == 2) {
 				highscore.loadDataFromDisk ();
-
+		
 				highscore.multi_score = sharedstats.player_Score;
 				highscore.m_score.Add (sharedstats.player_Score);
 
@@ -74,7 +81,7 @@ public class GameOverManager : MonoBehaviour {
 
 				highscore.saveDataToDisk ();
 
-				checking = true;
+				checking = true;				
 			}
 		}
 		if (checking == true) {
@@ -89,9 +96,15 @@ public class GameOverManager : MonoBehaviour {
 	public void ChangeScene (string sceneName)
 	{
 		//SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_BUTTONPRESSED1);
-		sharedstats.Reset ();
-		scene = sceneName;
-		Invoke ("ChangeSceneDelay",1.0f);
+		if (counter >= 1) {
+			sharedstats.Reset ();
+			scene = sceneName;
+			Invoke ("ChangeSceneDelay", 1.0f);
+		} 
+		else {
+			messagebox.gameObject.SetActive (true);
+			message.text = "Please input your name before leaving!";
+		}
 	}
 
 	void ChangeSceneDelay ()
@@ -103,5 +116,10 @@ public class GameOverManager : MonoBehaviour {
 	public void saveName(){
 		sharedstats.player_name = input_f.text;
 		checking = false;
+	}
+
+	public void wordCount(){
+		counter += 1;
+		messagebox.gameObject.SetActive (false);
 	}
 }

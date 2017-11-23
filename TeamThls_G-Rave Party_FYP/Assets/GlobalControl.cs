@@ -40,6 +40,8 @@ public class GlobalControl : MonoBehaviour {
 	public int F_Range;
 	public int Score_Multiplier;
 
+	public int healRequire;
+
 	void Awake() {
 		if (Instance == null) {
 			DontDestroyOnLoad (gameObject);

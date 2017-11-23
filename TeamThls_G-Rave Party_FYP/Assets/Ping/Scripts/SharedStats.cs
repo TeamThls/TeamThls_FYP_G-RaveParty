@@ -51,6 +51,8 @@ public class SharedStats : MonoBehaviour {
 
 	public int ScoreMultiplier;
 
+	public int healRequire;
+
 	//reset values
 	public int resetPlayer_Num;
 	public float resetplayer_Health;
@@ -90,6 +92,8 @@ public class SharedStats : MonoBehaviour {
 	public float resetabilityDuration;
 
 	public int resetFireRange;
+
+	public int resetHealRequire;
 
 	public int RandomNum;
 
@@ -131,6 +135,8 @@ public class SharedStats : MonoBehaviour {
 		resetabilityDuration = GlobalControl.Instance.ablty_Duration;
 
 		resetScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
+
+		resetHealRequire = GlobalControl.Instance.healRequire;
 	}
 
 	//void Start () {
@@ -177,6 +183,7 @@ public class SharedStats : MonoBehaviour {
 
 		ScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
 
+		healRequire = GlobalControl.Instance.healRequire;
 		//Reset ();
 	}
 	
@@ -325,6 +332,7 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.L_Duration = LaserDuration;
 		GlobalControl.Instance.I_Duration = IceDuration;
 		GlobalControl.Instance.ablty_Duration = abilityDuration;
+		GlobalControl.Instance.healRequire = healRequire;
 	}
 
 	public void Reset()
@@ -359,6 +367,8 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.I_Duration = resetIceDuration;
 		GlobalControl.Instance.ablty_Duration = resetabilityDuration;
 
+		GlobalControl.Instance.healRequire = resetHealRequire;
+
 		player_Number = GlobalControl.Instance.player_Num;
 		player_Health = GlobalControl.Instance.p_MaxHealth ;
 		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
@@ -389,5 +399,7 @@ public class SharedStats : MonoBehaviour {
 		abilityDuration = GlobalControl.Instance.ablty_Duration;
 
 		ScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
+
+		healRequire = GlobalControl.Instance.healRequire;
 	}
 }

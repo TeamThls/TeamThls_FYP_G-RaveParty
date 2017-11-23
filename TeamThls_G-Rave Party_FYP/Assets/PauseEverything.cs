@@ -17,6 +17,7 @@ public class PauseEverything : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (shared.levelPassed == true) {
+			Debug.Log ("work");
 			UpdateReferences ();
 			for (int i = 0; i < EnemyList.Count; i++) {
 				EnemyList [i].SetActive (false);
@@ -27,7 +28,7 @@ public class PauseEverything : MonoBehaviour {
 			player2.GetComponent<PlayerCombat> ().enabled = false;
 		}
 
-		if (shared.levelPassed == false) {
+		/*if (shared.levelPassed == false) {
 			UpdateReferences ();
 			for (int i = 0; i < EnemyList.Count; i++) {
 				EnemyList [i].SetActive (true);
@@ -36,7 +37,7 @@ public class PauseEverything : MonoBehaviour {
 			player2.GetComponent<PlayerMovement> ().enabled = true;
 			player1.GetComponent<PlayerCombat> ().enabled = true;
 			player2.GetComponent<PlayerCombat> ().enabled = true;
-		}
+		}*/
 	}
 
 	void UpdateReferences(){
