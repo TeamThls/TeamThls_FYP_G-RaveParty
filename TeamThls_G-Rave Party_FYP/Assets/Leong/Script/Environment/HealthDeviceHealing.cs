@@ -32,7 +32,7 @@ public class HealthDeviceHealing : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(healthDevice_Spr.color == Color.black && availableHealth == 5)
+		if(healthDevice_Spr.color == Color.black && availableHealth == health_Requirement)
 		{
 			healthDevice_Spr.color = Color.white;
 			healthDevice_Particles.Play();
