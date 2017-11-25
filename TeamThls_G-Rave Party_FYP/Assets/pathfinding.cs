@@ -60,7 +60,8 @@ public class pathfinding : MonoBehaviour {
 
 		for(int i = 0 ; i < WayManager.childList.Count; i++){
 			targetPath = WayManager.childList [i];
-			if (WayManager.childList [i].GetComponent<Waypoint> ().W_Dist < targetPath.GetComponent<Waypoint> ().totalDist) {
+			if (WayManager.childList [i].GetComponent<Waypoint> ().W_Dist 
+				< targetPath.GetComponent<Waypoint> ().totalDist) {
 				targetPath = WayManager.childList [i];
 			}
 		}
@@ -89,10 +90,7 @@ public class pathfinding : MonoBehaviour {
 			{
 				if(hitInfo.collider.gameObject.tag == "Player")
 				{
-					Debug.Log ("123");
-					//if (enemy_groundCheck == true) {
 					detect = true;
-					//}
 					target = hitInfo.collider.gameObject;
 				}
 				else
@@ -115,10 +113,7 @@ public class pathfinding : MonoBehaviour {
 			{
 				if(hitInfo.collider.gameObject.tag == "Player")
 				{
-					Debug.Log ("123");
-					//if (enemy_groundCheck == true) {
 					detect = true;
-					//}
 					target = hitInfo.collider.gameObject;
 				}
 				else
@@ -183,12 +178,8 @@ public class pathfinding : MonoBehaviour {
 
 	void Movement(){
 		transform.position = Vector3.MoveTowards(this.transform.position, targetPath.transform.position, step);
-		//stopDuration += Time.deltaTime;
-		//if (canJump == true ) {
-			if (targetPath.transform.position.y - this.transform.position.y >= 2.0) {
-				rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
-				//canJump = false;
-			//}
+		if (targetPath.transform.position.y - this.transform.position.y >= 2.0) {
+			rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
 		}
 	}
 }
