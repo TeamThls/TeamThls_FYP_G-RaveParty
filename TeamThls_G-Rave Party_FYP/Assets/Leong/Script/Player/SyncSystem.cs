@@ -20,13 +20,21 @@ public class SyncSystem : MonoBehaviour {
 	float random_OffsetMax = 2.0f;
 	float random_OffsetMin = 1.0f;
 
-	[SerializeField] float lightning_UpdateTime;
+	[SerializeField] float distance;
+	[SerializeField] float maxDistance = 15.0f;
+
+	float lightning_UpdateTime;
+
+	Bullet player1Bullet_Script, player2Bullet_Script;
 
 	// Use this for initialization
 	void Start () {
 		player1 = GameObject.Find("Player").transform;
 		player2 = GameObject.Find("Player2").transform;
+		player1Bullet_Script = player1.GetComponent<PlayerCombat>().bullet;
+		player2Bullet_Script = player2.GetComponent<PlayerCombat>().bullet;
 		lineRen = GetComponent<LineRenderer>();
+		lightning_UpdateTime = 0.02f;
 		//line = this.transform;
 		StartCoroutine(Beam());
 	}
@@ -34,8 +42,22 @@ public class SyncSystem : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		transform.position = (player1.position + player2.position) / 2.0f ;
-
+		transform.position = (player1.position + player2.position) / 2.0f;
+		distance = Vector3.Distance(player1.position, player2.position);
+		if(distance < maxDistance)
+		{
+			player1Bullet_Script.bullet_Damage = 15;
+			player2Bullet_Script.bullet_Damage = 15;
+			lineRen.enabled = true;
+			StartCoroutine(Beam());
+		}
+		else
+		{
+			player1Bullet_Script.bullet_Damage = 10;
+			player2Bullet_Script.bullet_Damage = 10;
+			StopCoroutine(Beam());
+			lineRen.enabled = false;
+		}
 	}
 
 	// Double Check the Begin Point and End Point
@@ -49,7 +71,7 @@ public class SyncSystem : MonoBehaviour {
 		lineRen.startWidth = RandomWidthOffset();
 		lineRen.endWidth = RandomWidthOffset();
 
-		StartCoroutine(Beam());
+		//StartCoroutine(Beam());
 	}
 
 

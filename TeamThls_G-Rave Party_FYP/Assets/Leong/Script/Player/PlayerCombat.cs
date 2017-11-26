@@ -50,7 +50,7 @@ public class PlayerCombat : MonoBehaviour {
 
 
 	private IEnumerator coroutine;
-	Bullet bullet;
+	public Bullet bullet;
 	[SerializeField] IceBullet iceBullet;
 	[SerializeField] LaserBeam laserBeam;
 	[SerializeField] Fire fire;
@@ -285,7 +285,7 @@ public class PlayerCombat : MonoBehaviour {
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			iceBullet.bullet_Direction = IceBullet.Bullet_SpawnDirection.Right;
-			Instantiate(bulletUpg_Script.ice_CurrentCastingParticles, new Vector3(gun.position.x + 1.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
+			Instantiate(bulletUpg_Script.ice_CurrentCastingParticles, new Vector3(gun.position.x + 2.0f, gun.position.y, gun.position.z - 1), Quaternion.identity);
 
 			movementScript.enabled = false;
 			movementScript.player_rgBody.velocity = new Vector2(0, 0);
