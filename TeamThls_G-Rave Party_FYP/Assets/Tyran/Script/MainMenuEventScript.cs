@@ -56,6 +56,47 @@ public class MainMenuEventScript : MonoBehaviour {
 					Exit();		
 				}
 			}
+			else if (this.gameObject.name == "SingleFree") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
+				{
+					ChangeScene ("FreeMode Single Selection");		
+				}
+			}
+			else if (this.gameObject.name == "Co-opFree") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
+				{
+					ChangeScene ("FreeMode Multi Selection");	
+				}
+			}
+			else if (this.gameObject.name == "ExitMenu") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
+				{
+					ChangeScene ("Main Menu");	
+				}
+			}
+			else if (this.gameObject.name == "Play") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
+				{
+					ChangeScene ("Wave Mode");	
+				}
+			}
+			else if (this.gameObject.name == "Free") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
+				{
+					ChangeScene ("Free Mode");	
+				}
+			}
+
 			
 		}
 	}

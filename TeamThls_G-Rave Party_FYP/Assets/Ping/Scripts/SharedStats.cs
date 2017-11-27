@@ -115,6 +115,8 @@ public class SharedStats : MonoBehaviour {
 
 	public int enemy_Damage;
 
+	public string newpath;
+
 	// Use this for initialization
 	void Awake() {
 		sceneManagement = Camera.main.GetComponentInParent<SceneManagement>();
