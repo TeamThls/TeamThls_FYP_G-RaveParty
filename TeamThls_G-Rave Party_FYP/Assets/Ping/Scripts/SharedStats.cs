@@ -33,6 +33,10 @@ public class SharedStats : MonoBehaviour {
 	public bool OnIce;
 	public bool OnLaser;
 
+	public int Wave1_EnemyDamage;
+	public int Wave2_EnemyDamage;
+	public int Wave3_EnemyDamage;
+
 	public int BulletMana;
 	public int FireMana;
 	public int BaseFireMana;
@@ -108,6 +112,8 @@ public class SharedStats : MonoBehaviour {
 
 	public int abilitiesLevel;
 	public int resetAbilitiesLevel;
+
+	public int enemy_Damage;
 
 	// Use this for initialization
 	void Awake() {
@@ -205,7 +211,6 @@ public class SharedStats : MonoBehaviour {
 		healRequire = GlobalControl.Instance.healRequire;
 
 		abilitiesLevel = GlobalControl.Instance.abilityLevel;
-
 		//Reset ();
 	}
 	
@@ -268,6 +273,16 @@ public class SharedStats : MonoBehaviour {
 		if (setTime >= maxDuration) {
 			player_Mana += ManaReg;
 			setTime = maxDuration - 0.5f;
+		}
+
+		if (wave_count == 1) {
+			enemy_Damage = Wave1_EnemyDamage;
+		} 
+		else if (wave_count == 2) {
+			enemy_Damage = Wave2_EnemyDamage;
+		} 
+		else if (wave_count == 3) {
+			enemy_Damage = Wave3_EnemyDamage;
 		}
 
 

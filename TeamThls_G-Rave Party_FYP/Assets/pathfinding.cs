@@ -37,6 +37,8 @@ public class pathfinding : MonoBehaviour {
 	public float setTime;
 	public float AttackTime;
 
+	public int damage;
+
 	[SerializeField] ParticleSystem playerDamaged_Particles;
 
 	// Use this for initialization
@@ -69,6 +71,8 @@ public class pathfinding : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		damage = shareStat.enemy_Damage;
+
 		step = speed * Time.deltaTime;
 
 		if (this.transform.position.x < xPos) {
@@ -139,8 +143,7 @@ public class pathfinding : MonoBehaviour {
 		if (detect == true) {
 			setTime += Time.deltaTime;
 			if (setTime >= AttackTime) {
-				shareStat.player_Health -= 1;
-				Debug.Log ("hitting" + shareStat.player_Health);
+				shareStat.player_Health -= damage;
 				setTime = 0.0f;
 				cam_Shake.Shake(0.4f, 0.2f);
 				target.GetComponent<Animator>().Play("PlayerDamaged");

@@ -37,6 +37,9 @@ public class UpgradeDetails : MonoBehaviour {
 
 	public bool open;
 
+	public GameObject player1;
+	public GameObject player2;
+
 	float time;
 
 	BulletUpgrades player1_Upgrade, player2_Upgrade;
@@ -57,17 +60,24 @@ public class UpgradeDetails : MonoBehaviour {
 
 		timeRemain = this.transform.GetChild (7);
 
-		player1_Upgrade = GameObject.Find("Player").GetComponent<BulletUpgrades>();
-		player2_Upgrade = GameObject.Find("Player2").GetComponent<BulletUpgrades>();
+		player1 = GameObject.Find ("Player");
+		player2 = GameObject.Find ("Player2");
+		if (player2 == null) {
+			player2 = player1;
+		}
+
+		player1_Upgrade = player1.GetComponent<BulletUpgrades>();
+		player2_Upgrade = player2.GetComponent<BulletUpgrades>();
+
 		selected = false;
 		open = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
+		stage = shrd.wave_count;
 
 		if (open == false) {
-			stage = shrd.wave_count;
 			if (stage == 1) {
 				//num = Random.Range (1, 3);
 				//num2 = Random.Range (1, 3);
@@ -89,10 +99,6 @@ public class UpgradeDetails : MonoBehaviour {
 			}
 		}
 
-		if (selected == true) {
-			shrd.endDuration += 15.0f;
-		}
-
 		time = 15.0f - shrd.endDuration;
 
 		timeMessage.text = "Next Level : " + time.ToString();
@@ -102,24 +108,12 @@ public class UpgradeDetails : MonoBehaviour {
 		if (selected == false) {
 			if (stage == 1) {
 				if (num == 1) {
-					/*player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
-					player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.First;
-					player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
-					player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.First;
-					player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;
-					player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.First;*/
 					shrd.abilitiesLevel = 2;
 					selected = true;
 					shrd.switchScene = true;
 				}
 			}
 			if (stage == 2) {
-				/*player1_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
-				player2_Upgrade.laser_CurrentLevel = BulletUpgrades.LaserLevel.Second;
-				player1_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
-				player2_Upgrade.ice_CurrentLevel = BulletUpgrades.IceLevel.Second;
-				player1_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;
-				player2_Upgrade.fire_CurrentLevel = BulletUpgrades.FireLevel.Second;*/
 				shrd.abilitiesLevel = 3;
 				selected = true;
 				shrd.switchScene = true;

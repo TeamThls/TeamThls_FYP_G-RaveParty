@@ -64,6 +64,8 @@ public class StrEnemyMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		damage = stts.enemy_Damage;
+
 		targetDetection ();
 		if (player.transform.position.x > this.transform.position.x) {
 			sprite.flipX = false;
