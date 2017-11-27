@@ -48,7 +48,6 @@ public class PlayerCombat : MonoBehaviour {
 	public bool canShootIceBullet = true;
 	public bool canShootLaser = true;
 
-
 	private IEnumerator coroutine;
 	public Bullet bullet;
 	[SerializeField] IceBullet iceBullet;
@@ -56,12 +55,14 @@ public class PlayerCombat : MonoBehaviour {
 	[SerializeField] Fire fire;
 
 	PlayerMovement movementScript;
+	SyncSystem sync_Script;
 
 	// Use this for initialization
 	void Start () 
 	{
+		sync_Script = GameObject.Find("Sync").GetComponent<SyncSystem>();
 		bulletUpg_Script = GetComponent<BulletUpgrades>();
-		bullet = bullet_Obj.GetComponent<Bullet>();
+		//bullet_Obj = sync_Scr
 		//laserBeam = laserBeam_Obj.GetComponent<LaserBeam>();
 		movementScript = GetComponent<PlayerMovement>();
 		GameManager = GameObject.Find ("GameManager");
@@ -246,29 +247,30 @@ public class PlayerCombat : MonoBehaviour {
 	IEnumerator ShootBullet(float duration)
 	{
 		SoundManagerScript.Instance.PlaySFX (AudioClipID.SFX_MB);
+		bullet = sync_Script.currentBullet_Obj.GetComponent<Bullet>();
 		canShootNormalBullet = false;
 		if(movementScript.player_isRight == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Right;
-			Instantiate(bullet_Obj, new Vector2(gun.position.x + 2.0f, gun.position.y), Quaternion.identity);
+			Instantiate(sync_Script.currentBullet_Obj, new Vector2(gun.position.x + 2.0f, gun.position.y), Quaternion.identity);
 			Instantiate(muzzle_Particles, new Vector2(gun.position.x + 2.0f, gun.position.y), Quaternion.identity);
 		}
 		else if(movementScript.player_isLeft == true && movementScript.player_isUp == false && movementScript.player_isDown == false)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Left;
-			Instantiate(bullet_Obj, new Vector2(gun.position.x - 2.0f, gun.position.y), Quaternion.identity);
+			Instantiate(sync_Script.currentBullet_Obj, new Vector2(gun.position.x - 2.0f, gun.position.y), Quaternion.identity);
 			Instantiate(muzzle_Particles, new Vector2(gun.position.x - 2.0f, gun.position.y), Quaternion.identity);
 		}
 		else if(movementScript.player_isUp == true)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Up;
-			Instantiate(bullet_Obj, new Vector2(gun.position.x, gun.position.y + 2.0f), Quaternion.identity);
+			Instantiate(sync_Script.currentBullet_Obj, new Vector2(gun.position.x, gun.position.y + 2.0f), Quaternion.identity);
 			Instantiate(muzzle_Particles, new Vector2(gun.position.x, gun.position.y + 2.0f), Quaternion.identity);
 		}
 		else if(movementScript.player_isDown == true)
 		{
 			bullet.bullet_Direction = Bullet.Bullet_SpawnDirection.Down;
-			Instantiate(bullet_Obj, new Vector2(gun.position.x, gun.position.y - 2.0f), Quaternion.identity);
+			Instantiate(sync_Script.currentBullet_Obj, new Vector2(gun.position.x, gun.position.y - 2.0f), Quaternion.identity);
 			Instantiate(muzzle_Particles, new Vector2(gun.position.x, gun.position.y - 2.0f), Quaternion.identity);
 		}
 		yield return new WaitForSeconds(duration);

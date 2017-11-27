@@ -7,6 +7,8 @@ public class SyncSystem : MonoBehaviour {
 	Transform player1, player2;
 	LineRenderer lineRen;
 
+	[SerializeField] GameObject bullet_Obj, syncBullet_Obj;
+	public GameObject currentBullet_Obj;
 	Vector3[] points = new Vector3[5];
 
 	int point_Begin = 0;
@@ -26,38 +28,67 @@ public class SyncSystem : MonoBehaviour {
 	float lightning_UpdateTime;
 
 	Bullet player1Bullet_Script, player2Bullet_Script;
+	SceneManagement sceneManager;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
+		sceneManager = Camera.main.transform.GetComponentInParent<SceneManagement>();
+		currentBullet_Obj = bullet_Obj;
 		player1 = GameObject.Find("Player").transform;
-		player2 = GameObject.Find("Player2").transform;
-		player1Bullet_Script = player1.GetComponent<PlayerCombat>().bullet;
-		player2Bullet_Script = player2.GetComponent<PlayerCombat>().bullet;
+		if(sceneManager.isSinglePlayer != true)
+		{
+			player2 = GameObject.Find("Player2").transform;
+		}
+		player1Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
+		player2Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
+		if(player2 == null)
+		{
+			player2Bullet_Script = null;
+		}
 		lineRen = GetComponent<LineRenderer>();
 		lightning_UpdateTime = 0.02f;
-		//line = this.transform;
-		StartCoroutine(Beam());
+
+		//StartCoroutine(Beam());
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		transform.position = (player1.position + player2.position) / 2.0f;
-		distance = Vector3.Distance(player1.position, player2.position);
-		if(distance < maxDistance)
+		if(player2 != null)
 		{
-			player1Bullet_Script.bullet_Damage = 15;
-			player2Bullet_Script.bullet_Damage = 15;
-			lineRen.enabled = true;
-			StartCoroutine(Beam());
+			transform.position = (player1.position + player2.position) / 2.0f;
+			distance = Vector3.Distance(player1.position, player2.position);
+
+			if(distance < maxDistance)
+			{
+				if(lineRen.enabled == false)
+				{
+					currentBullet_Obj = syncBullet_Obj;
+					player1Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
+					player2Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
+					player1Bullet_Script.bullet_Damage = 1.5f;
+					player2Bullet_Script.bullet_Damage = 1.5f;
+					lineRen.enabled = true;
+				}
+				StartCoroutine(Beam());
+			}
+			else
+			{
+				if(lineRen.enabled == true)
+				{
+					currentBullet_Obj = bullet_Obj;
+					player1Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
+					player2Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
+					player1Bullet_Script.bullet_Damage = 1.0f;
+					player2Bullet_Script.bullet_Damage = 1.0f;
+					lineRen.enabled = false;
+				}
+				StopCoroutine(Beam());
+
+			}
 		}
-		else
-		{
-			player1Bullet_Script.bullet_Damage = 10;
-			player2Bullet_Script.bullet_Damage = 10;
-			StopCoroutine(Beam());
-			lineRen.enabled = false;
-		}
+
 	}
 
 	// Double Check the Begin Point and End Point

@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour {
 	public Movement movementScript;
 	public Transform gun;
 	[SerializeField] ParticleSystem spark_Particle;
-	public int bullet_Damage = 10;
+	public float bullet_Damage = 1;
 
 	public enum Bullet_SpawnDirection
 	{
@@ -20,8 +20,6 @@ public class Bullet : MonoBehaviour {
 	}
 	public Bullet_SpawnDirection bullet_Direction;
 
-	//[SerializeField] MeshRenderer mesh_Ren;
-	//[SerializeField] LineRenderer line_Ren;
 	CameraShake cameraShake;
 
 	// Use this for initialization

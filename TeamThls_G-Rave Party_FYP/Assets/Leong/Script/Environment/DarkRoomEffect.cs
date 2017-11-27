@@ -12,7 +12,7 @@ public class DarkRoomEffect : MonoBehaviour {
 	public Material darkRoom_AltMat;
 	public float currentColor_increaseValue;
 	public float currentLight_Range;
-	int player_Count;
+	[SerializeField] int player_Count;
 
 	[SerializeField] float damageColor_Value;
 	[SerializeField] float timeToActivate;
@@ -29,7 +29,7 @@ public class DarkRoomEffect : MonoBehaviour {
 	{
 		Activated, Deactivated, FullDark, Null
 	};
-	public darkRoom_State darkRoom_CurrentState = darkRoom_State.Null;
+	[SerializeField] darkRoom_State darkRoom_CurrentState;
 
 	void Awake()
 	{
@@ -41,6 +41,7 @@ public class DarkRoomEffect : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		darkRoom_CurrentState = darkRoom_State.Deactivated;
 		darkRoom_Mat.color = Color.white;
 		darkRoom_AltMat.color = Color.white;
 		player1_Anim = GameObject.Find("Player").GetComponentInChildren<Animator>();
@@ -151,35 +152,53 @@ public class DarkRoomEffect : MonoBehaviour {
 		}
 	}
 
-
-
 	void OnTriggerEnter2D(Collider2D col)
 	{
 		if(col.gameObject.layer == 10)
 		{
-			darkRoom_CurrentState = darkRoom_State.Activated;
+			if(player_Count < 2)
+			{
+				player_Count++;
+				if(darkRoom_CurrentState != darkRoom_State.FullDark)
+				{
+					darkRoom_CurrentState = darkRoom_State.Activated;
+
+				}
+			}
 		}
 	}
 
 	void OnTriggerStay2D(Collider2D col)
 	{
-		if(col.gameObject.layer == 10 && darkRoom_CurrentState == darkRoom_State.Deactivated)
+		if(player_Count > 0)
 		{
-			darkRoom_CurrentState = darkRoom_State.Activated;
+			if(col.gameObject.layer == 10 && darkRoom_CurrentState == darkRoom_State.Deactivated)
+			{
+				darkRoom_CurrentState = darkRoom_State.Activated;
+			}
+			if(col.gameObject.layer == 8)
+			{
+				col.GetComponent<Renderer>().material = darkRoom_Mat;
+			}
 		}
-		if(col.gameObject.layer == 8)
-		{
-			col.GetComponent<Renderer>().material = darkRoom_Mat;
-		}
+
 	}
 
 	void OnTriggerExit2D(Collider2D col)
 	{
 		if(col.gameObject.layer == 10)
 		{
-			darkRoom_CurrentState = darkRoom_State.Deactivated;
-			damage_CurrentTime = 0.0f;
+			if(player_Count > 0)
+			{
+				player_Count--;
+				if(player_Count == 0)
+				{
+					darkRoom_CurrentState = darkRoom_State.Deactivated;
+					damage_CurrentTime = 0.0f;
+				}
+			}
 		}
+		
 	}
 
 }
