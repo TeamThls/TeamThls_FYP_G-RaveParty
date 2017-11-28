@@ -81,10 +81,12 @@ public class PlayerCombat : MonoBehaviour {
 		if (player_Control == Player_Controller.Keyboard_1) 
 		{
 			Keyboard1 ();
+			Controller1 ();
 		} 
 		else if (player_Control == Player_Controller.Keyboard_2) 
 		{
 			Keyboard2 ();
+			Controller2 ();
 		} 
 		else if (player_Control == Player_Controller.Controller_1) 
 		{

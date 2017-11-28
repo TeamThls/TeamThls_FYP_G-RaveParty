@@ -56,6 +56,8 @@ public class GUIManagerScript : MonoBehaviour {
 	public bool triggered;
 	public float setTime;
 	public float setTime2;
+
+	public Slider musicduration;
 	bool reset;
 
 	void Awake(){
@@ -121,6 +123,7 @@ public class GUIManagerScript : MonoBehaviour {
 				bookIcon.GetComponent<Image> ().fillAmount = 1.0f;
 			}
 		}
+		musicduration.value = SoundManagerScript.Instance.bgmAudioSource.time / SoundManagerScript.Instance.bgmAudioSource.clip.length;
 
 
 
