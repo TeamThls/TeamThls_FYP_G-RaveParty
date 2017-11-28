@@ -145,7 +145,7 @@ public class UpgradeDetails : MonoBehaviour {
 		if (selected == false) {
 			if (stage == 1) {
 				if (num3 == 1) {
-					shrd.abilityDuration += 15;
+					shrd.abilityExtendedDuration += 15;
 					selected = true;
 					shrd.switchScene = true;
 				} 
@@ -188,11 +188,11 @@ public class UpgradeDetails : MonoBehaviour {
 			if (stage == 1) {
 				// selection upgrade 2
 				if (num2 == 1) {
-					message2.text = "Player health increase 40";
+					message2.text = "Player health increase " + upgradeHealth;
 				} 
 			}
 			if (stage == 2) {
-				message2.text = "Player mana increase 150";
+				message2.text = "Player mana increase " + upgradeMana;
 			}
 		}
 	}

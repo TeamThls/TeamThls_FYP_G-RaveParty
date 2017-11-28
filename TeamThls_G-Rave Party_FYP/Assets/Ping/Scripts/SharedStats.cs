@@ -33,9 +33,21 @@ public class SharedStats : MonoBehaviour {
 	public bool OnIce;
 	public bool OnLaser;
 
+	public int enemy_Damage;
+	public int str_Damage;
+	public int path_Damage;
+
 	public int Wave1_EnemyDamage;
 	public int Wave2_EnemyDamage;
 	public int Wave3_EnemyDamage;
+
+	public int Wave1_StrDamage;
+	public int Wave2_StrDamage;
+	public int Wave3_StrDamage;
+
+	public int Wave1_PathDamage;
+	public int Wave2_PathDamage;
+	public int Wave3_PathDamage;
 
 	public int BulletMana;
 	public int FireMana;
@@ -113,9 +125,8 @@ public class SharedStats : MonoBehaviour {
 	public int abilitiesLevel;
 	public int resetAbilitiesLevel;
 
-	public int enemy_Damage;
-
 	public string newpath;
+	public float resetExtendDuration;
 
 	// Use this for initialization
 	void Awake() {
@@ -164,6 +175,7 @@ public class SharedStats : MonoBehaviour {
 		resetHealRequire = GlobalControl.Instance.healRequire;
 
 		resetAbilitiesLevel = GlobalControl.Instance.abilityLevel;
+		resetExtendDuration = GlobalControl.Instance.extendDuration;
 	}
 
 	//void Start () {
@@ -213,6 +225,7 @@ public class SharedStats : MonoBehaviour {
 		healRequire = GlobalControl.Instance.healRequire;
 
 		abilitiesLevel = GlobalControl.Instance.abilityLevel;
+		abilityExtendedDuration = GlobalControl.Instance.extendDuration;
 		//Reset ();
 	}
 	
@@ -279,12 +292,18 @@ public class SharedStats : MonoBehaviour {
 
 		if (wave_count == 1) {
 			enemy_Damage = Wave1_EnemyDamage;
+			str_Damage = Wave1_StrDamage;
+			path_Damage = Wave1_PathDamage;
 		} 
 		else if (wave_count == 2) {
 			enemy_Damage = Wave2_EnemyDamage;
+			str_Damage = Wave2_StrDamage;
+			path_Damage = Wave2_PathDamage;
 		} 
 		else if (wave_count == 3) {
 			enemy_Damage = Wave3_EnemyDamage;
+			str_Damage = Wave3_StrDamage;
+			path_Damage = Wave3_PathDamage;
 		}
 
 
@@ -377,6 +396,7 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.healRequire = healRequire;
 
 		GlobalControl.Instance.abilityLevel = abilitiesLevel;
+		GlobalControl.Instance.extendDuration = abilityExtendedDuration;
 	}
 
 	public void Reset()
@@ -415,6 +435,8 @@ public class SharedStats : MonoBehaviour {
 
 		GlobalControl.Instance.abilityLevel = resetAbilitiesLevel;
 
+		GlobalControl.Instance.extendDuration = resetExtendDuration;
+
 		player_Number = GlobalControl.Instance.player_Num;
 		player_Health = GlobalControl.Instance.p_MaxHealth ;
 		player_MaxHealth = GlobalControl.Instance.p_MaxHealth;
@@ -449,5 +471,7 @@ public class SharedStats : MonoBehaviour {
 		healRequire = GlobalControl.Instance.healRequire;
 
 		abilitiesLevel = GlobalControl.Instance.abilityLevel;
+
+		abilityExtendedDuration = GlobalControl.Instance.extendDuration;
 	}
 }

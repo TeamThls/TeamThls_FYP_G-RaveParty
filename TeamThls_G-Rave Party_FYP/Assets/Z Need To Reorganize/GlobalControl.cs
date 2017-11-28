@@ -44,6 +44,8 @@ public class GlobalControl : MonoBehaviour {
 
 	public int abilityLevel;
 
+	public float extendDuration;
+
 	void Awake() {
 		if (Instance == null) {
 			DontDestroyOnLoad (gameObject);

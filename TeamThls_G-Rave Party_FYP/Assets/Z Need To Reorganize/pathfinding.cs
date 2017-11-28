@@ -71,7 +71,7 @@ public class pathfinding : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		damage = shareStat.enemy_Damage;
+		damage = shareStat.path_Damage;
 
 		step = speed * Time.deltaTime;
 

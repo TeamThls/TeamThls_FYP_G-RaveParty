@@ -102,7 +102,7 @@ public class BulletUpgrades : MonoBehaviour {
 				playerCom.IceMana = 10;
 
 				stats_Script.IceMana = 10;
-				stats_Script.IceDuration = iceDuration_LevelZero;
+				//stats_Script.IceDuration = iceDuration_LevelZero;
 				break;
 
 			case IceLevel.First:
@@ -112,7 +112,7 @@ public class BulletUpgrades : MonoBehaviour {
 				playerCom.IceMana = 7;
 
 				stats_Script.IceMana = 7;
-				stats_Script.IceDuration = iceDuration_LevelOne;
+				//stats_Script.IceDuration = iceDuration_LevelOne;
 				break;
 
 			case IceLevel.Second:
@@ -121,7 +121,7 @@ public class BulletUpgrades : MonoBehaviour {
 				playerCom.IceMana = 7;
 
 				stats_Script.IceMana = 7;
-				stats_Script.IceDuration = iceDuration_LevelFinal;
+				//stats_Script.IceDuration = iceDuration_LevelFinal;
 				iceBullet.currentLevel = 2;
 				break;
 
@@ -134,7 +134,7 @@ public class BulletUpgrades : MonoBehaviour {
 				playerCom.FireMana = 5;
 
 				stats_Script.FireMana = 5;
-				stats_Script.FireDuration = fireDuration_LevelZero;
+				//stats_Script.FireDuration = fireDuration_LevelZero;
 				break;
 				
 			case FireLevel.First:
@@ -144,7 +144,7 @@ public class BulletUpgrades : MonoBehaviour {
 				playerCom.FireMana = 3.5f;
 
 				stats_Script.FireMana = 3;
-				stats_Script.FireDuration = fireDuration_LevelOne;
+				//stats_Script.FireDuration = fireDuration_LevelOne;
 				break;
 
 			case FireLevel.Second:
@@ -154,7 +154,7 @@ public class BulletUpgrades : MonoBehaviour {
 				fire_Script.fire_Damage = 0.15f;
 
 				stats_Script.FireMana = 3;
-				stats_Script.FireDuration = fireDuration_LevelFinal;
+				//stats_Script.FireDuration = fireDuration_LevelFinal;
 				break;
 
 		}
@@ -167,7 +167,7 @@ public class BulletUpgrades : MonoBehaviour {
 				playerCom.LaserMana = 20;
 
 				stats_Script.LaserMana = 20;
-				stats_Script.LaserDuration = laserDuration_LevelZero;
+				//stats_Script.LaserDuration = laserDuration_LevelZero;
 				break;
 				
 			case LaserLevel.First:
@@ -177,7 +177,7 @@ public class BulletUpgrades : MonoBehaviour {
 				playerCom.LaserMana = 14;
 
 				stats_Script.LaserMana = 14;
-				stats_Script.LaserDuration = laserDuration_LevelOne;
+				//stats_Script.LaserDuration = laserDuration_LevelOne;
 				break;
 
 			case LaserLevel.Second:
@@ -186,7 +186,7 @@ public class BulletUpgrades : MonoBehaviour {
 				playerCom.LaserMana = 14;
 
 				stats_Script.LaserMana = 14;
-				stats_Script.LaserDuration = laserDuration_LevelFinal;
+				//stats_Script.LaserDuration = laserDuration_LevelFinal;
 				laser_Script.laser_Level = 2;
 				break;
 
