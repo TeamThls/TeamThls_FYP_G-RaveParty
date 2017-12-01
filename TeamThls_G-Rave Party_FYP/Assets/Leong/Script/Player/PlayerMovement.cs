@@ -51,12 +51,12 @@ public class PlayerMovement : MonoBehaviour {
 		if (player_Control == Player_Controller.Keyboard_1) 
 		{
 			Keyboard1 ();
-			Controller1 ();
+			//Controller1 ();
 		} 
 		else if (player_Control == Player_Controller.Keyboard_2) 
 		{
 			Keyboard2 ();
-			Controller2 ();
+			//Controller2 ();
 		} 
 		else if (player_Control == Player_Controller.Controller_1) 
 		{
@@ -74,8 +74,35 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		//anim.SetBool("IsWalking", player_isWalking);
 		Vector2 move = Vector2.zero;
-		move.x = Input.GetAxis ("HorizontalK1");
-		move.y = Input.GetAxis ("VerticalK1");
+
+		if(Input.GetAxis ("HorizontalK1") <0|| Input.GetAxis ("HorizontalK1")>0)
+		{
+			move.x = Input.GetAxis ("HorizontalK1");
+		}
+		if(Input.GetAxis ("HorizontalP1") <0|| Input.GetAxis ("HorizontalP1")>0)
+		{
+			move.x = Input.GetAxis ("HorizontalP1");
+		}
+		if(Input.GetAxis ("HorizontalP1") == 0 && Input.GetAxis ("HorizontalK1")==0)
+		{
+			move.x = Input.GetAxis ("HorizontalP1");
+		}
+
+		if(Input.GetAxis ("VerticalK1") <0|| Input.GetAxis ("VerticalK1")>0)
+		{
+			move.y = Input.GetAxis ("VerticalK1");
+		}
+		if(Input.GetAxis ("VerticalP1") <0|| Input.GetAxis ("VerticalP1")>0)
+		{
+			move.y = Input.GetAxis ("VerticalP1");
+		}
+		if(Input.GetAxis ("VerticalP1") == 0 && Input.GetAxis ("VerticalK1")==0)
+		{
+			move.y = Input.GetAxis ("VerticalP1");
+		}
+
+		//move.x = (Input.GetAxis ("HorizontalK1")) || (Input.GetAxis ("HorizontalP1"));
+		//move.y = (Input.GetAxis ("VerticalK1"))   ||  (Input.GetAxis ("VerticalP1"));
 
 
 		bool flipSpriteX = (player_spriteRen.flipX ? (move.x > 0.0f) : (move.x < -0.01f));
@@ -125,7 +152,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
 
-		if(Input.GetButtonDown("JumpK1") && player_grounded)
+		if(Input.GetButtonDown("JumpK1") && player_grounded || Input.GetButtonDown("JumpP1") && player_grounded)
 		{
 			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
 			player_grounded = false;
@@ -174,8 +201,35 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		//anim.SetBool("IsWalking", player_isWalking);
 		Vector2 move = Vector2.zero;
-		move.x = Input.GetAxis ("HorizontalK2");
-		move.y = Input.GetAxis ("VerticalK2");
+
+		if(Input.GetAxis ("HorizontalK2") <0|| Input.GetAxis ("HorizontalK2")>0)
+		{
+			move.x = Input.GetAxis ("HorizontalK2");
+		}
+		if(Input.GetAxis ("HorizontalP2") <0|| Input.GetAxis ("HorizontalP2")>0)
+		{
+			move.x = Input.GetAxis ("HorizontalP2");
+		}
+		if(Input.GetAxis ("HorizontalP2") == 0 && Input.GetAxis ("HorizontalK2")==0)
+		{
+			move.x = Input.GetAxis ("HorizontalP2");
+		}
+
+		if(Input.GetAxis ("VerticalK2") <0|| Input.GetAxis ("VerticalK2")>0)
+		{
+			move.y = Input.GetAxis ("VerticalK2");
+		}
+		if(Input.GetAxis ("VerticalP2") <0|| Input.GetAxis ("VerticalP2")>0)
+		{
+			move.y = Input.GetAxis ("VerticalP2");
+		}
+		if(Input.GetAxis ("VerticalP2") == 0 && Input.GetAxis ("VerticalK2")==0)
+		{
+			move.y = Input.GetAxis ("VerticalP2");
+		}
+
+		//move.x = Input.GetAxis ("HorizontalK2")|| Input.GetAxis ("HorizontalP2");;
+		//move.y = Input.GetAxis ("VerticalK2")|| Input.GetAxis ("VerticalP2");;
 
 
 		bool flipSpriteX = (player_spriteRen.flipX ? (move.x > 0.0f) : (move.x < -0.01f));
@@ -223,7 +277,7 @@ public class PlayerMovement : MonoBehaviour {
 		player_rgBody.velocity = new Vector2(Mathf.Lerp(0, player_horizontalSpeed, 7.0f), player_rgBody.velocity.y);
 
 
-		if(Input.GetButtonDown("JumpK2") && player_grounded)
+		if((Input.GetButtonDown("JumpK2") && player_grounded) ||(Input.GetButtonDown("JumpP2") && player_grounded))
 		{
 			player_rgBody.AddForce(Vector2.up * player_JumpStrength * player_TimeFactor, ForceMode2D.Impulse);
 			player_grounded = false;

@@ -81,12 +81,12 @@ public class PlayerCombat : MonoBehaviour {
 		if (player_Control == Player_Controller.Keyboard_1) 
 		{
 			Keyboard1 ();
-			Controller1 ();
+			//Controller1 ();
 		} 
 		else if (player_Control == Player_Controller.Keyboard_2) 
 		{
 			Keyboard2 ();
-			Controller2 ();
+			//Controller2 ();
 		} 
 		else if (player_Control == Player_Controller.Controller_1) 
 		{
@@ -101,7 +101,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Keyboard1()
 	{
-		if(Input.GetAxis ("SquareK1") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
+		if((Input.GetAxis ("SquareK1") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)||(Input.GetAxis ("SquareP1") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana))
 		{
 			shareStat.setTime = 0.0f;
 			StartCoroutine(ShootBullet(normalBullet_FireRate));
@@ -109,7 +109,7 @@ public class PlayerCombat : MonoBehaviour {
 		}
 
 
-		if(Input.GetAxis ("CircleK1") > 0)
+		if(Input.GetAxis ("CircleK1") > 0 || Input.GetAxis ("CircleP1") > 0)
 		{
 			if(shareStat.OnLaser == true && canShootLaser == true && shareStat.player_Mana >= LaserMana)
 			{
@@ -138,7 +138,7 @@ public class PlayerCombat : MonoBehaviour {
 
 	void Keyboard2()
 	{
-		if(Input.GetAxis ("SquareK2") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana)
+		if((Input.GetAxis ("SquareK2") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana) || (Input.GetAxis ("SquareP2") > 0 && canShootNormalBullet == true && shareStat.player_Mana >= BulletMana))
 		{
 			shareStat.setTime = 0.0f;
 			StartCoroutine(ShootBullet(normalBullet_FireRate));
@@ -146,7 +146,7 @@ public class PlayerCombat : MonoBehaviour {
 
 		}
 
-		if(Input.GetAxis ("CircleK2") > 0)
+		if(Input.GetAxis ("CircleK2") > 0 || Input.GetAxis ("CircleP2") > 0)
 		{
 			if(shareStat.OnLaser == true && canShootLaser == true && shareStat.player_Mana >= LaserMana)
 			{
