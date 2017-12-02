@@ -69,8 +69,8 @@ public class StrengthEnemyMovement : MonoBehaviour {
 
 		if (damaging == true) {
 			shrds.player_Health -= damage;
-			target.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
-			Instantiate(playerDamaged_Particles, target.transform.position, Quaternion.identity);
+			//target.transform.GetChild(1).GetComponent<Animator>().Play("PlayerDamaged");
+			//Instantiate(playerDamaged_Particles, target.transform.position, Quaternion.identity);
 			cam_Shake.Shake(0.4f, 0.2f);
 			damaging = false;
 		}
@@ -272,6 +272,8 @@ public class StrengthEnemyMovement : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
 			damaging = true;
+			other.GetComponent<Animator>().Play("PlayerDamaged");
+			Instantiate(playerDamaged_Particles, other.transform.position, Quaternion.identity);
 		}
 	}
 
