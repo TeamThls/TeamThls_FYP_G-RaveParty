@@ -178,7 +178,15 @@ public class DarkRoomEffect : MonoBehaviour {
 			}
 			if(col.gameObject.layer == 8)
 			{
-				col.GetComponent<Renderer>().material = darkRoom_Mat;
+				if(col.transform.childCount > 1)
+				{
+					col.transform.GetChild(1).GetComponent<Renderer>().material = darkRoom_Mat;
+				}
+				else
+				{
+					col.GetComponent<Renderer>().material = darkRoom_Mat;
+
+				}
 			}
 		}
 

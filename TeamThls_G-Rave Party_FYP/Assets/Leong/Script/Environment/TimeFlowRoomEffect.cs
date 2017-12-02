@@ -24,6 +24,7 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 		{
 			cam = Camera.main;
 		}
+
 	}
 	
 	// Update is called once per frame

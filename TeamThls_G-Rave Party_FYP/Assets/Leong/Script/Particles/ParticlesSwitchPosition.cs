@@ -37,7 +37,7 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 			{
 				if(par_Type == ParticleType.Wand)
 				{
-					transform.localPosition = new Vector2(-0.55f, transform.localPosition.y);
+					transform.localPosition = new Vector2(-0.6f, transform.localPosition.y);
 				}
 				else if(par_Type == ParticleType.Ground)
 				{
@@ -49,7 +49,7 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 			{
 				if(par_Type == ParticleType.Wand)
 				{
-					transform.localPosition = new Vector2(0.55f, transform.localPosition.y);
+					transform.localPosition = new Vector2(0.6f, transform.localPosition.y);
 				}
 				else if(par_Type == ParticleType.Ground)
 				{
