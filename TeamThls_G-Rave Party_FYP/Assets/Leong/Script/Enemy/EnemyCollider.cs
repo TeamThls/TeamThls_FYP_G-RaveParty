@@ -153,9 +153,9 @@ public class EnemyCollider : MonoBehaviour {
 			yield return new WaitForSeconds(duration);
 			em.speed = 4.0f;
 		}
-		else if(this.gameObject.GetComponent<StrEnemyMovement>() != null)
+		else if(this.gameObject.GetComponent<StrengthEnemyMovement>() != null)
 		{
-			StrEnemyMovement em = this.gameObject.GetComponent<StrEnemyMovement>();
+			StrengthEnemyMovement em = this.gameObject.GetComponent<StrengthEnemyMovement>();
 			em.speed = 2.0f;
 
 			yield return new WaitForSeconds(duration);
@@ -189,9 +189,9 @@ public class EnemyCollider : MonoBehaviour {
 			yield return new WaitForSeconds(duration);
 			em.speed = 4.0f;
 		}
-		else if(this.gameObject.GetComponent<StrEnemyMovement>() != null)
+		else if(this.gameObject.GetComponent<StrengthEnemyMovement>() != null)
 		{
-			StrEnemyMovement em = this.gameObject.GetComponent<StrEnemyMovement>();
+			StrengthEnemyMovement em = this.gameObject.GetComponent<StrengthEnemyMovement>();
 			em.speed = 0.0f;
 
 			yield return new WaitForSeconds(duration);

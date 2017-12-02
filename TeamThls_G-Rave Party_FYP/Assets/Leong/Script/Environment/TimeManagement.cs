@@ -83,9 +83,9 @@ public class TimeManagement : MonoBehaviour {
 				{
 					obj.GetComponent<WaypointPathfinding>().speed = obj.GetComponent<WaypointPathfinding>().maxSpeed / 2.0f;
 				}
-				else if(obj.GetComponent<StrEnemyMovement>() != null)
+				else if(obj.GetComponent<StrengthEnemyMovement>() != null)
 				{
-					obj.GetComponent<StrEnemyMovement>().speed = obj.GetComponent<StrEnemyMovement>().maxSpeed / 2.0f;
+					obj.GetComponent<StrengthEnemyMovement>().speed = obj.GetComponent<StrengthEnemyMovement>().maxSpeed / 2.0f;
 				}
 				else if(obj.GetComponent<ShootingEnemy>() != null)
 				{
@@ -108,9 +108,9 @@ public class TimeManagement : MonoBehaviour {
 				{
 					obj.GetComponent<WaypointPathfinding>().speed = obj.GetComponent<WaypointPathfinding>().maxSpeed;
 				}
-				else if(obj.GetComponent<StrEnemyMovement>() != null)
+				else if(obj.GetComponent<StrengthEnemyMovement>() != null)
 				{
-					obj.GetComponent<StrEnemyMovement>().speed = obj.GetComponent<StrEnemyMovement>().maxSpeed;
+					obj.GetComponent<StrengthEnemyMovement>().speed = obj.GetComponent<StrengthEnemyMovement>().maxSpeed;
 				}
 				else if(obj.GetComponent<ShootingEnemy>() != null)
 				{
@@ -186,9 +186,9 @@ public class TimeManagement : MonoBehaviour {
 				{
 					obj.GetComponent<WaypointPathfinding>().speed = obj.GetComponent<WaypointPathfinding>().maxSpeed;
 				}
-				else if(obj.GetComponent<StrEnemyMovement>() != null)
+				else if(obj.GetComponent<StrengthEnemyMovement>() != null)
 				{
-					obj.GetComponent<StrEnemyMovement>().speed = obj.GetComponent<StrEnemyMovement>().maxSpeed;
+					obj.GetComponent<StrengthEnemyMovement>().speed = obj.GetComponent<StrengthEnemyMovement>().maxSpeed;
 				}
 				else if(obj.GetComponent<ShootingEnemy>() != null)
 				{

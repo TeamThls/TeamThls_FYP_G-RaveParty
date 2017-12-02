@@ -37,6 +37,8 @@ public class pathfinding : MonoBehaviour {
 	public float setTime;
 	public float AttackTime;
 
+	public float MovingDuration;
+
 	public int damage;
 
 	[SerializeField] ParticleSystem playerDamaged_Particles;
@@ -153,9 +155,20 @@ public class pathfinding : MonoBehaviour {
 		else {
 			Movement ();
 		}
+
+		if (MovingDuration >= 5.0f) {
+			for(int i = 0 ; i < WayManager.childList.Count; i++){
+				targetPath = WayManager.childList [i];
+				if (WayManager.childList [i].GetComponent<Waypoint> ().W_Dist 
+					< targetPath.GetComponent<Waypoint> ().totalDist) {
+					targetPath = WayManager.childList [i];
+				}
+			}
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
+		MovingDuration = 0.0f;
 		waypoint = other.GetComponent<Waypoint> ();
 		N_List = new List<GameObject> ();
 		if (waypoint != null) {
@@ -180,6 +193,7 @@ public class pathfinding : MonoBehaviour {
 	}
 
 	void Movement(){
+		MovingDuration += Time.deltaTime;
 		transform.position = Vector3.MoveTowards(this.transform.position, targetPath.transform.position, step);
 		if (targetPath.transform.position.y - this.transform.position.y >= 2.0) {
 			rgd.AddForce (transform.up * jump, ForceMode2D.Impulse);
