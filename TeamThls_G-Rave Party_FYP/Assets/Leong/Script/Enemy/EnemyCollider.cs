@@ -137,9 +137,9 @@ public class EnemyCollider : MonoBehaviour {
 
 	public IEnumerator IceBulletSlow(float duration)
 	{
-		if(this.gameObject.GetComponent<WaypointPathfinding>() != null)
+		if(this.gameObject.GetComponent<pathfinding>() != null)
 		{
-			WaypointPathfinding wp = this.gameObject.GetComponent<WaypointPathfinding>();
+			pathfinding wp = this.gameObject.GetComponent<pathfinding>();
 			wp.speed = 2.0f;
 
 			yield return new WaitForSeconds(duration);
@@ -161,6 +161,13 @@ public class EnemyCollider : MonoBehaviour {
 			yield return new WaitForSeconds(duration);
 			em.speed = 4.0f;
 		}
+		else if(this.gameObject.GetComponent<StrEnemyMovement>() != null){
+			StrEnemyMovement se = this.gameObject.GetComponent<StrEnemyMovement>();
+			se.speed = 2.0f;
+
+			yield return new WaitForSeconds(duration);
+			se.speed = 4.0f;
+		}
 		else if(this.gameObject.GetComponent<ShootingEnemy>() != null)
 		{
 			ShootingEnemy se = this.gameObject.GetComponent<ShootingEnemy>();
@@ -173,9 +180,9 @@ public class EnemyCollider : MonoBehaviour {
 
 	public IEnumerator IceBulletStun(float duration)
 	{
-		if(this.gameObject.GetComponent<WaypointPathfinding>() != null)
+		if(this.gameObject.GetComponent<pathfinding>() != null)
 		{
-			WaypointPathfinding wp = this.gameObject.GetComponent<WaypointPathfinding>();
+			pathfinding wp = this.gameObject.GetComponent<pathfinding>();
 			wp.speed = 0.0f;
 
 			yield return new WaitForSeconds(duration);
@@ -196,6 +203,13 @@ public class EnemyCollider : MonoBehaviour {
 
 			yield return new WaitForSeconds(duration);
 			em.speed = 4.0f;
+		}
+		else if(this.gameObject.GetComponent<StrEnemyMovement>() != null){
+			StrEnemyMovement se = this.gameObject.GetComponent<StrEnemyMovement>();
+			se.speed = 0.0f;
+
+			yield return new WaitForSeconds(duration);
+			se.speed = 4.0f;
 		}
 		else if(this.gameObject.GetComponent<ShootingEnemy>() != null)
 		{
