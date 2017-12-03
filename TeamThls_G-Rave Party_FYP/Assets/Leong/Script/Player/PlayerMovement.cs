@@ -175,7 +175,7 @@ public class PlayerMovement : MonoBehaviour {
 		if(transform.position.y <= camera_MinScreenLimit.y + 1 ||
 		   transform.position.y >= camera_MaxScreenLimit.y - 1)
 		   {
-		   Debug.Log("Teleport");
+
 		   		if(this.gameObject.name == "Player")
 		   		{
 		   			if(player2 != null)
@@ -297,7 +297,6 @@ public class PlayerMovement : MonoBehaviour {
 		if(transform.position.y <= camera_MinScreenLimit.y + 1||
 		   transform.position.y >= camera_MaxScreenLimit.y - 1)
 		   {
-			Debug.Log("Teleport");
 		   		if(this.gameObject.name == "Player")
 		   		{
 		   			player1.transform.position = player2.transform.position;
@@ -377,6 +376,19 @@ public class PlayerMovement : MonoBehaviour {
 
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
 			,Mathf.Clamp(transform.position.y, camera_MinScreenLimit.y + 1, camera_MaxScreenLimit.y - 1), transform.position.z);
+
+		if(transform.position.y <= camera_MinScreenLimit.y + 1||
+		   transform.position.y >= camera_MaxScreenLimit.y - 1)
+		   {
+		   		if(this.gameObject.name == "Player")
+		   		{
+		   			player1.transform.position = player2.transform.position;
+		   		}
+		   		else
+		   		{
+		   			player2.transform.position = player1.transform.position;
+		   		}
+		   }
 	}
 
 	void Controller2()
@@ -449,6 +461,19 @@ public class PlayerMovement : MonoBehaviour {
 
 		transform.position = new Vector3(Mathf.Clamp(transform.position.x, camera_MinScreenLimit.x + 1, camera_MaxScreenLimit.x - 1)
 			,Mathf.Clamp(transform.position.y, camera_MinScreenLimit.y + 1, camera_MaxScreenLimit.y - 1), transform.position.z);
+
+		if(transform.position.y <= camera_MinScreenLimit.y + 1||
+		   transform.position.y >= camera_MaxScreenLimit.y - 1)
+		   {
+		   		if(this.gameObject.name == "Player")
+		   		{
+		   			player1.transform.position = player2.transform.position;
+		   		}
+		   		else
+		   		{
+		   			player2.transform.position = player1.transform.position;
+		   		}
+		   }
 	}
 
 	void TeleportBackToOtherPlayer(GameObject teleportingPlayer1, GameObject teleportingPlayer2)

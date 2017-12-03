@@ -21,12 +21,18 @@ public class TimeManagement : MonoBehaviour {
 		if(tempPlayer1 == null)
 		{
 			tempPlayer1 = GameObject.Find("Player").transform.GetChild(1).gameObject;
+			tempPlayer1.transform.parent.GetChild(10).GetComponent<SpriteRenderer>().enabled = false;
+			tempPlayer1.transform.parent.GetChild(11).GetComponent<SpriteRenderer>().enabled = false;
+			tempPlayer1.transform.parent.GetChild(12).GetComponent<SpriteRenderer>().enabled = false;
 		}	
 		if(tempPlayer2 == null)
 		{
 			if(sceneManager.isSinglePlayer == false)
 			{
 				tempPlayer2 = GameObject.Find("Player2").transform.GetChild(1).gameObject;
+				tempPlayer2.transform.parent.GetChild(10).GetComponent<SpriteRenderer>().enabled = false;
+				tempPlayer2.transform.parent.GetChild(11).GetComponent<SpriteRenderer>().enabled = false;
+				tempPlayer2.transform.parent.GetChild(12).GetComponent<SpriteRenderer>().enabled = false;
 			}
 			else
 			{

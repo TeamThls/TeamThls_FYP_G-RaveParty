@@ -22,13 +22,13 @@ public class PlayerButtonSpriteScript : MonoBehaviour {
 		{
 			transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.2f);
 			transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-			Debug.Log("Flip");
+
 		}
 		else
 		{
 			transform.GetChild(1).GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 			transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.2f);
-			Debug.Log("FlipNo");
+
 		}
 	}
 }

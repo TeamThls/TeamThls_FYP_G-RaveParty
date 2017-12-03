@@ -105,7 +105,15 @@ public class MainMenuEventScript : MonoBehaviour {
 	{
 		if(col.gameObject.tag == "Player")
 		{
-			if(this.gameObject.name == "Single")
+			if(this.gameObject.name == "Play")
+			{
+				DisableSpriteI();
+			}
+			else if(this.gameObject.name == "Single")
+			{
+				DisableSpriteI();
+			}
+			else if(this.gameObject.name == "Free")
 			{
 				DisableSpriteI();
 			}
