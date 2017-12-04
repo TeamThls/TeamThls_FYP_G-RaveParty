@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using NAudio;
+using NAudio.Wave;
 
 public class ReadFolderSingle : MonoBehaviour {
 
@@ -57,6 +59,8 @@ public class ReadFolderSingle : MonoBehaviour {
 			if (GUILayout.Button ("Select", GUILayout.Width (50))) 
 			{
 				sharedstats.newpath = names [i].Replace (mp3, "");
+				//Mp3ToWav(paths[i], Application.dataPath+"/Resources/currentsong.wav");
+
 				//Debug.Log ("HERE"+sharedstats.newpath);
 				SceneManager.LoadScene ("Free Control Scheme 1");
 				//SoundManagerScript.Instance.ChangeClip (f.Name);
@@ -87,5 +91,13 @@ public class ReadFolderSingle : MonoBehaviour {
 
 		GUI.EndScrollView();
 		GUILayout.EndArea();
+	}
+
+	public static void Mp3ToWav(string mp3File, string outputFile)
+	{
+		using (Mp3FileReader reader = new Mp3FileReader(mp3File))
+		{
+			WaveFileWriter.CreateWaveFile(outputFile, reader);
+		}
 	}
 }

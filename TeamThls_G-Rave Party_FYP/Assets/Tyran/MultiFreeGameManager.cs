@@ -36,6 +36,11 @@ public class MultiFreeGameManager : MonoBehaviour
 
 	public GameObject GamaManager;
 	public SharedStats sharedstats;
+
+	public AudioClip freemode;
+
+
+
 	void Start()
 	{
 
@@ -169,7 +174,21 @@ public class MultiFreeGameManager : MonoBehaviour
 		{
 			SoundManagerScript.Instance.audioClipInfoList [0].audioClip = Resources.Load ("FadeX", typeof(AudioClip)) as AudioClip;
 		}*/
+		/*WWW www = new WWW("file://" + Application.dataPath+"/Resources/currentsong.wav");
+		 freemode = WWWAudioExtensions.GetAudioClipCompressed(www);
+
+		while(freemode.loadState != AudioDataLoadState.Loaded)
+		{
+			Debug.Log("still in loop");
+			//yield return www; 
+		}*/
 		SoundManagerScript.Instance.audioClipInfoList[0].audioClip = Resources.Load(sharedstats.newpath,typeof(AudioClip)) as AudioClip;
+
+
+		//SoundManagerScript.Instance.bgmAudioSource.clip = freemode;
+
+	    //SoundManagerScript.Instance.bgmAudioSource.Play();
+
 		SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_LEVEL);
 		InvokeRepeating("check", 0.0f, spawnrate);
 		InvokeRepeating("deathcheck", 0.0f, 1.0f);

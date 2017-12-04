@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Main Menu.unity
+- path: Assets/Scene/FreeMode/Free Control Scheme 2.unity
   isLoaded: 1
   isActive: 1

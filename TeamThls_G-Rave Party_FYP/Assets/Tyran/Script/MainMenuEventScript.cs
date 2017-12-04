@@ -125,7 +125,19 @@ public class MainMenuEventScript : MonoBehaviour {
 			{
 				DisableSpriteI();
 			}
+			else if(this.gameObject.name == "SingleFree")
+			{
+				DisableSpriteI();
+			}
+			else if(this.gameObject.name == "Co-opFree") 
+			{
+				DisableSpriteI();
+			}
 			else if(this.gameObject.name == "Exit") 
+			{
+				DisableSpriteI();
+			}
+			else if(this.gameObject.name == "ExitMenu") 
 			{
 				DisableSpriteI();
 			}
