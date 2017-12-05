@@ -49,8 +49,8 @@ public class TimeFlowRoomEffect : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D col)
 	{
-		time_Script.ResetTime(col.gameObject);
 		time_Script.ReducePlayerCount(col.gameObject);
+		time_Script.ResetTime(col.gameObject);
 		cam.GetComponent<UnityStandardAssets.ImageEffects.MotionBlur>().enabled = false;
 	}
 

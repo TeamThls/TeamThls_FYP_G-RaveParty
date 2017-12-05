@@ -4,22 +4,69 @@ using UnityEngine;
 
 public class WandParticlesEffect : MonoBehaviour {
 
-	ParticleSystem wand_Ps;
+	ParticleSystem normal_Ps, fire_Ps, ice_Ps, laser_Ps;
+	[SerializeField] ParticleSystem current_Ps;
 	SharedStats sharedStats_Script;
 	// Use this for initialization
 	void Start () 
 	{
-		wand_Ps = GetComponent<ParticleSystem>();
+		normal_Ps = transform.GetChild(0).GetComponent<ParticleSystem>();
+		fire_Ps = transform.GetChild(1).GetComponent<ParticleSystem>();
+		ice_Ps = transform.GetChild(2).GetComponent<ParticleSystem>();
+		laser_Ps = transform.GetChild(3).GetComponent<ParticleSystem>();
+
+		current_Ps = normal_Ps;
 		sharedStats_Script = GameObject.Find("GameManager").GetComponent<SharedStats>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		ChangeWandColor();
+		ChangeWandType();
 	}
 
-	void ChangeWandColor()
+	void ChangeWandType()
+	{
+		
+		if(sharedStats_Script.OnFire == true)
+		{
+			normal_Ps.Stop();
+			ice_Ps.Stop();
+			laser_Ps.Stop();
+			current_Ps = fire_Ps;
+
+		}
+		else if(sharedStats_Script.OnIce == true)
+		{
+			normal_Ps.Stop();
+			fire_Ps.Stop();
+			laser_Ps.Stop();
+			current_Ps = ice_Ps;
+
+		}
+		else if(sharedStats_Script.OnLaser == true)
+		{
+			normal_Ps.Stop();
+			ice_Ps.Stop();
+			fire_Ps.Stop();
+			current_Ps = laser_Ps;
+
+		}
+		else
+		{
+			fire_Ps.Stop();
+			ice_Ps.Stop();
+			laser_Ps.Stop();
+			current_Ps = normal_Ps;
+		}
+		if(current_Ps.isPlaying == false)
+		{
+			current_Ps.Play();
+		}
+		
+	}
+
+	/*void ChangeWandColor()
 	{
 		var wandPs_Main = wand_Ps.main;
 		if(sharedStats_Script.OnFire == true)
@@ -38,5 +85,5 @@ public class WandParticlesEffect : MonoBehaviour {
 		{
 			wandPs_Main.startColor = Color.white;
 		}
-	}
+	}*/
 }

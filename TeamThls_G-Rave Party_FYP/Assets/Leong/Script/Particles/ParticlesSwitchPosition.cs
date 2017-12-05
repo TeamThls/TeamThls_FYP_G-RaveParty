@@ -11,7 +11,7 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 
 	enum ParticleType
 	{
-		Wand, Ground
+		Wand, Ground, Sync
 	};
 	public Object current_Obj;
 	[SerializeField] ParticleType par_Type;
@@ -37,11 +37,16 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 			{
 				if(par_Type == ParticleType.Wand)
 				{
-					transform.localPosition = new Vector2(-0.6f, transform.localPosition.y);
+					transform.localPosition = new Vector2(-0.62f, transform.localPosition.y);
 				}
 				else if(par_Type == ParticleType.Ground)
 				{
 					transform.localPosition = new Vector3(0.65f, transform.localPosition.y, -1.0f);
+						
+				}
+				else if(par_Type == ParticleType.Sync)
+				{
+					transform.localPosition = new Vector3(0.15f, transform.localPosition.y, -1.0f);
 						
 				}
 			}
@@ -49,11 +54,16 @@ public class ParticlesSwitchPosition : MonoBehaviour {
 			{
 				if(par_Type == ParticleType.Wand)
 				{
-					transform.localPosition = new Vector2(0.6f, transform.localPosition.y);
+					transform.localPosition = new Vector2(0.62f, transform.localPosition.y);
 				}
 				else if(par_Type == ParticleType.Ground)
 				{
 					transform.localPosition = new Vector3(-0.65f, transform.localPosition.y, -1.0f);
+						
+				}
+				else if(par_Type == ParticleType.Sync)
+				{
+					transform.localPosition = new Vector3(-0.125f, transform.localPosition.y, -1.0f);
 						
 				}
 			}

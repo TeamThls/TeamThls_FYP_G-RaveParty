@@ -41,6 +41,45 @@ public class TimeManagement : MonoBehaviour {
 		}
 	}
 
+	void TimeFlowIndicator(GameObject player)
+	{
+		SpriteRenderer obj_PositiveTimeSpr = player.transform.parent.GetChild(10).GetComponent<SpriteRenderer>();
+		SpriteRenderer obj_NegativeTimeSpr = player.transform.parent.GetChild(11).GetComponent<SpriteRenderer>();
+		SpriteRenderer obj_NormalTimeSpr = player.transform.parent.GetChild(12).GetComponent<SpriteRenderer>();
+		switch(currentSlowState)
+		{
+			case CurrentSlowMoState.Player:
+				if(obj_NegativeTimeSpr.enabled == false)
+				{
+					obj_PositiveTimeSpr.enabled = false;
+					obj_NegativeTimeSpr.enabled = true;
+					obj_NormalTimeSpr.enabled = false;
+					Debug.Log("Negative");
+				}
+				break;
+
+			case CurrentSlowMoState.Enemy:
+				if(obj_PositiveTimeSpr.enabled == false)
+				{
+					obj_PositiveTimeSpr.enabled = true;
+					obj_NegativeTimeSpr.enabled = false;
+					obj_NormalTimeSpr.enabled = false;
+					Debug.Log("Positive");
+				}
+				break;
+
+			case CurrentSlowMoState.Normal:
+				if(obj_NormalTimeSpr.enabled == false)
+				{
+					obj_PositiveTimeSpr.enabled = false;
+					obj_NegativeTimeSpr.enabled = false;
+					obj_NormalTimeSpr.enabled = true;
+					Debug.Log("Normal");
+				}
+				break;
+		}
+	}
+
 	public void SlowDown(GameObject obj)
 	{
 		if(obj.layer == 10)
@@ -49,18 +88,11 @@ public class TimeManagement : MonoBehaviour {
 
 			PlayerMovement obj_pm = obj.GetComponentInParent<PlayerMovement>();
 			PlayerCombat obj_pc = obj.GetComponentInParent<PlayerCombat>();
-			SpriteRenderer obj_PositiveTimeSpr = obj.transform.parent.GetChild(10).GetComponent<SpriteRenderer>();
-			SpriteRenderer obj_NegativeTimeSpr = obj.transform.parent.GetChild(11).GetComponent<SpriteRenderer>();
-			SpriteRenderer obj_NormalTimeSpr = obj.transform.parent.GetChild(12).GetComponent<SpriteRenderer>();
+
 			if(obj_pm.player_SlowMo == false)
 			{
 				obj_pm.player_TimeFactor = 0.5f;
-				if(obj_PositiveTimeSpr.enabled == false)
-				{
-					obj_PositiveTimeSpr.enabled = false;
-					obj_NegativeTimeSpr.enabled = true;
-					obj_NormalTimeSpr.enabled = false;
-				}
+
 				if(obj_pc.isShootingIce == true)
 				{
 					obj.GetComponentInParent<Rigidbody2D>().gravityScale = 0.0f;
@@ -73,8 +105,10 @@ public class TimeManagement : MonoBehaviour {
 				obj_pm.player_SlowMo = true;
 
 			}
+			TimeFlowIndicator(obj);
+
 		}
-		if(obj.layer == 10 && currentSlowState == CurrentSlowMoState.Enemy)
+		/*if(obj.layer == 10 && currentSlowState == CurrentSlowMoState.Enemy)
 		{
 			SpriteRenderer obj_PositiveTimeSpr = obj.transform.parent.GetChild(10).GetComponent<SpriteRenderer>();
 			SpriteRenderer obj_NegativeTimeSpr = obj.transform.parent.GetChild(11).GetComponent<SpriteRenderer>();
@@ -84,6 +118,7 @@ public class TimeManagement : MonoBehaviour {
 				obj_PositiveTimeSpr.enabled = true;
 				obj_NegativeTimeSpr.enabled = false;
 				obj_NormalTimeSpr.enabled = false;
+				Debug.Log("Positive");
 			}
 		}
 		if(obj.layer == 10 && currentSlowState == CurrentSlowMoState.Normal)
@@ -96,8 +131,9 @@ public class TimeManagement : MonoBehaviour {
 				obj_PositiveTimeSpr.enabled = false;
 				obj_NegativeTimeSpr.enabled = false;
 				obj_NormalTimeSpr.enabled = true;
+				Debug.Log("Normal");
 			}
-		}
+		}*/
 		if(obj.layer == 11 && currentSlowState == CurrentSlowMoState.Player && timeFlow_ActivationStatus == true && player_Count > 0)
 		{
 			if(obj.tag == "NormalBullet")

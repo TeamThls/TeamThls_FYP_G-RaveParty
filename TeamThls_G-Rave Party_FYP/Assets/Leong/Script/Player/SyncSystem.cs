@@ -8,6 +8,7 @@ public class SyncSystem : MonoBehaviour {
 	LineRenderer lineRen;
 
 	[SerializeField] GameObject bullet_Obj, syncBullet_Obj;
+	[SerializeField] ParticleSystem player1_SyncParticles, player2_SyncParticles;
 	public GameObject currentBullet_Obj;
 	Vector3[] points = new Vector3[5];
 
@@ -42,9 +43,12 @@ public class SyncSystem : MonoBehaviour {
 		}
 		player1Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
 		player2Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
+		player1_SyncParticles = player1.GetChild(13).GetComponent<ParticleSystem>();
+		player2_SyncParticles = player2.GetChild(13).GetComponent<ParticleSystem>();
 		if(player2 == null)
 		{
 			player2Bullet_Script = null;
+			player2_SyncParticles = null;
 		}
 		lineRen = GetComponent<LineRenderer>();
 		lightning_UpdateTime = 0.02f;
@@ -70,6 +74,15 @@ public class SyncSystem : MonoBehaviour {
 					player1Bullet_Script.bullet_Damage = 1.5f;
 					player2Bullet_Script.bullet_Damage = 1.5f;
 					lineRen.enabled = true;
+
+				}
+				if(player1_SyncParticles.isPlaying == false)
+				{
+					player1_SyncParticles.Play();
+				}
+				if(player2_SyncParticles.isPlaying == false)
+				{
+					player2_SyncParticles.Play();
 				}
 				StartCoroutine(Beam());
 			}
@@ -83,6 +96,15 @@ public class SyncSystem : MonoBehaviour {
 					player1Bullet_Script.bullet_Damage = 1.0f;
 					player2Bullet_Script.bullet_Damage = 1.0f;
 					lineRen.enabled = false;
+
+				}
+				if(player1_SyncParticles.isPlaying == true)
+				{
+					player1_SyncParticles.Stop();
+				}
+				if(player2_SyncParticles.isPlaying == true)
+				{
+					player2_SyncParticles.Stop();
 				}
 				StopCoroutine(Beam());
 
