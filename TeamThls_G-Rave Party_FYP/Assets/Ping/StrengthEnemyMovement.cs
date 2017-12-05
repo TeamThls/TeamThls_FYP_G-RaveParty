@@ -40,7 +40,8 @@ public class StrengthEnemyMovement : MonoBehaviour {
 	public bool damaging;
 	public int damage;
 
-	public int health;
+	public float health;
+	bool getHealth;
 
 	public float DoubleAttackDist;
 
@@ -59,14 +60,17 @@ public class StrengthEnemyMovement : MonoBehaviour {
 			player2 = player1;
 		}
 		targetDetection ();
-
-		damage = shrds.str_Damage;
-		speed = shrds.str_Speed;
-		health = shrds.str_Health;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		damage = shrds.str_Damage;
+		speed = shrds.str_Speed;
+		if (getHealth == false) {
+			health = shrds.str_Health;
+			this.GetComponent<EnemyCollider> ().enemy_Health = health;
+			getHealth = true;
+		}
 
 		a = Vector3.Distance (this.transform.position, player1.transform.position);
 		b = Vector3.Distance (this.transform.position, player2.transform.position);

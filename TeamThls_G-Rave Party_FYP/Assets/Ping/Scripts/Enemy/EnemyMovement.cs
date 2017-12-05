@@ -40,7 +40,8 @@ public class EnemyMovement : MonoBehaviour {
 	public float a;
 	public float b;
 
-	public int health;
+	public float health;
+	bool getHealth;
 
 	// Use this for initialization
 	void Start () {
@@ -55,15 +56,19 @@ public class EnemyMovement : MonoBehaviour {
 		}
 		speed = maxSpeed;
 		targetDetection ();
-
-
-		damage = stts.enemy_Damage;
-		speed = stts.enemy_Speed;
-		health = stts.enemy_Health;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		damage = stts.enemy_Damage;
+		speed = stts.enemy_Speed;
+
+		if (getHealth == false) {
+			health = stts.path_Health;
+			this.GetComponent<EnemyCollider> ().enemy_Health = health;
+			getHealth = true;
+		}
 
 		targetDetection ();
 		/*if (player.transform.position.x > this.transform.position.x) {

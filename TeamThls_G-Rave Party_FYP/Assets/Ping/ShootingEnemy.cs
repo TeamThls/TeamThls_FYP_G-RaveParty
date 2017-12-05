@@ -45,9 +45,10 @@ public class ShootingEnemy : MonoBehaviour {
 	GameObject manager;
 	SharedStats stts;
 
-	public int health;
+	public float health;
 
 	public Vector3 newPos;
+	bool getHealth;
 
 	// Use this for initialization
 	void Start () {
@@ -61,13 +62,16 @@ public class ShootingEnemy : MonoBehaviour {
 		speed = maxSpeed;
 		Path01 = GameObject.Find ("Path01");
 		Path02 = GameObject.Find ("Path02");
-
-
-		speed = stts.shoot_Speed;
-		health = stts.shoot_Health;
 	}
 	// Update is called once per frame
 	void Update () {
+
+		speed = stts.shoot_Speed;
+		if (getHealth == false) {
+			health = stts.path_Health;
+			this.GetComponent<EnemyCollider> ().enemy_Health = health;
+			getHealth = true;
+		}
 
 		step = speed * Time.deltaTime;
 		targetDetection ();

@@ -41,7 +41,9 @@ public class pathfinding : MonoBehaviour {
 
 	public int damage;
 
-	public int health;
+	public float health;
+
+	bool getHealth;
 
 	[SerializeField] ParticleSystem playerDamaged_Particles;
 
@@ -71,14 +73,19 @@ public class pathfinding : MonoBehaviour {
 				targetPath = WayManager.childList [i];
 			}
 		}
-
-		damage = shareStat.path_Damage;
-		speed = shareStat.path_Speed;
-		health = shareStat.path_Health;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		damage = shareStat.path_Damage;
+		speed = shareStat.path_Speed;
+
+		if (getHealth == false) {
+			health = shareStat.path_Health;
+			this.GetComponent<EnemyCollider> ().enemy_Health = health;
+			getHealth = true;
+		}
+
 
 		step = speed * Time.deltaTime;
 
