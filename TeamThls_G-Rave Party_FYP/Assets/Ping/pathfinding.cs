@@ -71,13 +71,14 @@ public class pathfinding : MonoBehaviour {
 				targetPath = WayManager.childList [i];
 			}
 		}
+
+		damage = shareStat.path_Damage;
+		speed = shareStat.path_Speed;
+		health = shareStat.path_Health;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		damage = shareStat.path_Damage;
-		speed = shareStat.path_Speed;
-		health = shareStat.path_Health;
 
 		step = speed * Time.deltaTime;
 

@@ -59,13 +59,14 @@ public class StrengthEnemyMovement : MonoBehaviour {
 			player2 = player1;
 		}
 		targetDetection ();
+
+		damage = shrds.str_Damage;
+		speed = shrds.str_Speed;
+		health = shrds.str_Health;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		damage = shrds.str_Damage;
-		speed = shrds.str_Speed;
-		health = shrds.str_Health;
 
 		a = Vector3.Distance (this.transform.position, player1.transform.position);
 		b = Vector3.Distance (this.transform.position, player2.transform.position);

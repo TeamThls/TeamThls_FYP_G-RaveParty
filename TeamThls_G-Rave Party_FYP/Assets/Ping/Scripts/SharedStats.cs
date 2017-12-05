@@ -37,6 +37,7 @@ public class SharedStats : MonoBehaviour {
 	public int str_Damage;
 	public int path_Damage;
 
+	// single
 	public int Wave1_EnemyDamage;
 	public int Wave2_EnemyDamage;
 	public int Wave3_EnemyDamage;
@@ -49,11 +50,25 @@ public class SharedStats : MonoBehaviour {
 	public int Wave2_PathDamage;
 	public int Wave3_PathDamage;
 
+	//multi
+	public int mWave1_EnemyDamage;
+	public int mWave2_EnemyDamage;
+	public int mWave3_EnemyDamage;
+
+	public int mWave1_StrDamage;
+	public int mWave2_StrDamage;
+	public int mWave3_StrDamage;
+
+	public int mWave1_PathDamage;
+	public int mWave2_PathDamage;
+	public int mWave3_PathDamage;
+
 	public int enemy_Speed;
 	public int str_Speed;
 	public int path_Speed;
 	public int shoot_Speed;
 
+	//single
 	public int Wave1_EnemySpeed;
 	public int Wave2_EnemySpeed;
 	public int Wave3_EnemySpeed;
@@ -70,11 +85,29 @@ public class SharedStats : MonoBehaviour {
 	public int Wave2_ShootSpeed;
 	public int Wave3_ShootSpeed;
 
+	// multi
+	public int mWave1_EnemySpeed;
+	public int mWave2_EnemySpeed;
+	public int mWave3_EnemySpeed;
+
+	public int mWave1_StrSpeed;
+	public int mWave2_StrSpeed;
+	public int mWave3_StrSpeed;
+
+	public int mWave1_PathSpeed;
+	public int mWave2_PathSpeed;
+	public int mWave3_PathSpeed;
+
+	public int mWave1_ShootSpeed;
+	public int mWave2_ShootSpeed;
+	public int mWave3_ShootSpeed;
+
 	public int enemy_Health;
 	public int str_Health;
 	public int path_Health;
 	public int shoot_Health;
 
+	//single
 	public int Wave1_EnemyHealth;
 	public int Wave2_EnemyHealth;
 	public int Wave3_EnemyHealth;
@@ -90,6 +123,23 @@ public class SharedStats : MonoBehaviour {
 	public int Wave1_ShootHealth;
 	public int Wave2_ShootHealth;
 	public int Wave3_ShootHealth;
+
+	// multi
+	public int mWave1_EnemyHealth;
+	public int mWave2_EnemyHealth;
+	public int mWave3_EnemyHealth;
+
+	public int mWave1_StrHealth;
+	public int mWave2_StrHealth;
+	public int mWave3_StrHealth;
+
+	public int mWave1_PathHealth;
+	public int mWave2_PathHealth;
+	public int mWave3_PathHealth;
+
+	public int mWave1_ShootHealth;
+	public int mWave2_ShootHealth;
+	public int mWave3_ShootHealth;
 
 	public int BulletMana;
 	public int FireMana;
@@ -332,50 +382,99 @@ public class SharedStats : MonoBehaviour {
 			setTime = maxDuration - 0.5f;
 		}
 
-		if (wave_count == 1) {
-			enemy_Damage = Wave1_EnemyDamage;
-			str_Damage = Wave1_StrDamage;
-			path_Damage = Wave1_PathDamage;
+		if (player_Number == 1) {
+			if (wave_count == 1) {
+				enemy_Damage = Wave1_EnemyDamage;
+				str_Damage = Wave1_StrDamage;
+				path_Damage = Wave1_PathDamage;
 
-			enemy_Speed = Wave1_EnemySpeed;
-			str_Speed = Wave1_StrSpeed;
-			path_Speed = Wave1_PathSpeed;
-			shoot_Speed = Wave1_ShootSpeed;
+				enemy_Speed = Wave1_EnemySpeed;
+				str_Speed = Wave1_StrSpeed;
+				path_Speed = Wave1_PathSpeed;
+				shoot_Speed = Wave1_ShootSpeed;
 
-			enemy_Health = Wave1_EnemyHealth;
-			str_Health = Wave1_StrHealth;
-			path_Speed = Wave1_PathHealth;
-			shoot_Speed = Wave1_ShootHealth;
-		} 
-		else if (wave_count == 2) {
-			enemy_Damage = Wave2_EnemyDamage;
-			str_Damage = Wave2_StrDamage;
-			path_Damage = Wave2_PathDamage;
+				enemy_Health = Wave1_EnemyHealth;
+				str_Health = Wave1_StrHealth;
+				path_Speed = Wave1_PathHealth;
+				shoot_Speed = Wave1_ShootHealth;
+			} 
+			else if (wave_count == 2) {
+				enemy_Damage = Wave2_EnemyDamage;
+				str_Damage = Wave2_StrDamage;
+				path_Damage = Wave2_PathDamage;
 
-			enemy_Speed = Wave2_EnemySpeed;
-			str_Speed = Wave2_StrSpeed;
-			path_Speed = Wave2_PathSpeed;
-			shoot_Speed = Wave2_ShootSpeed;
+				enemy_Speed = Wave2_EnemySpeed;
+				str_Speed = Wave2_StrSpeed;
+				path_Speed = Wave2_PathSpeed;
+				shoot_Speed = Wave2_ShootSpeed;
 
-			enemy_Health = Wave2_EnemyHealth;
-			str_Health = Wave2_StrHealth;
-			path_Speed = Wave2_PathHealth;
-			shoot_Speed = Wave2_ShootHealth;
-		} 
-		else if (wave_count == 3) {
-			enemy_Damage = Wave3_EnemyDamage;
-			str_Damage = Wave3_StrDamage;
-			path_Damage = Wave3_PathDamage;
+				enemy_Health = Wave2_EnemyHealth;
+				str_Health = Wave2_StrHealth;
+				path_Speed = Wave2_PathHealth;
+				shoot_Speed = Wave2_ShootHealth;
+			} 
+			else if (wave_count == 3) {
+				enemy_Damage = Wave3_EnemyDamage;
+				str_Damage = Wave3_StrDamage;
+				path_Damage = Wave3_PathDamage;
 
-			enemy_Speed = Wave3_EnemySpeed;
-			str_Speed = Wave3_StrSpeed;
-			path_Speed = Wave3_PathSpeed;
-			shoot_Speed = Wave3_ShootSpeed;
+				enemy_Speed = Wave3_EnemySpeed;
+				str_Speed = Wave3_StrSpeed;
+				path_Speed = Wave3_PathSpeed;
+				shoot_Speed = Wave3_ShootSpeed;
 
-			enemy_Health = Wave3_EnemyHealth;
-			str_Health = Wave3_StrHealth;
-			path_Speed = Wave3_PathHealth;
-			shoot_Speed = Wave3_ShootHealth;
+				enemy_Health = Wave3_EnemyHealth;
+				str_Health = Wave3_StrHealth;
+				path_Speed = Wave3_PathHealth;
+				shoot_Speed = Wave3_ShootHealth;
+			}
+		}
+		else if (player_Number == 2) {
+			if (wave_count == 1) {
+				enemy_Damage = mWave1_EnemyDamage;
+				str_Damage = mWave1_StrDamage;
+				path_Damage = mWave1_PathDamage;
+
+				enemy_Speed = mWave1_EnemySpeed;
+				str_Speed = mWave1_StrSpeed;
+				path_Speed = mWave1_PathSpeed;
+				shoot_Speed = mWave1_ShootSpeed;
+
+				enemy_Health = mWave1_EnemyHealth;
+				str_Health = mWave1_StrHealth;
+				path_Speed = mWave1_PathHealth;
+				shoot_Speed = mWave1_ShootHealth;
+			} 
+			else if (wave_count == 2) {
+				enemy_Damage = mWave2_EnemyDamage;
+				str_Damage = mWave2_StrDamage;
+				path_Damage = mWave2_PathDamage;
+
+				enemy_Speed = mWave2_EnemySpeed;
+				str_Speed = mWave2_StrSpeed;
+				path_Speed = mWave2_PathSpeed;
+				shoot_Speed = mWave2_ShootSpeed;
+
+				enemy_Health = mWave2_EnemyHealth;
+				str_Health = mWave2_StrHealth;
+				path_Speed = mWave2_PathHealth;
+				shoot_Speed = mWave2_ShootHealth;
+			} 
+			else if (wave_count == 3) {
+				enemy_Damage = mWave3_EnemyDamage;
+				str_Damage = mWave3_StrDamage;
+				path_Damage = mWave3_PathDamage;
+
+				enemy_Speed = mWave3_EnemySpeed;
+				str_Speed = mWave3_StrSpeed;
+				path_Speed = mWave3_PathSpeed;
+				shoot_Speed = mWave3_ShootSpeed;
+
+				enemy_Health = mWave3_EnemyHealth;
+				str_Health = mWave3_StrHealth;
+				path_Speed = mWave3_PathHealth;
+				shoot_Speed = mWave3_ShootHealth;
+			}
 		}
 
 

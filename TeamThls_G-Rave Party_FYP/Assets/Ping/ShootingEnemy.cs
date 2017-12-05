@@ -61,11 +61,13 @@ public class ShootingEnemy : MonoBehaviour {
 		speed = maxSpeed;
 		Path01 = GameObject.Find ("Path01");
 		Path02 = GameObject.Find ("Path02");
+
+
+		speed = stts.shoot_Speed;
+		health = stts.shoot_Health;
 	}
 	// Update is called once per frame
 	void Update () {
-		speed = stts.shoot_Speed;
-		health = stts.shoot_Health;
 
 		step = speed * Time.deltaTime;
 		targetDetection ();

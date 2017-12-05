@@ -55,13 +55,15 @@ public class EnemyMovement : MonoBehaviour {
 		}
 		speed = maxSpeed;
 		targetDetection ();
+
+
+		damage = stts.enemy_Damage;
+		speed = stts.enemy_Speed;
+		health = stts.enemy_Health;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		damage = stts.enemy_Damage;
-		speed = stts.enemy_Speed;
-		health = stts.enemy_Health;
 
 		targetDetection ();
 		/*if (player.transform.position.x > this.transform.position.x) {
