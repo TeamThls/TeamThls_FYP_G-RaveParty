@@ -44,11 +44,14 @@ public class SyncSystem : MonoBehaviour {
 		player1Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
 		player2Bullet_Script = currentBullet_Obj.GetComponent<Bullet>();
 		player1_SyncParticles = player1.GetChild(13).GetComponent<ParticleSystem>();
-		player2_SyncParticles = player2.GetChild(13).GetComponent<ParticleSystem>();
 		if(player2 == null)
 		{
 			player2Bullet_Script = null;
 			player2_SyncParticles = null;
+		}
+		else
+		{
+			player2_SyncParticles = player2.GetChild(13).GetComponent<ParticleSystem>();
 		}
 		lineRen = GetComponent<LineRenderer>();
 		lightning_UpdateTime = 0.02f;

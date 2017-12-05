@@ -12,6 +12,8 @@ public class InstructionMenuManager : MonoBehaviour
 	public Sprite instruction2;
 	public Sprite instruction3;
 	public Sprite controlscheme;
+	[SerializeField] GameObject miscSync;
+	GameObject wandParticles, rune, darkRedSprite;
 
 
 	public string nextScene;
@@ -22,7 +24,10 @@ public class InstructionMenuManager : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		
+		//miscSync = GameObject.Find("MiscSync").gameObject;
+		wandParticles = GameObject.Find("WandParticles").gameObject;
+		rune = GameObject.Find("Rune").gameObject;
+		darkRedSprite = GameObject.Find("DarkRedSprite").gameObject;
 	}
 	
 	// Update is called once per frame
@@ -122,18 +127,36 @@ public class InstructionMenuManager : MonoBehaviour
 		if (arrowchange == 1) 
 		{
 			spriterendererIM.sprite = instruction1;
+			if(miscSync != null)
+			{
+				miscSync.SetActive(true);
+			}
+			wandParticles.SetActive(false);
+			rune.SetActive(false);
+			darkRedSprite.SetActive(false);
 		}
 		else if (arrowchange == 2) 
 		{
 			spriterendererIM.sprite = instruction2;
+			if(miscSync != null)
+			{
+				miscSync.SetActive(false);
+			}
+			wandParticles.SetActive(true);
+			rune.SetActive(true);
+			darkRedSprite.SetActive(false);
 		}
 		else if (arrowchange == 3) 
 		{
 			spriterendererIM.sprite = instruction3;
+			wandParticles.SetActive(false);
+			rune.SetActive(false);
+			darkRedSprite.SetActive(true);
 		}
 		else if (arrowchange == 4) 
 		{
 			spriterendererIM.sprite = controlscheme;
+			darkRedSprite.SetActive(false);
 		}
 		else if (arrowchange == 5) 
 		{
