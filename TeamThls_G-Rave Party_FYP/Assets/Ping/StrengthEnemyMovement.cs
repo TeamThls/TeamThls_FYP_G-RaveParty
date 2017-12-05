@@ -40,6 +40,8 @@ public class StrengthEnemyMovement : MonoBehaviour {
 	public bool damaging;
 	public int damage;
 
+	public int health;
+
 	public float DoubleAttackDist;
 
 	[SerializeField] ParticleSystem playerDamaged_Particles;
@@ -62,6 +64,9 @@ public class StrengthEnemyMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		damage = shrds.str_Damage;
+		speed = shrds.str_Speed;
+		health = shrds.str_Health;
+
 		a = Vector3.Distance (this.transform.position, player1.transform.position);
 		b = Vector3.Distance (this.transform.position, player2.transform.position);
 

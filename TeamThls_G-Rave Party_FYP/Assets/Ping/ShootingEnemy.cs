@@ -42,10 +42,17 @@ public class ShootingEnemy : MonoBehaviour {
 	public bool RunMode;
 	public bool fireMode;
 
+	GameObject manager;
+	SharedStats stts;
+
+	public int health;
+
 	public Vector3 newPos;
 
 	// Use this for initialization
 	void Start () {
+		manager = GameObject.Find ("GameManager");
+		stts = manager.GetComponent<SharedStats> ();
 		Player = GameObject.Find ("Player");
 		Player2 = GameObject.Find ("Player2");
 		if (Player2 == null) {
@@ -57,6 +64,9 @@ public class ShootingEnemy : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		speed = stts.shoot_Speed;
+		health = stts.shoot_Health;
+
 		step = speed * Time.deltaTime;
 		targetDetection ();
 

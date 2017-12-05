@@ -41,6 +41,8 @@ public class pathfinding : MonoBehaviour {
 
 	public int damage;
 
+	public int health;
+
 	[SerializeField] ParticleSystem playerDamaged_Particles;
 
 	// Use this for initialization
@@ -74,6 +76,8 @@ public class pathfinding : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		damage = shareStat.path_Damage;
+		speed = shareStat.path_Speed;
+		health = shareStat.path_Health;
 
 		step = speed * Time.deltaTime;
 

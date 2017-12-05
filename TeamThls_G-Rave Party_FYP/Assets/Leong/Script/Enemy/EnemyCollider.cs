@@ -47,6 +47,27 @@ public class EnemyCollider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(this.gameObject.GetComponent<pathfinding>() != null)
+		{
+			pathfinding wp = this.gameObject.GetComponent<pathfinding>();
+			enemy_Health = wp.health;
+		}
+		else if(this.gameObject.GetComponent<EnemyMovement>() != null)
+		{
+			EnemyMovement em = this.gameObject.GetComponent<EnemyMovement>();
+			enemy_Health = em.health;
+		}
+		else if(this.gameObject.GetComponent<StrengthEnemyMovement>() != null)
+		{
+			StrengthEnemyMovement em = this.gameObject.GetComponent<StrengthEnemyMovement>();
+			enemy_Health = em.health;
+		}
+		else if(this.gameObject.GetComponent<ShootingEnemy>() != null)
+		{
+			ShootingEnemy se = this.gameObject.GetComponent<ShootingEnemy>();
+			enemy_Health = se.health;
+		}
+
 		if(enemy_Health <= 0)
 		{
 			// WIP, a tiny pause when killed an enemy 
@@ -64,8 +85,6 @@ public class EnemyCollider : MonoBehaviour {
 
 			}
 			sharedstats.player_Gold += 100;
-
-			
 		}
 	}
 

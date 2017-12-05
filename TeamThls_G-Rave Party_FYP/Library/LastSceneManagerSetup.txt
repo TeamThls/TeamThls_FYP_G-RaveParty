@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/FreeMode/Free Control Scheme 2.unity
+- path: Assets/Scene/Wave Mode/MultiPlayer Level.unity
   isLoaded: 1
   isActive: 1

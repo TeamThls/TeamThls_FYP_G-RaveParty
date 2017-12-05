@@ -40,6 +40,8 @@ public class EnemyMovement : MonoBehaviour {
 	public float a;
 	public float b;
 
+	public int health;
+
 	// Use this for initialization
 	void Start () {
 		GameManager = GameObject.Find ("GameManager");
@@ -58,6 +60,8 @@ public class EnemyMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		damage = stts.enemy_Damage;
+		speed = stts.enemy_Speed;
+		health = stts.enemy_Health;
 
 		targetDetection ();
 		/*if (player.transform.position.x > this.transform.position.x) {

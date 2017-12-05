@@ -258,3 +258,6 @@ C:\Users\Tyran\Desktop\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.xml
 C:\Users\Tyran\Desktop\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\Tyran\Desktop\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.dll
 C:\Users\Tyran\Desktop\TeamThls_G-Rave Party_FYP\obj\Debug\Assembly-CSharp.pdb
+C:\Users\YzArC-BeatS\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.dll
+C:\Users\YzArC-BeatS\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.WindowsMediaFormat.dll
+C:\Users\YzArC-BeatS\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.xml
