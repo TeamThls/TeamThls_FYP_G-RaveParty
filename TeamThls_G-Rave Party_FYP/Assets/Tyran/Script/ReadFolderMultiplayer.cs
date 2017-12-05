@@ -58,7 +58,7 @@ public class ReadFolderMultiplayer : MonoBehaviour {
 			{
 				sharedstats.newpath = names [i].Replace (mp3, "");
 				//Debug.Log ("HERE"+sharedstats.newpath);
-				SceneManager.LoadScene ("Free Control Scheme 2");
+				SceneManager.LoadScene ("Free Instructions 2");
 				//SoundManagerScript.Instance.ChangeClip (f.Name);
 				//SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_LEVEL);
 			}

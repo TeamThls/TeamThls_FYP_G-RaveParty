@@ -264,3 +264,6 @@ C:\Users\YzArC-BeatS\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FY
 C:\Users\kh_xehanort\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.dll
 C:\Users\kh_xehanort\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.WindowsMediaFormat.dll
 C:\Users\kh_xehanort\Documents\TeamThls_FYP_G-RaveParty\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.xml
+C:\Users\Tyran\Desktop\Teamthlsband_FYP\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.dll
+C:\Users\Tyran\Desktop\Teamthlsband_FYP\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.WindowsMediaFormat.dll
+C:\Users\Tyran\Desktop\Teamthlsband_FYP\TeamThls_G-Rave Party_FYP\Temp\bin\Debug\NAudio.xml

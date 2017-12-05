@@ -62,7 +62,7 @@ public class ReadFolderSingle : MonoBehaviour {
 				//Mp3ToWav(paths[i], Application.dataPath+"/Resources/currentsong.wav");
 
 				//Debug.Log ("HERE"+sharedstats.newpath);
-				SceneManager.LoadScene ("Free Control Scheme 1");
+				SceneManager.LoadScene ("Free Instructions 1");
 				//SoundManagerScript.Instance.ChangeClip (f.Name);
 				//SoundManagerScript.Instance.PlayBGM (AudioClipID.BGM_LEVEL);
 			}

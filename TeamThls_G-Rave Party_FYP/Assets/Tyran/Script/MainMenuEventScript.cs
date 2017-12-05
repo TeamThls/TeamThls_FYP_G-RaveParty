@@ -28,7 +28,7 @@ public class MainMenuEventScript : MonoBehaviour {
 				DisplaySpriteI();
 				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
 				{
-					ChangeScene ("Control Scheme 2");
+					ChangeScene ("Instructions 2");
 				}
 			}
 			else if (this.gameObject.name == "Leaderboard") 
@@ -44,7 +44,7 @@ public class MainMenuEventScript : MonoBehaviour {
 				DisplaySpriteI();
 				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
 				{
-					ChangeScene ("Control Scheme 1");
+					ChangeScene ("Instructions 1");
 				}
 				//ChangeScene()
 			}
