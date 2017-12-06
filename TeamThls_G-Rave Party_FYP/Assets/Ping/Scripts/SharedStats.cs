@@ -378,10 +378,6 @@ public class SharedStats : MonoBehaviour {
 
 		GlobalControl.Instance.abilityLevel = abilitiesLevel;
 		GlobalControl.Instance.extendDuration = abilityExtendedDuration;
-
-		OnIce = false;
-		OnFire = false;
-		OnLaser = false;
 	}
 
 	public void Reset()
