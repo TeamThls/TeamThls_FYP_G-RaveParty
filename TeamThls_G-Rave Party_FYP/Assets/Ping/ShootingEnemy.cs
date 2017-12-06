@@ -50,6 +50,9 @@ public class ShootingEnemy : MonoBehaviour {
 	public Vector3 newPos;
 	bool getHealth;
 
+	float checkTime;
+	public float checkDuration;
+
 	// Use this for initialization
 	void Start () {
 		manager = GameObject.Find ("GameManager");
@@ -110,6 +113,14 @@ public class ShootingEnemy : MonoBehaviour {
 			checkPos = false;
 			num = 0;
 		}
+
+		if (checkPos == true) {
+			checkTime += Time.deltaTime;
+			if(checkTime >= checkDuration){
+				checkPos = false;
+				checkTime = 0.0f;
+			}
+		}
 	}
 
 	void RunFromPlayer(){
@@ -137,10 +148,10 @@ public class ShootingEnemy : MonoBehaviour {
 	void FindPlayer(){
 		if (checkPos == false) {
 			if (this.transform.position.x < Target.transform.position.x) {
-				newPos = new Vector3 (Target.transform.position.x - targetX, Target.transform.position.y + 1, Target.transform.position.z);
+				newPos = new Vector3 (Target.transform.position.x - targetX, Target.transform.position.y, Target.transform.position.z);
 			}
 			if (this.transform.position.x > Target.transform.position.x) {
-				newPos = new Vector3 (Target.transform.position.x + targetX, Target.transform.position.y + 1, Target.transform.position.z);
+				newPos = new Vector3 (Target.transform.position.x + targetX, Target.transform.position.y, Target.transform.position.z);
 			}
 			checkPos = true;
 		}
