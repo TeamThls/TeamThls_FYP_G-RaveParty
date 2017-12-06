@@ -43,6 +43,10 @@ public class StrengthEnemyMovement : MonoBehaviour {
 	public float health;
 	bool getHealth = false;
 
+	bool nextAttack;
+	float nextTime;
+	public float nextAttackTime;
+
 	public float DoubleAttackDist;
 
 	[SerializeField] ParticleSystem playerDamaged_Particles;
@@ -117,7 +121,15 @@ public class StrengthEnemyMovement : MonoBehaviour {
 			}
 		}
 
-		if (attack == true && counter == 0) {
+		if (nextAttack == false) {
+			nextTime += Time.deltaTime;
+			if (nextTime >= nextAttackTime) {
+				nextAttack = true;
+				nextTime = 0.0f;
+			}
+		}
+
+		if (attack == true && counter == 0 && nextAttack == true) {
 			this.transform.position = Vector3.MoveTowards(this.transform.position ,newPos1, step);
 			if (GetComponentInChildren<SpriteRenderer> ().flipX == true) {
 				this.transform.rotation = Quaternion.Euler (0, 0, 45);
@@ -175,11 +187,12 @@ public class StrengthEnemyMovement : MonoBehaviour {
 			}
 		}
 
-		if (attack == true && counter == 1) {
+		if (attack == true && counter == 1 && nextAttack == true) {
 			this.transform.position = Vector3.MoveTowards (this.transform.position, newPos2, step);
 			this.transform.rotation = Quaternion.Euler (0, 0, 0);
 			if (this.transform.position == newPos2) {
 				counter = 2;
+				nextAttack = false;
 				if (target == player1) {
 					targetNum = 1;
 				}
@@ -189,7 +202,7 @@ public class StrengthEnemyMovement : MonoBehaviour {
 			}
 		}
 
-		if (attack == true && counter == 2) {
+		if (attack == true && counter == 2 && nextAttack == true) {
 			this.transform.position = Vector3.MoveTowards(this.transform.position ,newPos1, step);
 			if (GetComponentInChildren<SpriteRenderer> ().flipX == true) {
 				this.transform.rotation = Quaternion.Euler (0, 0, 45);
@@ -247,7 +260,7 @@ public class StrengthEnemyMovement : MonoBehaviour {
 			}
 		}
 
-		if (attack == true && counter == 4) {
+		if (attack == true && counter == 4 && nextAttack == true) {
 			this.transform.rotation = Quaternion.Euler (0, 0, 0);
 			if (target == player1) {
 				targetNum = 1;
@@ -259,6 +272,7 @@ public class StrengthEnemyMovement : MonoBehaviour {
 
 			if (this.transform.position == newPos) {
 				counter = 0;
+				nextAttack = false;
 			}
 		}
 
