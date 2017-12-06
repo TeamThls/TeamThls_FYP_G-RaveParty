@@ -122,7 +122,7 @@ public class BalancingScript : MonoBehaviour {
 				stts.shoot_Speed = SW1_stSpeed;
 			}
 
-			if (wave_Count == 2) {
+			else if (wave_Count == 2) {
 				stts.enemy_Damage = SW2_enDamage;
 				stts.path_Damage = SW2_pfDamage;
 				stts.str_Damage = SW2_seDamage;
@@ -138,7 +138,7 @@ public class BalancingScript : MonoBehaviour {
 				stts.shoot_Speed = SW2_stSpeed;
 			}
 
-			if (wave_Count == 3) {
+			else if (wave_Count == 3) {
 				stts.enemy_Damage = SW3_enDamage;
 				stts.path_Damage = SW3_pfDamage;
 				stts.str_Damage = SW3_seDamage;
@@ -155,7 +155,7 @@ public class BalancingScript : MonoBehaviour {
 			}
 		}
 
-		if (player_Count == 2) {
+		else if (player_Count == 2) {
 			if (wave_Count == 1) {
 				stts.enemy_Damage = MW1_enDamage;
 				stts.path_Damage = MW1_pfDamage;
@@ -172,7 +172,7 @@ public class BalancingScript : MonoBehaviour {
 				stts.shoot_Speed = MW1_stSpeed;
 			}
 
-			if (wave_Count == 2) {
+			else if (wave_Count == 2) {
 				stts.enemy_Damage = MW2_enDamage;
 				stts.path_Damage = MW2_pfDamage;
 				stts.str_Damage = MW2_seDamage;
@@ -188,7 +188,7 @@ public class BalancingScript : MonoBehaviour {
 				stts.shoot_Speed = MW2_stSpeed;
 			}
 
-			if (wave_Count == 3) {
+			else if (wave_Count == 3) {
 				stts.enemy_Damage = MW3_enDamage;
 				stts.path_Damage = MW3_pfDamage;
 				stts.str_Damage = MW3_seDamage;

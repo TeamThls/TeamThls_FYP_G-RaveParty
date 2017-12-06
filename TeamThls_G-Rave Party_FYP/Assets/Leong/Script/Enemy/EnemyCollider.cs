@@ -41,7 +41,7 @@ public class EnemyCollider : MonoBehaviour {
 			healthDevice = GameObject.Find("P_HealDeviceStand").GetComponent<HealthDeviceHealing>();
 		}
 
-		if(this.gameObject.GetComponent<pathfinding>() != null)
+		/*if(this.gameObject.GetComponent<pathfinding>() != null)
 		{
 			pathfinding wp = this.gameObject.GetComponent<pathfinding>();
 			enemy_Health = wp.health;
@@ -60,7 +60,7 @@ public class EnemyCollider : MonoBehaviour {
 		{
 			ShootingEnemy se = this.gameObject.GetComponent<ShootingEnemy>();
 			enemy_Health = se.health;
-		}
+		}*/
 	}
 	
 	// Update is called once per frame

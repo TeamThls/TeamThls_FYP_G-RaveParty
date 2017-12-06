@@ -41,7 +41,7 @@ public class StrengthEnemyMovement : MonoBehaviour {
 	public int damage;
 
 	public float health;
-	bool getHealth;
+	bool getHealth = false;
 
 	public float DoubleAttackDist;
 
