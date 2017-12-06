@@ -89,10 +89,6 @@ public class SharedStats : MonoBehaviour {
 	public float resetmaxDuration;
 	public int resetManaReg;
 
-	public bool resetOnFire;
-	public bool resetOnIce;
-	public bool resetOnLaser;
-
 	public int resetBulletMana;
 	public int resetFireMana;
 	public int resetBaseFireMana;
@@ -163,6 +159,10 @@ public class SharedStats : MonoBehaviour {
 		resetLaserMana = GlobalControl.Instance.L_Mana;
 		resetIceMana = GlobalControl.Instance.I_Mana;
 
+		OnIce = false;
+		OnFire = false;
+		OnLaser = false;
+
 		resetFireDuration = GlobalControl.Instance.F_Duration;
 		resetLaserDuration = GlobalControl.Instance.L_Duration;
 		resetIceDuration = GlobalControl.Instance.I_Duration;
@@ -216,7 +216,7 @@ public class SharedStats : MonoBehaviour {
 		FireDuration = GlobalControl.Instance.F_Duration;
 		LaserDuration = GlobalControl.Instance.L_Duration;
 		IceDuration = GlobalControl.Instance.I_Duration;
-		abilityDuration = GlobalControl.Instance.ablty_Duration;
+		//abilityDuration = GlobalControl.Instance.ablty_Duration;
 
 		ScoreMultiplier = GlobalControl.Instance.Score_Multiplier;
 
@@ -373,11 +373,15 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.F_Duration = FireDuration;
 		GlobalControl.Instance.L_Duration = LaserDuration;
 		GlobalControl.Instance.I_Duration = IceDuration;
-		GlobalControl.Instance.ablty_Duration = abilityDuration;
+		//GlobalControl.Instance.ablty_Duration = abilityDuration;
 		GlobalControl.Instance.healRequire = healRequire;
 
 		GlobalControl.Instance.abilityLevel = abilitiesLevel;
 		GlobalControl.Instance.extendDuration = abilityExtendedDuration;
+
+		OnIce = false;
+		OnFire = false;
+		OnLaser = false;
 	}
 
 	public void Reset()
@@ -417,6 +421,10 @@ public class SharedStats : MonoBehaviour {
 		GlobalControl.Instance.abilityLevel = resetAbilitiesLevel;
 
 		GlobalControl.Instance.extendDuration = resetExtendDuration;
+
+		OnIce = false;
+		OnFire = false;
+		OnLaser = false;
 
 		player_Number = GlobalControl.Instance.player_Num;
 		player_Health = GlobalControl.Instance.p_MaxHealth ;
