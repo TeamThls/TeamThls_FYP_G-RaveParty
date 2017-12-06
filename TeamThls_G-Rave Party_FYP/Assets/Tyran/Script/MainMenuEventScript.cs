@@ -96,6 +96,14 @@ public class MainMenuEventScript : MonoBehaviour {
 					ChangeScene ("Free Mode");	
 				}
 			}
+			else if (this.gameObject.name == "Credits") 
+			{
+				DisplaySpriteI();
+				if (Input.GetAxis ("TriangleP1") > 0 || Input.GetAxis ("TriangleP2") > 0 || Input.GetAxis ("TriangleK1") > 0 || Input.GetAxis ("TriangleK2") > 0) 
+				{
+					ChangeScene ("Credits");	
+				}
+			}
 
 			
 		}
@@ -138,6 +146,10 @@ public class MainMenuEventScript : MonoBehaviour {
 				DisableSpriteI();
 			}
 			else if(this.gameObject.name == "ExitMenu") 
+			{
+				DisableSpriteI();
+			}
+			else if(this.gameObject.name == "Credits") 
 			{
 				DisableSpriteI();
 			}
