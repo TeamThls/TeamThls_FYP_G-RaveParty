@@ -15,21 +15,21 @@ public class playerCount : MonoBehaviour {
 	void Start () {
 		gameManager = GameObject.Find ("GameManager");
 		shrd = gameManager.GetComponent<SharedStats> ();
-		if (shrd.wave_count >= 1) {
-			shrd.player_Number = 2;
-		}
-		player1 = GameObject.Find ("Player");
-		player2 = GameObject.Find ("Player2");
-		if (player2 == null) {
-			player2 = player1;
-			if (shrd.wave_count >= 1) {
-				shrd.player_Number = 1;
-			}
-		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		player1 = GameObject.Find ("Player");
+		player2 = GameObject.Find ("Player2");
+		if (player2 == null) {
+			player2 = player1;
+		}
+
+		if (player2 == player1) {
+			shrd.player_Number = 1;
+		} 
+		else {
+			shrd.player_Number = 2;
+		}
 	}
 }
