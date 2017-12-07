@@ -266,7 +266,7 @@ public class MultiFreeGameManager : MonoBehaviour
 					spawner[8].GetComponent<SpawnBehaviour>().Spawn();
 					spawner[10].GetComponent<SpawnBehaviour>().Spawn();
 				}
-				else if (band [k]*2 <= 1.3f && band [11]*2 > 0.9f ) 
+				else if (band [k]*2 <= 1.3f && band [11]*2 > 0.7f ) 
 				{
 					//spawner[3].GetComponent<SpawnBehaviour>().Spawn();
 					int r = Random.Range (3, 11);

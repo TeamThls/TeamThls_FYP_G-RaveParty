@@ -91,7 +91,8 @@ public class GUIManagerScript : MonoBehaviour {
 		//Debug.Log (sharedstats.player_Mana);
 
 
-		if (sharedstats.levelPassed == true && sharedstats.wave_count <= 2) {
+		if (sharedstats.levelPassed == true && sharedstats.wave_count <= 2) 
+		{
 			UpgradeMenu.gameObject.SetActive (true);
 		} 
 		else {
