@@ -182,11 +182,20 @@ public class DarkRoomEffect : MonoBehaviour {
 				{
 					col.transform.GetChild(1).GetComponent<Renderer>().material = darkRoom_Mat;
 				}
+				else if(col.transform.GetChild(0).GetComponent<SpriteRenderer>() != null)
+				{
+					col.transform.GetChild(0).GetComponent<Renderer>().material = darkRoom_Mat;
+
+				}
 				else
 				{
 					col.GetComponent<Renderer>().material = darkRoom_Mat;
 
 				}
+			}
+			if(col.gameObject.layer == 14)
+			{
+				col.GetComponent<Renderer>().material = darkRoom_Mat;
 			}
 		}
 

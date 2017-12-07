@@ -360,7 +360,7 @@ public class PlayerCombat : MonoBehaviour {
 			Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x - 4.0f, gun.position.y, -0.1f), Quaternion.identity);
 			// When Level 3, Shoot Three Laser in Northwest, West, Southwest directions
 
-			if(laserBeam.laser_Level == 3)
+			if(laserBeam.laser_Level == 2)
 			{
 				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Northwest;
 				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x - 4.0f, gun.position.y, -0.1f), Quaternion.identity);
@@ -378,7 +378,7 @@ public class PlayerCombat : MonoBehaviour {
 			Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y + 2.0f, -0.1f), Quaternion.identity);
 			// When Level 3, Shoot Three Laser in Northeast, North, Northwest directions
 
-			if(laserBeam.laser_Level == 3)
+			if(laserBeam.laser_Level == 2)
 			{
 				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Northeast;
 				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y + 2.0f, -0.1f), Quaternion.identity);
@@ -396,7 +396,7 @@ public class PlayerCombat : MonoBehaviour {
 			Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y - 2.0f, -0.1f), Quaternion.identity);
 			// When Level 3, Shoot Three Laser in Southeast, South, Southwest directions
 
-			if(laserBeam.laser_Level == 3)
+			if(laserBeam.laser_Level == 2)
 			{
 				laserBeam.laser_Direction = LaserBeam.Laser_SpawnDirection.Southeast;
 				Instantiate(bulletUpg_Script.laser_CurrentObj, new Vector3(gun.position.x, gun.position.y - 2.0f, -0.1f), Quaternion.identity);

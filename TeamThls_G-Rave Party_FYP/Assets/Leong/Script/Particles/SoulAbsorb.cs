@@ -44,7 +44,7 @@ public class SoulAbsorb : MonoBehaviour {
 	{
 		var main = p_Soul.main;
 
-		main.startSize = (0.15f + (sharedStats.ScoreMultiplier * 0.15f));
+		main.startSize = (0.1f + (sharedStats.ScoreMultiplier * 0.1f));
 	}
 
 	IEnumerator Vanish(float duration)
