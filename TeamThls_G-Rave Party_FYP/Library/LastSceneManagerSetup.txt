@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Wave Mode/Single-Player Level.unity
+- path: Assets/Scene/Credits.unity
   isLoaded: 1
   isActive: 1
