@@ -56,9 +56,11 @@ public class GUIManagerScript : MonoBehaviour {
 	public bool triggered;
 	public float setTime;
 	public float setTime2;
+	public float targetTime;
 
 	public Slider musicduration;
 	bool reset;
+	public int counter;
 
 	void Awake(){
 		magicRune = GameObject.Find ("MagicSkill");
@@ -81,6 +83,7 @@ public class GUIManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		targetTime = Magic.setTime;
 		playerHealth.fillAmount = sharedstats.player_Health/sharedstats.player_MaxHealth;
 		playerMana.fillAmount = sharedstats.player_Mana/sharedstats.player_MaxMana;
 
@@ -100,27 +103,32 @@ public class GUIManagerScript : MonoBehaviour {
 
 		if (Magic.inCd == false) {
 			bookCompass.GetComponent<Image> ().enabled = true;
+			bookIcon.GetComponent<Image> ().fillAmount = 1;
+			setTime = 0.0f;
+			setTime2 = 0.0f;
+			counter = 0;
 		}
 		else if (Magic.inCd == true) {
 			bookCompass.GetComponent<Image> ().enabled = false;
 		}
-		if (triggered == true) {
+
+		if (Magic.inCd == true && counter == 0) {
 			bookIcon.GetComponent<Image> ().fillAmount = 0;
 			reset = true;
 			triggered = false;
+			counter += 1;
 		}
 
-		if (reset == true) {
+		if (Magic.inCd == true && counter == 1) {
 			setTime += Time.deltaTime;
 			setTime2 += Time.deltaTime;
 			if (setTime2 >= 1.0f) {
-				bookIcon.GetComponent<Image> ().fillAmount += 1.0f / Magic.setTime;
+				bookIcon.GetComponent<Image> ().fillAmount += 1.0f / targetTime;
 				setTime2 = 0.0f;
 			}
-			if (setTime >= 45.0f) {
-				triggered = false;
-				setTime = 0.0f;
+			if (setTime >= targetTime) {
 				bookIcon.GetComponent<Image> ().fillAmount = 1.0f;
+				setTime = 0.0f;
 			}
 		}
 		musicduration.value = SoundManagerScript.Instance.bgmAudioSource.time / SoundManagerScript.Instance.bgmAudioSource.clip.length;

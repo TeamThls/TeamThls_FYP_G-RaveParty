@@ -168,7 +168,7 @@ public class pathfinding : MonoBehaviour {
 			Movement ();
 		}
 
-		if (MovingDuration >= 5.0f) {
+		if (MovingDuration >= 3.0f) {
 			for(int i = 0 ; i < WayManager.childList.Count; i++){
 				targetPath = WayManager.childList [i];
 				if (WayManager.childList [i].GetComponent<Waypoint> ().W_Dist 

@@ -129,7 +129,6 @@ public class ActiveMagic : MonoBehaviour {
 				}
 				this.GetComponentInParent<MagicBookManager> ().Switch ();
 				inCd = true;
-
 			}
 		}
 	}
