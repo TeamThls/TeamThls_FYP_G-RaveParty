@@ -215,11 +215,11 @@ public class PlayerMovement : MonoBehaviour {
 			move.x = Input.GetAxis ("HorizontalP2");
 		}
 
-		if(Input.GetAxis ("VerticalK2") <0|| Input.GetAxis ("VerticalK2")>0)
+		if(Input.GetAxis ("VerticalK2") <0 || Input.GetAxis ("VerticalK2")>0)
 		{
 			move.y = Input.GetAxis ("VerticalK2");
 		}
-		if(Input.GetAxis ("VerticalP2") <0|| Input.GetAxis ("VerticalP2")>0)
+		if(Input.GetAxis ("VerticalP2") <0 || Input.GetAxis ("VerticalP2")>0)
 		{
 			move.y = Input.GetAxis ("VerticalP2");
 		}
@@ -227,6 +227,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			move.y = Input.GetAxis ("VerticalP2");
 		}
+		///Debug.Log (move.y);
 
 		//move.x = Input.GetAxis ("HorizontalK2")|| Input.GetAxis ("HorizontalP2");;
 		//move.y = Input.GetAxis ("VerticalK2")|| Input.GetAxis ("VerticalP2");;
