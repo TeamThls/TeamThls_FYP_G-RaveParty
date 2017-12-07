@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Wave Mode/MultiPlayer Level.unity
+- path: Assets/Scene/Wave Mode.unity
   isLoaded: 1
   isActive: 1

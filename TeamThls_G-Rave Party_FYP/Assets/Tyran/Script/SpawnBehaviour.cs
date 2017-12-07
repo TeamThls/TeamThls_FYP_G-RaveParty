@@ -41,17 +41,17 @@ public class SpawnBehaviour : MonoBehaviour {
 
 		if (sharedstats.wave_count == 1 || sharedstats.wave_count == 2) 
 		{
-			if (r2 == 1) 
+			if (r1 == 1) 
 			{
 
 				Instantiate (enemy1, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
 			} 
-			else if (r2 == 2) 
+			else if (r1 == 2) 
 			{
 
 				Instantiate (enemy2, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
 			} 
-			else if (r2 == 3) 
+			else if (r1 == 3) 
 			{
 
 				Instantiate (enemy3, new Vector2 (this.transform.position.x, this.transform.position.y), Quaternion.identity);
