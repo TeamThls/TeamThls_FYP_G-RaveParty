@@ -10,24 +10,6 @@ public class HighScore : MonoBehaviour {
 
 	private SaveScore Score;
 
-	public Text text0;
-	public Text text1;
-	public Text text2;
-	public Text text3;
-	public Text text4;
-
-	public Text t_name0;
-	public Text t_name1;
-	public Text t_name2;
-	public Text t_name3;
-	public Text t_name4;
-
-	public Text t_wave0;
-	public Text t_wave1;
-	public Text t_wave2;
-	public Text t_wave3;
-	public Text t_wave4;
-
 	public List<int> s_score;
 	public List<int> m_score;
 
@@ -50,68 +32,10 @@ public class HighScore : MonoBehaviour {
 
 		loadDataFromDisk ();
 		saveDataToDisk ();
-
-		t_wave0.text = s_Wave[0].ToString ();
-		t_wave1.text = s_Wave[1].ToString ();
-		t_wave2.text = s_Wave[2].ToString ();
-		t_wave3.text = s_Wave[3].ToString ();
-		t_wave4.text = s_Wave[4].ToString ();
-
-		t_name0.text = s_Names[0].ToString ();
-		t_name1.text = s_Names[1].ToString ();
-		t_name2.text = s_Names[2].ToString ();
-		t_name3.text = s_Names[3].ToString ();
-		t_name4.text = s_Names[4].ToString ();
-
-		text0.text = s_score [0].ToString ();
-		text1.text = s_score [1].ToString ();
-		text2.text = s_score [2].ToString ();
-		text3.text = s_score [3].ToString ();
-		text4.text = s_score [4].ToString ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (counter == 0) {
-			t_wave0.text = s_Wave[0].ToString ();
-			t_wave1.text = s_Wave[1].ToString ();
-			t_wave2.text = s_Wave[2].ToString ();
-			t_wave3.text = s_Wave[3].ToString ();
-			t_wave4.text = s_Wave[4].ToString ();
-
-			t_name0.text = s_Names[0].ToString ();
-			t_name1.text = s_Names[1].ToString ();
-			t_name2.text = s_Names[2].ToString ();
-			t_name3.text = s_Names[3].ToString ();
-			t_name4.text = s_Names[4].ToString ();
-
-			text0.text = s_score [0].ToString ();
-			text1.text = s_score [1].ToString ();
-			text2.text = s_score [2].ToString ();
-			text3.text = s_score [3].ToString ();
-			text4.text = s_score [4].ToString ();
-		}
-		if (counter == 1) {
-			t_wave0.text = m_Wave[0].ToString ();
-			t_wave1.text = m_Wave[1].ToString ();
-			t_wave2.text = m_Wave[2].ToString ();
-			t_wave3.text = m_Wave[3].ToString ();
-			t_wave4.text = m_Wave[4].ToString ();
-
-			t_name0.text = m_Names[0].ToString ();
-			t_name1.text = m_Names[1].ToString ();
-			t_name2.text = m_Names[2].ToString ();
-			t_name3.text = m_Names[3].ToString ();
-			t_name4.text = m_Names[4].ToString ();
-
-			text0.text = m_score [0].ToString ();
-			text1.text = m_score [1].ToString ();
-			text2.text = m_score [2].ToString ();
-			text3.text = m_score [3].ToString ();
-			text4.text = m_score [4].ToString ();
-
-		}
-
 		if (counter >= 2) {
 			counter = 0;
 		}
