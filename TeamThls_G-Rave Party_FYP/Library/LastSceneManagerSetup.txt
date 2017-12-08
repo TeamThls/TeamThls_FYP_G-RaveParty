@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Control Scheme 1.unity
+- path: Assets/Scene/Wave Mode/Single-Player Level 3.unity
   isLoaded: 1
   isActive: 1
