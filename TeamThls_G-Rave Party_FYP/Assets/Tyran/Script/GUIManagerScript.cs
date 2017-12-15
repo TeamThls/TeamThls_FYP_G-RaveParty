@@ -97,7 +97,20 @@ public class GUIManagerScript : MonoBehaviour {
 
 		if (sharedstats.levelPassed == true && sharedstats.wave_count <= 2) 
 		{
-			UpgradeMenu.gameObject.SetActive (true);
+			if(SceneManager.GetActiveScene().name == "FreeMode Multi Selection" || 
+				SceneManager.GetActiveScene().name == "FreeMode Multiplayer" ||
+				SceneManager.GetActiveScene().name == "FreeMode Single" ||
+				SceneManager.GetActiveScene().name == "FreeMode Single Selection") 
+			{
+				sharedstats.levelPassed = false;
+				sharedstats.switchScene = false;
+				sharedstats.endDuration = 0.0f;
+				SceneManager.LoadScene("Game Over");
+			}
+			else
+			{
+				UpgradeMenu.gameObject.SetActive (true);
+			}
 		} 
 		else {
 			UpgradeMenu.gameObject.SetActive (false);
